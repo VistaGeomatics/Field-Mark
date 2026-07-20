@@ -764,6 +764,13 @@ body{
   var moveSnapshots = null;     // [{action, before}]
   var selectDeleteBtn = null;
 
+  // touch / pinch / pan state
+  var activePointers = new Map(); // pointerId -> {x,y} in client coords
+  var pinchState = null;          // { startDist, startZoom, anchorX, anchorY }
+  var panState = null;            // { startX, startY, startLeft, startTop }
+  var holdTimer = null;           // hold-to-straighten timer
+  var rafScheduled = false;
+
   var btnPressure = document.getElementById("btnPressure");
   btnPressure.addEventListener("click", function(){
     pressureEnabled = !pressureEnabled;
@@ -1136,13 +1143,37 @@ body{
     var pressureFactor = 0.7 + 0.3 * Math.max(0, Math.min(1, pressure));
     return Math.max(0.6, baseWidth * angleFactor * pressureFactor);
   }
+  // Smooths a raw sampled stroke into a denser quadratic curve through
+  // segment midpoints — the standard technique for silky freehand ink.
+  // Purely local (each output point depends only on its 3 nearest inputs),
+  // so it can be safely applied to a short tail slice as well as a whole stroke.
+  function densifyStroke(points, stepsPerSegment){
+    if (points.length < 3) return points;
+    var out = [points[0]];
+    for (var i=1; i<points.length-1; i++){
+      var p0=points[i-1], p1=points[i], p2=points[i+1];
+      var pr0 = (p0.pressure!=null?p0.pressure:0.5), pr1=(p1.pressure!=null?p1.pressure:0.5), pr2=(p2.pressure!=null?p2.pressure:0.5);
+      var sx=(p0.x+p1.x)/2, sy=(p0.y+p1.y)/2, spr=(pr0+pr1)/2;
+      var ex=(p1.x+p2.x)/2, ey=(p1.y+p2.y)/2, epr=(pr1+pr2)/2;
+      for (var s=1; s<=stepsPerSegment; s++){
+        var t = s/stepsPerSegment, mt = 1-t;
+        out.push({
+          x: mt*mt*sx + 2*mt*t*p1.x + t*t*ex,
+          y: mt*mt*sy + 2*mt*t*p1.y + t*t*ey,
+          pressure: mt*mt*spr + 2*mt*t*pr1 + t*t*epr
+        });
+      }
+    }
+    out.push(points[points.length-1]);
+    return out;
+  }
 
   function drawAction(c, a){
     c.save();
     c.lineCap = "round"; c.lineJoin = "round";
     if (a.type === "pen"){
       c.strokeStyle = a.color; c.fillStyle = a.color; c.globalAlpha = 1;
-      var pts = a.points;
+      var pts = densifyStroke(a.points, 4);
       if (a.pressureSensitive && pts.length > 1){
         for (var i=0;i<pts.length-1;i++){
           var w = pressureToWidth(a.width, ((pts[i].pressure||0.5)+(pts[i+1].pressure||0.5))/2);
@@ -1160,7 +1191,7 @@ body{
       }
     } else if (a.type === "calligraphy"){
       c.strokeStyle = a.color; c.fillStyle = a.color; c.globalAlpha = 1;
-      var cpts = a.points;
+      var cpts = densifyStroke(a.points, 4);
       var nib = (typeof a.nibAngle === "number") ? a.nibAngle : Math.PI/4;
       if (cpts.length > 1){
         for (var k=0;k<cpts.length-1;k++){
@@ -1178,7 +1209,8 @@ body{
       c.strokeStyle = a.color; c.lineWidth = a.width*4; c.globalAlpha = 0.38;
       c.globalCompositeOperation = "multiply";
       c.beginPath();
-      a.points.forEach(function(p,i){ i===0 ? c.moveTo(p.x,p.y) : c.lineTo(p.x,p.y); });
+      var hpts = densifyStroke(a.points, 4);
+      hpts.forEach(function(p,i){ i===0 ? c.moveTo(p.x,p.y) : c.lineTo(p.x,p.y); });
       c.stroke();
     } else if (a.type === "arrow"){
       c.strokeStyle = a.color; c.fillStyle = a.color; c.lineWidth = a.width;
@@ -1357,15 +1389,125 @@ body{
     var rect = stage.getBoundingClientRect();
     return { x: e.clientX - rect.left, y: e.clientY - rect.top };
   }
+  function scheduleRedraw(){
+    if (rafScheduled) return;
+    rafScheduled = true;
+    requestAnimationFrame(function(){ rafScheduled = false; redraw(); });
+  }
+
+  // ---------- pinch-to-zoom / two-finger pan ----------
+  function clientToCanvasContent(clientX, clientY){
+    if (!canvas) return { x:0, y:0 };
+    var rect = canvas.getBoundingClientRect();
+    return { x: (clientX-rect.left)/rect.width*canvas.width, y: (clientY-rect.top)/rect.height*canvas.height };
+  }
+  function pinchDistance(){
+    var vals = Array.from(activePointers.values());
+    if (vals.length < 2) return null;
+    return Math.hypot(vals[1].x-vals[0].x, vals[1].y-vals[0].y);
+  }
+  function pinchMidpoint(){
+    var vals = Array.from(activePointers.values());
+    return { x:(vals[0].x+vals[1].x)/2, y:(vals[0].y+vals[1].y)/2 };
+  }
+  function beginPinch(){
+    if (!canvas) return;
+    var dist = pinchDistance(); if (!dist) return;
+    var mid = pinchMidpoint();
+    var anchor = clientToCanvasContent(mid.x, mid.y);
+    pinchState = { startDist: dist, startZoom: zoom, anchorX: anchor.x, anchorY: anchor.y };
+  }
+  function updatePinch(){
+    if (!pinchState || !canvas) return;
+    var dist = pinchDistance(); if (!dist) return;
+    var mid = pinchMidpoint();
+    var ratio = dist / pinchState.startDist;
+    zoom = Math.max(0.05, Math.min(8, pinchState.startZoom * ratio));
+    applyZoom();
+    var rect = canvas.getBoundingClientRect();
+    var actualX = rect.left + (pinchState.anchorX/canvas.width)*rect.width;
+    var actualY = rect.top + (pinchState.anchorY/canvas.height)*rect.height;
+    scrollWrap.scrollLeft += (actualX - mid.x);
+    scrollWrap.scrollTop += (actualY - mid.y);
+  }
+  function endPinch(){ pinchState = null; }
+
+  function cancelActiveStroke(){
+    drawing = false;
+    currentAction = null;
+    dragMode = null; marqueeRect = null; moveSnapshots = null; moveStartPos = null;
+    eraseRemoved = null;
+    clearTimeout(holdTimer);
+    redraw();
+  }
+
+  // ---------- hold-to-straighten (pen / calligraphy) ----------
+  function armHoldTimer(){
+    clearTimeout(holdTimer);
+    if (!currentAction || (currentAction.type !== "pen" && currentAction.type !== "calligraphy")) return;
+    var first = currentAction.points[0];
+    var last = currentAction.points[currentAction.points.length-1];
+    if (Math.hypot(last.x-first.x, last.y-first.y) < 16) return;
+    holdTimer = setTimeout(straightenCurrentStroke, 380);
+  }
+  function straightenCurrentStroke(){
+    if (!drawing || !currentAction) return;
+    if (currentAction.type !== "pen" && currentAction.type !== "calligraphy") return;
+    var first = currentAction.points[0];
+    var last = currentAction.points[currentAction.points.length-1];
+    currentAction.points = [
+      { x:first.x, y:first.y, pressure:first.pressure },
+      { x:last.x, y:last.y, pressure:last.pressure }
+    ];
+    currentAction.isStraightLine = true;
+    redraw();
+  }
 
   function attachPointerEvents(){
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerUp);
   }
 
+  // catches the second (or later) pinch finger when it lands outside the
+  // canvas itself, e.g. on the surrounding blueprint-grid background
+  var canvasAreaEl = document.getElementById("canvas-area");
+  canvasAreaEl.addEventListener("pointerdown", function(e){
+    if (e.target === canvas) return;
+    activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
+    if (activePointers.size >= 2){
+      if (drawing || currentAction) cancelActiveStroke();
+      beginPinch();
+      e.preventDefault();
+    }
+  });
+  canvasAreaEl.addEventListener("pointermove", function(e){
+    if (!activePointers.has(e.pointerId)) return;
+    activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
+    if (activePointers.size >= 2){ updatePinch(); e.preventDefault(); }
+  });
+
   function onPointerDown(e){
-    if (currentTool === "pan") return;
+    activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
+    if (activePointers.size >= 2){
+      if (drawing || currentAction) cancelActiveStroke();
+      commitPendingText();
+      beginPinch();
+      e.preventDefault();
+      return;
+    }
+
+    if (currentTool === "pan"){
+      commitPendingText();
+      if (currentIndex < 0) return;
+      panState = { startX:e.clientX, startY:e.clientY, startLeft:scrollWrap.scrollLeft, startTop:scrollWrap.scrollTop };
+      if (canvas) canvas.style.cursor = "grabbing";
+      try { canvas.setPointerCapture(e.pointerId); } catch(err){}
+      e.preventDefault();
+      return;
+    }
+
     commitPendingText();
     if (currentIndex < 0) return;
     e.preventDefault();
@@ -1412,10 +1554,10 @@ body{
 
     if (currentTool === "pen" || currentTool === "highlighter"){
       currentAction = { type: currentTool, color: currentColor, width: currentWidth, points: [pos],
-        pressureSensitive: (currentTool === "pen" && pressureEnabled) };
+        pressureSensitive: (currentTool === "pen" && pressureEnabled), isStraightLine: false };
     } else if (currentTool === "calligraphy"){
       currentAction = { type: "calligraphy", color: currentColor, width: currentWidth * 1.4, points: [pos],
-        nibAngle: calligraphyNibAngle * Math.PI / 180 };
+        nibAngle: calligraphyNibAngle * Math.PI / 180, isStraightLine: false };
     } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler"){
       currentAction = { type: currentTool, color: currentColor, width: currentWidth, x1: pos.x, y1: pos.y, x2: pos.x, y2: pos.y };
     } else if (currentTool === "eraser"){
@@ -1426,36 +1568,60 @@ body{
   }
 
   function onPointerMove(e){
+    if (activePointers.has(e.pointerId)) activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
+    if (activePointers.size >= 2){ updatePinch(); return; }
+
+    if (panState){
+      var pdx = e.clientX - panState.startX, pdy = e.clientY - panState.startY;
+      scrollWrap.scrollLeft = panState.startLeft - pdx;
+      scrollWrap.scrollTop = panState.startTop - pdy;
+      return;
+    }
+
     if (!drawing || currentIndex < 0) return;
     var page = pages[currentIndex];
-    var pos = getCanvasPos(e);
 
     if (dragMode === "marquee"){
-      marqueeRect.x2 = pos.x; marqueeRect.y2 = pos.y;
-      redraw();
+      var pos0 = getCanvasPos(e);
+      marqueeRect.x2 = pos0.x; marqueeRect.y2 = pos0.y;
+      scheduleRedraw();
       return;
     }
     if (dragMode === "move"){
-      var dx = pos.x - moveStartPos.x, dy = pos.y - moveStartPos.y;
+      var pos1 = getCanvasPos(e);
+      var dx = pos1.x - moveStartPos.x, dy = pos1.y - moveStartPos.y;
       moveSnapshots.forEach(function(p){ applyGeom(p.action, p.before); translateAction(p.action, dx, dy); });
-      redraw();
+      scheduleRedraw();
       return;
     }
 
     if (currentTool === "pen" || currentTool === "highlighter" || currentTool === "calligraphy"){
-      currentAction.points.push(pos);
-      redraw();
+      if (currentAction.isStraightLine){
+        currentAction.points[1] = getCanvasPos(e);
+      } else {
+        var events = (typeof e.getCoalescedEvents === "function") ? e.getCoalescedEvents() : null;
+        if (!events || !events.length) events = [e];
+        events.forEach(function(ev){ currentAction.points.push(getCanvasPos(ev)); });
+        armHoldTimer();
+      }
+      scheduleRedraw();
     } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler"){
-      currentAction.x2 = pos.x; currentAction.y2 = pos.y;
-      redraw();
+      var pos2 = getCanvasPos(e);
+      currentAction.x2 = pos2.x; currentAction.y2 = pos2.y;
+      scheduleRedraw();
     } else if (currentTool === "eraser"){
-      eraseAt(page, pos);
+      eraseAt(page, getCanvasPos(e));
     }
   }
 
   function onPointerUp(e){
+    activePointers.delete(e.pointerId);
+    if (activePointers.size < 2) endPinch();
+    if (panState){ panState = null; if (canvas && currentTool === "pan") canvas.style.cursor = "grab"; return; }
+
     if (!drawing) return;
     drawing = false;
+    clearTimeout(holdTimer);
     if (currentIndex < 0){ currentAction=null; dragMode=null; return; }
     var page = pages[currentIndex];
 
@@ -1740,7 +1906,7 @@ body{
       var color = hexToRgb01(a.color);
 
       if (a.type === "pen" || a.type === "calligraphy"){
-        var pts = a.points;
+        var pts = a.points.length >= 3 ? densifyStroke(a.points, 3) : a.points;
         if (pts.length < 2){
           if (pts.length === 1){
             var w0 = (a.type === "calligraphy")
@@ -1769,7 +1935,7 @@ body{
           pdfPage.drawEllipse({ x:s1.x, y:s1.y, xScale:wPt/2, yScale:wPt/2, color: color });
         }
       } else if (a.type === "highlighter"){
-        var pts2 = a.points;
+        var pts2 = a.points.length >= 3 ? densifyStroke(a.points, 3) : a.points;
         var wPt2 = (a.width*4)/scale;
         for (var j=0;j<pts2.length-1;j++){
           var q0 = toPt(pts2[j].x,pts2[j].y), q1 = toPt(pts2[j+1].x,pts2[j+1].y);
