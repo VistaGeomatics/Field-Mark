@@ -823,7 +823,7 @@ body{
   </div>
 
   <input type="file" id="fileInput" accept="image/*,application/pdf" multiple style="display:none">
-  <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none">
+  <input type="file" id="photoInput" accept="image/*" capture="environment" style="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;">
   <div id="photo-lightbox">
     <img id="photo-lightbox-img" src="" alt="">
     <button id="photo-lightbox-close" title="Close">
@@ -2117,6 +2117,31 @@ body{
       return;
     }
 
+    if (currentTool === "photo"){
+      commitPendingText();
+      if (currentIndex < 0) return;
+      var photoPage = pages[currentIndex];
+      var photoPos = getCanvasPos(e);
+      var hitExisting = false;
+      for (var phi=photoPage.actions.length-1; phi>=0; phi--){
+        var pa = photoPage.actions[phi];
+        if (pa.type === "photopin" && Math.hypot(photoPos.x-pa.x, photoPos.y-pa.y) <= pa.size/2 + 8){
+          e.preventDefault();
+          openPhotoLightbox(pa);
+          hitExisting = true;
+          break;
+        }
+      }
+      if (!hitExisting){
+        // Deliberately NOT calling e.preventDefault() here: doing so would
+        // strip the trusted user-gesture context that iOS Safari requires
+        // before it will open the camera/photo picker from input.click().
+        pendingPhotoPos = photoPos;
+        document.getElementById("photoInput").click();
+      }
+      return;
+    }
+
     commitPendingText();
     if (currentIndex < 0) return;
     e.preventDefault();
@@ -2173,19 +2198,6 @@ body{
       }
       redraw();
       showAngleCancelBtn();
-      return;
-    }
-
-    if (currentTool === "photo"){
-      for (var phi=page.actions.length-1; phi>=0; phi--){
-        var pa = page.actions[phi];
-        if (pa.type === "photopin" && Math.hypot(pos.x-pa.x, pos.y-pa.y) <= pa.size/2 + 8){
-          openPhotoLightbox(pa);
-          return;
-        }
-      }
-      pendingPhotoPos = pos;
-      document.getElementById("photoInput").click();
       return;
     }
 
@@ -2621,9 +2633,11 @@ body{
   }
   function commitPendingText(){
     if (!activeInput || !pendingTextCtx) return;
-    var val = activeInput.value.trim();
+    var inputEl = activeInput;
     var ctx2 = pendingTextCtx;
-    activeInput.remove(); activeInput = null; pendingTextCtx = null;
+    var val = inputEl.value.trim();
+    activeInput = null; pendingTextCtx = null;
+    inputEl.remove();
     if (val && ctx2.page){
       var scaleFactor = canvas ? (canvas.width / canvas.getBoundingClientRect().width) : 1;
       var fontSize = Math.round(16 * scaleFactor);
@@ -2633,8 +2647,9 @@ body{
     }
   }
   function cancelPendingText(){
-    if (activeInput) activeInput.remove();
+    var inputEl = activeInput;
     activeInput = null; pendingTextCtx = null;
+    if (inputEl) inputEl.remove();
   }
 
   // ---------- zoom ----------
