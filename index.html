@@ -73,6 +73,30 @@ body{
 }
 #splash-screen.hidden{ opacity:0; pointer-events:none; }
 
+/* ---------- PHOTO LIGHTBOX ---------- */
+#photo-lightbox{
+  display:none;
+  position:fixed; inset:0; z-index:900;
+  background:rgba(4,12,20,0.92);
+  align-items:center; justify-content:center;
+  cursor:zoom-out;
+}
+#photo-lightbox.visible{ display:flex; }
+#photo-lightbox img{
+  max-width:92vw; max-height:88vh;
+  border-radius:10px;
+  box-shadow:0 10px 50px rgba(0,0,0,0.6);
+  cursor:default;
+}
+#photo-lightbox-close{
+  position:absolute; top:18px; right:18px;
+  width:40px; height:40px;
+  background:rgba(18,41,61,0.9); border:1px solid var(--border); border-radius:10px;
+  color:var(--ink); display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+#photo-lightbox-close svg{ width:18px; height:18px; }
+
 /* ---------- LIBRARY VIEW ---------- */
 #library-view{ display:none; flex-direction:column; height:100vh; height:100dvh; }
 #library-view.visible{ display:flex; }
@@ -148,7 +172,7 @@ body{
   display:flex; align-items:center; justify-content:center;
   position:relative; overflow:hidden;
 }
-.note-thumb img{ width:100%; height:100%; object-fit:cover; }
+.note-thumb img{ width:100%; height:100%; object-fit:cover; -webkit-user-drag:none; user-drag:none; pointer-events:none; }
 .note-thumb svg{ width:30px; height:30px; color:var(--ink-faint); }
 .note-info{ padding:10px 12px 11px; }
 .note-name{ font-size:13px; font-weight:600; color:var(--ink); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -592,6 +616,13 @@ body{
       </div>
       <div id="lib-save-indicator" class="save-indicator"></div>
       <div class="topbar-spacer"></div>
+      <button class="icon-btn" id="btnBackup" data-tip="Back up entire library">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3" stroke-linecap="round"/><path d="M7 10l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="icon-btn" id="btnRestore" data-tip="Restore from backup file">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12" stroke-linecap="round"/><path d="M7 8l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <input type="file" id="restoreInput" accept="application/json" style="display:none">
       <button class="pill-btn pill-blue" id="btnNewFolder" data-tip="New folder">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a1 1 0 011-1h5l2 2h9a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V7z"/><path d="M12 12v4M10 14h4" stroke-linecap="round"/></svg>
         NEW FOLDER
@@ -679,8 +710,17 @@ body{
       <button class="tool-btn" data-tool="ellipse" data-tip="Circle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7.5"/></svg>
       </button>
+      <button class="tool-btn" data-tool="polygon" data-tip="Area (polygon)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l8 6-3 10H7L4 9z"/><circle cx="12" cy="3" r="1.4" fill="currentColor" stroke="none"/><circle cx="20" cy="9" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="19" r="1.4" fill="currentColor" stroke="none"/><circle cx="7" cy="19" r="1.4" fill="currentColor" stroke="none"/><circle cx="4" cy="9" r="1.4" fill="currentColor" stroke="none"/></svg>
+      </button>
+      <button class="tool-btn" data-tool="cloud" data-tip="Revision cloud">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 17c-1.9 0-3.2-1.7-2.7-3.5.3-1.2 1.3-2 2.5-2.1-.4-1.6.8-3.2 2.5-3.2.4 0 .8.1 1.1.3.5-1.5 1.9-2.5 3.6-2.5 2 0 3.6 1.5 3.8 3.4 1.6 0 3 1.2 3.1 2.8.2 1.9-1.3 3.6-3.3 3.6H6.9"/></svg>
+      </button>
       <button class="tool-btn" data-tool="ruler" data-tip="Ruler (measure)">
         <span class="tool-icon-mask" style="width:20px;height:20px;-webkit-mask-image:url('data:image/png;base64,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');mask-image:url('data:image/png;base64,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');"></span>
+      </button>
+      <button class="tool-btn" data-tool="angle" data-tip="Angle / bearing">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 20L17 6"/><path d="M9 20a8 8 0 014.5-11.7" stroke-dasharray="2 2"/></svg>
       </button>
       <button class="tool-btn" data-tool="eraser" data-tip="Eraser">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 12.5L11 20H7l-4-4a1.5 1.5 0 010-2.1l9.4-9.4a1.5 1.5 0 012.1 0l4 4a1.5 1.5 0 010 2.1z"/><path d="M9 20h11"/><path d="M8.3 9.3l6 6"/></svg>
@@ -693,6 +733,9 @@ body{
       </button>
       <button class="tool-btn" data-tool="pan" data-tip="Hand (pan)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 11V6a1.5 1.5 0 013 0v4" stroke-linecap="round"/><path d="M11 10V4.5a1.5 1.5 0 013 0V10" stroke-linecap="round"/><path d="M14 10.2V6a1.5 1.5 0 013 0v7" stroke-linecap="round"/><path d="M17 13v-1.5a1.5 1.5 0 013 0V16a6 6 0 01-6 6h-2a6 6 0 01-5-2.7L4.3 15a1.4 1.4 0 012.2-1.7L8 15" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="tool-btn" data-tool="photo" data-tip="Photo pin">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a1 1 0 011-1h2l1.5-2h7L17 7h2a1 1 0 011 1v10a1 1 0 01-1 1H5a1 1 0 01-1-1z"/><circle cx="12" cy="13" r="3.2"/></svg>
       </button>
       <div class="tool-divider"></div>
       <button class="tool-btn" data-tool="text" data-tip="Text note">
@@ -723,6 +766,9 @@ body{
         </button>
         <button class="pressure-toggle" id="btnRecalibrate" data-tip="Recalibrate ruler scale">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 019-9c2.5 0 4.7 1.1 6.2 2.8" stroke-linecap="round"/><path d="M21 3v5h-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12a9 9 0 01-9 9c-2.5 0-4.7-1.1-6.2-2.8" stroke-linecap="round"/><path d="M3 21v-5h5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="pressure-toggle" id="btnGridToggle" data-tip="Coordinate grid (screen only, not exported)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="1"/><path d="M3.5 9.5h17M3.5 15.5h17M9.5 3.5v17M15.5 3.5v17"/></svg>
         </button>
       </div>
 
@@ -777,6 +823,13 @@ body{
   </div>
 
   <input type="file" id="fileInput" accept="image/*,application/pdf" multiple style="display:none">
+  <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none">
+  <div id="photo-lightbox">
+    <img id="photo-lightbox-img" src="" alt="">
+    <button id="photo-lightbox-close" title="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
   </div>
 </div>
 
@@ -856,7 +909,6 @@ body{
   var foldersCache = [];
   var currentFolderFilter = "__all__";
   var saveTimer = null;
-  var draggedNoteId = null;
 
   var pages = [];
   var currentIndex = -1;
@@ -905,6 +957,14 @@ body{
   var panState = null;            // { startX, startY, startLeft, startTop }
   var holdTimer = null;           // hold-to-straighten timer
   var rafScheduled = false;
+
+  // multi-tap tool drafts (polygon/area, angle/bearing)
+  var polygonDraft = null;   // { points:[{x,y},...] }
+  var polygonFinishBtn = null, polygonCancelBtn = null;
+  var angleDraft = null;     // { vertex:{x,y}, p1:{x,y} } (p2 set on completion)
+  var angleCancelBtn = null;
+  var photoImageCache = new WeakMap(); // action -> HTMLImageElement (runtime only, not persisted)
+  var pendingPhotoPos = null;
 
   var btnPressure = document.getElementById("btnPressure");
   btnPressure.addEventListener("click", function(){
@@ -960,6 +1020,10 @@ body{
   var pendingLineDash = null;
 
   function selectTool(name){
+    if (currentTool !== name){
+      if (polygonDraft) cancelPolygonDraft();
+      if (angleDraft) cancelAngleDraft();
+    }
     currentTool = name;
     document.querySelectorAll(".tool-btn[data-tool]").forEach(function(b){ b.classList.toggle("active", b.dataset.tool === name); });
     if (canvas) canvas.style.cursor = (currentTool === "pan") ? "grab" : "crosshair";
@@ -977,21 +1041,19 @@ body{
     { key:"sip", label:"Stat. Iron Post — found" },
     { key:"sipplaced", label:"Stat. Iron Post — placed" },
     { key:"ironbar", label:"Iron Bar — found" },
-    { key:"ironbarplaced", label:"Iron Bar — placed" },
     { key:"woodfound", label:"Wooden Post — found" },
-    { key:"woodplaced", label:"Wooden Post — placed" },
     { key:"witnessfound", label:"Witness Mon. — found" },
     { key:"witnessplaced", label:"Witness Mon. — placed" },
     { key:"ascmfound", label:"ASCM — found" },
-    { key:"traverseplaced", label:"Traverse Stn — placed" },
-    { key:"traversefound", label:"Traverse Stn — found" },
+    { key:"spikeplaced", label:"Spike — placed" },
+    { key:"spikefound", label:"Spike — found" },
     { key:"auxfound", label:"Auxiliary Mon. — found" },
     { key:"auxplaced", label:"Auxiliary Mon. — placed" },
     { key:"drillhole", label:"Drill Hole — found" },
-    { key:"nail", label:"Magnetic Nail — found" },
-    { key:"delta", label:"Delta Angle of Arc" },
+    { key:"nail", label:"Mag Nail — found" },
     { key:"temppos", label:"Temporary Position" },
-    { key:"wellhead", label:"Well Head" }
+    { key:"wellhead", label:"Well Head" },
+    { key:"northarrow", label:"North Arrow" }
   ];
   var stampGridEl = document.getElementById("stampGrid");
   STAMP_SYMBOLS.forEach(function(sym, i){
@@ -1056,7 +1118,7 @@ body{
   function newPage(name, img){
     return { id: genId(), name: name, img: img, actions: [], history: [], redo: [],
       sourceFileId: null, sourcePageIndex: null, pdfScale: null, pdfPtWidth: null, pdfPtHeight: null,
-      _imgBlob: null, _imgMime: "image/png", guides: [], rulerScale: null };
+      _imgBlob: null, _imgMime: "image/png", guides: [], rulerScale: null, gridOn: false };
   }
 
   function imageToBlob(img, mime, quality){
@@ -1221,6 +1283,8 @@ body{
     attachPointerEvents();
 
     sheetTitle.placeholder = "Untitled note";
+    var gridBtn = document.getElementById("btnGridToggle");
+    if (gridBtn) gridBtn.classList.toggle("active", !!page.gridOn);
     fitToScreen();
     redraw();
     renderPageStrip();
@@ -1270,7 +1334,7 @@ body{
     if (a.type === "arrow" || a.type === "line" || a.type === "ruler"){
       return ptSegDist(px,py,a.x1,a.y1,a.x2,a.y2) <= radius + a.width;
     }
-    if (a.type === "rect"){
+    if (a.type === "rect" || a.type === "cloud"){
       var x = Math.min(a.x1,a.x2), y = Math.min(a.y1,a.y2), w = Math.abs(a.x2-a.x1), h = Math.abs(a.y2-a.y1);
       var edges = [[x,y,x+w,y],[x+w,y,x+w,y+h],[x+w,y+h,x,y+h],[x,y+h,x,y]];
       for (var j=0;j<edges.length;j++){
@@ -1288,10 +1352,45 @@ body{
       var fw = (a.text.length * a.fontSize * 0.6), fh = a.fontSize*1.3;
       return px >= a.x-4 && px <= a.x+fw+4 && py >= a.y-fh-4 && py <= a.y+4;
     }
-    if (a.type === "stamp"){
+    if (a.type === "stamp" || a.type === "photopin"){
       return Math.hypot(px-a.x, py-a.y) <= radius + a.size/2;
     }
+    if (a.type === "polygon"){
+      var pts = a.points;
+      for (var pi=0; pi<pts.length; pi++){
+        var pj = (pi+1) % pts.length;
+        if (ptSegDist(px,py,pts[pi].x,pts[pi].y,pts[pj].x,pts[pj].y) <= radius + a.width) return true;
+      }
+      return false;
+    }
+    if (a.type === "angle"){
+      return ptSegDist(px,py,a.vertex.x,a.vertex.y,a.p1.x,a.p1.y) <= radius + a.width ||
+             ptSegDist(px,py,a.vertex.x,a.vertex.y,a.p2.x,a.p2.y) <= radius + a.width;
+    }
     return false;
+  }
+
+  // ---------- revision cloud geometry ----------
+  function buildCloudBumps(x1,y1,x2,y2){
+    var cx=(x1+x2)/2, cy=(y1+y2)/2;
+    var rx=Math.max(3,Math.abs(x2-x1)/2), ry=Math.max(3,Math.abs(y2-y1)/2);
+    var perimeter = Math.PI*(3*(rx+ry)-Math.sqrt((3*rx+ry)*(rx+3*ry)));
+    var n = Math.max(8, Math.round(perimeter/20));
+    var pts = [];
+    for (var i=0;i<=n;i++){
+      var ang = (i/n)*Math.PI*2;
+      pts.push({ x: cx+Math.cos(ang)*rx, y: cy+Math.sin(ang)*ry });
+    }
+    var bumps = [];
+    for (var j=0;j<pts.length-1;j++){
+      var p0=pts[j], p1=pts[j+1];
+      var mx=(p0.x+p1.x)/2, my=(p0.y+p1.y)/2;
+      var dist = Math.hypot(p1.x-p0.x, p1.y-p0.y);
+      var nx=mx-cx, ny=my-cy; var nlen=Math.hypot(nx,ny)||1; nx/=nlen; ny/=nlen;
+      var bumpR = dist/2*0.9;
+      bumps.push({ p0:p0, p1:p1, ctrl:{ x:mx+nx*bumpR, y:my+ny*bumpR } });
+    }
+    return bumps;
   }
 
   // ---------- selection helpers ----------
@@ -1306,9 +1405,21 @@ body{
       var fw = a.text.length * a.fontSize * 0.6, fh = a.fontSize*1.3;
       return { x:a.x-4, y:a.y-fh-4, w:fw+8, h:fh+8 };
     }
-    if (a.type === "stamp"){
+    if (a.type === "stamp" || a.type === "photopin"){
       var sp = (a.size/2) + 3;
       return { x:a.x-sp, y:a.y-sp, w:sp*2, h:sp*2 };
+    }
+    if (a.type === "polygon"){
+      var pxs = a.points.map(function(p){return p.x;}), pys = a.points.map(function(p){return p.y;});
+      var pad4 = (a.width||2)+4;
+      var minPx=Math.min.apply(null,pxs), maxPx=Math.max.apply(null,pxs), minPy=Math.min.apply(null,pys), maxPy=Math.max.apply(null,pys);
+      return { x:minPx-pad4, y:minPy-pad4, w:(maxPx-minPx)+pad4*2, h:(maxPy-minPy)+pad4*2 };
+    }
+    if (a.type === "angle"){
+      var axs=[a.vertex.x,a.p1.x,a.p2.x], ays=[a.vertex.y,a.p1.y,a.p2.y];
+      var pad5=(a.width||2)+4;
+      var minAx=Math.min.apply(null,axs), maxAx=Math.max.apply(null,axs), minAy=Math.min.apply(null,ays), maxAy=Math.max.apply(null,ays);
+      return { x:minAx-pad5, y:minAy-pad5, w:(maxAx-minAx)+pad5*2, h:(maxAy-minAy)+pad5*2 };
     }
     if (a.type === "ellipse"){
       var cx=(a.x1+a.x2)/2, cy=(a.y1+a.y2)/2, rx=Math.abs(a.x2-a.x1)/2, ry=Math.abs(a.y2-a.y1)/2;
@@ -1336,20 +1447,34 @@ body{
     return bbox && x >= bbox.x && x <= bbox.x+bbox.w && y >= bbox.y && y <= bbox.y+bbox.h;
   }
   function snapshotGeom(a){
-    if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy"){
+    if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy" || a.type === "polygon"){
       return { points: a.points.map(function(p){ return { x:p.x, y:p.y, pressure:p.pressure }; }) };
     }
-    if (a.type === "text" || a.type === "stamp") return { x:a.x, y:a.y };
+    if (a.type === "text" || a.type === "stamp" || a.type === "photopin") return { x:a.x, y:a.y };
+    if (a.type === "angle") return { vertex:{x:a.vertex.x,y:a.vertex.y}, p1:{x:a.p1.x,y:a.p1.y}, p2:{x:a.p2.x,y:a.p2.y} };
     return { x1:a.x1, y1:a.y1, x2:a.x2, y2:a.y2 };
   }
   function applyGeom(a, snap){
-    Object.keys(snap).forEach(function(k){ a[k] = snap[k]; });
+    Object.keys(snap).forEach(function(k){
+      var v = snap[k];
+      if (Array.isArray(v)){
+        a[k] = v.map(function(p){ return { x:p.x, y:p.y, pressure:p.pressure }; });
+      } else if (v && typeof v === "object"){
+        a[k] = { x:v.x, y:v.y };
+      } else {
+        a[k] = v;
+      }
+    });
   }
   function translateAction(a, dx, dy){
-    if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy"){
+    if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy" || a.type === "polygon"){
       a.points.forEach(function(p){ p.x += dx; p.y += dy; });
-    } else if (a.type === "text" || a.type === "stamp"){
+    } else if (a.type === "text" || a.type === "stamp" || a.type === "photopin"){
       a.x += dx; a.y += dy;
+    } else if (a.type === "angle"){
+      a.vertex.x += dx; a.vertex.y += dy;
+      a.p1.x += dx; a.p1.y += dy;
+      a.p2.x += dx; a.p2.y += dy;
     } else {
       a.x1 += dx; a.y1 += dy; a.x2 += dx; a.y2 += dy;
     }
@@ -1501,14 +1626,24 @@ body{
       var cl = r*0.36;
       c.beginPath(); c.moveTo(-cl,0); c.lineTo(cl,0); c.moveTo(0,-cl); c.lineTo(0,cl); c.stroke();
       c.restore();
-    } else if (sym === "delta" || sym === "traverseplaced"){
+    } else if (sym === "delta" || sym === "traverseplaced" || sym === "spikeplaced"){
       c.beginPath(); c.moveTo(0,-r); c.lineTo(r*0.9,r*0.75); c.lineTo(-r*0.9,r*0.75); c.closePath(); c.stroke();
-    } else if (sym === "ascmfound" || sym === "traversefound"){
+    } else if (sym === "traversefound" || sym === "spikefound"){
       c.beginPath(); c.moveTo(0,-r); c.lineTo(r*0.9,r*0.75); c.lineTo(-r*0.9,r*0.75); c.closePath(); c.fill();
+    } else if (sym === "ascmfound"){
+      c.beginPath(); c.moveTo(0,-r*0.75); c.lineTo(r*0.68,r*0.55); c.lineTo(-r*0.68,r*0.55); c.closePath(); c.fill();
+      c.beginPath(); c.arc(0,0,r*0.95,0,Math.PI*2); c.stroke();
     } else if (sym === "wellhead"){
       c.beginPath(); c.arc(0,0,r*0.8,0,Math.PI*2); c.stroke();
       var wl = r*1.15;
       c.beginPath(); c.moveTo(-wl,0); c.lineTo(wl,0); c.moveTo(0,-wl); c.lineTo(0,wl); c.stroke();
+    } else if (sym === "northarrow"){
+      c.lineWidth = lw;
+      c.beginPath(); c.moveTo(0,-r*1.05); c.lineTo(r*0.42,r*0.35); c.lineTo(0,r*0.05); c.lineTo(-r*0.42,r*0.35); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(0,r*0.05); c.lineTo(0,r*0.95); c.stroke();
+      c.font = "700 " + Math.max(13,r*0.55) + "px 'JetBrains Mono', monospace";
+      c.textAlign = "center"; c.textBaseline = "alphabetic";
+      c.fillText("N", 0, -r*1.15);
     } else if (sym === "temppos"){
       c.lineWidth = Math.max(1.4, size*0.14);
       c.beginPath(); c.moveTo(-r,-r); c.lineTo(r,r); c.moveTo(r,-r); c.lineTo(-r,r); c.stroke();
@@ -1568,6 +1703,32 @@ body{
       c.setLineDash([]);
     } else if (a.type === "stamp"){
       drawStampSymbol(c, a.symbol, a.x, a.y, a.size, a.color);
+    } else if (a.type === "photopin"){
+      var pImg = photoImageCache.get(a);
+      var pr = a.size/2;
+      c.save();
+      if (pImg){
+        c.beginPath(); c.arc(a.x, a.y, pr, 0, Math.PI*2); c.closePath(); c.clip();
+        var iw = pImg.naturalWidth||pImg.width, ih = pImg.naturalHeight||pImg.height;
+        var scaleFit = Math.max((pr*2)/iw, (pr*2)/ih);
+        var dw = iw*scaleFit, dh = ih*scaleFit;
+        c.drawImage(pImg, a.x-dw/2, a.y-dh/2, dw, dh);
+        c.restore();
+        c.beginPath(); c.arc(a.x, a.y, pr, 0, Math.PI*2);
+        c.strokeStyle = a.color || "#FF7A1A"; c.lineWidth = Math.max(2, pr*0.14); c.stroke();
+      } else {
+        c.beginPath(); c.arc(a.x, a.y, pr, 0, Math.PI*2);
+        c.fillStyle = a.color || "#FF7A1A"; c.fill();
+        c.restore();
+      }
+      c.save();
+      var bR = pr*0.4;
+      c.beginPath(); c.arc(a.x+pr*0.72, a.y+pr*0.72, bR, 0, Math.PI*2);
+      c.fillStyle = "#0B1E2E"; c.fill();
+      c.strokeStyle = "#fff"; c.lineWidth = Math.max(1, bR*0.14); c.stroke();
+      c.strokeStyle = "#fff"; c.lineWidth = Math.max(1, bR*0.22);
+      c.beginPath(); c.arc(a.x+pr*0.72, a.y+pr*0.72, bR*0.42, 0, Math.PI*2); c.stroke();
+      c.restore();
     } else if (a.type === "ruler"){
       c.strokeStyle = a.color; c.fillStyle = a.color; c.lineWidth = Math.max(1, a.width*0.7);
       var rAng = Math.atan2(a.y2-a.y1, a.x2-a.x1);
@@ -1601,10 +1762,62 @@ body{
     } else if (a.type === "rect"){
       c.strokeStyle = a.color; c.lineWidth = a.width;
       c.strokeRect(Math.min(a.x1,a.x2), Math.min(a.y1,a.y2), Math.abs(a.x2-a.x1), Math.abs(a.y2-a.y1));
+    } else if (a.type === "cloud"){
+      var bumpsC = buildCloudBumps(a.x1,a.y1,a.x2,a.y2);
+      c.strokeStyle = a.color; c.lineWidth = a.width; c.lineJoin = "round"; c.lineCap = "round";
+      c.beginPath();
+      c.moveTo(bumpsC[0].p0.x, bumpsC[0].p0.y);
+      bumpsC.forEach(function(b){ c.quadraticCurveTo(b.ctrl.x, b.ctrl.y, b.p1.x, b.p1.y); });
+      c.closePath();
+      c.stroke();
     } else if (a.type === "ellipse"){
       c.strokeStyle = a.color; c.lineWidth = a.width;
       var cx=(a.x1+a.x2)/2, cy=(a.y1+a.y2)/2, rx=Math.abs(a.x2-a.x1)/2, ry=Math.abs(a.y2-a.y1)/2;
       c.beginPath(); c.ellipse(cx,cy,Math.max(rx,0.1),Math.max(ry,0.1),0,0,Math.PI*2); c.stroke();
+    } else if (a.type === "polygon"){
+      c.strokeStyle = a.color; c.lineWidth = a.width; c.lineJoin = "round";
+      c.beginPath();
+      a.points.forEach(function(p,i){ i===0?c.moveTo(p.x,p.y):c.lineTo(p.x,p.y); });
+      c.closePath();
+      c.fillStyle = a.color; c.globalAlpha = 0.12; c.fill();
+      c.globalAlpha = 1; c.stroke();
+      if (a.label){
+        var cx0=0, cy0=0;
+        a.points.forEach(function(p){ cx0+=p.x; cy0+=p.y; });
+        cx0/=a.points.length; cy0/=a.points.length;
+        var fs = Math.max(12, a.width*3.2);
+        c.font = "700 " + fs + "px 'JetBrains Mono', monospace";
+        var tw = c.measureText(a.label).width;
+        c.fillStyle = "rgba(11,30,46,0.86)";
+        c.fillRect(cx0-tw/2-5, cy0-fs/2-3, tw+10, fs+6);
+        c.fillStyle = a.color;
+        c.textAlign = "center"; c.textBaseline = "middle";
+        c.fillText(a.label, cx0, cy0+1);
+        c.textAlign = "left"; c.textBaseline = "alphabetic";
+      }
+    } else if (a.type === "angle"){
+      c.strokeStyle = a.color; c.fillStyle = a.color; c.lineWidth = a.width; c.lineCap = "round";
+      c.beginPath(); c.moveTo(a.vertex.x,a.vertex.y); c.lineTo(a.p1.x,a.p1.y); c.stroke();
+      c.beginPath(); c.moveTo(a.vertex.x,a.vertex.y); c.lineTo(a.p2.x,a.p2.y); c.stroke();
+      var ang1 = Math.atan2(a.p1.y-a.vertex.y, a.p1.x-a.vertex.x);
+      var ang2 = Math.atan2(a.p2.y-a.vertex.y, a.p2.x-a.vertex.x);
+      var arcR = Math.min(36, Math.hypot(a.p1.x-a.vertex.x,a.p1.y-a.vertex.y)*0.4, Math.hypot(a.p2.x-a.vertex.x,a.p2.y-a.vertex.y)*0.4);
+      c.beginPath(); c.arc(a.vertex.x, a.vertex.y, Math.max(10,arcR), ang1, ang2); c.stroke();
+      if (a.label){
+        var midAng = ang1 + ((ang2-ang1+Math.PI*3)%(Math.PI*2) - Math.PI)/1;
+        var labelAng = Math.atan2(Math.sin(ang1)+Math.sin(ang2), Math.cos(ang1)+Math.cos(ang2));
+        var lx = a.vertex.x + Math.cos(labelAng)*(arcR+18);
+        var ly = a.vertex.y + Math.sin(labelAng)*(arcR+18);
+        var fs2 = Math.max(12, a.width*3.2);
+        c.font = "700 " + fs2 + "px 'JetBrains Mono', monospace";
+        var tw2 = c.measureText(a.label).width;
+        c.fillStyle = "rgba(11,30,46,0.86)";
+        c.fillRect(lx-tw2/2-5, ly-fs2/2-3, tw2+10, fs2+6);
+        c.fillStyle = a.color;
+        c.textAlign = "center"; c.textBaseline = "middle";
+        c.fillText(a.label, lx, ly+1);
+        c.textAlign = "left"; c.textBaseline = "alphabetic";
+      }
     } else if (a.type === "text"){
       c.fillStyle = a.color; c.font = "700 " + a.fontSize + "px Inter, sans-serif";
       c.textBaseline = "alphabetic";
@@ -1618,8 +1831,51 @@ body{
     var page = pages[currentIndex];
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.drawImage(page.img, 0, 0, canvas.width, canvas.height);
+
+    if (page.gridOn){
+      ctx.save();
+      var spacing = Math.max(20, Math.round(canvas.width/40));
+      ctx.strokeStyle = "#5EC8E8";
+      ctx.globalAlpha = 0.28;
+      ctx.lineWidth = 1;
+      for (var gx=0; gx<=canvas.width; gx+=spacing){
+        ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,canvas.height); ctx.stroke();
+      }
+      for (var gy=0; gy<=canvas.height; gy+=spacing){
+        ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(canvas.width,gy); ctx.stroke();
+      }
+      ctx.restore();
+    }
+
     page.actions.forEach(function(a){ drawAction(ctx, a); });
     if (currentAction) drawAction(ctx, currentAction);
+
+    if (polygonDraft && polygonDraft.points.length){
+      ctx.save();
+      ctx.strokeStyle = currentColor; ctx.fillStyle = currentColor; ctx.lineWidth = currentWidth;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      ctx.beginPath();
+      polygonDraft.points.forEach(function(p,i){ i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y); });
+      ctx.stroke();
+      polygonDraft.points.forEach(function(p,i){
+        ctx.beginPath();
+        ctx.arc(p.x,p.y, i===0?7:4, 0, Math.PI*2);
+        ctx.globalAlpha = i===0 ? 0.9 : 1;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+      ctx.restore();
+    }
+    if (angleDraft){
+      ctx.save();
+      ctx.strokeStyle = currentColor; ctx.fillStyle = currentColor; ctx.lineWidth = currentWidth;
+      ctx.lineCap = "round";
+      ctx.beginPath(); ctx.arc(angleDraft.vertex.x, angleDraft.vertex.y, 5, 0, Math.PI*2); ctx.fill();
+      if (angleDraft.p1){
+        ctx.beginPath(); ctx.moveTo(angleDraft.vertex.x, angleDraft.vertex.y); ctx.lineTo(angleDraft.p1.x, angleDraft.p1.y); ctx.stroke();
+      }
+      ctx.restore();
+    }
 
     // non-printing guides (screen only; never exported, never part of page.actions)
     if (page.guides && page.guides.length){
@@ -1886,8 +2142,50 @@ body{
 
     if (currentTool === "stamp"){
       var stampSize = Math.max(16, currentWidth*4.5);
+      if (armedStampSymbol === "northarrow") stampSize *= 1.8;
       pushAdd(page, { type:"stamp", symbol:armedStampSymbol, color:currentColor, size:stampSize, x:pos.x, y:pos.y });
       redraw();
+      return;
+    }
+
+    if (currentTool === "polygon"){
+      if (!polygonDraft){
+        polygonDraft = { points: [pos] };
+      } else if (polygonDraft.points.length >= 3 && Math.hypot(pos.x-polygonDraft.points[0].x, pos.y-polygonDraft.points[0].y) < 16){
+        finishPolygon(page);
+        return;
+      } else {
+        polygonDraft.points.push(pos);
+      }
+      redraw();
+      showPolygonBtns();
+      return;
+    }
+
+    if (currentTool === "angle"){
+      if (!angleDraft){
+        angleDraft = { vertex: pos, p1: null };
+      } else if (!angleDraft.p1){
+        angleDraft.p1 = pos;
+      } else {
+        finishAngle(page, angleDraft.vertex, angleDraft.p1, pos);
+        return;
+      }
+      redraw();
+      showAngleCancelBtn();
+      return;
+    }
+
+    if (currentTool === "photo"){
+      for (var phi=page.actions.length-1; phi>=0; phi--){
+        var pa = page.actions[phi];
+        if (pa.type === "photopin" && Math.hypot(pos.x-pa.x, pos.y-pa.y) <= pa.size/2 + 8){
+          openPhotoLightbox(pa);
+          return;
+        }
+      }
+      pendingPhotoPos = pos;
+      document.getElementById("photoInput").click();
       return;
     }
 
@@ -1918,7 +2216,7 @@ body{
     } else if (currentTool === "calligraphy"){
       currentAction = { type: "calligraphy", color: currentColor, width: currentWidth * 1.4, points: [pos],
         nibAngle: calligraphyNibAngle * Math.PI / 180, isStraightLine: false };
-    } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler"){
+    } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler" || currentTool === "cloud"){
       currentAction = { type: currentTool, color: currentColor, width: currentWidth, x1: pos.x, y1: pos.y, x2: pos.x, y2: pos.y };
       if (currentTool === "line" && pendingLineDash) currentAction.dash = pendingLineDash;
     } else if (currentTool === "eraser"){
@@ -1966,7 +2264,7 @@ body{
         armHoldTimer();
       }
       scheduleRedraw();
-    } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler"){
+    } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler" || currentTool === "cloud"){
       var pos2 = getCanvasPos(e);
       currentAction.x2 = pos2.x; currentAction.y2 = pos2.y;
       scheduleRedraw();
@@ -2076,6 +2374,131 @@ body{
     pages[currentIndex].rulerScale = null;
     scheduleSave();
     alert("Ruler scale cleared. Draw a new ruler line and enter its real-world length to recalibrate.");
+  });
+
+  // ---------- polygon (area) tool ----------
+  function polygonAreaPx(points){
+    var area = 0;
+    for (var i=0;i<points.length;i++){
+      var j = (i+1) % points.length;
+      area += points[i].x*points[j].y - points[j].x*points[i].y;
+    }
+    return Math.abs(area)/2;
+  }
+  function formatArea(areaUnits, unit){
+    if (unit === "ft"){
+      if (areaUnits >= 43560) return (areaUnits/43560).toFixed(2) + " ac (" + Math.round(areaUnits).toLocaleString() + " sq ft)";
+      return Math.round(areaUnits).toLocaleString() + " sq ft";
+    }
+    if (areaUnits >= 10000) return (areaUnits/10000).toFixed(2) + " ha (" + Math.round(areaUnits).toLocaleString() + " m\u00b2)";
+    return Math.round(areaUnits).toLocaleString() + " m\u00b2";
+  }
+  function ensurePolygonBtns(){
+    if (polygonFinishBtn) return;
+    polygonFinishBtn = document.createElement("button");
+    polygonFinishBtn.className = "select-delete-btn";
+    polygonFinishBtn.style.background = "#34C759";
+    polygonFinishBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+    polygonFinishBtn.title = "Finish shape";
+    polygonFinishBtn.addEventListener("click", function(){ if (currentIndex>=0) finishPolygon(pages[currentIndex]); });
+    stage.appendChild(polygonFinishBtn);
+
+    polygonCancelBtn = document.createElement("button");
+    polygonCancelBtn.className = "select-delete-btn";
+    polygonCancelBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    polygonCancelBtn.title = "Cancel";
+    polygonCancelBtn.addEventListener("click", cancelPolygonDraft);
+    stage.appendChild(polygonCancelBtn);
+  }
+  function showPolygonBtns(){
+    if (!polygonDraft || !canvas) return;
+    ensurePolygonBtns();
+    var last = polygonDraft.points[polygonDraft.points.length-1];
+    var scaleFactor = canvas.getBoundingClientRect().width / canvas.width;
+    polygonCancelBtn.style.left = (last.x*scaleFactor + 10) + "px";
+    polygonCancelBtn.style.top = (last.y*scaleFactor - 14) + "px";
+    polygonCancelBtn.style.display = "flex";
+    if (polygonDraft.points.length >= 3){
+      polygonFinishBtn.style.left = (last.x*scaleFactor + 10) + "px";
+      polygonFinishBtn.style.top = (last.y*scaleFactor + 22) + "px";
+      polygonFinishBtn.style.display = "flex";
+    } else {
+      polygonFinishBtn.style.display = "none";
+    }
+  }
+  function hidePolygonBtns(){
+    if (polygonFinishBtn) polygonFinishBtn.style.display = "none";
+    if (polygonCancelBtn) polygonCancelBtn.style.display = "none";
+  }
+  function cancelPolygonDraft(){
+    polygonDraft = null;
+    hidePolygonBtns();
+    redraw();
+  }
+  function finishPolygon(page){
+    if (!polygonDraft || polygonDraft.points.length < 3) return;
+    var action = { type:"polygon", color: currentColor, width: currentWidth, points: polygonDraft.points.slice() };
+    var areaPx = polygonAreaPx(action.points);
+    if (page.rulerScale){
+      var areaUnits = areaPx * page.rulerScale.unitsPerPixel * page.rulerScale.unitsPerPixel;
+      action.label = formatArea(areaUnits, page.rulerScale.unit);
+    } else {
+      action.label = null;
+      showToast("Tip: calibrate with the Ruler tool to see real-world area");
+      setTimeout(hideToast, 2200);
+    }
+    pushAdd(page, action);
+    polygonDraft = null;
+    hidePolygonBtns();
+    redraw();
+  }
+
+  // ---------- angle (bearing) tool ----------
+  function ensureAngleCancelBtn(){
+    if (angleCancelBtn) return;
+    angleCancelBtn = document.createElement("button");
+    angleCancelBtn.className = "select-delete-btn";
+    angleCancelBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    angleCancelBtn.title = "Cancel";
+    angleCancelBtn.addEventListener("click", cancelAngleDraft);
+    stage.appendChild(angleCancelBtn);
+  }
+  function showAngleCancelBtn(){
+    if (!angleDraft || !canvas) return;
+    ensureAngleCancelBtn();
+    var anchor = angleDraft.p1 || angleDraft.vertex;
+    var scaleFactor = canvas.getBoundingClientRect().width / canvas.width;
+    angleCancelBtn.style.left = (anchor.x*scaleFactor + 10) + "px";
+    angleCancelBtn.style.top = (anchor.y*scaleFactor - 14) + "px";
+    angleCancelBtn.style.display = "flex";
+  }
+  function hideAngleCancelBtn(){
+    if (angleCancelBtn) angleCancelBtn.style.display = "none";
+  }
+  function cancelAngleDraft(){
+    angleDraft = null;
+    hideAngleCancelBtn();
+    redraw();
+  }
+  function finishAngle(page, vertex, p1, p2){
+    var a1 = Math.atan2(p1.y-vertex.y, p1.x-vertex.x);
+    var a2 = Math.atan2(p2.y-vertex.y, p2.x-vertex.x);
+    var diff = Math.abs(a1-a2) * 180/Math.PI;
+    if (diff > 180) diff = 360 - diff;
+    var label = diff.toFixed(1) + "\u00b0";
+    var action = { type:"angle", color: currentColor, width: currentWidth, vertex:vertex, p1:p1, p2:p2, label: label };
+    pushAdd(page, action);
+    angleDraft = null;
+    hideAngleCancelBtn();
+    redraw();
+  }
+  document.getElementById("btnGridToggle").addEventListener("click", function(){
+    if (currentIndex < 0) return;
+    var page = pages[currentIndex];
+    page.gridOn = !page.gridOn;
+    document.getElementById("btnGridToggle").classList.toggle("active", page.gridOn);
+    scheduleSave();
+    redraw();
   });
 
   // ---------- selection tool ----------
@@ -2277,6 +2700,41 @@ body{
     fileInput.value = "";
   });
 
+  // ---------- photo pins ----------
+  var photoInputEl = document.getElementById("photoInput");
+  photoInputEl.addEventListener("change", async function(){
+    var file = photoInputEl.files && photoInputEl.files[0];
+    photoInputEl.value = "";
+    if (!file || currentIndex < 0 || !pendingPhotoPos) return;
+    var pos = pendingPhotoPos; pendingPhotoPos = null;
+    try {
+      var img = await blobToImage(file);
+      var page = pages[currentIndex];
+      var size = Math.max(28, currentWidth*7);
+      var action = { type:"photopin", x: pos.x, y: pos.y, size: size, imgBlob: file, color: currentColor };
+      photoImageCache.set(action, img);
+      pushAdd(page, action);
+      redraw();
+    } catch(err){
+      console.error(err);
+      alert("Couldn't load that photo.");
+    }
+  });
+
+  var photoLightbox = document.getElementById("photo-lightbox");
+  var photoLightboxImg = document.getElementById("photo-lightbox-img");
+  function openPhotoLightbox(action){
+    var img = photoImageCache.get(action);
+    photoLightboxImg.src = img ? img.src : "";
+    photoLightbox.classList.add("visible");
+  }
+  function closePhotoLightbox(){
+    photoLightbox.classList.remove("visible");
+    photoLightboxImg.src = "";
+  }
+  photoLightbox.addEventListener("click", closePhotoLightbox);
+  document.getElementById("photo-lightbox-close").addEventListener("click", closePhotoLightbox);
+
   // drag & drop
   ["dragover","drop"].forEach(function(ev){
     document.getElementById("canvas-area").addEventListener(ev, function(e){ e.preventDefault(); });
@@ -2325,7 +2783,7 @@ body{
   }
 
   // Draws a survey stamp symbol as real PDF vector shapes (mirrors drawStampSymbol).
-  function drawStampSymbolPdf(pdfPage, a, toPt, scale, color){
+  function drawStampSymbolPdf(pdfPage, a, toPt, scale, color, font){
     var r = a.size/2;
     var cx = a.x, cy = a.y;
     function pt(dx,dy){ return toPt(cx+dx, cy+dy); }
@@ -2341,6 +2799,7 @@ body{
     var diamondPath = "M 0 " + (-r) + " L " + r + " 0 L 0 " + r + " L " + (-r) + " 0 Z";
     var squarePath = "M " + (-r*0.72) + " " + (-r*0.72) + " L " + (r*0.72) + " " + (-r*0.72) + " L " + (r*0.72) + " " + (r*0.72) + " L " + (-r*0.72) + " " + (r*0.72) + " Z";
     var trianglePath = "M 0 " + (-r) + " L " + (r*0.9) + " " + (r*0.75) + " L " + (-r*0.9) + " " + (r*0.75) + " Z";
+    var ascmTrianglePath = "M 0 " + (-r*0.75) + " L " + (r*0.68) + " " + (r*0.55) + " L " + (-r*0.68) + " " + (r*0.55) + " Z";
 
     if (a.symbol === "drillhole"){
       pdfPage.drawLine({ start:pt(-r,-r), end:pt(r,r), thickness:lw, color:color });
@@ -2378,15 +2837,26 @@ body{
       var cl = r*0.36, clw = Math.max(0.5,(a.size*0.09)/scale);
       pdfPage.drawLine({ start:pt(-cl,0), end:pt(cl,0), thickness:clw, color:PDFLib.rgb(1,1,1) });
       pdfPage.drawLine({ start:pt(0,-cl), end:pt(0,cl), thickness:clw, color:PDFLib.rgb(1,1,1) });
-    } else if (a.symbol === "delta" || a.symbol === "traverseplaced"){
+    } else if (a.symbol === "delta" || a.symbol === "traverseplaced" || a.symbol === "spikeplaced"){
       poly(trianglePath, false);
-    } else if (a.symbol === "ascmfound" || a.symbol === "traversefound"){
+    } else if (a.symbol === "traversefound" || a.symbol === "spikefound"){
       poly(trianglePath, true);
+    } else if (a.symbol === "ascmfound"){
+      poly(ascmTrianglePath, true);
+      pdfPage.drawEllipse({ x:anchor.x, y:anchor.y, xScale:(r*0.95)/scale, yScale:(r*0.95)/scale, borderColor:color, borderWidth:lw });
     } else if (a.symbol === "wellhead"){
       pdfPage.drawEllipse({ x:anchor.x, y:anchor.y, xScale:(r*0.8)/scale, yScale:(r*0.8)/scale, borderColor:color, borderWidth:lw });
       var wl = r*1.15;
       pdfPage.drawLine({ start:pt(-wl,0), end:pt(wl,0), thickness:lw, color:color });
       pdfPage.drawLine({ start:pt(0,-wl), end:pt(0,wl), thickness:lw, color:color });
+    } else if (a.symbol === "northarrow"){
+      var arrowPath = "M 0 " + (-r*1.05) + " L " + (r*0.42) + " " + (r*0.35) + " L 0 " + (r*0.05) + " L " + (-r*0.42) + " " + (r*0.35) + " Z";
+      poly(arrowPath, true);
+      pdfPage.drawLine({ start: pt(0, r*0.05), end: pt(0, r*0.95), thickness: lw, color: color });
+      if (font){
+        var nPt = pt(0, -r*1.15);
+        pdfPage.drawText("N", { x: nPt.x-3, y: nPt.y, size: Math.max(10, (r*0.55)/scale), font: font, color: color });
+      }
     } else if (a.symbol === "temppos"){
       var lw2 = Math.max(0.6, (a.size*0.14)/scale);
       pdfPage.drawLine({ start:pt(-r,-r), end:pt(r,r), thickness:lw2, color:color });
@@ -2396,12 +2866,13 @@ body{
 
   // Draws our vector actions directly onto a real PDF page (crisp at any zoom,
   // and keeps the original plan's vector content untouched underneath).
-  function drawAnnotationsOnPdfPage(pdfPage, page, font){
+  async function drawAnnotationsOnPdfPage(pdfPage, page, font, outDoc){
     var scale = page.pdfScale || 1;
     var ptH = page.pdfPtHeight || ((page.img.naturalHeight || page.img.height) / scale);
     function toPt(x,y){ return { x: x/scale, y: ptH - y/scale }; }
 
-    page.actions.forEach(function(a){
+    for (var actIdx=0; actIdx<page.actions.length; actIdx++){
+      var a = page.actions[actIdx];
       var color = hexToRgb01(a.color);
 
       if (a.type === "pen" || a.type === "calligraphy"){
@@ -2442,7 +2913,7 @@ body{
         if (a.dash && a.dash.length) lineOpts.dashArray = a.dash.map(function(d){ return d/scale; });
         pdfPage.drawLine(lineOpts);
       } else if (a.type === "stamp"){
-        drawStampSymbolPdf(pdfPage, a, toPt, scale, color);
+        drawStampSymbolPdf(pdfPage, a, toPt, scale, color, font);
       } else if (a.type === "ruler"){
         var rS = toPt(a.x1,a.y1), rE = toPt(a.x2,a.y2);
         var rW = Math.max(0.5, a.width*0.7/scale);
@@ -2475,6 +2946,17 @@ body{
         var x = Math.min(a.x1,a.x2), y = Math.min(a.y1,a.y2), w = Math.abs(a.x2-a.x1), h = Math.abs(a.y2-a.y1);
         var bl = toPt(x, y+h);
         pdfPage.drawRectangle({ x:bl.x, y:bl.y, width:w/scale, height:h/scale, borderColor: color, borderWidth: a.width/scale });
+      } else if (a.type === "cloud"){
+        var bumpsPdf = buildCloudBumps(a.x1,a.y1,a.x2,a.y2);
+        var firstPt = toPt(bumpsPdf[0].p0.x, bumpsPdf[0].p0.y);
+        var dCloud = "M " + firstPt.x + " " + firstPt.y + " ";
+        bumpsPdf.forEach(function(b){
+          var ctrlPt = toPt(b.ctrl.x, b.ctrl.y);
+          var endPt = toPt(b.p1.x, b.p1.y);
+          dCloud += "Q " + ctrlPt.x + " " + ctrlPt.y + " " + endPt.x + " " + endPt.y + " ";
+        });
+        dCloud += "Z";
+        pdfPage.drawSvgPath(dCloud, { x:0, y:0, scale:1, borderColor: color, borderWidth: a.width/scale });
       } else if (a.type === "ellipse"){
         var cx=(a.x1+a.x2)/2, cy=(a.y1+a.y2)/2, rx=Math.abs(a.x2-a.x1)/2, ry=Math.abs(a.y2-a.y1)/2;
         var cpt = toPt(cx,cy);
@@ -2482,8 +2964,49 @@ body{
       } else if (a.type === "text"){
         var tp = toPt(a.x, a.y);
         pdfPage.drawText(a.text, { x: tp.x, y: tp.y, size: a.fontSize/scale, font: font, color: color });
+      } else if (a.type === "polygon"){
+        var polyPts = a.points.map(function(p){ return toPt(p.x, p.y); });
+        var dPoly = "M " + polyPts[0].x + " " + polyPts[0].y + " " +
+          polyPts.slice(1).map(function(p){ return "L " + p.x + " " + p.y; }).join(" ") + " Z";
+        pdfPage.drawSvgPath(dPoly, { x:0, y:0, scale:1, borderColor: color, borderWidth: a.width/scale, opacity:0.12, color: color });
+        pdfPage.drawSvgPath(dPoly, { x:0, y:0, scale:1, borderColor: color, borderWidth: a.width/scale });
+        if (a.label && font){
+          var cxp=0, cyp=0;
+          a.points.forEach(function(p){ cxp+=p.x; cyp+=p.y; });
+          cxp/=a.points.length; cyp/=a.points.length;
+          var lblPt = toPt(cxp, cyp);
+          var fs3 = Math.max(8, a.width*3.2/scale);
+          pdfPage.drawText(a.label, { x: lblPt.x-(a.label.length*fs3*0.28), y: lblPt.y-fs3*0.35, size: fs3, font: font, color: color });
+        }
+      } else if (a.type === "angle"){
+        var vPt = toPt(a.vertex.x,a.vertex.y), p1Pt = toPt(a.p1.x,a.p1.y), p2Pt = toPt(a.p2.x,a.p2.y);
+        var wPt5 = a.width/scale;
+        pdfPage.drawLine({ start:vPt, end:p1Pt, thickness:wPt5, color:color });
+        pdfPage.drawLine({ start:vPt, end:p2Pt, thickness:wPt5, color:color });
+        if (a.label && font){
+          var angMid = Math.atan2(
+            Math.sin(Math.atan2(a.p1.y-a.vertex.y,a.p1.x-a.vertex.x))+Math.sin(Math.atan2(a.p2.y-a.vertex.y,a.p2.x-a.vertex.x)),
+            Math.cos(Math.atan2(a.p1.y-a.vertex.y,a.p1.x-a.vertex.x))+Math.cos(Math.atan2(a.p2.y-a.vertex.y,a.p2.x-a.vertex.x))
+          );
+          var labelX = a.vertex.x + Math.cos(angMid)*40, labelY = a.vertex.y + Math.sin(angMid)*40;
+          var lblPt2 = toPt(labelX, labelY);
+          var fs4 = Math.max(8, a.width*3.2/scale);
+          pdfPage.drawText(a.label, { x: lblPt2.x-(a.label.length*fs4*0.28), y: lblPt2.y-fs4*0.35, size: fs4, font: font, color: color });
+        }
+      } else if (a.type === "photopin" && outDoc && a.imgBlob){
+        try {
+          var pBytes = new Uint8Array(await a.imgBlob.arrayBuffer());
+          var embedded = (a.imgBlob.type === "image/png")
+            ? await outDoc.embedPng(pBytes)
+            : await outDoc.embedJpg(pBytes);
+          var pr2 = a.size/2;
+          var bl2 = toPt(a.x-pr2, a.y+pr2);
+          pdfPage.drawImage(embedded, { x:bl2.x, y:bl2.y, width:(pr2*2)/scale, height:(pr2*2)/scale });
+          var centerPt = toPt(a.x, a.y);
+          pdfPage.drawEllipse({ x:centerPt.x, y:centerPt.y, xScale:pr2/scale, yScale:pr2/scale, borderColor: color, borderWidth: Math.max(1,pr2*0.14/scale) });
+        } catch(photoErr){ console.error("photo pin export failed", photoErr); }
       }
-    });
+    }
   }
 
   async function buildOutputPdf(pageList){
@@ -2501,7 +3024,7 @@ body{
         var copied = await outDoc.copyPages(srcDoc, [page.sourcePageIndex]);
         var pdfPage = copied[0];
         outDoc.addPage(pdfPage);
-        drawAnnotationsOnPdfPage(pdfPage, page, boldFont);
+        await drawAnnotationsOnPdfPage(pdfPage, page, boldFont, outDoc);
       } else {
         var flat = renderFlattened(page);
         var pngBytes = dataURLToUint8(flat.toDataURL("image/png"));
@@ -2568,7 +3091,7 @@ body{
         return { id:p.id, name:p.name, actions:p.actions, sourceFileId:p.sourceFileId,
           sourcePageIndex:p.sourcePageIndex, pdfScale:p.pdfScale, pdfPtWidth:p.pdfPtWidth,
           pdfPtHeight:p.pdfPtHeight, imgBlob:p._imgBlob, imgMime:p._imgMime,
-          guides:p.guides || [], rulerScale:p.rulerScale || null };
+          guides:p.guides || [], rulerScale:p.rulerScale || null, gridOn:!!p.gridOn };
       }),
       sourceFiles: sourceFiles
     };
@@ -2593,11 +3116,19 @@ body{
     for (var i=0;i<data.pages.length;i++){
       var pd = data.pages[i];
       var img = await blobToImage(pd.imgBlob);
-      loadedPages.push({ id: pd.id, name: pd.name, img: img, actions: pd.actions || [], history: [], redo: [],
+      var pageActions = pd.actions || [];
+      for (var ai=0; ai<pageActions.length; ai++){
+        var act = pageActions[ai];
+        if (act.type === "photopin" && act.imgBlob){
+          try { photoImageCache.set(act, await blobToImage(act.imgBlob)); }
+          catch(e){ console.error("photo pin failed to load", e); }
+        }
+      }
+      loadedPages.push({ id: pd.id, name: pd.name, img: img, actions: pageActions, history: [], redo: [],
         sourceFileId: pd.sourceFileId, sourcePageIndex: pd.sourcePageIndex,
         pdfScale: pd.pdfScale, pdfPtWidth: pd.pdfPtWidth, pdfPtHeight: pd.pdfPtHeight,
         _imgBlob: pd.imgBlob, _imgMime: pd.imgMime || "image/png",
-        guides: pd.guides || [], rulerScale: pd.rulerScale || null });
+        guides: pd.guides || [], rulerScale: pd.rulerScale || null, gridOn: !!pd.gridOn });
     }
     var srcFiles = {};
     Object.keys(data.sourceFiles || {}).forEach(function(k){ srcFiles[k] = data.sourceFiles[k]; });
@@ -2635,27 +3166,79 @@ body{
   }
 
   // ---------- library: folders ----------
+  var cardDragState = null; // { noteId, card, ghost, startX, startY, dragging, pointerId }
+
   function updateFolderActiveStates(){
     document.querySelectorAll("#lib-folders .lib-folder-item[data-folder]").forEach(function(el){
       el.classList.toggle("active", el.dataset.folder === currentFolderFilter);
     });
   }
-  function attachFolderDropTarget(el, folderId){
-    el.addEventListener("dragover", function(ev){ ev.preventDefault(); el.classList.add("drag-over"); });
-    el.addEventListener("dragleave", function(){ el.classList.remove("drag-over"); });
-    el.addEventListener("drop", function(ev){
-      ev.preventDefault();
-      el.classList.remove("drag-over");
-      if (draggedNoteId) moveNoteToFolder(draggedNoteId, folderId === "__unfiled__" ? null : folderId);
-    });
-  }
   function setupStaticFolderItem(el, id){
     if (!el) return;
     el.addEventListener("click", function(){ currentFolderFilter = id; updateFolderActiveStates(); refreshGrid(); });
-    if (id !== "__all__") attachFolderDropTarget(el, id);
   }
   setupStaticFolderItem(document.querySelector('.lib-folder-item[data-folder="__all__"]'), "__all__");
   setupStaticFolderItem(document.querySelector('.lib-folder-item[data-folder="__unfiled__"]'), "__unfiled__");
+
+  // touch-friendly card drag: works with mouse AND touch, unlike native HTML5 drag-and-drop
+  function attachCardDrag(card, getNoteId){
+    card.addEventListener("pointerdown", function(e){
+      if (e.target.closest(".note-action-btn")) return;
+      cardDragState = { noteId: getNoteId(), card: card, startX: e.clientX, startY: e.clientY, dragging: false, pointerId: e.pointerId, ghost: null };
+    });
+  }
+  document.addEventListener("pointermove", function(e){
+    if (!cardDragState || e.pointerId !== cardDragState.pointerId) return;
+    var dx = e.clientX - cardDragState.startX, dy = e.clientY - cardDragState.startY;
+    if (!cardDragState.dragging){
+      if (Math.hypot(dx,dy) < 10) return;
+      cardDragState.dragging = true;
+      cardDragState.card.classList.add("dragging");
+      var rect = cardDragState.card.getBoundingClientRect();
+      var ghost = cardDragState.card.cloneNode(true);
+      ghost.style.position = "fixed";
+      ghost.style.width = rect.width + "px";
+      ghost.style.pointerEvents = "none";
+      ghost.style.opacity = "0.88";
+      ghost.style.zIndex = "500";
+      ghost.style.transform = "scale(1.06) rotate(-2deg)";
+      ghost.style.boxShadow = "0 14px 34px rgba(0,0,0,0.55)";
+      ghost.style.transition = "none";
+      document.body.appendChild(ghost);
+      cardDragState.ghost = ghost;
+      cardDragState.ghostW = rect.width;
+    }
+    cardDragState.ghost.style.left = (e.clientX - cardDragState.ghostW/2) + "px";
+    cardDragState.ghost.style.top = (e.clientY - 24) + "px";
+    document.querySelectorAll(".lib-folder-item.drag-over").forEach(function(el){ el.classList.remove("drag-over"); });
+    var under = document.elementFromPoint(e.clientX, e.clientY);
+    var folderEl = under && under.closest && under.closest(".lib-folder-item[data-folder]");
+    if (folderEl && folderEl.dataset.folder !== "__all__") folderEl.classList.add("drag-over");
+  });
+  document.addEventListener("pointerup", function(e){
+    if (!cardDragState || e.pointerId !== cardDragState.pointerId) return;
+    var state = cardDragState; cardDragState = null;
+    document.querySelectorAll(".lib-folder-item.drag-over").forEach(function(el){ el.classList.remove("drag-over"); });
+    if (state.dragging){
+      if (state.ghost) state.ghost.remove();
+      state.card.classList.remove("dragging");
+      var under = document.elementFromPoint(e.clientX, e.clientY);
+      var folderEl = under && under.closest && under.closest(".lib-folder-item[data-folder]");
+      if (folderEl && folderEl.dataset.folder !== "__all__"){
+        var targetFolderId = folderEl.dataset.folder === "__unfiled__" ? null : folderEl.dataset.folder;
+        moveNoteToFolder(state.noteId, targetFolderId);
+      }
+      state.card._justDragged = true;
+      setTimeout(function(){ state.card._justDragged = false; }, 60);
+    }
+  });
+  document.addEventListener("pointercancel", function(e){
+    if (!cardDragState || e.pointerId !== cardDragState.pointerId) return;
+    if (cardDragState.ghost) cardDragState.ghost.remove();
+    cardDragState.card.classList.remove("dragging");
+    document.querySelectorAll(".lib-folder-item.drag-over").forEach(function(el){ el.classList.remove("drag-over"); });
+    cardDragState = null;
+  });
 
   async function refreshFolders(){
     foldersCache = storageAvailable ? await dbGetAll("folders") : [];
@@ -2668,7 +3251,6 @@ body{
       el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a1 1 0 011-1h5l2 2h9a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V7z"/></svg><span></span>';
       el.querySelector("span").textContent = f.name;
       el.addEventListener("click", function(){ currentFolderFilter = f.id; updateFolderActiveStates(); refreshGrid(); });
-      attachFolderDropTarget(el, f.id);
       libFolderList.appendChild(el);
     });
     updateFolderActiveStates();
@@ -2716,9 +3298,8 @@ body{
     filtered.forEach(function(m){
       var card = document.createElement("div");
       card.className = "note-card";
-      card.draggable = true;
       var thumbHtml = m.thumbnail
-        ? ('<img src="'+m.thumbnail+'" alt="">')
+        ? ('<img src="'+m.thumbnail+'" alt="" draggable="false">')
         : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20l6-16h4l6 16" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       card.innerHTML =
         '<div class="note-thumb">' + thumbHtml +
@@ -2734,17 +3315,13 @@ body{
       card.querySelector(".nm-date").textContent = formatDate(m.updatedAt);
       card.addEventListener("click", function(ev){
         if (ev.target.closest(".note-action-btn")) return;
+        if (card._justDragged) return;
         openNoteById(m.id);
       });
       card.querySelector('[data-act="dup"]').addEventListener("click", function(ev){ ev.stopPropagation(); duplicateNote(m.id); });
       card.querySelector('[data-act="ren"]').addEventListener("click", function(ev){ ev.stopPropagation(); renameNote(m.id, m.name); });
       card.querySelector('[data-act="del"]').addEventListener("click", function(ev){ ev.stopPropagation(); deleteNote(m.id, m.name); });
-      card.addEventListener("dragstart", function(ev){
-        draggedNoteId = m.id;
-        card.classList.add("dragging");
-        try { ev.dataTransfer.effectAllowed = "move"; } catch(e){}
-      });
-      card.addEventListener("dragend", function(){ card.classList.remove("dragging"); draggedNoteId = null; });
+      attachCardDrag(card, function(){ return m.id; });
       libGrid.appendChild(card);
     });
   }
@@ -2854,6 +3431,160 @@ body{
 
   document.addEventListener("visibilitychange", function(){
     if (document.visibilityState === "hidden" && currentDoc){ clearTimeout(saveTimer); doSave(); }
+  });
+
+  // ---------- backup / restore ----------
+  function blobToBase64(blob){
+    return new Promise(function(resolve, reject){
+      var reader = new FileReader();
+      reader.onload = function(){ resolve(reader.result); };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+  function dataUrlToBlob(dataUrl){
+    return fetch(dataUrl).then(function(r){ return r.blob(); });
+  }
+
+  async function exportLibrary(){
+    if (!storageAvailable){ alert("Local saving isn't available in this browser, so there's nothing to back up."); return; }
+    showToast("Preparing backup\u2026");
+    try {
+      var folders = await dbGetAll("folders");
+      var metas = await dbGetAll("notesMeta");
+      var datas = await dbGetAll("notesData");
+      var notesDataOut = [];
+      for (var i=0;i<datas.length;i++){
+        var d = datas[i];
+        var pagesOut = [];
+        for (var j=0;j<d.pages.length;j++){
+          var p = d.pages[j];
+          var imgB64 = p.imgBlob ? await blobToBase64(p.imgBlob) : null;
+          var actionsOut = [];
+          var pageActions = p.actions || [];
+          for (var k=0;k<pageActions.length;k++){
+            var act = pageActions[k];
+            if (act.type === "photopin" && act.imgBlob){
+              var actB64 = await blobToBase64(act.imgBlob);
+              var cleanAct = {};
+              Object.keys(act).forEach(function(kk){ if (kk !== "imgBlob") cleanAct[kk] = act[kk]; });
+              cleanAct.imgBlobB64 = actB64;
+              actionsOut.push(cleanAct);
+            } else {
+              actionsOut.push(act);
+            }
+          }
+          var cleanPage = {};
+          Object.keys(p).forEach(function(kk){ if (kk !== "imgBlob") cleanPage[kk] = p[kk]; });
+          cleanPage.imgBlobB64 = imgB64;
+          cleanPage.actions = actionsOut;
+          pagesOut.push(cleanPage);
+        }
+        var sourceFilesOut = {};
+        var sfKeys = Object.keys(d.sourceFiles || {});
+        for (var s=0;s<sfKeys.length;s++){
+          var sf = d.sourceFiles[sfKeys[s]];
+          var sfBlob = new Blob([sf.bytes]);
+          var sfB64 = await blobToBase64(sfBlob);
+          sourceFilesOut[sfKeys[s]] = { name: sf.name, bytesB64: sfB64 };
+        }
+        notesDataOut.push({ id: d.id, pages: pagesOut, sourceFiles: sourceFilesOut });
+      }
+      var bundle = { app:"vista-geomatics-fieldmark", version:1, exportedAt: Date.now(), folders: folders, notesMeta: metas, notesData: notesDataOut };
+      var json = JSON.stringify(bundle);
+      var blob = new Blob([json], { type:"application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      var dateStr = new Date().toISOString().slice(0,10);
+      a.download = "fieldmark-backup-" + dateStr + ".json";
+      a.href = url;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    } catch(err){
+      console.error(err);
+      alert("Backup failed. " + (err && err.message ? err.message : ""));
+    }
+    hideToast();
+  }
+
+  async function importLibraryFile(file){
+    if (!storageAvailable){ alert("Local saving isn't available in this browser, so a backup can't be restored here."); return; }
+    showToast("Restoring backup\u2026");
+    try {
+      var text = await file.text();
+      var bundle = JSON.parse(text);
+      if (!bundle || !bundle.notesMeta || !bundle.notesData) throw new Error("That doesn't look like a Field Mark backup file.");
+      var folderIdMap = {};
+      for (var i=0;i<(bundle.folders||[]).length;i++){
+        var f = bundle.folders[i];
+        var newFId = genId();
+        folderIdMap[f.id] = newFId;
+        await dbPut("folders", { id:newFId, name:f.name, createdAt:f.createdAt||Date.now() });
+      }
+      var imported = 0;
+      for (var m=0;m<bundle.notesMeta.length;m++){
+        var meta = bundle.notesMeta[m];
+        var data = bundle.notesData.filter(function(d){ return d.id === meta.id; })[0];
+        if (!data) continue;
+        var newNoteId = genId();
+        var newFolderId = meta.folderId ? (folderIdMap[meta.folderId] || null) : null;
+
+        var pagesRestored = [];
+        for (var pi=0; pi<data.pages.length; pi++){
+          var pd = data.pages[pi];
+          var imgBlobRestored = pd.imgBlobB64 ? await dataUrlToBlob(pd.imgBlobB64) : null;
+          var actionsRestored = [];
+          var pdActions = pd.actions || [];
+          for (var ai=0; ai<pdActions.length; ai++){
+            var act = pdActions[ai];
+            if (act.imgBlobB64){
+              var photoBlobRestored = await dataUrlToBlob(act.imgBlobB64);
+              var cleanAct2 = {};
+              Object.keys(act).forEach(function(kk){ if (kk !== "imgBlobB64") cleanAct2[kk] = act[kk]; });
+              cleanAct2.imgBlob = photoBlobRestored;
+              actionsRestored.push(cleanAct2);
+            } else {
+              actionsRestored.push(act);
+            }
+          }
+          var cleanPage2 = {};
+          Object.keys(pd).forEach(function(kk){ if (kk !== "imgBlobB64") cleanPage2[kk] = pd[kk]; });
+          cleanPage2.imgBlob = imgBlobRestored;
+          cleanPage2.actions = actionsRestored;
+          pagesRestored.push(cleanPage2);
+        }
+        var sourceFilesRestored = {};
+        var sfKeys2 = Object.keys(data.sourceFiles || {});
+        for (var s2=0; s2<sfKeys2.length; s2++){
+          var sf2 = data.sourceFiles[sfKeys2[s2]];
+          var sfBlobRestored = await dataUrlToBlob(sf2.bytesB64);
+          var sfBuf = await sfBlobRestored.arrayBuffer();
+          sourceFilesRestored[sfKeys2[s2]] = { name: sf2.name, bytes: sfBuf };
+        }
+
+        await dbPut("notesMeta", { id:newNoteId, name: meta.name, folderId: newFolderId, createdAt: meta.createdAt||Date.now(), updatedAt: meta.updatedAt||Date.now(), thumbnail: meta.thumbnail||null, pageCount: meta.pageCount||pagesRestored.length });
+        await dbPut("notesData", { id:newNoteId, pages: pagesRestored, sourceFiles: sourceFilesRestored });
+        imported++;
+      }
+      await refreshFolders();
+      await refreshGrid();
+      alert("Restore complete \u2014 " + imported + " note(s) imported.");
+    } catch(err){
+      console.error(err);
+      alert("Restore failed. The file may be corrupted or not a Field Mark backup. " + (err && err.message ? err.message : ""));
+    }
+    hideToast();
+  }
+
+  document.getElementById("btnBackup").addEventListener("click", exportLibrary);
+  document.getElementById("btnRestore").addEventListener("click", function(){
+    document.getElementById("restoreInput").click();
+  });
+  document.getElementById("restoreInput").addEventListener("change", function(){
+    var input = document.getElementById("restoreInput");
+    var file = input.files && input.files[0];
+    input.value = "";
+    if (file) importLibraryFile(file);
   });
 
   // ---------- boot ----------
