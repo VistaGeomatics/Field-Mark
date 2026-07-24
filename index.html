@@ -475,6 +475,7 @@ body{
   box-shadow:0 8px 40px rgba(0,0,0,0.5);
   background:#fff;
 }
+#stage.zooming{ box-shadow:none; }
 #stage canvas{
   display:block;
   touch-action:none;
@@ -1035,7 +1036,20 @@ body{
   var polygonFinishBtn = null, polygonCancelBtn = null;
   var angleDraft = null;     // { vertex:{x,y}, p1:{x,y} } (p2 set on completion)
   var angleCancelBtn = null;
-  var photoImageCache = new WeakMap(); // action -> HTMLImageElement (runtime only, not persisted)
+  var photoImageCache = new WeakMap(); // action -> HTMLImageElement (runtime only, not persisted; full-res, used for lightbox)
+  var photoThumbCache = new WeakMap(); // action -> small pre-scaled <canvas>, used for fast on-screen rendering
+  function makePhotoThumb(img){
+    var THUMB = 220; // px, comfortably covers any realistic on-screen pin size
+    var iw = img.naturalWidth||img.width, ih = img.naturalHeight||img.height;
+    var scaleFit = Math.max(THUMB/iw, THUMB/ih);
+    var dw = Math.max(1,Math.round(iw*scaleFit)), dh = Math.max(1,Math.round(ih*scaleFit));
+    var oc = document.createElement("canvas");
+    oc.width = THUMB; oc.height = THUMB;
+    var octx = oc.getContext("2d", { alpha: false });
+    octx.fillStyle = "#0B1E2E"; octx.fillRect(0,0,THUMB,THUMB);
+    octx.drawImage(img, (THUMB-dw)/2, (THUMB-dh)/2, dw, dh);
+    return oc;
+  }
   var pendingPhotoPos = null;
   var awaitingPhotoTrigger = null; // { pointerId, startX, startY } — fires the picker on pointerup
 
@@ -1865,15 +1879,12 @@ body{
     } else if (a.type === "stamp"){
       drawStampSymbol(c, a.symbol, a.x, a.y, a.size, a.color, a.rotation||0);
     } else if (a.type === "photopin"){
-      var pImg = photoImageCache.get(a);
+      var pThumb = photoThumbCache.get(a);
       var pr = a.size/2;
       c.save();
-      if (pImg){
+      if (pThumb){
         c.beginPath(); c.arc(a.x, a.y, pr, 0, Math.PI*2); c.closePath(); c.clip();
-        var iw = pImg.naturalWidth||pImg.width, ih = pImg.naturalHeight||pImg.height;
-        var scaleFit = Math.max((pr*2)/iw, (pr*2)/ih);
-        var dw = iw*scaleFit, dh = ih*scaleFit;
-        c.drawImage(pImg, a.x-dw/2, a.y-dh/2, dw, dh);
+        c.drawImage(pThumb, a.x-pr, a.y-pr, pr*2, pr*2);
         c.restore();
         c.beginPath(); c.arc(a.x, a.y, pr, 0, Math.PI*2);
         c.strokeStyle = a.color || "#FF7A1A"; c.lineWidth = Math.max(2, pr*0.14); c.stroke();
@@ -2196,21 +2207,22 @@ body{
     var mid = pinchMidpoint();
     var anchor = clientToCanvasContent(mid.x, mid.y);
     pinchState = { startDist: dist, startZoom: zoom, anchorX: anchor.x, anchorY: anchor.y };
+    if (stage) stage.classList.add("zooming");
   }
   function updatePinch(){
     if (!pinchState || !canvas) return;
     var dist = pinchDistance(); if (!dist) return;
     var mid = pinchMidpoint();
+    var oldRect = canvas.getBoundingClientRect(); // read BEFORE any style write this frame
     var ratio = dist / pinchState.startDist;
     zoom = Math.max(0.05, Math.min(8, pinchState.startZoom * ratio));
-    applyZoom();
-    var rect = canvas.getBoundingClientRect();
-    var actualX = rect.left + (pinchState.anchorX/canvas.width)*rect.width;
-    var actualY = rect.top + (pinchState.anchorY/canvas.height)*rect.height;
+    applyZoom(); // write — canvas top-left won't move (scroll-wrap is flex-start, not centered), so we can predict the new anchor position without reading layout again
+    var actualX = oldRect.left + pinchState.anchorX * zoom;
+    var actualY = oldRect.top + pinchState.anchorY * zoom;
     scrollWrap.scrollLeft += (actualX - mid.x);
     scrollWrap.scrollTop += (actualY - mid.y);
   }
-  function endPinch(){ pinchState = null; }
+  function endPinch(){ pinchState = null; if (stage) stage.classList.remove("zooming"); }
 
   function cancelActiveStroke(){
     drawing = false;
@@ -2969,6 +2981,7 @@ body{
       var size = Math.max(50, currentWidth*12);
       var action = { type:"photopin", x: pos.x, y: pos.y, size: size, imgBlob: file, color: currentColor };
       photoImageCache.set(action, img);
+      photoThumbCache.set(action, makePhotoThumb(img));
       pushAdd(page, action);
       redraw();
     } catch(err){
@@ -3423,7 +3436,11 @@ body{
       for (var ai=0; ai<pageActions.length; ai++){
         var act = pageActions[ai];
         if (act.type === "photopin" && act.imgBlob){
-          try { photoImageCache.set(act, await blobToImage(act.imgBlob)); }
+          try {
+            var hydratedImg = await blobToImage(act.imgBlob);
+            photoImageCache.set(act, hydratedImg);
+            photoThumbCache.set(act, makePhotoThumb(hydratedImg));
+          }
           catch(e){ console.error("photo pin failed to load", e); }
         }
       }
