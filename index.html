@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Vista Geomatics Field Mark — Plan Markup</title>
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEYklEQVR42u3VWWxUVRgH8O9sd+beuTMFWmZpU7owbaHFomI1IFTAhWjUxJgYBBWjJiQuMRE1GAnIiyY1IT6gxheCa9SIxhhAKgop+1qkLBEtA9PpOuu9s9xl7j3HhybEYCPEyINJv9dzvvzOSc75f8g3ox1uZGG4wTUJTAKTwL8AMEKE4BsFEEJMy9ZzOiHkvwcYo3oq09LU8NSKR/Vk+joNIlWEJlxACBGCMUZCCABglObGkp13Ldi29f32tlmYsQP7D3sUGSMMABjj8W3XC1BKLMsqFUqWYTJJooRoI2NPrlr+2Uebtv3wYyyeaG1pqqyq7O09Y5fL5bJjmpYksQmZqwGEECFET6ZCkdDmrrdubm/bf/h4Uc9vendj14bXV65+pXvPPgToWO9pRZYdzlVJ+nrr5mhjXffPPQJAkqSrDPTXeUAIKZUMxzSfe/rxN9e8cKE/dvJUXzqrdS64PeBX127sOn7qDCbYNkzikVxNf2PdmmefeOxiLE4IjieG17+9aWBg0D91Cud8YqBYKLREG9e9+qIiez/+8rvf+2PRutqVyx/Z0b33ky++Acb8qg8hZBpGdSi4Ye3LXkl6570Pa2uq22Y3z6yfEQpWbfn0q527e6jECCHjV0Fq3VwEAAhRhDoXdCyc37Gn59COXb8gRpctWRQOh77fviubylRUTRMCOOfcddtaog8/cO/BIyd27tzNfD7HcTBG4VBw2pSKjlvbNU3fd/Bo0bQwQlwIJFW3AoBdMhoa61RV7es7B4WiJ1iFEQIAI1+gXq8se23bppS6nAvOI+Hg5YEhYRj+qkrLtiXGyo4jhLAtG+xyZSQYUNXB4VEBQmKMRutnyLJ34R23xeKJ+tqaxtqahfM7jp3qS6bSAVXt2Xfo7qWLLvRf8ngkVVH6Lw/Mbmo0TDOgqhjjWDwxb+6cgcGhmnC4ZBqtzdFYPJFMZZpn1kfCQUX2anqern/tpf7YZZ9PqY4Ew9Orzp8971eVoeHR559ZUREIYIJPnj5bKhr337f44qWB1uaZsXjCtssPLltimlZLtIESMm1KINpQv/2nvdmc5rruQ8uWfru9O5vJ3bP4Tsdx0AdbPj/x65mhkTG/qnbcctPR3tOO43DOmxrrOec5TT/32x+KIvsUOTE0UjLM2pqIZdklwwAAIYQiy5QSw7QQQFbTHccJBaf7fUoqkxVCzJs7B7HwrNqa6uD0So8kyV7PWCrt8XgYpZqeF0L4FFlVfaZpxRNDq1ct33vgyODwaCQUzGo6Idi2bb/qKxmm67o+RXE5RwB2uazni5lsjjFq2TZllFm2nc7kOOecc8ZYvlAUQhBCEIBhmqPJNCE4p2nnLvSPJlMjYynLtjHG47+yUDQwRgihYskAQAACIzyWSpumhTBC48+07Djc5YAAAODviYIABDBGS/kC9Xoopa7jXjMWr8QGFUIwSoDSf+4RQgSmVnAuhBDUQ665+UpgUAAQYsKTX12uy6/0T87k/xPwJ+/XHMEAGLb1AAAAAElFTkSuQmCC">
 <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
@@ -657,6 +657,169 @@ body{
   #lib-grid{ grid-template-columns:repeat(auto-fill, minmax(130px,1fr)); gap:12px; }
   #lib-grid-wrap{ padding:14px; }
 }
+/* Shared field-note workspace; original Vista palette and tools stay intact. */
+[hidden]{display:none!important}
+#app{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#editor-view,#library-view{height:100%;min-height:0}
+#main{position:relative;min-width:0}
+#canvas-area{min-width:0;touch-action:none}
+button,input,select,textarea{font:inherit}
+button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+.tool-btn,.icon-btn,.pressure-toggle{flex-shrink:0}
+#topbar{gap:8px;flex-wrap:wrap}
+#topbar .sheet-title{min-width:95px}
+.mode-badge,.field-button{border:1px solid var(--border);border-radius:8px;background:var(--panel-alt);color:var(--ink);padding:9px 12px;cursor:pointer;min-height:44px}
+.mode-badge{border-color:var(--mode-color,var(--accent));color:var(--mode-color,var(--accent));font-size:12px;font-weight:700;white-space:nowrap}
+.field-button:hover,.field-button.active{border-color:var(--accent-2);background:#183b52}
+.field-button.primary{background:var(--accent);color:#101c27;border-color:var(--accent);font-weight:700}
+#field-panel{width:290px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--border);overflow-y:auto;padding:14px;touch-action:pan-y}
+.field-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.field-heading h2{font-size:16px;margin:0;color:var(--ink)}
+.field-help{color:#a6bfd0;font-size:12px;line-height:1.5;margin:8px 0 12px}
+.field-presets{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.field-presets button{font-size:12px;text-align:left;padding:9px}
+.field-section{border-top:1px solid var(--border);margin-top:16px;padding-top:14px}
+.field-section h3{font-size:12px;color:var(--accent-2);margin:0 0 10px}
+.field-list{display:flex;flex-direction:column;gap:7px}
+.field-list button{text-align:left;overflow-wrap:anywhere;font-size:12px}
+.field-list small{display:block;margin-top:4px;color:#a6bfd0}
+#field-status{padding:8px 0;color:var(--accent-2);font-size:12px;line-height:1.5}
+.field-overlay{position:fixed;inset:0;z-index:800;background:#020b13bd;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.field-dialog{width:min(680px,100%);max-height:100%;overflow:auto;background:var(--panel);color:var(--ink);border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:0 20px 70px #0009;touch-action:pan-y}
+.field-dialog h2{margin:0;font-size:20px}
+.field-dialog label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:#b6cddd}
+.field-dialog input,.field-dialog select,.field-dialog textarea{width:100%;min-width:0;min-height:44px;padding:10px;border:1px solid #38617b;background:var(--panel-alt);color:var(--ink);border-radius:7px;font-size:16px;user-select:text}
+.field-dialog textarea{resize:vertical;min-height:80px}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.field-grid .full{grid-column:1/-1}
+.field-dialog fieldset{border:1px solid var(--border);border-radius:9px;padding:12px;margin:14px 0}
+.field-dialog legend{padding:0 5px;color:var(--accent-2);font-size:12px}
+.field-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;flex-wrap:wrap}
+.mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.mode-card{min-height:106px;text-align:left;border-left:4px solid var(--mode-color)}
+.mode-card strong{display:block;font-size:16px;margin-bottom:8px}
+.mode-card small{display:block;font-size:12px;line-height:1.5;color:#b6cddd}
+.mode-card[aria-pressed=true]{background:#21435b;outline:2px solid var(--mode-color)}
+.field-result{display:block;background:#0b2230;border:1px solid #38617b;padding:12px;border-radius:8px;color:var(--accent-2);font:700 14px var(--font-tech);line-height:1.5}
+.field-photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.field-photos img{width:90px;height:70px;object-fit:cover;border-radius:6px}
+.field-photos button{font-size:12px}
+.field-tie{border-bottom:1px solid var(--border);padding-bottom:10px}
+.note-mode{font-size:11px;color:var(--accent-2);margin:6px 0}
+#fingerMode{font-size:11px}
+#fieldToggle{font-size:12px}
+#fieldNoteTool{font:bold 14px var(--font-tech)}
+.recolor-popover{width:170px;max-height:260px;overflow:auto}
+@media (max-width:1100px){
+  #field-panel{position:absolute;left:60px;top:0;bottom:0;z-index:15;width:min(320px,calc(100% - 70px));box-shadow:8px 0 20px #0006}
+  #stamp-panel{position:absolute;left:60px;top:0;bottom:0;z-index:14;box-shadow:8px 0 20px #0006}
+  #save-indicator{font-size:10px}
+}
+@media (pointer:coarse){
+  .icon-btn,#zoom-hud .icon-btn,.tool-btn,.width-dot,.fontsize-dot,.pressure-toggle,.custom-color-btn,.note-action-btn,.select-delete-btn,.select-recolor-btn,.rotate-handle{min-width:44px;min-height:44px}
+  .swatch,.stamp-color-row .swatch,.recolor-popover .swatch{width:44px;height:44px}
+  .color-grid{grid-template-columns:1fr}
+  .lib-folder-item,.linestyle-chip,.pill-btn{min-height:44px}
+  .note-actions{opacity:1;top:4px;right:4px;gap:3px}
+  .note-action-btn{background:#0b1e2ee8}
+  #lib-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+  [data-tip]:hover::after{display:none}
+}
+@media (max-width:800px) and (orientation:portrait){
+  #lib-topbar{flex-wrap:wrap;gap:8px}
+  #lib-save-indicator{order:3;flex-basis:100%}
+  #topbar .topbar-spacer,#topbar .divider-v{display:none}
+  #topbar .btn-group{margin-left:auto}
+  #save-indicator{order:3}
+}
+@media (max-width:640px){
+  #toolbar{width:56px}
+  #field-panel,#stamp-panel{left:56px}
+  #topbar{padding:6px;gap:6px}
+  #topbar .sheet-title{max-width:none}
+  #save-indicator{display:none}
+  #lib-body{flex-direction:column}
+  #lib-folders{width:100%;max-height:100px;display:flex;overflow:auto;padding:6px}
+  #lib-folder-list{display:flex}
+  .lib-folder-item{flex-shrink:0}
+  #lib-folder-hint{display:none}
+  #page-strip{min-height:62px;padding:4px 8px}
+  .field-dialog{padding:16px}
+  .field-grid{gap:10px}
+  .mode-cards{grid-template-columns:1fr}
+  .mode-card{min-height:80px}
+}
+
+/* Sketch workspace: compact tool rail, always-visible history and ink controls. */
+#sketch-strip{min-height:58px;display:flex;align-items:center;gap:14px;padding:6px 14px;background:#122b40;border-bottom:1px solid #27465c;flex-shrink:0;z-index:22;position:relative}
+.sketch-slot{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.sketch-slot button{min-width:44px;min-height:44px}
+#active-tool-label{font-size:13px;font-weight:700;min-width:88px;color:#dceaf4}
+.sketch-setting{display:flex;align-items:center;gap:9px;font-size:11px;color:#9db9ca;white-space:nowrap}
+#strokeWidthRange{width:110px;accent-color:var(--accent);min-height:44px;cursor:pointer}
+#strokeWidthValue{width:26px;text-align:center;font:12px var(--font-tech);color:var(--ink)}
+#inkButton{display:flex;align-items:center;gap:9px}
+#ink-preview{width:20px;height:20px;border-radius:50%;border:2px solid #dceaf4;box-shadow:0 0 0 1px #091a28}
+#sketch-strip .field-button{font-size:12px;padding:7px 10px}
+#sketch-strip #fontsizeTrack{display:flex;flex-direction:row;padding:0;gap:3px}
+#sketch-strip .fontsize-dot{width:44px;height:44px;border-color:#27465c}
+.sketch-popover{position:fixed;z-index:60;padding:16px;border:1px solid #355a72;background:#122b40;border-radius:14px;box-shadow:0 16px 48px #0009;width:min(330px,calc(100vw - 24px));max-height:65dvh;overflow:auto;touch-action:pan-y}
+.sketch-popover h3{font-size:13px;margin:0 0 12px;color:var(--ink)}
+.sketch-popover .color-grid{display:grid;grid-template-columns:repeat(4,44px);gap:10px;justify-content:center}
+.sketch-popover .swatch{width:44px;height:44px}
+.sketch-popover .custom-color-btn{width:100%;min-height:44px}
+.sketch-popover .tool-btn{width:100%;height:60px;min-width:0;flex-direction:row;justify-content:flex-start;gap:12px;border-color:#27465c;padding:10px}
+.sketch-popover .tool-caption{font-size:12px;line-height:1.3;max-width:none}
+.sketch-popover #widthTrack{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px}
+.sketch-popover .width-dot{width:54px;height:44px;border-color:#27465c}
+.sketch-popover #btnPressure,.sketch-popover #btnNibAngle{width:44px;height:44px}
+.sketch-option{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;padding:10px 0;color:#bdd0de}
+.sketch-option input{width:20px;height:20px;accent-color:var(--accent)}
+.sketch-option select{background:var(--panel-alt);border:1px solid #355a72;color:var(--ink);border-radius:7px;min-height:44px;padding:8px;font-size:14px}
+.sketch-popup-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#toolbar{width:72px;padding:8px 5px;gap:5px;scrollbar-width:thin}
+#toolbar>.tool-btn,#toolbar>.tool-group-btn{width:60px;height:57px;min-height:57px;flex-direction:column;gap:5px;border-radius:10px}
+.tool-caption{font-size:9px;line-height:1;max-width:60px;white-space:nowrap}
+#toolbar .tool-divider{margin:3px 0}
+.tool-group-btn{display:flex;align-items:center;justify-content:center;flex-shrink:0;background:transparent;border:1px solid transparent;color:var(--ink-dim);cursor:pointer}
+.tool-group-btn svg{width:21px;height:21px;pointer-events:none}
+.tool-group-btn.active,.tool-group-btn[aria-expanded=true]{background:var(--accent-dim);color:var(--accent);border-color:var(--accent)}
+#stamp-panel,#field-panel{border-right-color:#27465c}
+#canvas-area{background:#0e2233}
+#zoom-hud{box-shadow:0 4px 24px #0004;border-radius:12px}
+#page-strip{min-height:68px;padding:6px 14px;gap:10px;background:#10273b}
+.page-thumb{transition:border-color .15s,box-shadow .15s}
+.page-thumb.active{box-shadow:0 0 0 2px #ff7a1a26}
+.page-thumb:focus-visible{outline:2px solid var(--accent-2)}
+#selection-dock{position:absolute;left:50%;bottom:76px;transform:translateX(-50%);display:flex;align-items:center;gap:5px;padding:6px;background:#122b40;border:1px solid #40637b;box-shadow:0 8px 32px #0006;border-radius:12px;z-index:18;max-width:calc(100% - 20px)}
+#selection-dock button{min-height:44px;white-space:nowrap;font-size:12px}
+#selection-count{font-size:11px;padding:0 8px;color:var(--accent-2);white-space:nowrap}
+.sketch-popover .field-help{margin-bottom:0}
+#sketch-help{font-size:12px}
+#stroke-preview{height:34px;width:70px}
+#sketch-strip button:disabled{opacity:.28;cursor:default;transform:none}
+#modeBadge{min-height:40px}
+#topbar{min-height:60px}
+#page-position{font:11px var(--font-tech);color:var(--ink-dim);white-space:nowrap;padding-right:4px}
+#topbar .sheet-title{font-family:var(--font-ui);font-weight:600}
+.focus-view #toolbar,.focus-view #field-panel,.focus-view #stamp-panel,.focus-view #page-strip{display:none!important}
+.focus-view #sketch-help{display:none}
+#topbar .editor-wordmark{font:700 11px var(--font-tech);color:var(--accent);white-space:nowrap}
+@media(max-width:1100px){#field-panel,#stamp-panel{left:72px}#sketch-strip{gap:10px}#stroke-preview,#sketch-help{display:none}.editor-wordmark{display:none}}
+@media(max-width:850px){#sketch-strip{gap:8px;padding:6px 10px}#active-tool-label{display:none}#strokeWidthRange{width:85px}#stroke-settings-label{display:none}#page-position{display:none}}
+@media(max-width:640px){
+  #toolbar{width:62px;padding:6px 3px}#toolbar>.tool-btn,#toolbar>.tool-group-btn{width:54px;height:54px;min-height:54px}
+  #field-panel,#stamp-panel{left:62px}
+  #sketch-strip{gap:5px;padding:5px 6px;min-height:54px;flex-wrap:wrap}
+  #sketch-strip .field-button{padding:5px 8px}
+  #strokeWidthRange{width:65px}#strokeWidthValue{width:20px}
+  #inkButton .ink-caption,#penSettingsButton .settings-caption{display:none}
+  #selection-dock{left:10px;right:10px;transform:none;max-width:none;overflow-x:auto;justify-content:flex-start}
+  #selection-count{display:none}
+  #sketch-strip #fontsizeTrack .fontsize-dot{width:44px;min-width:44px}
+  #topbar .btn-group{gap:3px}#topbar .icon-btn{width:38px;min-width:44px}
+}
+
 </style>
 </head>
 <body>
@@ -725,7 +888,11 @@ body{
     <button class="icon-btn" id="btnLibrary" data-tip="Back to Library">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
+    <span class="editor-wordmark">VISTA / FIELD MARK</span>
     <input class="sheet-title" id="sheetTitle" placeholder="Untitled note" spellcheck="false">
+    <button class="mode-badge" id="modeBadge" title="Change field-note mode">Municipal ▾</button>
+    <button class="field-button" id="fieldToggle" aria-controls="field-panel" aria-expanded="false">Field tools</button>
+    <button class="field-button" id="fingerMode" title="Pencil always draws; choose what a finger does">Finger: pan</button>
     <div id="save-indicator" class="save-indicator"></div>
     <div class="topbar-spacer"></div>
     <div class="btn-group">
@@ -745,8 +912,24 @@ body{
     </div>
   </div>
 
+<div id="sketch-strip" aria-label="Sketch controls">
+  <div id="history-slot" class="sketch-slot"></div>
+  <span id="active-tool-label">Pen</span>
+  <div class="sketch-setting" id="stroke-setting"><span id="stroke-settings-label">Stroke</span><input id="strokeWidthRange" type="range" min="1" max="18" step="0.5" value="4" aria-label="Stroke width"><output id="strokeWidthValue">4</output><canvas id="stroke-preview" width="140" height="68" aria-hidden="true"></canvas></div>
+  <div id="type-setting" class="sketch-slot" hidden></div>
+  <button class="field-button" id="inkButton" aria-label="Ink colour" aria-expanded="false" aria-controls="ink-popover"><span id="ink-preview"></span><span class="ink-caption">Ink</span></button>
+  <button class="field-button" id="penSettingsButton" aria-label="Drawing settings" aria-expanded="false" aria-controls="pen-popover">⚙ <span class="settings-caption">Settings</span></button>
+  <span class="topbar-spacer"></span><span id="sketch-help" class="field-help">Pencil draws · fingers pan</span>
+  <button id="focusButton" class="field-button" aria-pressed="false" title="Hide panels for a clear canvas">Focus</button>
+</div>
+<div id="ink-popover" class="sketch-popover" hidden><h3>Ink colour</h3><div id="ink-slot"></div></div>
+<div id="pen-popover" class="sketch-popover" hidden><h3>Drawing settings</h3><div id="pen-settings-slot"></div><label class="sketch-option">Stroke smoothing<select id="smoothingLevel"><option value="0">Raw</option><option value="1">Light</option><option value="2" selected>Balanced</option><option value="3">Smooth</option></select></label><label class="sketch-option">Snap lines to 45°<input id="snapAngles" type="checkbox"></label><p class="field-help">Hold Shift for angle snapping on PC. Hold a pen stroke still to straighten it. Pressure and nib slant controls stay available above.</p></div>
+<div id="shape-popover" class="sketch-popover" hidden><h3>Shapes</h3><div id="shape-slot" class="sketch-popup-grid"></div></div>
+<div id="measure-popover" class="sketch-popover" hidden><h3>Survey &amp; media</h3><div id="measure-slot" class="sketch-popup-grid"></div></div>
+
   <div id="main">
     <div id="toolbar">
+      <button class="tool-btn" id="fieldNoteTool" data-tool="fieldpoint" data-tip="Field Point (F)" aria-label="Field Point">FP</button>
       <button class="tool-btn active" data-tool="pen" data-tip="Pen">
         <span class="tool-icon-mask" style="width:16px;height:23px;-webkit-mask-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAEMCAYAAACY8dVrAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGMWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDMgNzkuOTY5MGE4NywgMjAyNS8wMy8wNi0xOToxMjowMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjAgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNy0yMFQxNDoyMzoyNS0wNjowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDctMjBUMTQ6MjY6MTctMDY6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDctMjBUMTQ6MjY6MTctMDY6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE5MTk3NWUyLTRiNGQtZDk0MS04N2IxLTkwNDNmMzljNWUyNCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjc5ZTRlMTBkLTViMDctNWI0Ny04Nzc1LWFhNzJlOGNiZmNjZSIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk0NWRlMmRjLWQwYTAtYTI0NS05MzlhLWRiNzdkYzMwYWQ5YyI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTQ1ZGUyZGMtZDBhMC1hMjQ1LTkzOWEtZGI3N2RjMzBhZDljIiBzdEV2dDp3aGVuPSIyMDI2LTA3LTIwVDE0OjIzOjI1LTA2OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuMCAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MTkxOTc1ZTItNGI0ZC1kOTQxLTg3YjEtOTA0M2YzOWM1ZTI0IiBzdEV2dDp3aGVuPSIyMDI2LTA3LTIwVDE0OjI2OjE3LTA2OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+josHqQAACTBJREFUeNrt3XuwTVUYAPBzCeVexlxGyiNduhiP0WsIRSgUIq8RiUSiZGQoj+71qiYyNyqv0VDGKxqioktjvJIZkmdNU6TxGhKJyw23tad1zTff7HPvOWd/a63vnPPtme+/s9f6fvexz15rfXvtUEFBQShoqKOmijdU5Ko4qaJAR56KfSrmqHhCRUmK/gLlGhBa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');mask-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAEMCAYAAACY8dVrAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGMWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDMgNzkuOTY5MGE4NywgMjAyNS8wMy8wNi0xOToxMjowMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjAgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNy0yMFQxNDoyMzoyNS0wNjowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDctMjBUMTQ6MjY6MTctMDY6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDctMjBUMTQ6MjY6MTctMDY6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE5MTk3NWUyLTRiNGQtZDk0MS04N2IxLTkwNDNmMzljNWUyNCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjc5ZTRlMTBkLTViMDctNWI0Ny04Nzc1LWFhNzJlOGNiZmNjZSIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk0NWRlMmRjLWQwYTAtYTI0NS05MzlhLWRiNzdkYzMwYWQ5YyI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTQ1ZGUyZGMtZDBhMC1hMjQ1LTkzOWEtZGI3N2RjMzBhZDljIiBzdEV2dDp3aGVuPSIyMDI2LTA3LTIwVDE0OjIzOjI1LTA2OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuMCAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MTkxOTc1ZTItNGI0ZC1kOTQxLTg3YjEtOTA0M2YzOWM1ZTI0IiBzdEV2dDp3aGVuPSIyMDI2LTA3LTIwVDE0OjI2OjE3LTA2OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+josHqQAACTBJREFUeNrt3XuwTVUYAPBzCeVexlxGyiNduhiP0WsIRSgUIq8RiUSiZGQoj+71qiYyNyqv0VDGKxqioktjvJIZkmdNU6TxGhKJyw23tad1zTff7HPvOWd/a63vnPPtme+/s9f6fvexz15rfXvtUEFBQShoqKOmijdU5Ko4qaJAR56KfSrmqHhCRUmK/gLlGhBa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');"></span>
       </button>
@@ -840,7 +1023,7 @@ body{
       <div class="color-grid" id="colorGrid"></div>
       <label class="custom-color-btn" id="customColorBtn" data-tip="Custom color">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 6 0 010 17" fill="currentColor" stroke="none" opacity="0.5"/></svg>
-        <input type="color" id="customColorInput" value="#FF3B30">
+        <input type="color" id="customColorInput" value="#000000">
       </label>
     </div>
 
@@ -853,6 +1036,16 @@ body{
       <div class="stamp-linestyles" id="stampLineStyles"></div>
     </div>
 
+    <aside id="field-panel" hidden aria-label="Field note tools">
+      <div class="field-heading"><h2 id="field-panel-title">Municipal</h2><button class="field-button" id="fieldClose" aria-label="Close field tools">✕</button></div>
+      <p id="field-panel-help" class="field-help"></p>
+      <div id="field-presets" class="field-presets"></div>
+      <div id="field-status" role="status"></div>
+      <div id="grading-tools" class="field-section" hidden><h3>GRADING TOOLS</h3><div class="field-presets"><button class="field-button" id="slopeTool">Slope between points</button><button class="field-button" id="drainageTool">Drainage arrow</button></div></div>
+      <div class="field-section"><h3 id="field-count">This sheet</h3><div id="field-list" class="field-list"></div></div>
+      <div class="field-section"><button class="field-button" id="exportFieldNotes">Export structured field notes</button><p class="field-help">Metres for field entries. Slope uses observed elevations and horizontal distance. PDF points are clickable: open their details and photos, then use Back to plan to return. A field-notes.json attachment also keeps the structured records.</p></div>
+      <p class="field-help">PC: wheel to zoom · Space/right-drag to pan · P pen · V select · F field point · H hand · Delete selection · Ctrl/Cmd+Z undo.</p>
+    </aside>
     <div id="canvas-area">
       <div id="scroll-wrap">
         <div id="stage-pad">
@@ -869,7 +1062,10 @@ body{
         </button>
       </div>
       <div id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="8" stroke-dasharray="38 12" stroke-linecap="round"/></svg><span id="toast-text">Working…</span></div>
-      <div id="zoom-hud">
+      <div id="selection-dock" hidden aria-label="Selection actions">
+        <span id="selection-count"></span><button id="editPointButton" class="field-button" hidden>Details</button><button id="selectionInk" class="field-button" aria-controls="ink-popover" aria-expanded="false">Colour</button><button id="duplicateSelection" class="field-button">Duplicate</button><button id="deleteSelection" class="field-button">Delete</button><button id="deselectButton" class="field-button" aria-label="Deselect">✕</button>
+      </div>
+      <div id="zoom-hud"><span id="page-position"></span>
         <button class="icon-btn" id="btnZoomOut" data-tip="Zoom out">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/><path d="M8 11h6" stroke-linecap="round"/></svg>
         </button>
@@ -901,11 +1097,42 @@ body{
   </div>
 </div>
 
+<div id="mode-dialog" class="field-overlay" hidden>
+  <section class="field-dialog" role="dialog" aria-modal="true" aria-labelledby="mode-title" tabindex="-1">
+    <h2 id="mode-title">Choose a field-note mode</h2>
+    <p class="field-help">One job, one plan set. Change modes anytime; all markup and field notes stay with the job.</p>
+    <div id="mode-cards" class="mode-cards"></div>
+    <div class="field-actions"><button type="button" class="field-button" id="mode-cancel">Cancel</button></div>
+  </section>
+</div>
+<div id="point-dialog" class="field-overlay" hidden>
+  <form id="point-form" class="field-dialog" role="dialog" aria-modal="true" aria-labelledby="point-title" tabindex="-1">
+    <div class="field-heading"><h2 id="point-title">Field Point</h2><span id="point-mode" class="mode-badge"></span></div>
+    <p class="field-help">Coordinates and measurements are field entries. Plan positions do not imply survey coordinates.</p>
+    <div id="point-fields"></div>
+    <fieldset><legend>Photos attached to this point</legend>
+      <label>Add photos<input id="field-photo-input" type="file" accept="image/*" multiple></label>
+      <div id="field-photos" class="field-photos"></div>
+    </fieldset>
+    <div id="point-error" class="field-help" role="alert"></div>
+    <div class="field-actions"><button type="button" class="field-button" id="point-cancel">Cancel</button><button type="submit" class="field-button primary" id="point-save">Save point</button></div>
+  </form>
+</div>
+<div id="slope-dialog" class="field-overlay" hidden>
+  <form id="slope-form" class="field-dialog" role="dialog" aria-modal="true" aria-labelledby="slope-title" tabindex="-1">
+    <h2 id="slope-title">Slope between field points</h2>
+    <p class="field-help">Uses observed elevations. Horizontal distance comes from entered N/E coordinates, a calibrated plan, or your measured distance. Values use the selected points' units.</p>
+    <div class="field-grid"><label>From point<select id="slope-from" required></select></label><label>To point<select id="slope-to" required></select></label><label class="full">Measured horizontal distance (optional override)<input id="slope-distance" type="number" step="any" min="0.000001" placeholder="Use coordinates or calibrated plan"></label></div>
+    <output id="slope-result" class="field-result" aria-live="polite"></output>
+    <div class="field-actions"><button type="button" class="field-button" id="slope-cancel">Cancel</button><button type="submit" class="field-button primary">Add slope to plan</button></div>
+  </form>
+</div>
+
 <script>
 (function(){
   "use strict";
 
-  var COLORS = ["#FF3B30","#FF9500","#FFD60A","#34C759","#0A84FF","#5EC8E8","#FFFFFF","#1C1C1E",
+  var COLORS = ["#FF0000","#FF9500","#FFD60A","#34C759","#0A84FF","#5EC8E8","#FFFFFF","#000000",
                 "#AF52DE","#FF375F","#5E5CE6","#00C7BE","#A2845E","#8E8E93","#FFB340","#98989D"];
   var MAX_DIM = 2800;
 
@@ -982,7 +1209,8 @@ body{
   var pages = [];
   var currentIndex = -1;
   var currentTool = "pen";
-  var currentColor = COLORS[0];
+  var currentColor = "#000000";
+  var toolColors = {highlighter:"#FF0000"};
   var currentWidth = 4;
   var currentFontSize = 16;
   var zoom = 1;
@@ -1074,11 +1302,14 @@ body{
   var allColorSwatches = [];
   function setCurrentColor(c){
     currentColor = c;
+    toolColors[currentTool] = c;
+    document.getElementById("customColorInput").value = c;
     allColorSwatches.forEach(function(sw){ sw.classList.toggle("active", sw.dataset.color === c); });
+    if(sketchReady){if(currentTool==="select"&&selectedActions.length)applyRecolor(c);syncSketchUI();}
   }
   COLORS.forEach(function(c, i){
     var sw = document.createElement("div");
-    sw.className = "swatch" + (i===0 ? " active" : "");
+    sw.className = "swatch" + (c===currentColor ? " active" : "");
     sw.style.background = c;
     sw.dataset.color = c;
     sw.addEventListener("click", function(){ setCurrentColor(c); });
@@ -1086,7 +1317,7 @@ body{
     allColorSwatches.push(sw);
 
     var sw2 = document.createElement("div");
-    sw2.className = "swatch" + (i===0 ? " active" : "");
+    sw2.className = "swatch" + (c===currentColor ? " active" : "");
     sw2.style.background = c;
     sw2.dataset.color = c;
     sw2.addEventListener("click", function(){ setCurrentColor(c); });
@@ -1099,6 +1330,7 @@ body{
       currentWidth = parseInt(el.dataset.width, 10);
       document.querySelectorAll(".width-dot").forEach(function(x){ x.classList.remove("active"); });
       el.classList.add("active");
+      if(sketchReady)syncSketchUI();
     });
   });
 
@@ -1128,12 +1360,17 @@ body{
       if (angleDraft) cancelAngleDraft();
       awaitingPhotoTrigger = null;
     }
+    if (drawing || currentAction) cancelActiveStroke();
     currentTool = name;
+    activateToolColor(name);
     document.querySelectorAll(".tool-btn[data-tool]").forEach(function(b){ b.classList.toggle("active", b.dataset.tool === name); });
     if (canvas) canvas.style.cursor = (currentTool === "pan") ? "grab" : "crosshair";
     commitPendingText();
     if (currentTool !== "select"){ clearSelection(); redraw(); }
     stampPanel.classList.toggle("visible", currentTool === "stamp");
+    if (name === "stamp") showFieldPanel(false);
+    if (name === "fieldpoint") showFieldPanel(true);
+    if(sketchReady){closeSketchPopovers();syncSketchUI();}
   }
 
   document.querySelectorAll(".tool-btn[data-tool]").forEach(function(btn){
@@ -1160,7 +1397,7 @@ body{
   var stampGridEl = document.getElementById("stampGrid");
   STAMP_SYMBOLS.forEach(function(sym, i){
     var chip = document.createElement("div");
-    chip.className = "stamp-chip" + (i===0 ? " active" : "");
+    chip.className = "stamp-chip" + (c===currentColor ? " active" : "");
     chip.dataset.stamp = sym.key;
     var prevCanvas = document.createElement("canvas");
     if (sym.key === "northarrow"){
@@ -1185,11 +1422,11 @@ body{
 
   var LINE_STYLES = [
     { key:"solid", label:"Solid line", color:null, dash:null },
-    { key:"property", label:"Property line", color:"#E6197A", dash:null },
-    { key:"foundation", label:"Building foundation", color:"#2979FF", dash:null },
-    { key:"row", label:"Right-of-way", color:"#1C1C1E", dash:[10,6] },
-    { key:"eave", label:"Eave fascia", color:"#1C1C1E", dash:[3,4] },
-    { key:"fence", label:"Fence line", color:"#4A3B1E", dash:[16,10], decoration:"fence" }
+    { key:"property", label:"Property line", color:null, dash:null },
+    { key:"foundation", label:"Building foundation", color:null, dash:null },
+    { key:"row", label:"Right-of-way", color:null, dash:[10,6] },
+    { key:"eave", label:"Eave fascia", color:null, dash:[3,4] },
+    { key:"fence", label:"Fence line", color:null, dash:[16,10], decoration:"fence" }
   ];
   var stampLineStylesEl = document.getElementById("stampLineStyles");
   LINE_STYLES.forEach(function(style){
@@ -1215,6 +1452,308 @@ body{
     });
     stampLineStylesEl.appendChild(chip);
   });
+
+  // ---------- shared Field Point / Field Note model (additive schema v1) ----------
+  var FIELD_MODES = {
+    municipal:{label:"Municipal",color:"#5EC8E8",description:"Evidence, ties & legal survey",features:["Survey evidence","Building tie","Fence tie","Offset","Search point","Bearing / distance"]},
+    construction:{label:"Construction",color:"#FFB340",description:"Layout, stakeout & as-builts",features:["Stake","Hub","Nail","Control","As-built","Offset","Gridline","Centreline","Footing","Building","Pile"]},
+    oilgas:{label:"Oil & Gas",color:"#AFA0FF",description:"Pipeline, facility & crossings",features:["Pipeline","Facility","Wellhead","Riser","Valve","Road","Fence","Watercourse","Utility","Crossing","Road crossing","Fence crossing","Powerline crossing","Flange","Culvert"]},
+    grading:{label:"Grading",color:"#78D69B",description:"Elevations, slopes & drainage",features:["EG","FG","TF","BF","Curb","Gutter","Invert","House corner","Garage corner","Swale","High point","Low point","Sidewalk","Manhole","Retaining wall"]}
+  };
+  var fieldPreset = null, fieldDraft = null, modeResolve = null, modalReturnFocus = null;
+  var fieldPhotoBusy = false, spacePan = false, inputPointerId = null, penPointerId = null;
+  var coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  var touchPan = true;
+  try { touchPan = localStorage.getItem("fieldmark-finger-draw") !== "true"; } catch(e){}
+  var fieldPanel = document.getElementById("field-panel");
+  function modeKey(key){ return Object.prototype.hasOwnProperty.call(FIELD_MODES,key) ? key : "municipal"; }
+  function docMode(){ return modeKey(currentDoc && currentDoc.mode); }
+  function fieldPoints(page){ return page ? page.actions.filter(function(a){return a.type === "fieldpoint" && a.fieldNote;}) : []; }
+  function fieldNumber(value){ return value === "" || value == null ? null : (Number.isFinite(Number(value)) ? Number(value) : null); }
+  function fieldCutFill(note){
+    var design = fieldNumber(note.designElevation), observed = fieldNumber(note.observedElevation);
+    if (design === null || observed === null) return null;
+    var diff = design-observed;
+    return {difference:diff,kind:Math.abs(diff)<0.0005?"ON GRADE":diff>0?"FILL":"CUT",amount:Math.abs(diff)};
+  }
+  function cutFillText(note){ var r=fieldCutFill(note); return r ? r.kind+(r.kind==="ON GRADE"?"":" "+r.amount.toFixed(3)+" m") : "Enter design and observed elevations"; }
+  function fieldLabel(a){
+    var n=a.fieldNote, lines=[n.pointNumber+" · "+n.feature];
+    if(n.status) lines.push(n.status.toUpperCase());
+    if(n.observedElevation!=null) lines.push("OBS "+Number(n.observedElevation).toFixed(3)+" m");
+    if(fieldCutFill(n)) lines.push(cutFillText(n));
+    if(n.station) lines.push("STA "+n.station+(n.offset!=null?" · "+n.offset+" m "+(n.offsetDirection||""):""));
+    if(n.photos && n.photos.length) lines.push(n.photos.length+" photo"+(n.photos.length===1?"":"s"));
+    return lines;
+  }
+  function fieldPointBox(a){
+    var fs=a.labelSize||18, lines=fieldLabel(a), w=Math.max.apply(null,lines.map(function(s){return Array.from(s).length*fs*0.72;}));
+    return {x:a.x-a.size/2-4,y:a.y-a.size/2-4,w:a.size+12+w,h:Math.max(a.size+8,lines.length*fs*1.3+a.size/2+4)};
+  }
+  function drawFieldPoint(c,a){
+    var n=a.fieldNote, r=a.size/2, fs=a.labelSize||18;
+    c.save();c.strokeStyle=a.color;c.fillStyle="#fff";c.lineWidth=Math.max(2,a.size*0.08);
+    c.beginPath();c.arc(a.x,a.y,r,0,Math.PI*2);c.fill();c.stroke();
+    c.beginPath();
+    if(n.status==="Not found" || n.status==="Disturbed"){
+      c.moveTo(a.x-r*.6,a.y-r*.6);c.lineTo(a.x+r*.6,a.y+r*.6);c.moveTo(a.x+r*.6,a.y-r*.6);c.lineTo(a.x-r*.6,a.y+r*.6);
+    }else{c.moveTo(a.x-r*.6,a.y);c.lineTo(a.x+r*.6,a.y);c.moveTo(a.x,a.y-r*.6);c.lineTo(a.x,a.y+r*.6);}
+    c.stroke();c.font="700 "+fs+"px Inter, sans-serif";c.textBaseline="top";c.lineJoin="round";
+    fieldLabel(a).forEach(function(line,i){
+      var x=a.x+r+8,y=a.y-r+i*fs*1.3;
+      c.strokeStyle="#fff";c.lineWidth=4;c.strokeText(line,x,y);c.fillStyle=a.color;c.fillText(line,x,y);
+    });c.restore();
+  }
+  function showFieldPanel(show){
+    fieldPanel.hidden=!show;
+    document.getElementById("fieldToggle").setAttribute("aria-expanded",String(show));
+    if(show){stampPanel.classList.remove("visible");renderFieldPanel();}
+  }
+  function renderFieldPanel(){
+    var mode=FIELD_MODES[docMode()], badge=document.getElementById("modeBadge");
+    badge.textContent=mode.label+" ▾";badge.style.setProperty("--mode-color",mode.color);
+    document.getElementById("field-panel-title").textContent=mode.label;
+    document.getElementById("field-panel-help").textContent=mode.description+". Choose a preset, then tap the plan. Tap a point with the FP tool to edit it.";
+    var presets=document.getElementById("field-presets");presets.replaceChildren();
+    var entries=mode.features.map(function(f){return {feature:f,label:f};});
+    if(docMode()==="municipal") entries=["Found","Set","Not found","Disturbed"].map(function(s){return {feature:"Survey evidence",status:s,label:s+" evidence"};}).concat(entries.slice(1));
+    entries.forEach(function(p){
+      var b=document.createElement("button");b.className="field-button";b.textContent=p.label;
+      if(fieldPreset && fieldPreset.feature===p.feature && fieldPreset.status===p.status)b.classList.add("active");
+      b.addEventListener("click",function(){fieldPreset=p;selectTool("fieldpoint");renderFieldPanel();if(window.innerWidth<=1100)showFieldPanel(false);fieldMessage("Tap the plan to place "+p.label.toLowerCase()+".");});presets.appendChild(b);
+    });
+    document.getElementById("grading-tools").hidden=docMode()!=="grading";
+    var list=document.getElementById("field-list");list.replaceChildren();
+    var pts=fieldPoints(pages[currentIndex]);
+    document.getElementById("field-count").textContent="This sheet · "+pts.length+" point"+(pts.length===1?"":"s");
+    pts.forEach(function(a){var b=document.createElement("button");b.className="field-button";b.textContent=a.fieldNote.pointNumber+" · "+a.fieldNote.feature;
+      var small=document.createElement("small");small.textContent=FIELD_MODES[modeKey(a.fieldNote.mode)].label+(a.fieldNote.status?" · "+a.fieldNote.status:"");b.appendChild(small);
+      b.addEventListener("click",function(){openFieldPoint(a);});list.appendChild(b);
+    });
+    if(!pts.length){var p=document.createElement("p");p.className="field-help";p.textContent="No field points on this sheet yet.";list.appendChild(p);}
+  }
+  function fieldMessage(message){document.getElementById("field-status").textContent=message;showToast(message);clearTimeout(fieldMessage.timer);fieldMessage.timer=setTimeout(hideToast,3000);}
+  function showFieldModal(id){
+    modalReturnFocus=document.activeElement;
+    document.getElementById(id).hidden=false;
+    var first=document.querySelector("#"+id+" button, #"+id+" input, #"+id+" select");if(first)first.focus();
+  }
+  function closeFieldModal(id){document.getElementById(id).hidden=true;if(modalReturnFocus && modalReturnFocus.isConnected)modalReturnFocus.focus();}
+  function chooseFieldMode(title,current){
+    document.getElementById("mode-title").textContent=title;
+    var cards=document.getElementById("mode-cards");cards.replaceChildren();
+    Object.keys(FIELD_MODES).forEach(function(key){
+      var mode=FIELD_MODES[key],b=document.createElement("button");b.type="button";b.className="field-button mode-card";
+      b.style.setProperty("--mode-color",mode.color);b.setAttribute("aria-pressed",String(key===current));
+      var strong=document.createElement("strong"),small=document.createElement("small");strong.textContent=mode.label;small.textContent=mode.description;b.append(strong,small);
+      b.addEventListener("click",function(){finishModeChoice(key);});cards.appendChild(b);
+    });showFieldModal("mode-dialog");return new Promise(function(resolve){modeResolve=resolve;});
+  }
+  function finishModeChoice(key){closeFieldModal("mode-dialog");var resolve=modeResolve;modeResolve=null;if(resolve)resolve(key);}
+  document.getElementById("mode-cancel").addEventListener("click",function(){finishModeChoice(null);});
+  document.getElementById("modeBadge").addEventListener("click",async function(){
+    if(!currentDoc)return;commitPendingText();var key=await chooseFieldMode("Change field-note mode",docMode());
+    if(key){currentDoc.mode=key;fieldPreset=null;selectTool("fieldpoint");showFieldPanel(true);scheduleSave();}
+  });
+  document.getElementById("fieldToggle").addEventListener("click",function(){showFieldPanel(fieldPanel.hidden);});
+  function updateFingerButton(){if(sketchReady)syncSketchUI();document.getElementById("fingerMode").textContent=touchPan?"Finger: pan":"Finger: draw";document.getElementById("fingerMode").setAttribute("aria-pressed",String(!touchPan));}
+  document.getElementById("fingerMode").addEventListener("click",function(){touchPan=!touchPan;try{localStorage.setItem("fieldmark-finger-draw",String(!touchPan));}catch(e){}updateFingerButton();});
+  updateFingerButton();
+
+  function addField(container,key,label,type,value,options){
+    var wrap=document.createElement("label");wrap.textContent=label;
+    var input=document.createElement(type==="select"?"select":type==="textarea"?"textarea":"input");input.id="fp-"+key;input.name=key;
+    if(type==="select"){(options||[]).forEach(function(opt){var o=document.createElement("option");o.value=opt;o.textContent=opt||"—";input.appendChild(o);});}
+    else if(type!=="textarea"){input.type=type||"text";if(type==="number")input.step="any";}
+    input.value=value==null?"":value;wrap.appendChild(input);container.appendChild(wrap);return input;
+  }
+  function nextPointNumber(){var max=0;pages.forEach(function(p){fieldPoints(p).forEach(function(a){var n=Number(a.fieldNote.pointNumber);if(Number.isInteger(n)&&n>max)max=n;});});return String(max+1);}
+  function fieldValue(key){var e=document.getElementById("fp-"+key);return e?e.value.trim():null;}
+  function openFieldPoint(action,pos){
+    if(currentIndex<0)return;
+    commitPendingText();cancelActiveStroke();activePointers.clear();inputPointerId=null;penPointerId=null;
+    var mode=action?modeKey(action.fieldNote.mode):docMode(),preset=fieldPreset||{feature:FIELD_MODES[mode].features[0]};
+    var note=action?JSON.parse(JSON.stringify(action.fieldNote)):{schemaVersion:1,id:genId(),kind:"point",mode:mode,pointNumber:nextPointNumber(),feature:preset.feature,status:mode==="municipal"?(preset.status||"Found"):"",units:"m",createdAt:new Date().toISOString(),photos:[],ties:[]};
+    fieldDraft={action:action||null,page:pages[currentIndex],pos:pos,note:note};
+    var root=document.getElementById("point-fields");root.replaceChildren();
+    document.getElementById("point-title").textContent=action?"Edit Field Point":"New Field Point";
+    var badge=document.getElementById("point-mode");badge.textContent=FIELD_MODES[mode].label;badge.style.setProperty("--mode-color",FIELD_MODES[mode].color);
+    var grid=document.createElement("div");grid.className="field-grid";root.appendChild(grid);
+    addField(grid,"pointNumber","Point number","text",note.pointNumber).required=true;
+    addField(grid,"feature","Feature","select",note.feature,FIELD_MODES[mode].features.includes(note.feature)?FIELD_MODES[mode].features:FIELD_MODES[mode].features.concat(note.feature));
+    addField(grid,"northing","Northing (m)","number",note.northing);
+    addField(grid,"easting","Easting (m)","number",note.easting);
+    addField(grid,"observedElevation","Observed elevation (m)","number",note.observedElevation);
+    if(mode==="construction"||mode==="grading"){
+      addField(grid,"designElevation","Design elevation (m)","number",note.designElevation);
+      var result=document.createElement("output");result.id="fp-cutfill";result.className="field-result full";result.setAttribute("aria-live","polite");grid.appendChild(result);
+      var help=document.createElement("p");help.className="field-help full";help.textContent="Design − observed: positive = FILL, negative = CUT. All elevations and distances are in metres.";grid.appendChild(help);
+    }
+    addField(grid,"code","Code","text",note.code);
+    addField(grid,"description","Description","text",note.description);
+    addField(grid,"offset","Offset (m)","number",note.offset);
+    addField(grid,"offsetDirection",mode==="oilgas"?"Offset side":"Offset direction","select",note.offsetDirection,["","L","R","N","S","E","W","NE","NW","SE","SW","CL"]);
+    if(mode==="municipal"){
+      addField(grid,"status","Evidence status","select",note.status,["Found","Set","Not found","Disturbed"]);
+      addField(grid,"evidenceType","Evidence type","text",note.evidenceType||"").placeholder="Iron bar, pin, nail, hub…";
+      addField(grid,"condition","Evidence condition","text",note.condition).placeholder="Good, bent, destroyed…";
+      addField(grid,"depth","Depth (m)","number",note.depth).min="0";
+      addField(grid,"searchRadius","Search radius (m)","number",note.searchRadius).min="0";
+      addField(grid,"bearing","Bearing (recorded)","text",note.bearing).placeholder="089°57′41″ or N 30° E";
+      addField(grid,"distance","Distance (m)","number",note.distance).min="0";
+      var ties=document.createElement("fieldset");ties.innerHTML="<legend>Building / fence ties</legend><div id='field-ties'></div>";
+      var add=document.createElement("button");add.type="button";add.className="field-button";add.textContent="Add tie";
+      add.addEventListener("click",function(){addTieRow({});});ties.appendChild(add);root.appendChild(ties);
+      (note.ties||[]).forEach(addTieRow);
+    }
+    if(mode==="oilgas"){
+      addField(grid,"station","Station / chainage","text",note.station).placeholder="12+345.67";
+      addField(grid,"depth","Depth (m)","number",note.depth).min="0";
+      addField(grid,"crossingAngle","Crossing angle (degrees)","number",note.crossingAngle);
+      addField(grid,"assetStatus","Asset status","select",note.assetStatus,["","Existing","Proposed","Located","Not located"]);
+    }
+    addField(grid,"createdBy","Recorded by","text",note.createdBy);
+    var notes=addField(root,"notes","Field notes","textarea",note.notes);notes.maxLength=10000;
+    var time=document.createElement("p");time.className="field-help";time.textContent="Recorded "+new Date(note.createdAt).toLocaleString();root.appendChild(time);
+    document.getElementById("point-error").textContent="";document.getElementById("field-photo-input").value="";
+    renderFieldPhotos();updateCutFill();showFieldModal("point-dialog");
+  }
+  function addTieRow(tie){
+    var row=document.createElement("div");row.className="field-grid field-tie";
+    [["feature","Tie to","text"],["distance","Distance (m)","number"],["bearing","Bearing","text"],["direction","Offset direction","text"]].forEach(function(f){
+      var input=addField(row,"tie-"+genId(),f[1],f[2],tie[f[0]]);input.dataset.tieKey=f[0];
+    });
+    var del=document.createElement("button");del.type="button";del.className="field-button";del.textContent="Remove tie";del.addEventListener("click",function(){row.remove();});row.appendChild(del);
+    document.getElementById("field-ties").appendChild(row);
+  }
+  function updateCutFill(){var out=document.getElementById("fp-cutfill");if(out)out.textContent=cutFillText({designElevation:fieldValue("designElevation"),observedElevation:fieldValue("observedElevation")});}
+  document.getElementById("point-form").addEventListener("input",updateCutFill);
+  function cancelFieldPoint(){if(fieldPhotoBusy)return;fieldDraft=null;closeFieldModal("point-dialog");}
+  document.getElementById("point-cancel").addEventListener("click",cancelFieldPoint);
+  document.getElementById("point-form").addEventListener("submit",function(e){
+    e.preventDefault();if(!fieldDraft||fieldPhotoBusy)return;
+    var d=fieldDraft,n=d.note;
+    ["pointNumber","feature","code","description","offsetDirection","createdBy","notes","status","evidenceType","condition","bearing","station","assetStatus"].forEach(function(k){var v=fieldValue(k);if(v!==null)n[k]=v;});
+    ["northing","easting","observedElevation","designElevation","offset","depth","searchRadius","distance","crossingAngle"].forEach(function(k){var v=fieldValue(k);if(v!==null)n[k]=fieldNumber(v);});
+    if(!n.pointNumber)return;
+    if(pages.some(function(p){return fieldPoints(p).some(function(a){return a!==d.action && a.fieldNote.pointNumber===n.pointNumber;});})){
+      document.getElementById("point-error").textContent="That point number already exists in this job. Choose a unique number.";return;
+    }
+    if(document.getElementById("field-ties"))n.ties=Array.from(document.querySelectorAll(".field-tie")).map(function(row){var t={};row.querySelectorAll("[data-tie-key]").forEach(function(el){t[el.dataset.tieKey]=el.dataset.tieKey==="distance"?fieldNumber(el.value):el.value.trim();});return t;});
+    n.updatedAt=new Date().toISOString();
+    if(d.action){var before=d.action.fieldNote;d.action.fieldNote=n;d.page.history.push({type:"fieldnote",action:d.action,before:before,after:n});d.page.redo=[];scheduleSave();}
+    else pushAdd(d.page,{type:"fieldpoint",x:d.pos.x,y:d.pos.y,size:Math.max(22,28/zoom),labelSize:Math.max(14,13/zoom),color:currentColor,fieldNote:n});
+    fieldDraft=null;closeFieldModal("point-dialog");refreshDerivedNotes();redraw();renderFieldPanel();
+  });
+  function renderFieldPhotos(){
+    var root=document.getElementById("field-photos");root.replaceChildren();if(!fieldDraft)return;
+    (fieldDraft.note.photos||[]).forEach(function(photo,index){
+      var wrap=document.createElement("div"),b=document.createElement("button"),im=document.createElement("img"),del=document.createElement("button");
+      im.src=photo.dataUrl;im.alt=photo.name||"Point photo";b.type="button";b.className="field-button";b.appendChild(im);b.title="View photo";
+      b.addEventListener("click",function(){photoLightboxImg.src=photo.dataUrl;photoLightbox.classList.add("visible");});
+      del.type="button";del.className="field-button";del.textContent="Remove";del.addEventListener("click",function(){fieldDraft.note.photos.splice(index,1);renderFieldPhotos();});wrap.append(b,del);root.appendChild(wrap);
+    });
+  }
+  document.getElementById("field-photo-input").addEventListener("change",async function(e){
+    if(!fieldDraft)return;var draft=fieldDraft,files=Array.from(e.target.files||[]);e.target.value="";fieldPhotoBusy=true;
+    document.getElementById("point-save").disabled=true;document.getElementById("point-cancel").disabled=true;
+    try{for(var i=0;i<files.length;i++){
+      var url=URL.createObjectURL(files[i]);
+      try{var im=await new Promise(function(resolve,reject){var img=new Image();img.onload=function(){resolve(img);};img.onerror=function(){reject(new Error("Photo could not be read."));};img.src=url;});
+        var ratio=Math.min(1,1600/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.naturalWidth*ratio));c.height=Math.max(1,Math.round(im.naturalHeight*ratio));
+        c.getContext("2d").drawImage(im,0,0,c.width,c.height);draft.note.photos.push({id:genId(),name:files[i].name,capturedAt:new Date().toISOString(),dataUrl:c.toDataURL("image/jpeg",0.86)});c.width=c.height=1;
+      }finally{URL.revokeObjectURL(url);}
+    }renderFieldPhotos();}catch(err){document.getElementById("point-error").textContent=err.message;}
+    finally{fieldPhotoBusy=false;document.getElementById("point-save").disabled=false;document.getElementById("point-cancel").disabled=false;}
+  });
+
+  function slopeCalculation(page,from,to,manual){
+    if(!from||!to||from===to)return {error:"Choose two different field points."};
+    var a=from.fieldNote,b=to.fieldNote,z1=fieldNumber(a.observedElevation),z2=fieldNumber(b.observedElevation);
+    if(z1===null||z2===null)return {error:"Both points need an observed elevation."};
+    var dist=fieldNumber(manual),source="Measured horizontal distance";
+    if(dist===null){
+      var coords=[a.northing,a.easting,b.northing,b.easting].map(fieldNumber);
+      if(coords.every(function(v){return v!==null;})){dist=Math.hypot(coords[2]-coords[0],coords[3]-coords[1]);source="N/E coordinates";}
+      else if(page.rulerScale){dist=Math.hypot(to.x-from.x,to.y-from.y)*page.rulerScale.unitsPerPixel*(page.rulerScale.unit==="ft"?0.3048:1);source="Calibrated plan (approximate)";}
+      else return {error:"Enter a measured horizontal distance, N/E coordinates, or calibrate the plan with the Ruler tool."};
+    }
+    if(!(dist>0))return {error:"Horizontal distance must be greater than zero."};
+    return {distance:dist,rise:z2-z1,slope:(z2-z1)/dist*100,source:source};
+  }
+  function slopeSelection(){var page=pages[currentIndex],pts=fieldPoints(page);return {page:page,from:pts.find(function(a){return a.fieldNote.id===document.getElementById("slope-from").value;}),to:pts.find(function(a){return a.fieldNote.id===document.getElementById("slope-to").value;}),manual:document.getElementById("slope-distance").value};}
+  function updateSlopeResult(){var s=slopeSelection(),r=slopeCalculation(s.page,s.from,s.to,s.manual);document.getElementById("slope-result").textContent=r.error||r.slope.toFixed(2)+"% · ΔZ "+r.rise.toFixed(3)+" m · "+r.distance.toFixed(3)+" m · "+r.source;return r;}
+  document.getElementById("slopeTool").addEventListener("click",function(){
+    var pts=fieldPoints(pages[currentIndex]);if(pts.length<2){fieldMessage("Add at least two field points with observed elevations first.");return;}
+    ["slope-from","slope-to"].forEach(function(id,index){var select=document.getElementById(id);select.replaceChildren();pts.forEach(function(a){var o=document.createElement("option");o.value=a.fieldNote.id;o.textContent=a.fieldNote.pointNumber+" · "+a.fieldNote.feature;select.appendChild(o);});select.selectedIndex=index;});
+    document.getElementById("slope-distance").value="";updateSlopeResult();showFieldModal("slope-dialog");
+  });
+  document.getElementById("slope-form").addEventListener("input",updateSlopeResult);
+  document.getElementById("slope-cancel").addEventListener("click",function(){closeFieldModal("slope-dialog");});
+  document.getElementById("slope-form").addEventListener("submit",function(e){
+    e.preventDefault();var r=updateSlopeResult();if(r.error)return;var s=slopeSelection();
+    pushAdd(s.page,{type:"ruler",color:toolColors.ruler||"#000000",width:currentWidth,x1:s.from.x,y1:s.from.y,x2:s.to.x,y2:s.to.y,fieldNote:{schemaVersion:1,id:genId(),kind:"slope",mode:"grading",fromId:s.from.fieldNote.id,toId:s.to.fieldNote.id,distance:fieldNumber(s.manual),units:"m",createdAt:new Date().toISOString()}});
+    refreshDerivedNotes();redraw();closeFieldModal("slope-dialog");
+  });
+  document.getElementById("drainageTool").addEventListener("click",function(){selectTool("drainage");if(window.innerWidth<=1100)showFieldPanel(false);fieldMessage("Draw a drainage arrow in the direction of flow.");});
+  function refreshDerivedNotes(){
+    pages.forEach(function(p){var pts=fieldPoints(p);p.actions.forEach(function(a){
+      if(!a.fieldNote||a.fieldNote.kind!=="slope")return;var n=a.fieldNote,from=pts.find(function(x){return x.fieldNote.id===n.fromId;}),to=pts.find(function(x){return x.fieldNote.id===n.toId;});
+      var r=slopeCalculation(p,from,to,n.distance);if(r.error){a.label="SLOPE — check endpoints / distance";return;}
+      a.x1=from.x;a.y1=from.y;a.x2=to.x;a.y2=to.y;a.label=from.fieldNote.pointNumber+" → "+to.fieldNote.pointNumber+": "+r.slope.toFixed(2)+"% / "+r.distance.toFixed(3)+" m";
+    });});
+  }
+  document.getElementById("exportFieldNotes").addEventListener("click",function(){
+    if(!currentDoc)return;var data={app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc.name,mode:docMode(),units:"m",pages:pages.map(function(p){return {id:p.id,name:p.name,notes:p.actions.filter(function(a){return a.fieldNote;})};})};
+    downloadBytes(JSON.stringify(data,null,2),(currentDoc.name||"field-notes")+" - field notes.json","application/json");
+  });
+
+  // Export the new labels as bounded transparent tiles, keeping original PDF vectors.
+  async function drawFieldPointPdf(pdfPage,a,toPt,scale,outDoc){
+    var b=fieldPointBox(a),c=document.createElement("canvas"),factor=Math.min(2,3000/Math.max(b.w,b.h));
+    c.width=Math.max(1,Math.ceil(b.w*factor));c.height=Math.max(1,Math.ceil(b.h*factor));
+    var cx=c.getContext("2d");cx.scale(factor,factor);cx.translate(-b.x,-b.y);drawFieldPoint(cx,a);
+    var image=await outDoc.embedPng(dataURLToUint8(c.toDataURL("image/png"))),pt=toPt(b.x,b.y+b.h);
+    pdfPage.drawImage(image,{x:pt.x,y:pt.y,width:b.w/scale,height:b.h/scale});c.width=c.height=1;
+  }
+  async function attachFieldNotesToPdf(outDoc,pageList){
+    var notes=pageList.map(function(p){return {sheet:p.name,notes:p.actions.filter(function(a){return a.fieldNote;})};}).filter(function(p){return p.notes.length;});
+    if(!notes.length)return;
+    // Embedded JSON retains every structured field and photo in the marked-up PDF.
+    await outDoc.attach(new TextEncoder().encode(JSON.stringify({app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc&&currentDoc.name,units:"m",pages:notes},null,2)),"field-notes.json",{mimeType:"application/json",description:"Vista Field Mark structured field notes and photos"});
+  }
+
+  // Modal keyboard scope: typing never invokes drawing shortcuts underneath.
+  document.addEventListener("keydown",function(e){
+    var open=document.querySelector(".field-overlay:not([hidden])");if(!open)return;
+    if(e.key==="Escape"){
+      e.preventDefault();e.stopImmediatePropagation();if(photoLightbox.classList.contains("visible")){closePhotoLightbox();return;}
+      if(open.id==="mode-dialog")finishModeChoice(null);else if(open.id==="point-dialog")cancelFieldPoint();else closeFieldModal(open.id);return;
+    }
+    if(e.key==="Tab"){
+      var els=Array.from(open.querySelectorAll("button:not(:disabled),input:not(:disabled),select,textarea")).filter(function(el){return el.getClientRects().length;});
+      var first=els[0],last=els[els.length-1];
+      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    }
+    e.stopPropagation();
+  });
+
+  // Pointer zoom is anchored under the cursor; resizing retains the viewed plan centre.
+  var viewportMemory=null, resizePending=false;
+  function rememberViewport(){if(!canvas||!scrollWrap.clientWidth)return;var rect=scrollWrap.getBoundingClientRect(),p=clientToCanvasContent(rect.left+rect.width/2,rect.top+rect.height/2);viewportMemory={x:p.x,y:p.y,zoom:zoom,width:scrollWrap.clientWidth,height:scrollWrap.clientHeight};}
+  function restoreViewport(){if(!canvas||!viewportMemory)return;zoom=viewportMemory.zoom;applyZoom();var rect=canvas.getBoundingClientRect(),wrap=scrollWrap.getBoundingClientRect();scrollWrap.scrollLeft+=rect.left+viewportMemory.x*zoom-(wrap.left+wrap.width/2);scrollWrap.scrollTop+=rect.top+viewportMemory.y*zoom-(wrap.top+wrap.height/2);if(selectedActions.length)showSelectDeleteBtn();}
+  scrollWrap.addEventListener("scroll",function(){if(!resizePending && (!viewportMemory || (viewportMemory.width===scrollWrap.clientWidth && viewportMemory.height===scrollWrap.clientHeight)))rememberViewport();},{passive:true});
+  var viewportObserver=new ResizeObserver(function(){if(!canvas)return;resizePending=true;requestAnimationFrame(function(){restoreViewport();resizePending=false;rememberViewport();});});viewportObserver.observe(scrollWrap);
+  function zoomAt(factor,x,y){
+    if(!canvas)return;var anchor=clientToCanvasContent(x,y);zoom=Math.max(.05,Math.min(8,zoom*factor));applyZoom();var rect=canvas.getBoundingClientRect();scrollWrap.scrollLeft+=rect.left+anchor.x*zoom-x;scrollWrap.scrollTop+=rect.top+anchor.y*zoom-y;rememberViewport();if(selectedActions.length)showSelectDeleteBtn();
+  }
+  scrollWrap.addEventListener("wheel",function(e){if(!canvas||drawing||textEditing)return;e.preventDefault();zoomAt(Math.exp(-Math.max(-100,Math.min(100,e.deltaY*(e.deltaMode===1?16:1)))*.002),e.clientX,e.clientY);},{passive:false});
+  scrollWrap.addEventListener("contextmenu",function(e){e.preventDefault();});
+  window.addEventListener("keyup",function(e){if(e.code==="Space")spacePan=false;});
+  window.addEventListener("blur",function(){spacePan=false;cancelActiveStroke();activePointers.clear();inputPointerId=null;penPointerId=null;panState=null;endPinch();});
+  window.addEventListener("pagehide",function(){commitPendingText();if(currentDoc)doSave();});
+
+  document.getElementById("fieldClose").addEventListener("click",function(){showFieldPanel(false);});
 
   // ---------- page model ----------
   var sourceFiles = {}; // id -> { bytes: ArrayBuffer, name }
@@ -1310,12 +1849,16 @@ body{
     var pdfDoc = await loadingTask.promise;
     var numPages = pdfDoc.numPages;
 
+    try {
     for (var i = 1; i <= numPages; i++){
       showToast("Rendering " + baseName + " — page " + i + " of " + numPages + "…");
       var pdfPage = await pdfDoc.getPage(i);
       var baseViewport = pdfPage.getViewport({ scale: 1 });
       var longEdge = Math.max(baseViewport.width, baseViewport.height);
-      var renderScale = Math.min(4, Math.max(1, 2600 / longEdge));
+      var tablet = coarsePointer || navigator.maxTouchPoints>1 || (navigator.deviceMemory && navigator.deviceMemory<=4);
+      var edgeBudget = tablet ? (numPages>20?1800:2200) : 2800;
+      var pixelBudget = tablet ? 4000000 : 8000000;
+      var renderScale = Math.min(4,edgeBudget/longEdge,Math.sqrt(pixelBudget/(baseViewport.width*baseViewport.height)));
       var viewport = pdfPage.getViewport({ scale: renderScale });
 
       var oc = document.createElement("canvas");
@@ -1324,7 +1867,8 @@ body{
       var octx = oc.getContext("2d");
       await pdfPage.render({ canvasContext: octx, viewport: viewport }).promise;
 
-      var img = await canvasToImage(oc);
+      var rasterBlob=await new Promise(function(resolve){oc.toBlob(resolve,"image/png");});
+      var img = await blobToImage(rasterBlob);
       var p = newPage(numPages > 1 ? (baseName + " — p" + i) : baseName, img);
       p.sourceFileId = sourceId;
       p.sourcePageIndex = i - 1;
@@ -1332,13 +1876,14 @@ body{
       p.pdfPtWidth = baseViewport.width;
       p.pdfPtHeight = baseViewport.height;
       p._imgMime = "image/png";
-      p._imgBlob = await new Promise(function(res){ oc.toBlob(res, "image/png"); });
+      p._imgBlob = rasterBlob;
+      oc.width=oc.height=1;pdfPage.cleanup();
       pages.push(p);
       renderPageStrip();
       if (currentIndex === -1) selectPage(pages.length - 1);
       scheduleSave();
     }
-    hideToast();
+    } finally { await pdfDoc.destroy(); hideToast(); }
   }
 
   function addImageFile(file){
@@ -1379,6 +1924,10 @@ body{
 
   function selectPage(idx){
     commitPendingText();
+    if (currentIndex >= 0 && pages[currentIndex]) { rememberViewport(); pages[currentIndex]._view = viewportMemory; }
+    cancelActiveStroke(); cancelPolygonDraft(); cancelAngleDraft();
+    activePointers.clear(); panState=null; endPinch(); inputPointerId=null; penPointerId=null;
+    polygonFinishBtn=null; polygonCancelBtn=null; angleCancelBtn=null;
     clearSelection();
     currentIndex = idx;
     var page = pages[idx];
@@ -1398,22 +1947,26 @@ body{
     sheetTitle.placeholder = "Untitled note";
     var gridBtn = document.getElementById("btnGridToggle");
     if (gridBtn) gridBtn.classList.toggle("active", !!page.gridOn);
-    fitToScreen();
+    if(page._view){viewportMemory=page._view;restoreViewport();}else{fitToScreen();}
+    rememberViewport();
     redraw();
     renderPageStrip();
+    renderFieldPanel();
   }
 
   function renderPageStrip(){
+    if(sketchReady)syncSketchUI();
     Array.prototype.slice.call(pageStrip.querySelectorAll(".page-thumb")).forEach(function(t){ t.remove(); });
     pages.forEach(function(p, i){
       var t = document.createElement("div");
       t.className = "page-thumb" + (i === currentIndex ? " active" : "");
       var im = document.createElement("img");
-      im.src = p.img.src;
+      im.src = p._stripThumbnail || (p._stripThumbnail = makeThumbnail(p,150));
       var num = document.createElement("div");
       num.className = "num"; num.textContent = (i+1);
       t.appendChild(im); t.appendChild(num);
       t.addEventListener("click", function(){ selectPage(i); });
+      t.tabIndex=0;t.setAttribute("role","button");t.setAttribute("aria-label","Sheet "+(i+1)+": "+p.name);t.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();selectPage(i);}});
       pageStrip.insertBefore(t, pageAddBtn);
     });
   }
@@ -1436,6 +1989,7 @@ body{
   }
 
   function hitTestAction(a, px, py, radius){
+    if (a.type === "fieldpoint") return pointInBBox(fieldPointBox(a),px,py) || Math.hypot(px-a.x,py-a.y) < a.size/2+radius;
     if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy"){
       var pts = a.points;
       for (var i=0;i<pts.length-1;i++){
@@ -1539,6 +2093,7 @@ body{
 
   // ---------- selection helpers ----------
   function actionBBox(a){
+    if (a.type === "fieldpoint") return fieldPointBox(a);
     if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy"){
       var xs = a.points.map(function(p){ return p.x; }), ys = a.points.map(function(p){ return p.y; });
       var pad = (a.width||4) + 2;
@@ -1594,7 +2149,7 @@ body{
     if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy" || a.type === "polygon"){
       return { points: a.points.map(function(p){ return { x:p.x, y:p.y, pressure:p.pressure }; }) };
     }
-    if (a.type === "text" || a.type === "stamp" || a.type === "photopin") return { x:a.x, y:a.y };
+    if (a.type === "text" || a.type === "stamp" || a.type === "photopin" || a.type === "fieldpoint") return { x:a.x, y:a.y };
     if (a.type === "angle") return { vertex:{x:a.vertex.x,y:a.vertex.y}, p1:{x:a.p1.x,y:a.p1.y}, p2:{x:a.p2.x,y:a.p2.y} };
     return { x1:a.x1, y1:a.y1, x2:a.x2, y2:a.y2 };
   }
@@ -1613,7 +2168,7 @@ body{
   function translateAction(a, dx, dy){
     if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy" || a.type === "polygon"){
       a.points.forEach(function(p){ p.x += dx; p.y += dy; });
-    } else if (a.type === "text" || a.type === "stamp" || a.type === "photopin"){
+    } else if (a.type === "text" || a.type === "stamp" || a.type === "photopin" || a.type === "fieldpoint"){
       a.x += dx; a.y += dy;
     } else if (a.type === "angle"){
       a.vertex.x += dx; a.vertex.y += dy;
@@ -1625,6 +2180,7 @@ body{
   }
   function clearSelection(){
     selectedActions = [];
+    if(sketchReady)syncSelectionDock();
     marqueeRect = null;
     dragMode = null;
     hideSelectDeleteBtn();
@@ -1855,9 +2411,11 @@ body{
   function drawAction(c, a){
     c.save();
     c.lineCap = "round"; c.lineJoin = "round";
-    if (a.type === "pen"){
+    if (a.type === "fieldpoint"){
+      drawFieldPoint(c,a);
+    } else if (a.type === "pen"){
       c.fillStyle = a.color; c.globalAlpha = 1;
-      var pts = densifyStroke(smoothPoints(a.points, 2), 4);
+      var pts = densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 4);
       if (pts.length > 1){
         var tangentsP = computeTangents(pts);
         var widthsP = pts.map(function(p){
@@ -1870,7 +2428,7 @@ body{
       }
     } else if (a.type === "calligraphy"){
       c.fillStyle = a.color; c.globalAlpha = 1;
-      var cpts = densifyStroke(smoothPoints(a.points, 2), 4);
+      var cpts = densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 4);
       var nib = (typeof a.nibAngle === "number") ? a.nibAngle : Math.PI/4;
       if (cpts.length > 1){
         var tangentsC = computeTangents(cpts);
@@ -1881,7 +2439,7 @@ body{
         c.beginPath(); c.arc(cpts[0].x, cpts[0].y, w0c/2, 0, Math.PI*2); c.fill();
       }
     } else if (a.type === "highlighter"){
-      var hpts = densifyStroke(smoothPoints(a.points, 2), 4);
+      var hpts = densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 4);
       if (hpts.length > 1){
         var tangentsH = computeTangents(hpts);
         var widthsH = hpts.map(function(){ return a.width*4; });
@@ -2027,6 +2585,7 @@ body{
   }
 
   function redraw(){
+    if(sketchReady)syncSelectionDock();
     if (!canvas || !ctx || currentIndex < 0) return;
     var page = pages[currentIndex];
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -2156,7 +2715,12 @@ body{
     var page = pages[currentIndex];
     var op = page.history.pop();
     if (!op) return;
-    if (op.type === "add"){
+    clearSelection();
+    if(op.type==="batchadd"){
+      op.actions.forEach(function(a){var i=page.actions.indexOf(a);if(i>=0)page.actions.splice(i,1);});
+    } else if (op.type === "fieldnote"){
+      op.action.fieldNote=op.before;
+    } else if (op.type === "add"){
       var idx = page.actions.indexOf(op.action);
       if (idx >= 0) page.actions.splice(idx,1);
     } else if (op.type === "erase"){
@@ -2169,6 +2733,7 @@ body{
       op.pairs.forEach(function(p){ p.action.rotation = p.before; });
     }
     page.redo.push(op);
+    refreshDerivedNotes();
     redraw();
     scheduleSave();
   }
@@ -2177,7 +2742,12 @@ body{
     var page = pages[currentIndex];
     var op = page.redo.pop();
     if (!op) return;
-    if (op.type === "add"){
+    clearSelection();
+    if(op.type==="batchadd"){
+      op.actions.forEach(function(a){page.actions.push(a);});
+    } else if (op.type === "fieldnote"){
+      op.action.fieldNote=op.after;
+    } else if (op.type === "add"){
       page.actions.push(op.action);
     } else if (op.type === "erase"){
       op.items.forEach(function(it){
@@ -2192,6 +2762,7 @@ body{
       op.pairs.forEach(function(p){ p.action.rotation = p.after; });
     }
     page.history.push(op);
+    refreshDerivedNotes();
     redraw();
     scheduleSave();
   }
@@ -2253,11 +2824,14 @@ body{
   function endPinch(){ pinchState = null; if (stage) stage.classList.remove("zooming"); }
 
   function cancelActiveStroke(){
+    if(moveSnapshots)moveSnapshots.forEach(function(p){applyGeom(p.action,p.before);});
+    if(eraseRemoved && pages[currentIndex])eraseRemoved.forEach(function(a){if(!pages[currentIndex].actions.includes(a))pages[currentIndex].actions.push(a);});
     drawing = false;
     currentAction = null;
     dragMode = null; marqueeRect = null; moveSnapshots = null; moveStartPos = null;
     eraseRemoved = null;
     awaitingPhotoTrigger = null;
+    pendingFieldTap = null;
     clearTimeout(holdTimer);
     redraw();
   }
@@ -2288,38 +2862,40 @@ body{
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
-    window.addEventListener("pointercancel", onPointerUp);
+    window.addEventListener("pointercancel", onPointerCancel);
   }
 
-  // catches the second (or later) pinch finger when it lands outside the
-  // canvas itself, e.g. on the surrounding blueprint-grid background
+  // Background participates in pan/pinch, while controls keep their own gestures.
   var canvasAreaEl = document.getElementById("canvas-area");
-  canvasAreaEl.addEventListener("pointerdown", function(e){
-    if (e.target === canvas) return;
-    activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
-    if (activePointers.size >= 2){
-      if (drawing || currentAction) cancelActiveStroke();
-      beginPinch();
-      e.preventDefault();
-    }
-  });
-  canvasAreaEl.addEventListener("pointermove", function(e){
-    if (!activePointers.has(e.pointerId)) return;
-    activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
-    if (activePointers.size >= 2){ updatePinch(); e.preventDefault(); }
-  });
+  var pendingFieldTap = null;
+  scrollWrap.addEventListener("pointerdown",function(e){if(e.target===scrollWrap || e.target.id==="stage-pad")onPointerDown(e);});
+  scrollWrap.addEventListener("pointermove",function(e){if(e.target!==canvas && activePointers.has(e.pointerId))onPointerMove(e);});
+  function onPointerCancel(e){
+    activePointers.delete(e.pointerId);
+    if(e.pointerId===inputPointerId){cancelActiveStroke();panState=null;inputPointerId=null;}
+    if(e.pointerId===penPointerId)penPointerId=null;
+    if(activePointers.size<2)endPinch();
+  }
 
   function onPointerDown(e){
-    activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
+    if(!canvas || currentIndex<0 || document.querySelector(".field-overlay:not([hidden])"))return;
+    if(e.pointerType==="touch" && penPointerId!==null)return;
+    if(e.pointerType==="pen"){
+      if(drawing || panState)cancelActiveStroke();
+      activePointers.clear();panState=null;endPinch();penPointerId=e.pointerId;
+    }
+    if(e.pointerType==="touch") activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
     if (activePointers.size >= 2){
-      if (drawing || currentAction) cancelActiveStroke();
+      cancelActiveStroke(); panState=null; inputPointerId=null;
       commitPendingText();
       beginPinch();
       e.preventDefault();
       return;
     }
 
-    if (currentTool === "pan"){
+    inputPointerId=e.pointerId;
+    if (currentTool === "pan" || (e.pointerType==="mouse" && (e.button===1 || e.button===2 || spacePan)) || (e.pointerType==="touch" && touchPan) || e.target!==canvas){
+      if(currentTool==="fieldpoint" && e.pointerType==="touch" && e.target===canvas)pendingFieldTap={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,pos:getCanvasPos(e)};
       commitPendingText();
       if (currentIndex < 0) return;
       panState = { startX:e.clientX, startY:e.clientY, startLeft:scrollWrap.scrollLeft, startTop:scrollWrap.scrollTop };
@@ -2362,6 +2938,11 @@ body{
     var page = pages[currentIndex];
     var pos = getCanvasPos(e);
 
+    if(currentTool === "fieldpoint"){
+      pendingFieldTap={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,pos:pos};
+      try{canvas.setPointerCapture(e.pointerId);}catch(err){}
+      return;
+    }
     if (currentTool === "text"){
       openTextInput(e, pos, page);
       return;
@@ -2445,12 +3026,13 @@ body{
 
     if (currentTool === "pen" || currentTool === "highlighter"){
       currentAction = { type: currentTool, color: currentColor, width: currentWidth, points: [pos],
-        pressureSensitive: (currentTool === "pen" && pressureEnabled), isStraightLine: false };
+        pressureSensitive: (currentTool === "pen" && pressureEnabled), isStraightLine: false, smoothing:strokeSmoothing };
     } else if (currentTool === "calligraphy"){
       currentAction = { type: "calligraphy", color: currentColor, width: currentWidth * 1.4, points: [pos],
-        nibAngle: calligraphyNibAngle * Math.PI / 180, isStraightLine: false };
-    } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler" || currentTool === "cloud"){
-      currentAction = { type: currentTool, color: currentColor, width: currentWidth, x1: pos.x, y1: pos.y, x2: pos.x, y2: pos.y };
+        nibAngle: calligraphyNibAngle * Math.PI / 180, isStraightLine: false, smoothing:strokeSmoothing };
+    } else if (currentTool === "drainage" || currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler" || currentTool === "cloud"){
+      currentAction = { type: currentTool === "drainage" ? "arrow" : currentTool, color: currentColor, width: currentWidth, x1: pos.x, y1: pos.y, x2: pos.x, y2: pos.y };
+      if(currentTool === "drainage")currentAction.fieldNote={schemaVersion:1,id:genId(),kind:"drainage",mode:docMode(),createdAt:new Date().toISOString()};
       if (currentTool === "line" && pendingLineDash) currentAction.dash = pendingLineDash;
       if (currentTool === "line" && pendingLineDecoration) currentAction.decoration = pendingLineDecoration;
     } else if (currentTool === "eraser"){
@@ -2461,9 +3043,11 @@ body{
   }
 
   function onPointerMove(e){
+    if(e.pointerType==="touch" && penPointerId!==null)return;
     if (activePointers.has(e.pointerId)) activePointers.set(e.pointerId, { x:e.clientX, y:e.clientY });
     if (activePointers.size >= 2){ updatePinch(); return; }
 
+    if(e.pointerId!==inputPointerId)return;
     if (panState){
       var pdx = e.clientX - panState.startX, pdy = e.clientY - panState.startY;
       scrollWrap.scrollLeft = panState.startLeft - pdx;
@@ -2498,8 +3082,8 @@ body{
         armHoldTimer();
       }
       scheduleRedraw();
-    } else if (currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler" || currentTool === "cloud"){
-      var pos2 = getCanvasPos(e);
+    } else if (currentTool === "drainage" || currentTool === "arrow" || currentTool === "rect" || currentTool === "ellipse" || currentTool === "line" || currentTool === "ruler" || currentTool === "cloud"){
+      var pos2 = snapLineEnd(currentAction,getCanvasPos(e),e);
       currentAction.x2 = pos2.x; currentAction.y2 = pos2.y;
       scheduleRedraw();
     } else if (currentTool === "eraser"){
@@ -2508,9 +3092,24 @@ body{
   }
 
   function onPointerUp(e){
+    var wasPinching=!!pinchState;
     activePointers.delete(e.pointerId);
+    if(e.pointerId===penPointerId)penPointerId=null;
+    if(wasPinching){
+      if(activePointers.size<2)endPinch();
+      if(activePointers.size===1){var remaining=Array.from(activePointers.entries())[0];inputPointerId=remaining[0];panState={startX:remaining[1].x,startY:remaining[1].y,startLeft:scrollWrap.scrollLeft,startTop:scrollWrap.scrollTop};}
+      rememberViewport();return;
+    }
+    if(e.pointerId!==inputPointerId)return;
+    inputPointerId=null;
+    if(pendingFieldTap && pendingFieldTap.pointerId===e.pointerId){
+      var tap=pendingFieldTap;pendingFieldTap=null;
+      panState=null;if(canvas)canvas.style.cursor="crosshair";rememberViewport();
+      if(Math.hypot(e.clientX-tap.startX,e.clientY-tap.startY)<10){var pts=fieldPoints(pages[currentIndex]),hit=null;for(var fi=pts.length-1;fi>=0;fi--){if(hitTestAction(pts[fi],tap.pos.x,tap.pos.y,8/zoom)){hit=pts[fi];break;}}openFieldPoint(hit,tap.pos);}
+      return;
+    }
     if (activePointers.size < 2) endPinch();
-    if (panState){ panState = null; if (canvas && currentTool === "pan") canvas.style.cursor = "grab"; return; }
+    if (panState){ panState = null; if (canvas) canvas.style.cursor = currentTool === "pan" ? "grab" : "crosshair"; rememberViewport(); return; }
 
     if (awaitingPhotoTrigger && e.pointerId === awaitingPhotoTrigger.pointerId){
       var moved = Math.hypot(e.clientX-awaitingPhotoTrigger.startX, e.clientY-awaitingPhotoTrigger.startY);
@@ -2531,6 +3130,8 @@ body{
       var mBox = { x:mx0, y:my0, w:mw, h:mh };
       if (mw > 3 || mh > 3){
         selectedActions = page.actions.filter(function(a){ return rectsIntersect(mBox, actionBBox(a)); });
+      } else {
+        for(var si=page.actions.length-1;si>=0;si--){if(hitTestAction(page.actions[si],mx0,my0,8/zoom)){selectedActions=[page.actions[si]];break;}}
       }
       dragMode = null; marqueeRect = null;
       redraw();
@@ -2540,6 +3141,7 @@ body{
     if (dragMode === "move"){
       var pairs = moveSnapshots.map(function(p){ return { action:p.action, before:p.before, after: snapshotGeom(p.action) }; });
       pushMove(page, pairs);
+      refreshDerivedNotes();
       dragMode = null; moveSnapshots = null; moveStartPos = null;
       redraw();
       showSelectDeleteBtn();
@@ -2661,7 +3263,7 @@ body{
     polygonCancelBtn.style.display = "flex";
     if (polygonDraft.points.length >= 3){
       polygonFinishBtn.style.left = (last.x*scaleFactor + 10) + "px";
-      polygonFinishBtn.style.top = (last.y*scaleFactor + 22) + "px";
+      polygonFinishBtn.style.top = (last.y*scaleFactor + (coarsePointer?38:22)) + "px";
       polygonFinishBtn.style.display = "flex";
     } else {
       polygonFinishBtn.style.display = "none";
@@ -2803,7 +3405,7 @@ body{
     pop.style.display = willShow ? "flex" : "none";
     if (willShow && selectRecolorBtn){
       pop.style.left = selectRecolorBtn.style.left;
-      pop.style.top = (parseFloat(selectRecolorBtn.style.top) + 36) + "px";
+      pop.style.top = (parseFloat(selectRecolorBtn.style.top) + (coarsePointer?50:36)) + "px";
     }
   }
   function hideRecolorPopover(){
@@ -2867,8 +3469,9 @@ body{
     delBtn.style.display = "flex";
     var recolorBtn = ensureSelectRecolorBtn();
     recolorBtn.style.left = ((box.x+box.w) * scaleFactor + 6) + "px";
-    recolorBtn.style.top = (box.y * scaleFactor - 6 + 34) + "px";
+    recolorBtn.style.top = (box.y * scaleFactor - 6 + (coarsePointer?50:34)) + "px";
     recolorBtn.style.display = "flex";
+    if(sketchReady && currentTool==="select"){delBtn.style.display="none";recolorBtn.style.display="none";syncSelectionDock();}
 
     if (selectedActions.length === 1 && selectedActions[0].type === "stamp" && selectedActions[0].symbol === "northarrow"){
       var stampAction = selectedActions[0];
@@ -2877,14 +3480,15 @@ body{
       var hx = stampAction.x + Math.cos(rot - Math.PI/2) * handleDist;
       var hy = stampAction.y + Math.sin(rot - Math.PI/2) * handleDist;
       var handle = ensureRotateHandle();
-      handle.style.left = (hx*scaleFactor - 14) + "px";
-      handle.style.top = (hy*scaleFactor - 14) + "px";
+      handle.style.left = (hx*scaleFactor - (coarsePointer?22:14)) + "px";
+      handle.style.top = (hy*scaleFactor - (coarsePointer?22:14)) + "px";
       handle.style.display = "flex";
     } else if (rotateHandle){
       rotateHandle.style.display = "none";
     }
   }
   function hideSelectDeleteBtn(){
+    if(sketchReady)syncSelectionDock();
     if (selectDeleteBtn) selectDeleteBtn.style.display = "none";
     if (selectRecolorBtn) selectRecolorBtn.style.display = "none";
     if (rotateHandle) rotateHandle.style.display = "none";
@@ -2954,9 +3558,10 @@ body{
     var areaH = scrollWrap.clientHeight - 120;
     zoom = Math.max(0.05, Math.min(areaW / w, areaH / h, 2));
     applyZoom();
+    scrollWrap.scrollLeft=0;scrollWrap.scrollTop=0;rememberViewport();
   }
-  document.getElementById("btnZoomIn").addEventListener("click", function(){ zoom = Math.min(zoom*1.25, 8); applyZoom(); });
-  document.getElementById("btnZoomOut").addEventListener("click", function(){ zoom = Math.max(zoom/1.25, 0.05); applyZoom(); });
+  document.getElementById("btnZoomIn").addEventListener("click", function(){var r=scrollWrap.getBoundingClientRect();zoomAt(1.25,r.left+r.width/2,r.top+r.height/2);});
+  document.getElementById("btnZoomOut").addEventListener("click", function(){var r=scrollWrap.getBoundingClientRect();zoomAt(1/1.25,r.left+r.width/2,r.top+r.height/2);});
   document.getElementById("btnFit").addEventListener("click", fitToScreen);
 
   // ---------- undo/redo/clear buttons ----------
@@ -2981,7 +3586,12 @@ body{
 
   window.addEventListener("keydown", function(e){
     var tag = document.activeElement && document.activeElement.tagName;
-    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (document.activeElement && document.activeElement.isContentEditable) || editorView.classList.contains("hidden") || document.querySelector(".field-overlay:not([hidden])")) return;
+    if(e.code==="Space"){e.preventDefault();spacePan=true;return;}
+    if(e.key==="Escape"){cancelActiveStroke();cancelPolygonDraft();cancelAngleDraft();clearSelection();closePhotoLightbox();redraw();return;}
+    if(e.key==="Delete" || e.key==="Backspace"){if(selectedActions.length){e.preventDefault();ensureSelectDeleteBtn().click();}return;}
+    if(!e.ctrlKey&&!e.metaKey&&!e.altKey){var shortcuts={p:"pen",v:"select",f:"fieldpoint",h:"pan",t:"text",e:"eraser"};if(shortcuts[e.key.toLowerCase()]){e.preventDefault();selectTool(shortcuts[e.key.toLowerCase()]);}}
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="s"){e.preventDefault();commitPendingText();doSave();}
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z" && !e.shiftKey){ e.preventDefault(); undo(); }
     if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === "y" || (e.shiftKey && e.key.toLowerCase()==="z"))){ e.preventDefault(); redo(); }
   });
@@ -3002,10 +3612,11 @@ body{
     var file = photoInputEl.files && photoInputEl.files[0];
     photoInputEl.value = "";
     if (!file || currentIndex < 0 || !pendingPhotoPos) return;
-    var pos = pendingPhotoPos; pendingPhotoPos = null;
+    var pos = pendingPhotoPos, photoTargetPage=pages[currentIndex]; pendingPhotoPos = null;
     try {
       var img = await blobToImage(file);
-      var page = pages[currentIndex];
+      if(!pages.includes(photoTargetPage))return;
+      var page = photoTargetPage;
       var size = Math.max(50, currentWidth*12);
       var action = { type:"photopin", x: pos.x, y: pos.y, size: size, imgBlob: file, color: currentColor };
       photoImageCache.set(action, img);
@@ -3173,7 +3784,7 @@ body{
       var naR = r*0.85;
       var naGap = naR*0.62;
       var sp1=pt(0,-r*4.4), sp2=pt(r*0.10,-r*1.75), sp3=pt(0,-naR), sp4=pt(-r*0.10,-r*1.75);
-      var spirePath = "M "+sp1.x+" "+sp1.y+" L "+sp2.x+" "+sp2.y+" L "+sp3.x+" "+sp3.y+" L "+sp4.x+" "+sp4.y+" Z";
+      var spirePath = "M "+sp1.x+" "+(-sp1.y)+" L "+sp2.x+" "+(-sp2.y)+" L "+sp3.x+" "+(-sp3.y)+" L "+sp4.x+" "+(-sp4.y)+" Z";
       pdfPage.drawLine({ start: pt(0,-r*4.4), end: pt(0,-naGap), thickness: lw, color: color });
       pdfPage.drawLine({ start: pt(0,naGap), end: pt(0,r*1.1), thickness: lw, color: color });
       pdfPage.drawLine({ start: pt(-naR*1.3,0), end: pt(-naGap,0), thickness: lw, color: color });
@@ -3210,8 +3821,10 @@ body{
       var a = page.actions[actIdx];
       var color = hexToRgb01(a.color);
 
-      if (a.type === "pen" || a.type === "calligraphy"){
-        var pts = a.points.length >= 3 ? densifyStroke(smoothPoints(a.points, 2), 3) : a.points;
+      if (a.type === "fieldpoint"){
+        await drawFieldPointPdf(pdfPage,a,toPt,scale,outDoc);
+      } else if (a.type === "pen" || a.type === "calligraphy"){
+        var pts = a.points.length >= 3 ? densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 3) : a.points;
         if (pts.length < 2){
           if (pts.length === 1){
             var w0 = (a.type === "calligraphy")
@@ -3220,7 +3833,7 @@ body{
             var c0 = toPt(pts[0].x, pts[0].y);
             pdfPage.drawEllipse({ x:c0.x, y:c0.y, xScale:(w0/scale)/2, yScale:(w0/scale)/2, color:color });
           }
-          return;
+          continue;
         }
         var tangentsPdf = computeTangents(pts);
         var nibPdf = a.nibAngle || Math.PI/4;
@@ -3229,16 +3842,16 @@ body{
           return a.pressureSensitive ? pressureToWidth(a.width, p.pressure!=null?p.pressure:0.5) : a.width;
         });
         var polyPdf = ribbonPolygonPoints(pts, widthsPdf, tangentsPdf, 6);
-        var polyPt = polyPdf.map(function(p){ return toPt(p.x, p.y); });
+        var polyPt = polyPdf.map(function(p){ var pt=toPt(p.x,p.y);return {x:pt.x,y:-pt.y}; });
         var pathStr = "M " + polyPt[0].x + " " + polyPt[0].y + " " + polyPt.slice(1).map(function(p){ return "L " + p.x + " " + p.y; }).join(" ") + " Z";
         pdfPage.drawSvgPath(pathStr, { x:0, y:0, scale:1, color: color });
       } else if (a.type === "highlighter"){
-        var pts2 = a.points.length >= 3 ? densifyStroke(smoothPoints(a.points, 2), 3) : a.points;
+        var pts2 = a.points.length >= 3 ? densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 3) : a.points;
         if (pts2.length >= 2){
           var tangentsHl = computeTangents(pts2);
           var widthsHl = pts2.map(function(){ return a.width*4; });
           var polyHl = ribbonPolygonPoints(pts2, widthsHl, tangentsHl, 6);
-          var polyHlPt = polyHl.map(function(p){ return toPt(p.x, p.y); });
+          var polyHlPt = polyHl.map(function(p){ var pt=toPt(p.x,p.y);return {x:pt.x,y:-pt.y}; });
           var pathHl = "M " + polyHlPt[0].x + " " + polyHlPt[0].y + " " + polyHlPt.slice(1).map(function(p){ return "L " + p.x + " " + p.y; }).join(" ") + " Z";
           pdfPage.drawSvgPath(pathHl, { x:0, y:0, scale:1, color: color, opacity:0.38 });
         }
@@ -3277,7 +3890,7 @@ body{
           var mxPx=(a.x1+a.x2)/2, myPx=(a.y1+a.y2)/2;
           var labelPt = toPt(mxPx, myPx);
           var fSize = Math.max(13, a.width*5.5/scale);
-          pdfPage.drawText(a.label, { x: labelPt.x - (a.label.length*fSize*0.28), y: labelPt.y + 3, size: fSize, font: font, color: color });
+          pdfPage.drawText(a.label.replace(/→/g,"->").replace(/—/g,"-"), { x: labelPt.x - (a.label.length*fSize*0.28), y: labelPt.y + 3, size: fSize, font: font, color: color });
         }
       } else if (a.type === "arrow"){
         var s = toPt(a.x1,a.y1), e = toPt(a.x2,a.y2);
@@ -3296,11 +3909,11 @@ body{
       } else if (a.type === "cloud"){
         var bumpsPdf = buildCloudBumps(a.x1,a.y1,a.x2,a.y2);
         var firstPt = toPt(bumpsPdf[0].p0.x, bumpsPdf[0].p0.y);
-        var dCloud = "M " + firstPt.x + " " + firstPt.y + " ";
+        var dCloud = "M " + firstPt.x + " " + (-firstPt.y) + " ";
         bumpsPdf.forEach(function(b){
           var ctrlPt = toPt(b.ctrl.x, b.ctrl.y);
           var endPt = toPt(b.p1.x, b.p1.y);
-          dCloud += "Q " + ctrlPt.x + " " + ctrlPt.y + " " + endPt.x + " " + endPt.y + " ";
+          dCloud += "Q " + ctrlPt.x + " " + (-ctrlPt.y) + " " + endPt.x + " " + (-endPt.y) + " ";
         });
         dCloud += "Z";
         pdfPage.drawSvgPath(dCloud, { x:0, y:0, scale:1, borderColor: color, borderWidth: a.width/scale });
@@ -3312,7 +3925,7 @@ body{
         var tp = toPt(a.x, a.y);
         pdfPage.drawText(a.text, { x: tp.x, y: tp.y, size: a.fontSize/scale, font: font, color: color });
       } else if (a.type === "polygon"){
-        var polyPts = a.points.map(function(p){ return toPt(p.x, p.y); });
+        var polyPts = a.points.map(function(p){ var pt=toPt(p.x,p.y);return {x:pt.x,y:-pt.y}; });
         var dPoly = "M " + polyPts[0].x + " " + polyPts[0].y + " " +
           polyPts.slice(1).map(function(p){ return "L " + p.x + " " + p.y; }).join(" ") + " Z";
         pdfPage.drawSvgPath(dPoly, { x:0, y:0, scale:1, borderColor: color, borderWidth: a.width/scale, opacity:0.12, color: color });
@@ -3382,6 +3995,8 @@ body{
         newPdfPage.drawImage(pngImage, { x:0, y:0, width:ptW, height:ptH });
       }
     }
+    await appendInteractiveFieldReports(outDoc,pageList);
+    await attachFieldNotesToPdf(outDoc,pageList);
     return outDoc;
   }
 
@@ -3419,7 +4034,7 @@ body{
     hideToast();
   });
 
-  window.addEventListener("resize", function(){ if (currentIndex >= 0) fitToScreen(); });
+  // ResizeObserver above preserves zoom and the viewed centre across orientation changes.
 
   // ---------- persistence: serialize / hydrate a note ----------
   function serializeCurrentDoc(){
@@ -3427,6 +4042,7 @@ body{
       id: currentDoc.id,
       name: currentDoc.name || "Untitled note",
       folderId: currentDoc.folderId || null,
+      mode: docMode(), fieldSchemaVersion:1,
       createdAt: currentDoc.createdAt,
       updatedAt: currentDoc.updatedAt,
       thumbnail: pages.length ? makeThumbnail(pages[0], 340) : null,
@@ -3458,7 +4074,7 @@ body{
   }
 
   async function hydrateDoc(meta, data){
-    var doc = { id: meta.id, name: meta.name, folderId: meta.folderId, createdAt: meta.createdAt, updatedAt: meta.updatedAt };
+    var doc = { id: meta.id, name: meta.name, folderId: meta.folderId, createdAt: meta.createdAt, updatedAt: meta.updatedAt, mode:modeKey(meta.mode), fieldSchemaVersion:1 };
     var loadedPages = [];
     for (var i=0;i<data.pages.length;i++){
       var pd = data.pages[i];
@@ -3495,6 +4111,9 @@ body{
 
   function scheduleSave(){
     if (!currentDoc) return;
+    refreshDerivedNotes();
+    clearTimeout(scheduleSave.panelTimer);scheduleSave.panelTimer=setTimeout(renderFieldPanel,100);
+    if(sketchReady)syncSketchUI();
     currentDoc.updatedAt = Date.now();
     setSaveIndicator("saving");
     clearTimeout(saveTimer);
@@ -3507,8 +4126,8 @@ body{
     if (!storageAvailable){ setSaveIndicator("error"); return; }
     try {
       var built = serializeCurrentDoc();
-      await dbPut("notesMeta", built.meta);
-      await dbPut("notesData", built.data);
+      var saveDB=await openDB();
+      await new Promise(function(resolve,reject){var tx=saveDB.transaction(["notesMeta","notesData"],"readwrite");tx.objectStore("notesMeta").put(built.meta);tx.objectStore("notesData").put(built.data);tx.oncomplete=resolve;tx.onerror=function(){reject(tx.error);};tx.onabort=function(){reject(tx.error||new Error("Save aborted"));};});
       setSaveIndicator("saved");
     } catch(err){
       console.error("save failed", err);
@@ -3664,6 +4283,7 @@ body{
       card.querySelector(".note-name").textContent = m.name || "Untitled note";
       card.querySelector(".nm-pages").textContent = (m.pageCount||0) + (m.pageCount === 1 ? " sheet" : " sheets");
       card.querySelector(".nm-date").textContent = formatDate(m.updatedAt);
+      var modeLabel=document.createElement("div");modeLabel.className="note-mode";modeLabel.textContent=m.mode?FIELD_MODES[modeKey(m.mode)].label:"Choose field mode";card.querySelector(".note-info").appendChild(modeLabel);
       card.addEventListener("click", function(ev){
         if (ev.target.closest(".note-action-btn")) return;
         if (card._justDragged) return;
@@ -3718,6 +4338,7 @@ body{
 
   function resetEditorChrome(){
     commitPendingText();
+    cancelActiveStroke();cancelPolygonDraft();cancelAngleDraft();activePointers.clear();panState=null;endPinch();inputPointerId=null;penPointerId=null;viewportMemory=null;
     clearSelection();
     pages.length = 0;
     Object.keys(sourceFiles).forEach(function(k){ delete sourceFiles[k]; });
@@ -3730,6 +4351,7 @@ body{
   function showEditor(){
     libraryView.classList.remove("visible");
     editorView.classList.remove("hidden");
+    renderFieldPanel();
   }
 
   async function showLibrary(){
@@ -3748,11 +4370,13 @@ body{
     var meta = await dbGet("notesMeta", id);
     var data = await dbGet("notesData", id);
     if (!meta || !data){ alert("Couldn't open that note."); return; }
+    var chosenMode=await chooseFieldMode("Open job · choose field mode",meta.mode);if(!chosenMode)return;
     releaseActiveDoc();
     var hyd;
     try { hyd = await hydrateDoc(meta, data); }
     catch(err){ console.error(err); alert("Couldn't load one of the images in this note."); return; }
     currentDoc = hyd.doc;
+    currentDoc.mode=chosenMode;fieldPreset=null;
     pages.length = 0;
     hyd.pages.forEach(function(p){ pages.push(p); });
     Object.keys(sourceFiles).forEach(function(k){ delete sourceFiles[k]; });
@@ -3763,15 +4387,19 @@ body{
     stage.innerHTML = ""; canvas = null; ctx = null; selectDeleteBtn = null; selectRecolorBtn = null; recolorPopover = null; rotateHandle = null; rotatingAction = null;
     if (pages.length){ selectPage(0); } else { emptyState.style.display = "flex"; renderPageStrip(); }
     setSaveIndicator("saved");
+    renderFieldPanel();scheduleSave();
   }
 
-  function createNote(folderId){
+  async function createNote(folderId){
+    var chosenMode=await chooseFieldMode("New job · choose field mode",null);if(!chosenMode)return;
     releaseActiveDoc();
     var inferredFolder = folderId || ((currentFolderFilter !== "__all__" && currentFolderFilter !== "__unfiled__") ? currentFolderFilter : null);
-    currentDoc = { id: genId(), name: "", folderId: inferredFolder, createdAt: Date.now(), updatedAt: Date.now() };
+    currentDoc = { id: genId(), name: "", folderId: inferredFolder, createdAt: Date.now(), updatedAt: Date.now(), mode:chosenMode, fieldSchemaVersion:1 };
+    fieldPreset=null;
     resetEditorChrome();
     showEditor();
     sheetTitle.value = "";
+    showFieldPanel(true);
     scheduleSave();
   }
 
@@ -3913,7 +4541,7 @@ body{
           sourceFilesRestored[sfKeys2[s2]] = { name: sf2.name, bytes: sfBuf };
         }
 
-        await dbPut("notesMeta", { id:newNoteId, name: meta.name, folderId: newFolderId, createdAt: meta.createdAt||Date.now(), updatedAt: meta.updatedAt||Date.now(), thumbnail: meta.thumbnail||null, pageCount: meta.pageCount||pagesRestored.length });
+        await dbPut("notesMeta", { id:newNoteId, name: meta.name, folderId: newFolderId, mode:modeKey(meta.mode), fieldSchemaVersion:1, createdAt: meta.createdAt||Date.now(), updatedAt: meta.updatedAt||Date.now(), thumbnail: meta.thumbnail||null, pageCount: meta.pageCount||pagesRestored.length });
         await dbPut("notesData", { id:newNoteId, pages: pagesRestored, sourceFiles: sourceFilesRestored });
         imported++;
       }
@@ -3938,6 +4566,238 @@ body{
     if (file) importLibraryFile(file);
   });
 
+  // ---------- clickable PDF field records ----------
+  // Standard internal /GoTo links require no viewer scripting or external files.
+  function addPdfPageLink(doc,page,rect,target,description){
+    var w=page.getWidth(),h=page.getHeight();
+    rect=[Math.max(0,rect[0]),Math.max(0,rect[1]),Math.min(w,rect[2]),Math.min(h,rect[3])];
+    if(rect[2]<=rect[0] || rect[3]<=rect[1])return;
+    var link=doc.context.register(doc.context.obj({Type:"Annot",Subtype:"Link",Rect:rect,Border:[0,0,0],
+      Contents:PDFLib.PDFHexString.fromText(description),A:{S:"GoTo",D:[target.ref,PDFLib.PDFName.of("Fit")]}}));
+    var annotations=page.node.lookupMaybe(PDFLib.PDFName.of("Annots"),PDFLib.PDFArray);
+    if(!annotations){annotations=doc.context.obj([]);page.node.set(PDFLib.PDFName.of("Annots"),annotations);}
+    annotations.push(link);
+  }
+  function reportWrap(cx,text,width){
+    var lines=[];
+    String(text==null?"":text).split(/\r?\n/).forEach(function(paragraph){
+      if(!paragraph){lines.push("");return;}
+      var line="";
+      Array.from(paragraph).forEach(function(ch){
+        if(line && cx.measureText(line+ch).width>width){
+          var space=line.lastIndexOf(" ");
+          if(space>line.length*.4){lines.push(line.slice(0,space));line=line.slice(space+1)+ch;}
+          else{lines.push(line);line=ch;}
+        }else line+=ch;
+      });if(line)lines.push(line);
+    });return lines;
+  }
+  function reportCanvas(job,sheet,number,subtitle,preview){
+    var c=document.createElement("canvas");c.width=1224;c.height=1584;
+    var x=c.getContext("2d");x.scale(2,2);x.fillStyle="#fff";x.fillRect(0,0,612,792);
+    x.fillStyle="#0B1E2E";x.fillRect(0,0,612,106);x.fillStyle="#FF7A1A";x.fillRect(0,106,612,3);
+    x.font="700 11px Inter,sans-serif";x.fillStyle="#82a7bf";x.fillText("VISTA GEOMATICS  /  FIELD MARK",36,28);
+    x.font="700 23px Inter,sans-serif";x.fillStyle="#fff";
+    var heading="Point "+number;while(x.measureText(heading).width>(preview?382:540)&&heading.length>1)heading=heading.slice(0,-2)+"…";
+    x.fillText(heading,36,61);x.font="12px Inter,sans-serif";x.fillStyle="#bfd6e5";x.fillText(subtitle,36,84);
+    if(preview){
+      var fit=Math.min(136/preview.naturalWidth,74/preview.naturalHeight),pw=preview.naturalWidth*fit,ph=preview.naturalHeight*fit;
+      x.fillStyle="#213d50";x.fillRect(440,14,136,74);x.drawImage(preview,440+(136-pw)/2,14+(74-ph)/2,pw,ph);
+      x.font="8px Inter,sans-serif";x.fillStyle="#c8e1ee";x.fillText("SELECT PHOTO TO ENLARGE",440,99);
+    }
+    x.fillStyle="#eaf3f8";x.fillRect(36,124,132,30);x.fillStyle="#164664";x.font="700 11px Inter,sans-serif";x.fillText("‹  BACK TO PLAN",48,143);
+    x.font="11px Inter,sans-serif";x.fillStyle="#516978";
+    var identity=reportWrap(x,(job||"Untitled job")+"  ·  "+sheet,350);x.fillText(identity[0]||"",186,135);if(identity[1])x.fillText(identity[1],186,150);
+    x.fillStyle="#d5e2e9";x.fillRect(36,735,540,1);x.fillStyle="#617b8e";x.font="10px Inter,sans-serif";
+    x.fillText("Field measurements in metres  ·  Select Back to plan to return",36,766);
+    return {canvas:c,ctx:x,page:null};
+  }
+  async function finishReportPage(doc,record,planPage){
+    var image=await doc.embedPng(dataURLToUint8(record.canvas.toDataURL("image/png")));
+    record.page.drawImage(image,{x:0,y:0,width:612,height:792});
+    addPdfPageLink(doc,record.page,[36,638,168,668],planPage,"Back to plan");
+    record.canvas.width=record.canvas.height=1;
+  }
+  async function appendInteractiveFieldReports(doc,pageList){
+    var plans=doc.getPages().slice(0,pageList.length),job=currentDoc&&currentDoc.name;
+    for(var pi=0;pi<pageList.length;pi++){
+      var sheet=pageList[pi],points=fieldPoints(sheet);
+      for(var ai=0;ai<points.length;ai++){
+        var point=points[ai],note=point.fieldNote,mode=FIELD_MODES[modeKey(note.mode)],records=[],firstPhoto=null;
+        var preview=null;
+        if(note.photos&&note.photos.length)preview=await new Promise(function(resolve,reject){var im=new Image();im.onload=function(){resolve(im);};im.onerror=function(){reject(new Error("Could not export photo for point "+note.pointNumber));};im.src=note.photos[0].dataUrl;});
+        var record=reportCanvas(job,sheet.name,note.pointNumber,mode.label+"  ·  "+note.feature,preview),y=181;
+        record.page=doc.addPage([612,792]);records.push(record);
+        var firstPage=record.page;
+        async function nextDetailPage(){
+          await finishReportPage(doc,record,plans[pi]);
+          record=reportCanvas(job,sheet.name,note.pointNumber,"Field details - continued");record.page=doc.addPage([612,792]);records.push(record);y=181;
+        }
+        async function paragraph(label,value){
+          if(value==null || value==="")return;
+          var x=record.ctx;x.font="12px Inter,sans-serif";var lines=reportWrap(x,String(value),520);
+          if(y+43>726)await nextDetailPage();
+          x=record.ctx;x.font="700 9px Inter,sans-serif";x.fillStyle="#52748b";x.fillText(label.toUpperCase(),36,y);y+=18;
+          for(var li=0;li<lines.length;li++){
+            if(y+16>726){await nextDetailPage();x=record.ctx;x.font="700 9px Inter,sans-serif";x.fillStyle="#52748b";x.fillText(label.toUpperCase()+" - CONTINUED",36,y);y+=18;}
+            x.font="12px Inter,sans-serif";x.fillStyle="#172f40";x.fillText(lines[li],36,y);y+=17;
+          }y+=13;
+        }
+        // Compact paired entries preserve zero elevations and offsets as real values.
+        var entries=[['Feature',note.feature],['Evidence status',note.status],['Code',note.code],['Description',note.description],
+          ['Northing (m)',note.northing],['Easting (m)',note.easting],['Observed elevation (m)',note.observedElevation],['Design elevation (m)',note.designElevation],
+          ['Cut / fill',fieldCutFill(note)?cutFillText(note):null],['Offset (m)',note.offset],['Offset direction',note.offsetDirection],
+          ['Evidence type',note.evidenceType],['Condition',note.condition],['Depth (m)',note.depth],['Search radius (m)',note.searchRadius],
+          ['Bearing',note.bearing],['Distance (m)',note.distance],['Station / chainage',note.station],['Crossing angle (degrees)',note.crossingAngle],['Asset status',note.assetStatus],['Recorded by',note.createdBy]];
+        entries=entries.filter(function(e){return e[1]!==null && e[1]!==undefined && e[1]!=="";});
+        for(var ei=0;ei<entries.length;ei+=2){
+          var pair=entries.slice(ei,ei+2),lineSets=pair.map(function(e){record.ctx.font="12px Inter,sans-serif";return reportWrap(record.ctx,String(e[1]),244);});
+          var rowH=29+Math.max.apply(null,lineSets.map(function(l){return l.length;}))*17;
+          if(rowH>480){for(var ci=0;ci<pair.length;ci++)await paragraph(pair[ci][0],pair[ci][1]);continue;}
+          if(y+rowH>726)await nextDetailPage();
+          pair.forEach(function(e,col){var x=record.ctx,left=36+col*282;x.font="700 9px Inter,sans-serif";x.fillStyle="#52748b";x.fillText(e[0].toUpperCase(),left,y);x.font="12px Inter,sans-serif";x.fillStyle="#172f40";lineSets[col].forEach(function(line,i){x.fillText(line,left,y+18+i*17);});});y+=rowH;
+        }
+        for(var ti=0;ti<(note.ties||[]).length;ti++){
+          var tie=note.ties[ti];await paragraph("Tie "+(ti+1),[tie.feature,tie.distance!=null?tie.distance+" m":null,tie.bearing,tie.direction].filter(function(v){return v!=null&&v!=="";}).join(" · "));
+        }
+        await paragraph("Field notes",note.notes);
+        await paragraph("Recorded",note.createdAt);await paragraph("Last updated",note.updatedAt);
+        var photos=note.photos||[],photoJumpRecord=null,photoJumpY=0;
+        if(photos.length){
+          if(y+46>726)await nextDetailPage();
+          photoJumpRecord=record;photoJumpY=y;record.ctx.fillStyle="#e8f4fb";record.ctx.fillRect(36,y-10,540,36);
+          record.ctx.fillStyle="#164664";record.ctx.font="700 12px Inter,sans-serif";record.ctx.fillText("View "+photos.length+" attached photo"+(photos.length===1?"":"s")+"  ›",48,y+12);
+        }
+        await finishReportPage(doc,record,plans[pi]);
+        for(var fi=0;fi<photos.length;fi++){
+          var photo=photos[fi],photoRecord=reportCanvas(job,sheet.name,note.pointNumber,"Photo "+(fi+1)+" of "+photos.length);
+          photoRecord.page=doc.addPage([612,792]);records.push(photoRecord);if(!firstPhoto)firstPhoto=photoRecord.page;
+          var px=photoRecord.ctx;px.fillStyle="#172f40";px.font="700 12px Inter,sans-serif";
+          reportWrap(px,photo.name||"Field photo",540).slice(0,2).forEach(function(line,i){px.fillText(line,36,184+i*17);});
+          var photoImage=await new Promise(function(resolve,reject){var im=new Image();im.onload=function(){resolve(im);};im.onerror=function(){reject(new Error("Could not export photo for point "+note.pointNumber));};im.src=photo.dataUrl;});
+          var ratio=Math.min(540/photoImage.naturalWidth,484/photoImage.naturalHeight),dw=photoImage.naturalWidth*ratio,dh=photoImage.naturalHeight*ratio;
+          px.fillStyle="#f0f5f8";px.fillRect(36,219,540,484);px.drawImage(photoImage,36+(540-dw)/2,219+(484-dh)/2,dw,dh);
+          px.font="10px Inter,sans-serif";px.fillStyle="#617b8e";px.fillText(photo.capturedAt||"",36,723);
+          await finishReportPage(doc,photoRecord,plans[pi]);
+        }
+        if(firstPhoto){
+          addPdfPageLink(doc,firstPage,[440,704,576,778],firstPhoto,"Enlarge point photo");
+          if(photoJumpRecord)addPdfPageLink(doc,photoJumpRecord.page,[36,792-(photoJumpY+26),576,792-(photoJumpY-10)],firstPhoto,"View attached photos");
+        }
+        // Every continuation/photo page can return to the point record or move to the next page.
+        var navFont=await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+        for(var ri=0;ri<records.length;ri++){
+          var rp=records[ri].page;
+          if(ri>0){rp.drawText("< Point details",{x:36,y:39,size:10,font:navFont,color:PDFLib.rgb(.09,.27,.38)});addPdfPageLink(doc,rp,[36,33,142,53],firstPage,"Point details");}
+          if(ri+1<records.length){rp.drawText("Continue >",{x:495,y:39,size:10,font:navFont,color:PDFLib.rgb(.09,.27,.38)});addPdfPageLink(doc,rp,[488,33,576,53],records[ri+1].page,"Next details or photo page");}
+        }
+        var box=fieldPointBox(point),sourcePdf=!!(sheet.sourceFileId&&sourceFiles[sheet.sourceFileId]),scale=sourcePdf?(sheet.pdfScale||1):150/72;
+        var ptH=sourcePdf?(sheet.pdfPtHeight||sheet.img.naturalHeight/scale):plans[pi].getHeight();
+        addPdfPageLink(doc,plans[pi],[box.x/scale,ptH-(box.y+box.h)/scale,(box.x+box.w)/scale,ptH-box.y/scale],firstPage,"Point "+note.pointNumber+" - details and photos");
+      }
+    }
+  }
+
+  // ---------- polished sketch controls (move existing controls, keep their handlers) ----------
+  var sketchReady=false,strokeSmoothing=2,snapAngles=false;
+  var TOOL_LABELS={pen:"Pen",highlighter:"Highlighter",calligraphy:"Ink pen",line:"Line",arrow:"Arrow",rect:"Rectangle",ellipse:"Ellipse",polygon:"Area",cloud:"Cloud",ruler:"Ruler",angle:"Angle",guides:"Guides",stamp:"Stamps",photo:"Photo",text:"Text",eraser:"Erase",select:"Select",pan:"Pan",fieldpoint:"Field Point",drainage:"Drainage"};
+  function activateToolColor(name){
+    // Restore each tool's ink without recoloring an existing selection.
+    currentColor=toolColors[name]||"#000000";
+    allColorSwatches.forEach(function(sw){sw.classList.toggle("active",sw.dataset.color===currentColor);});
+    document.getElementById("customColorInput").value=currentColor;
+  }
+  function closeSketchPopovers(){
+    document.querySelectorAll(".sketch-popover").forEach(function(p){p.hidden=true;});
+    document.querySelectorAll("[aria-controls$='-popover']").forEach(function(b){b.setAttribute("aria-expanded","false");});
+  }
+  function openSketchPopover(id,button){
+    var popup=document.getElementById(id),open=popup.hidden;closeSketchPopovers();if(!open)return;
+    popup.hidden=false;button.setAttribute("aria-expanded","true");
+    var rect=button.getBoundingClientRect(),top=rect.bottom+8;
+    popup.style.left=Math.max(12,Math.min(rect.left,window.innerWidth-popup.offsetWidth-12))+"px";
+    popup.style.top=Math.max(12,Math.min(top,window.innerHeight-popup.offsetHeight-12))+"px";
+  }
+  function syncSketchUI(){
+    if(!sketchReady)return;
+    document.getElementById("active-tool-label").textContent=TOOL_LABELS[currentTool]||currentTool;
+    document.getElementById("ink-preview").style.background=currentColor;
+    document.getElementById("strokeWidthRange").value=currentWidth;document.getElementById("strokeWidthValue").textContent=currentWidth;
+    document.getElementById("type-setting").hidden=currentTool!=="text";
+    document.getElementById("stroke-setting").hidden=currentTool==="text";
+    document.getElementById("shapeGroup").classList.toggle("active",["line","arrow","rect","ellipse","polygon","cloud"].includes(currentTool));
+    document.getElementById("measureGroup").classList.toggle("active",["ruler","angle","guides","stamp","photo"].includes(currentTool));
+    var page=pages[currentIndex];
+    document.getElementById("btnUndo").disabled=!page||!page.history.length;document.getElementById("btnRedo").disabled=!page||!page.redo.length;
+    document.getElementById("page-position").textContent=page?"Sheet "+(currentIndex+1)+" / "+pages.length:"No sheet";
+    document.getElementById("sketch-help").textContent=touchPan?"Pencil draws · fingers pan":"Finger drawing on · two fingers to navigate";
+    var preview=document.getElementById("stroke-preview"),pc=preview.getContext("2d");pc.clearRect(0,0,140,68);pc.strokeStyle=currentColor;pc.lineWidth=currentWidth*1.5;pc.lineCap="round";pc.beginPath();pc.moveTo(14,44);pc.bezierCurveTo(45,8,80,60,126,25);pc.stroke();
+    syncSelectionDock();
+  }
+  function syncSelectionDock(){
+    var dock=document.getElementById("selection-dock");if(!dock)return;
+    var page=pages[currentIndex];selectedActions=selectedActions.filter(function(a){return page&&page.actions.includes(a);});
+    dock.hidden=!selectedActions.length || currentTool!=="select";
+    document.getElementById("selection-count").textContent=selectedActions.length+" selected";
+    document.getElementById("editPointButton").hidden=selectedActions.length!==1||selectedActions[0].type!=="fieldpoint";
+    document.getElementById("duplicateSelection").disabled=selectedActions.some(function(a){return a.type==="fieldpoint"||a.fieldNote;});
+  }
+  function initSketchUI(){
+    var rail=document.getElementById("toolbar");
+    ["btnUndo","btnRedo"].forEach(function(id){document.getElementById("history-slot").appendChild(document.getElementById(id));});
+    document.getElementById("type-setting").appendChild(document.getElementById("fontsizeTrack"));
+    document.getElementById("pen-settings-slot").appendChild(document.getElementById("widthTrack"));
+    document.getElementById("ink-slot").append(document.getElementById("colorGrid"),document.getElementById("customColorBtn"));
+    document.querySelectorAll(".tool-btn[data-tool]").forEach(function(b){
+      if(b.dataset.tool==="fieldpoint")b.textContent="⊕";
+      var label=document.createElement("span");label.className="tool-caption";label.textContent=TOOL_LABELS[b.dataset.tool];b.appendChild(label);
+      b.title=TOOL_LABELS[b.dataset.tool];b.setAttribute("aria-label",TOOL_LABELS[b.dataset.tool]);
+    });
+    function group(id,label,svg,names,popup){
+      var b=document.createElement("button");b.id=id;b.className="tool-group-btn";b.innerHTML=svg+'<span class="tool-caption">'+label+'</span>';b.setAttribute("aria-expanded","false");b.setAttribute("aria-controls",popup);b.setAttribute("aria-label",label);
+      b.addEventListener("click",function(){openSketchPopover(popup,b);});rail.appendChild(b);
+      names.forEach(function(name){var tool=rail.querySelector('[data-tool="'+name+'"]');document.getElementById(id==="shapeGroup"?"shape-slot":"measure-slot").appendChild(tool);});
+    }
+    group("shapeGroup","Shapes",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="11" height="11" rx="2"/><circle cx="16" cy="16" r="5"/></svg>',["line","arrow","rect","ellipse","polygon","cloud"],"shape-popover");
+    group("measureGroup","Survey",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17L17 3l4 4L7 21zM7 13l3 3M11 9l3 3M15 5l3 3"/></svg>',["ruler","angle","guides","stamp","photo"],"measure-popover");
+    ["btnRecalibrate","btnGridToggle"].forEach(function(id){
+      var b=document.getElementById(id),name=id==="btnRecalibrate"?"Calibrate":"Grid";
+      b.classList.remove("pressure-toggle");b.classList.add("tool-btn");
+      var label=document.createElement("span");label.className="tool-caption";label.textContent=name;b.appendChild(label);
+      b.title=b.dataset.tip;b.setAttribute("aria-label",name);document.getElementById("measure-slot").appendChild(b);
+    });
+    rail.querySelectorAll(".tool-divider").forEach(function(d){d.remove();});
+    // Order the primary rail around sketching; no tool or legacy event handler is discarded.
+    ["pen","highlighter","calligraphy","eraser","text"].forEach(function(name){rail.appendChild(rail.querySelector('[data-tool="'+name+'"]'));});
+    rail.append(document.getElementById("shapeGroup"),document.getElementById("measureGroup"));
+    ["fieldpoint","select","pan"].forEach(function(name){rail.appendChild(rail.querySelector('[data-tool="'+name+'"]'));});
+    [["inkButton","ink-popover"],["penSettingsButton","pen-popover"]].forEach(function(pair){var b=document.getElementById(pair[0]);b.addEventListener("click",function(){openSketchPopover(pair[1],b);});});
+    document.getElementById("strokeWidthRange").addEventListener("input",function(e){currentWidth=Number(e.target.value);document.querySelectorAll(".width-dot").forEach(function(b){b.classList.toggle("active",Number(b.dataset.width)===currentWidth);});syncSketchUI();});
+    document.getElementById("smoothingLevel").addEventListener("change",function(e){strokeSmoothing=Number(e.target.value);});
+    document.getElementById("snapAngles").addEventListener("change",function(e){snapAngles=e.target.checked;});
+    document.getElementById("focusButton").addEventListener("click",function(){rememberViewport();var on=editorView.classList.toggle("focus-view");this.setAttribute("aria-pressed",String(on));this.textContent=on?"Exit focus":"Focus";closeSketchPopovers();});
+    document.addEventListener("pointerdown",function(e){if(!e.target.closest(".sketch-popover")&&!e.target.closest("[aria-controls$='-popover']"))closeSketchPopovers();});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSketchPopovers();});
+    document.getElementById("selectionInk").addEventListener("click",function(){openSketchPopover("ink-popover",document.getElementById("selectionInk"));});
+    document.getElementById("deleteSelection").addEventListener("click",function(){ensureSelectDeleteBtn().click();syncSketchUI();});
+    document.getElementById("editPointButton").addEventListener("click",function(){if(selectedActions.length===1)openFieldPoint(selectedActions[0]);});
+    document.getElementById("deselectButton").addEventListener("click",function(){clearSelection();redraw();syncSketchUI();});
+    document.getElementById("duplicateSelection").addEventListener("click",function(){
+      var page=pages[currentIndex];if(!page||!selectedActions.length||selectedActions.some(function(a){return a.fieldNote;}))return;
+      var copies=selectedActions.map(function(a){var copy=typeof structuredClone==="function"?structuredClone(a):Object.assign({},a);if(a.points)copy.points=a.points.map(function(p){return Object.assign({},p);});if(a.vertex){copy.vertex=Object.assign({},a.vertex);copy.p1=Object.assign({},a.p1);copy.p2=Object.assign({},a.p2);}translateAction(copy,20/zoom,20/zoom);if(a.type==="photopin"){photoImageCache.set(copy,photoImageCache.get(a));photoThumbCache.set(copy,photoThumbCache.get(a));}return copy;});
+      copies.forEach(function(a){page.actions.push(a);});page.history.push({type:"batchadd",actions:copies});page.redo=[];selectedActions=copies;scheduleSave();redraw();showSelectDeleteBtn();syncSketchUI();
+    });
+    sketchReady=true;syncSketchUI();
+  }
+  function snapLineEnd(action,pos,event){
+    if((snapAngles||(event&&event.shiftKey))&&(action.type==="line"||action.type==="arrow"||action.type==="ruler")){
+      var dx=pos.x-action.x1,dy=pos.y-action.y1,len=Math.hypot(dx,dy),angle=Math.round(Math.atan2(dy,dx)/(Math.PI/4))*Math.PI/4;
+      return {x:action.x1+Math.cos(angle)*len,y:action.y1+Math.sin(angle)*len};
+    }return pos;
+  }
+
+  initSketchUI();
+
   // ---------- boot ----------
   var splashStartTime = Date.now();
   var splashEl = document.getElementById("splash-screen");
@@ -3959,6 +4819,9 @@ body{
         alert("Local saving isn't available in this browser (private browsing mode sometimes blocks it). Vista Geomatics Field Mark will still work, but export your sheets before closing the tab — nothing will be kept automatically.");
       }, 400);
     }
+    // Give existing icon and div controls names and keyboard activation.
+    document.querySelectorAll("[data-tip]").forEach(function(el){if(!el.getAttribute("aria-label"))el.setAttribute("aria-label",el.dataset.tip);});
+    document.querySelectorAll(".swatch,.width-dot,.fontsize-dot,.stamp-chip,.linestyle-chip,.page-add,.lib-folder-item").forEach(function(el){el.tabIndex=0;el.setAttribute("role","button");el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();el.click();}});});
     await showLibrary();
     var elapsed = Date.now() - splashStartTime;
     setTimeout(hideSplash, Math.max(0, 1100 - elapsed));
