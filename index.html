@@ -820,6 +820,67 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   #topbar .btn-group{gap:3px}#topbar .icon-btn{width:38px;min-width:44px}
 }
 
+.grading-dialog{width:min(1200px,100%);padding:0;display:flex;flex-direction:column;overflow:hidden}
+.grading-dialog>.field-heading,.grading-tabs,.grading-footer{padding:16px 20px;margin:0;flex-shrink:0}
+.grading-dialog>.field-heading{border-bottom:1px solid var(--border)}
+.grading-dialog .field-help{margin:6px 0;font-size:12px}
+.grading-dialog h3{font-size:14px;margin:8px 0}
+.grading-tabs{display:flex;gap:8px;padding-top:10px;padding-bottom:10px}
+.grading-tabs [aria-selected=true]{background:#21435b;border-color:var(--accent-2);color:var(--accent-2)}
+.grading-dialog [role=tabpanel]{overflow:auto;padding:0 20px 20px;min-height:120px;touch-action:pan-y}
+.grading-setup{border:1px solid #355a72;border-radius:10px;padding:12px;margin:10px 0;background:#102b3f;display:grid;grid-template-columns:1.1fr 1.1fr 1.3fr 1fr .8fr 1fr auto;gap:10px;align-items:end}
+.grading-setup output{min-height:44px;display:flex;align-items:center;font:700 14px var(--font-tech);color:var(--accent-2);overflow-wrap:anywhere}
+.grading-table-wrap{overflow:auto;touch-action:pan-x pan-y;border:1px solid #355a72;border-radius:10px;margin-top:12px}
+.grading-table{border-collapse:separate;border-spacing:0;width:100%;font-size:12px;text-align:left;min-width:1010px}
+.grading-table th{background:#24455d;color:#dceaf4;font-size:11px;padding:12px 10px;white-space:nowrap}
+.grading-table td{padding:8px;border-top:1px solid #2a465a;vertical-align:middle;min-width:106px}
+.grading-table td:first-child{background:#153147;min-width:115px;max-width:180px;overflow-wrap:anywhere}
+.grading-table small{display:block;color:#9fb9cc;margin-top:4px}
+.grading-table select,.grading-table input{min-width:90px;font:16px var(--font-tech);padding:8px}
+.grading-table output{font:13px var(--font-tech);display:block;min-width:90px;line-height:1.5}
+.grading-table input:read-only{background:#163345;color:#a9cbdc;border-color:transparent}
+.grading-invalid{color:#ffb5a7!important}
+.grading-footer{border-top:1px solid var(--border);background:var(--panel);display:flex;justify-content:space-between;gap:14px;align-items:center}
+.grading-footer p{font-size:12px;line-height:1.5;margin:0;color:#a6bfd0;max-width:70%;overflow-wrap:anywhere}
+.grading-footer .field-actions{margin:0;flex-wrap:nowrap}
+@media(max-width:1050px){.grading-setup{grid-template-columns:repeat(3,minmax(0,1fr))}.grading-setup button{justify-self:end}.grading-dialog>.field-heading,.grading-tabs,.grading-footer{padding:12px}.grading-dialog [role=tabpanel]{padding:0 12px 16px}}
+@media(max-width:600px){.grading-setup{grid-template-columns:repeat(2,minmax(0,1fr))}.grading-footer{flex-direction:column;align-items:stretch}.grading-footer p{max-width:none}.grading-dialog .field-heading{flex-wrap:wrap}.grading-dialog h2{font-size:18px}}
+
+/* One readable tooltip above popovers and dialogs, with a touch-accessible guide. */
+.crew-help-ready [data-tip]:hover::after{display:none!important}
+#tool-description{position:fixed;z-index:1200;width:min(300px,calc(100vw - 24px));padding:13px 15px;border:1px solid #668ca5;border-radius:10px;background:#183b52;color:#e8f3fa;box-shadow:0 10px 36px #0008;font-size:13px;line-height:1.5;max-height:calc(100dvh - 24px);overflow:auto;touch-action:pan-y}
+#tool-description strong{font-size:13px;color:#fff;display:block}
+#tool-description p{margin:5px 0 0;color:#c3d9e8}
+.crew-help-toggle{display:flex!important;flex-direction:row!important;align-items:center;gap:9px!important;font-size:13px!important;min-height:44px}
+.crew-help-toggle input{width:20px!important;min-height:20px!important;height:20px;accent-color:var(--accent)}
+.tool-guide-dialog{width:min(760px,100%)}
+.tool-guide-dialog details{border:1px solid #355a72;border-radius:9px;padding:0 12px;margin-top:12px}
+.tool-guide-dialog summary{padding:14px 0;cursor:pointer;font-weight:700;font-size:14px;min-height:44px}
+.tool-guide-entry{padding:12px 0;border-top:1px solid #294b62}
+.tool-guide-entry strong{font-size:13px;color:#e3f1fa}
+.tool-guide-entry p{font-size:13px;color:#b6cddd;line-height:1.55;margin:5px 0}
+.crew-step{border:1px solid #355a72;background:#102b3f;border-radius:10px;padding:12px;margin-bottom:12px}
+.crew-step h3{margin:0 0 8px;color:#9ee1b6;font-size:13px}
+.crew-step .field-button{width:100%;text-align:left;font-size:12px}
+.crew-step p{font-size:12px;color:#b6cddd;line-height:1.5;margin:8px 0 0}
+#grading-workflow [id=gradingRegister]{font-weight:700;border-color:#568777}
+#grading-next-shot{margin-top:8px;background:#214c40;border-color:#568777}
+.crew-preset-caption{display:block;font-size:10px;color:#a6bfd0;margin-top:4px;font-weight:400}
+.crew-more-features{grid-column:1/-1;margin-top:4px;border-top:1px solid #355a72}
+.crew-more-features summary{min-height:44px;padding:12px 0;cursor:pointer;font-size:12px;color:#b6cddd}
+.crew-more-features .field-presets{margin-top:4px}
+#grading-tools h3{color:#9ee1b6}
+.crew-point-extra{margin-top:16px;border-top:1px solid #355a72}
+.crew-point-extra summary{padding:12px 0;min-height:44px;cursor:pointer;font-size:13px;color:#b6cddd}
+.crew-point-reading{margin:14px 0;border:1px solid #477263;padding:12px;border-radius:10px;background:#102e2c}
+.crew-point-reading h3{font-size:14px;margin:0;color:#a8e0b9}
+.crew-point-reading .field-grid{margin-bottom:8px}
+#crew-reading-result{font-size:12px;color:#b5d9d1;line-height:1.5;margin:4px 0}
+#point-next{border-color:#699682;color:#c2ebd1}
+#point-dialog .field-actions{position:sticky;bottom:-22px;background:var(--panel);padding:12px 0;margin-bottom:-10px;z-index:2}
+#field-panel .crew-stage-heading{font-size:13px;color:#9ee1b6;margin:16px 0 10px}
+@media(max-width:640px){#point-dialog .field-actions{bottom:-16px}#point-next{flex:1}#toolGuideButton{padding:6px 10px!important}}
+
 </style>
 </head>
 <body>
@@ -920,10 +981,11 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   <button class="field-button" id="inkButton" aria-label="Ink colour" aria-expanded="false" aria-controls="ink-popover"><span id="ink-preview"></span><span class="ink-caption">Ink</span></button>
   <button class="field-button" id="penSettingsButton" aria-label="Drawing settings" aria-expanded="false" aria-controls="pen-popover">⚙ <span class="settings-caption">Settings</span></button>
   <span class="topbar-spacer"></span><span id="sketch-help" class="field-help">Pencil draws · fingers pan</span>
+  <button id="toolGuideButton" class="field-button" aria-label="Field guide">? Help</button>
   <button id="focusButton" class="field-button" aria-pressed="false" title="Hide panels for a clear canvas">Focus</button>
 </div>
 <div id="ink-popover" class="sketch-popover" hidden><h3>Ink colour</h3><div id="ink-slot"></div></div>
-<div id="pen-popover" class="sketch-popover" hidden><h3>Drawing settings</h3><div id="pen-settings-slot"></div><label class="sketch-option">Stroke smoothing<select id="smoothingLevel"><option value="0">Raw</option><option value="1">Light</option><option value="2" selected>Balanced</option><option value="3">Smooth</option></select></label><label class="sketch-option">Snap lines to 45°<input id="snapAngles" type="checkbox"></label><p class="field-help">Hold Shift for angle snapping on PC. Hold a pen stroke still to straighten it. Pressure and nib slant controls stay available above.</p></div>
+<div id="pen-popover" class="sketch-popover" hidden><h3>Drawing settings</h3><div id="pen-settings-slot"></div><label class="crew-help-toggle"><input id="toolHintsToggle" type="checkbox" checked> Show hover descriptions</label><label class="sketch-option">Stroke smoothing<select id="smoothingLevel"><option value="0">Raw</option><option value="1">Light</option><option value="2" selected>Balanced</option><option value="3">Smooth</option></select></label><label class="sketch-option">Snap lines to 45°<input id="snapAngles" type="checkbox"></label><p class="field-help">Hold Shift for angle snapping on PC. Hold a pen stroke still to straighten it. Pressure and nib slant controls stay available above.</p></div>
 <div id="shape-popover" class="sketch-popover" hidden><h3>Shapes</h3><div id="shape-slot" class="sketch-popup-grid"></div></div>
 <div id="measure-popover" class="sketch-popover" hidden><h3>Survey &amp; media</h3><div id="measure-slot" class="sketch-popup-grid"></div></div>
 
@@ -1039,9 +1101,10 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     <aside id="field-panel" hidden aria-label="Field note tools">
       <div class="field-heading"><h2 id="field-panel-title">Municipal</h2><button class="field-button" id="fieldClose" aria-label="Close field tools">✕</button></div>
       <p id="field-panel-help" class="field-help"></p>
-      <div id="field-presets" class="field-presets"></div>
+      <div id="grading-workflow" hidden><section class="crew-step"><h3>1 · Set up the level</h3><div id="crew-setup-slot"></div><p id="crew-setup-status"></p></section><section class="crew-step"><h3>2 · Record numbered shots</h3><p>Tap each shot location on the plan. Match the point number to your level book, then enter the staff reading and design grade.</p><button type="button" class="field-button" id="grading-next-shot">Place numbered shot</button></section></div><div id="field-presets" class="field-presets"></div>
       <div id="field-status" role="status"></div>
-      <div id="grading-tools" class="field-section" hidden><h3>GRADING TOOLS</h3><div class="field-presets"><button class="field-button" id="slopeTool">Slope between points</button><button class="field-button" id="drainageTool">Drainage arrow</button></div></div>
+      <div id="grading-tools" class="field-section" hidden><h3>3 · Check slopes &amp; drainage</h3><div class="field-presets"><button class="field-button" id="gradingRegister">Levelling & slope register</button><button class="field-button" id="gradingSlopeRegister">Slope register</button><button class="field-button" id="slopeTool">Slope between points</button><button class="field-button" id="drainageTool">Drainage arrow</button></div></div>
+      <section id="grading-export-step" class="crew-step" hidden><h3>4 · Review &amp; export</h3><button type="button" class="field-button" id="gradingExport">Export plan + registers</button><p>Includes marked-up sheets, linked point details, photos, levelling and slope tables.</p></section>
       <div class="field-section"><h3 id="field-count">This sheet</h3><div id="field-list" class="field-list"></div></div>
       <div class="field-section"><button class="field-button" id="exportFieldNotes">Export structured field notes</button><p class="field-help">Metres for field entries. Slope uses observed elevations and horizontal distance. PDF points are clickable: open their details and photos, then use Back to plan to return. A field-notes.json attachment also keeps the structured records.</p></div>
       <p class="field-help">PC: wheel to zoom · Space/right-drag to pan · P pen · V select · F field point · H hand · Delete selection · Ctrl/Cmd+Z undo.</p>
@@ -1097,6 +1160,37 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   </div>
 </div>
 
+<div id="grading-dialog" class="field-overlay" hidden>
+  <form id="grading-form" class="field-dialog grading-dialog" role="dialog" aria-modal="true" aria-labelledby="grading-title">
+    <div class="field-heading"><div><h2 id="grading-title">Grading register</h2><p id="grading-sheet" class="field-help"></p></div><button type="button" id="grading-close" class="field-button" aria-label="Cancel register changes">✕</button></div>
+    <div class="grading-tabs" role="tablist" aria-label="Grading registers"><button type="button" class="field-button" id="levels-tab" role="tab" aria-selected="true" aria-controls="levels-panel">Levelling</button><button type="button" class="field-button" id="slopes-tab" role="tab" aria-selected="false" aria-controls="slopes-panel">Slopes</button></div>
+    <section id="levels-panel" role="tabpanel" aria-labelledby="levels-tab">
+      <div class="field-heading"><h3>Instrument setups</h3><button type="button" class="field-button" id="grading-add-setup">Add setup</button></div>
+      <p class="field-help">HI = benchmark elevation + BS. Point elevation = HI − IFS or FS. Link a setup to a turning point to carry elevations forward, or enter a known HI directly. All readings are in metres.</p>
+      <div id="grading-setups"></div>
+      <div class="field-heading"><h3>Point readings</h3><span class="field-help">Swipe the table to see all columns</span></div>
+      <p class="field-help">STA is the same point number shown on the plan. Choose Manual for a directly entered elevation. Place new Field Points on the plan before adding their readings here.</p>
+      <div class="grading-table-wrap" tabindex="0" aria-label="Levelling readings"><table class="grading-table"><thead><tr><th>STA / Feature</th><th>Setup</th><th>Reading</th><th>FS / IFS (m)</th><th>HI (m)</th><th>ELEV (m)</th><th>Design (m)</th><th>Difference / Cut-fill</th></tr></thead><tbody id="grading-readings"></tbody></table></div>
+    </section>
+    <section id="slopes-panel" role="tabpanel" aria-labelledby="slopes-tab" hidden>
+      <div class="field-heading"><h3>Slopes between points</h3><button type="button" class="field-button" id="grading-add-slope">Add slope</button></div>
+      <p class="field-help">Grade = (To elevation − From elevation) ÷ horizontal distance × 100. Positive means rising; negative means falling from From to To. Enter a measured horizontal distance, or leave it blank to use coordinates or the calibrated plan.</p>
+      <div class="grading-table-wrap" tabindex="0" aria-label="Slope readings"><table class="grading-table"><thead><tr><th>From</th><th>To</th><th>Distance override (m)</th><th>Distance used (m)</th><th>Rise / fall (m)</th><th>Grade (%)</th><th></th></tr></thead><tbody id="grading-slopes"></tbody></table></div>
+    </section>
+    <div class="grading-footer"><p id="grading-error" role="status" aria-live="polite"></p><div class="field-actions"><button type="button" class="field-button" id="grading-cancel">Cancel</button><button type="submit" class="field-button primary">Save register</button></div></div>
+  </form>
+</div>
+
+<div id="tool-description" role="tooltip" hidden><strong id="tool-description-title"></strong><p id="tool-description-body"></p></div>
+<div id="tool-guide-dialog" class="field-overlay" hidden>
+  <section class="field-dialog tool-guide-dialog" role="dialog" aria-modal="true" aria-labelledby="tool-guide-title">
+    <div class="field-heading"><h2 id="tool-guide-title">Field guide</h2><button type="button" id="tool-guide-close" class="field-button" aria-label="Close field guide">✕</button></div>
+    <p class="field-help">Hover over a tool on PC, or focus it with Tab, to see what it does. On iPad, use this guide for the same descriptions.</p>
+    <label class="crew-help-toggle"><input id="guideHintsToggle" type="checkbox" checked> Show hover descriptions</label>
+    <div id="tool-guide-content"></div>
+  </section>
+</div>
+
 <div id="mode-dialog" class="field-overlay" hidden>
   <section class="field-dialog" role="dialog" aria-modal="true" aria-labelledby="mode-title" tabindex="-1">
     <h2 id="mode-title">Choose a field-note mode</h2>
@@ -1115,7 +1209,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       <div id="field-photos" class="field-photos"></div>
     </fieldset>
     <div id="point-error" class="field-help" role="alert"></div>
-    <div class="field-actions"><button type="button" class="field-button" id="point-cancel">Cancel</button><button type="submit" class="field-button primary" id="point-save">Save point</button></div>
+    <div class="field-actions"><button type="button" class="field-button" id="point-cancel">Cancel</button><button type="submit" class="field-button" id="point-next" hidden>Save &amp; next point</button><button type="submit" class="field-button primary" id="point-save">Save point</button></div>
   </form>
 </div>
 <div id="slope-dialog" class="field-overlay" hidden>
@@ -1458,7 +1552,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     municipal:{label:"Municipal",color:"#5EC8E8",description:"Evidence, ties & legal survey",features:["Survey evidence","Building tie","Fence tie","Offset","Search point","Bearing / distance"]},
     construction:{label:"Construction",color:"#FFB340",description:"Layout, stakeout & as-builts",features:["Stake","Hub","Nail","Control","As-built","Offset","Gridline","Centreline","Footing","Building","Pile"]},
     oilgas:{label:"Oil & Gas",color:"#AFA0FF",description:"Pipeline, facility & crossings",features:["Pipeline","Facility","Wellhead","Riser","Valve","Road","Fence","Watercourse","Utility","Crossing","Road crossing","Fence crossing","Powerline crossing","Flange","Culvert"]},
-    grading:{label:"Grading",color:"#78D69B",description:"Elevations, slopes & drainage",features:["EG","FG","TF","BF","Curb","Gutter","Invert","House corner","Garage corner","Swale","High point","Low point","Sidewalk","Manhole","Retaining wall"]}
+    grading:{label:"Grading",color:"#78D69B",description:"Elevations, slopes & drainage",features:["EG","FG","TF","BF","Curb","Gutter","Invert","House corner","Garage corner","Swale","High point","Low point","Sidewalk","Manhole","Retaining wall","Spot grade","Main floor","Benchmark","Turning point","Back of walk","Top of foundation"]}
   };
   var fieldPreset = null, fieldDraft = null, modeResolve = null, modalReturnFocus = null;
   var fieldPhotoBusy = false, spacePan = false, inputPointerId = null, penPointerId = null;
@@ -1480,6 +1574,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   function fieldLabel(a){
     var n=a.fieldNote, lines=[n.pointNumber+" · "+n.feature];
     if(n.status) lines.push(n.status.toUpperCase());
+    if(n.levelingError)lines.push("LEVEL: check readings");
     if(n.observedElevation!=null) lines.push("OBS "+Number(n.observedElevation).toFixed(3)+" m");
     if(fieldCutFill(n)) lines.push(cutFillText(n));
     if(n.station) lines.push("STA "+n.station+(n.offset!=null?" · "+n.offset+" m "+(n.offsetDirection||""):""));
@@ -1498,7 +1593,9 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     if(n.status==="Not found" || n.status==="Disturbed"){
       c.moveTo(a.x-r*.6,a.y-r*.6);c.lineTo(a.x+r*.6,a.y+r*.6);c.moveTo(a.x+r*.6,a.y-r*.6);c.lineTo(a.x-r*.6,a.y+r*.6);
     }else{c.moveTo(a.x-r*.6,a.y);c.lineTo(a.x+r*.6,a.y);c.moveTo(a.x,a.y-r*.6);c.lineTo(a.x,a.y+r*.6);}
-    c.stroke();c.font="700 "+fs+"px Inter, sans-serif";c.textBaseline="top";c.lineJoin="round";
+    c.stroke();
+    if(n.mode==="grading"){c.fillStyle="#fff";c.beginPath();c.arc(a.x,a.y,r*.76,0,Math.PI*2);c.fill();c.fillStyle=a.color;c.textAlign="center";c.textBaseline="middle";var number=String(n.pointNumber);c.font="700 "+Math.min(r*1.25,r*2/Math.max(1,number.length)*1.4)+"px Inter,sans-serif";c.fillText(number,a.x,a.y,r*1.55);c.textAlign="start";}
+    c.font="700 "+fs+"px Inter, sans-serif";c.textBaseline="top";c.lineJoin="round";
     fieldLabel(a).forEach(function(line,i){
       var x=a.x+r+8,y=a.y-r+i*fs*1.3;
       c.strokeStyle="#fff";c.lineWidth=4;c.strokeText(line,x,y);c.fillStyle=a.color;c.fillText(line,x,y);
@@ -1510,6 +1607,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     if(show){stampPanel.classList.remove("visible");renderFieldPanel();}
   }
   function renderFieldPanel(){
+    clearTimeout(scheduleSave.panelTimer);
     var mode=FIELD_MODES[docMode()], badge=document.getElementById("modeBadge");
     badge.textContent=mode.label+" ▾";badge.style.setProperty("--mode-color",mode.color);
     document.getElementById("field-panel-title").textContent=mode.label;
@@ -1531,6 +1629,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       b.addEventListener("click",function(){openFieldPoint(a);});list.appendChild(b);
     });
     if(!pts.length){var p=document.createElement("p");p.className="field-help";p.textContent="No field points on this sheet yet.";list.appendChild(p);}
+    if(crewReady)decorateFieldWorkflow();
   }
   function fieldMessage(message){document.getElementById("field-status").textContent=message;showToast(message);clearTimeout(fieldMessage.timer);fieldMessage.timer=setTimeout(hideToast,3000);}
   function showFieldModal(id){
@@ -1616,7 +1715,9 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     var notes=addField(root,"notes","Field notes","textarea",note.notes);notes.maxLength=10000;
     var time=document.createElement("p");time.className="field-help";time.textContent="Recorded "+new Date(note.createdAt).toLocaleString();root.appendChild(time);
     document.getElementById("point-error").textContent="";document.getElementById("field-photo-input").value="";
+    configureCrewPointForm(mode,note,action,root,grid);
     renderFieldPhotos();updateCutFill();showFieldModal("point-dialog");
+    if(mode==="grading"){var first=document.getElementById("fp-crewReading");if(!first||first.disabled)first=document.getElementById("fp-observedElevation");if(first)first.focus({preventScroll:true});}
   }
   function addTieRow(tie){
     var row=document.createElement("div");row.className="field-grid field-tie";
@@ -1633,6 +1734,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   document.getElementById("point-form").addEventListener("submit",function(e){
     e.preventDefault();if(!fieldDraft||fieldPhotoBusy)return;
     var d=fieldDraft,n=d.note;
+    if(!commitCrewReading(d))return;
     ["pointNumber","feature","code","description","offsetDirection","createdBy","notes","status","evidenceType","condition","bearing","station","assetStatus"].forEach(function(k){var v=fieldValue(k);if(v!==null)n[k]=v;});
     ["northing","easting","observedElevation","designElevation","offset","depth","searchRadius","distance","crossingAngle"].forEach(function(k){var v=fieldValue(k);if(v!==null)n[k]=fieldNumber(v);});
     if(!n.pointNumber)return;
@@ -1643,7 +1745,9 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     n.updatedAt=new Date().toISOString();
     if(d.action){var before=d.action.fieldNote;d.action.fieldNote=n;d.page.history.push({type:"fieldnote",action:d.action,before:before,after:n});d.page.redo=[];scheduleSave();}
     else pushAdd(d.page,{type:"fieldpoint",x:d.pos.x,y:d.pos.y,size:Math.max(22,28/zoom),labelSize:Math.max(14,13/zoom),color:currentColor,fieldNote:n});
+    var nextShot=e.submitter&&e.submitter.id==="point-next";rememberCrewShot(d,nextShot);
     fieldDraft=null;closeFieldModal("point-dialog");refreshDerivedNotes();redraw();renderFieldPanel();
+    if(nextShot){selectTool("fieldpoint");if(window.innerWidth<=1100)showFieldPanel(false);fieldMessage("Saved point "+n.pointNumber+". Tap the plan for point "+nextPointNumber()+".");}
   });
   function renderFieldPhotos(){
     var root=document.getElementById("field-photos");root.replaceChildren();if(!fieldDraft)return;
@@ -1656,7 +1760,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   }
   document.getElementById("field-photo-input").addEventListener("change",async function(e){
     if(!fieldDraft)return;var draft=fieldDraft,files=Array.from(e.target.files||[]);e.target.value="";fieldPhotoBusy=true;
-    document.getElementById("point-save").disabled=true;document.getElementById("point-cancel").disabled=true;
+    document.getElementById("point-save").disabled=true;document.getElementById("point-next").disabled=true;document.getElementById("point-cancel").disabled=true;
     try{for(var i=0;i<files.length;i++){
       var url=URL.createObjectURL(files[i]);
       try{var im=await new Promise(function(resolve,reject){var img=new Image();img.onload=function(){resolve(img);};img.onerror=function(){reject(new Error("Photo could not be read."));};img.src=url;});
@@ -1664,7 +1768,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         c.getContext("2d").drawImage(im,0,0,c.width,c.height);draft.note.photos.push({id:genId(),name:files[i].name,capturedAt:new Date().toISOString(),dataUrl:c.toDataURL("image/jpeg",0.86)});c.width=c.height=1;
       }finally{URL.revokeObjectURL(url);}
     }renderFieldPhotos();}catch(err){document.getElementById("point-error").textContent=err.message;}
-    finally{fieldPhotoBusy=false;document.getElementById("point-save").disabled=false;document.getElementById("point-cancel").disabled=false;}
+    finally{fieldPhotoBusy=false;document.getElementById("point-save").disabled=false;document.getElementById("point-next").disabled=false;document.getElementById("point-cancel").disabled=false;}
   });
 
   function slopeCalculation(page,from,to,manual){
@@ -1697,14 +1801,14 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   });
   document.getElementById("drainageTool").addEventListener("click",function(){selectTool("drainage");if(window.innerWidth<=1100)showFieldPanel(false);fieldMessage("Draw a drainage arrow in the direction of flow.");});
   function refreshDerivedNotes(){
-    pages.forEach(function(p){var pts=fieldPoints(p);p.actions.forEach(function(a){
+    pages.forEach(function(p){recomputeLevels(p);var pts=fieldPoints(p);p.actions.forEach(function(a){
       if(!a.fieldNote||a.fieldNote.kind!=="slope")return;var n=a.fieldNote,from=pts.find(function(x){return x.fieldNote.id===n.fromId;}),to=pts.find(function(x){return x.fieldNote.id===n.toId;});
       var r=slopeCalculation(p,from,to,n.distance);if(r.error){a.label="SLOPE — check endpoints / distance";return;}
       a.x1=from.x;a.y1=from.y;a.x2=to.x;a.y2=to.y;a.label=from.fieldNote.pointNumber+" → "+to.fieldNote.pointNumber+": "+r.slope.toFixed(2)+"% / "+r.distance.toFixed(3)+" m";
     });});
   }
   document.getElementById("exportFieldNotes").addEventListener("click",function(){
-    if(!currentDoc)return;var data={app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc.name,mode:docMode(),units:"m",pages:pages.map(function(p){return {id:p.id,name:p.name,notes:p.actions.filter(function(a){return a.fieldNote;})};})};
+    if(!currentDoc)return;var data={app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc.name,mode:docMode(),units:"m",pages:pages.map(function(p){return {id:p.id,name:p.name,gradingSetups:p.gradingSetups||[],notes:p.actions.filter(function(a){return a.fieldNote;})};})};
     downloadBytes(JSON.stringify(data,null,2),(currentDoc.name||"field-notes")+" - field notes.json","application/json");
   });
 
@@ -1717,7 +1821,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     pdfPage.drawImage(image,{x:pt.x,y:pt.y,width:b.w/scale,height:b.h/scale});c.width=c.height=1;
   }
   async function attachFieldNotesToPdf(outDoc,pageList){
-    var notes=pageList.map(function(p){return {sheet:p.name,notes:p.actions.filter(function(a){return a.fieldNote;})};}).filter(function(p){return p.notes.length;});
+    var notes=pageList.map(function(p){return {sheet:p.name,gradingSetups:p.gradingSetups||[],notes:p.actions.filter(function(a){return a.fieldNote;})};}).filter(function(p){return p.notes.length||p.gradingSetups.length;});
     if(!notes.length)return;
     // Embedded JSON retains every structured field and photo in the marked-up PDF.
     await outDoc.attach(new TextEncoder().encode(JSON.stringify({app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc&&currentDoc.name,units:"m",pages:notes},null,2)),"field-notes.json",{mimeType:"application/json",description:"Vista Field Mark structured field notes and photos"});
@@ -1728,7 +1832,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     var open=document.querySelector(".field-overlay:not([hidden])");if(!open)return;
     if(e.key==="Escape"){
       e.preventDefault();e.stopImmediatePropagation();if(photoLightbox.classList.contains("visible")){closePhotoLightbox();return;}
-      if(open.id==="mode-dialog")finishModeChoice(null);else if(open.id==="point-dialog")cancelFieldPoint();else closeFieldModal(open.id);return;
+      if(open.id==="mode-dialog")finishModeChoice(null);else if(open.id==="point-dialog")cancelFieldPoint();else if(open.id==="grading-dialog")closeGradingRegister();else closeFieldModal(open.id);return;
     }
     if(e.key==="Tab"){
       var els=Array.from(open.querySelectorAll("button:not(:disabled),input:not(:disabled),select,textarea")).filter(function(el){return el.getClientRects().length;});
@@ -2716,7 +2820,8 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     var op = page.history.pop();
     if (!op) return;
     clearSelection();
-    if(op.type==="batchadd"){
+    if(op.type==="grading"){applyGradingState(page,op.before);
+    } else if(op.type==="batchadd"){
       op.actions.forEach(function(a){var i=page.actions.indexOf(a);if(i>=0)page.actions.splice(i,1);});
     } else if (op.type === "fieldnote"){
       op.action.fieldNote=op.before;
@@ -2743,7 +2848,8 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     var op = page.redo.pop();
     if (!op) return;
     clearSelection();
-    if(op.type==="batchadd"){
+    if(op.type==="grading"){applyGradingState(page,op.after);
+    } else if(op.type==="batchadd"){
       op.actions.forEach(function(a){page.actions.push(a);});
     } else if (op.type === "fieldnote"){
       op.action.fieldNote=op.after;
@@ -3970,6 +4076,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   }
 
   async function buildOutputPdf(pageList){
+    refreshDerivedNotes();
     var outDoc = await PDFLib.PDFDocument.create();
     var libDocCache = {};
     var boldFont = await outDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
@@ -3995,7 +4102,8 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         newPdfPage.drawImage(pngImage, { x:0, y:0, width:ptW, height:ptH });
       }
     }
-    await appendInteractiveFieldReports(outDoc,pageList);
+    var fieldDetailPages=await appendInteractiveFieldReports(outDoc,pageList);
+    await appendGradingReports(outDoc,pageList,fieldDetailPages);
     await attachFieldNotesToPdf(outDoc,pageList);
     return outDoc;
   }
@@ -4054,7 +4162,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         return { id:p.id, name:p.name, actions:p.actions, sourceFileId:p.sourceFileId,
           sourcePageIndex:p.sourcePageIndex, pdfScale:p.pdfScale, pdfPtWidth:p.pdfPtWidth,
           pdfPtHeight:p.pdfPtHeight, imgBlob:p._imgBlob, imgMime:p._imgMime,
-          guides:p.guides || [], rulerScale:p.rulerScale || null, gridOn:!!p.gridOn };
+          guides:p.guides || [], rulerScale:p.rulerScale || null, gridOn:!!p.gridOn, gradingSetups:p.gradingSetups||[] };
       }),
       sourceFiles: sourceFiles
     };
@@ -4095,7 +4203,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         sourceFileId: pd.sourceFileId, sourcePageIndex: pd.sourcePageIndex,
         pdfScale: pd.pdfScale, pdfPtWidth: pd.pdfPtWidth, pdfPtHeight: pd.pdfPtHeight,
         _imgBlob: pd.imgBlob, _imgMime: pd.imgMime || "image/png",
-        guides: pd.guides || [], rulerScale: pd.rulerScale || null, gridOn: !!pd.gridOn });
+        guides: pd.guides || [], rulerScale: pd.rulerScale || null, gridOn: !!pd.gridOn, gradingSetups:pd.gradingSetups||[] });
     }
     var srcFiles = {};
     Object.keys(data.sourceFiles || {}).forEach(function(k){ srcFiles[k] = data.sourceFiles[k]; });
@@ -4619,6 +4727,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     record.canvas.width=record.canvas.height=1;
   }
   async function appendInteractiveFieldReports(doc,pageList){
+    var detailPages=new Map();
     var plans=doc.getPages().slice(0,pageList.length),job=currentDoc&&currentDoc.name;
     for(var pi=0;pi<pageList.length;pi++){
       var sheet=pageList[pi],points=fieldPoints(sheet);
@@ -4628,7 +4737,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         if(note.photos&&note.photos.length)preview=await new Promise(function(resolve,reject){var im=new Image();im.onload=function(){resolve(im);};im.onerror=function(){reject(new Error("Could not export photo for point "+note.pointNumber));};im.src=note.photos[0].dataUrl;});
         var record=reportCanvas(job,sheet.name,note.pointNumber,mode.label+"  ·  "+note.feature,preview),y=181;
         record.page=doc.addPage([612,792]);records.push(record);
-        var firstPage=record.page;
+        var firstPage=record.page;detailPages.set(point,firstPage);
         async function nextDetailPage(){
           await finishReportPage(doc,record,plans[pi]);
           record=reportCanvas(job,sheet.name,note.pointNumber,"Field details - continued");record.page=doc.addPage([612,792]);records.push(record);y=181;
@@ -4648,7 +4757,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
           ['Northing (m)',note.northing],['Easting (m)',note.easting],['Observed elevation (m)',note.observedElevation],['Design elevation (m)',note.designElevation],
           ['Cut / fill',fieldCutFill(note)?cutFillText(note):null],['Offset (m)',note.offset],['Offset direction',note.offsetDirection],
           ['Evidence type',note.evidenceType],['Condition',note.condition],['Depth (m)',note.depth],['Search radius (m)',note.searchRadius],
-          ['Bearing',note.bearing],['Distance (m)',note.distance],['Station / chainage',note.station],['Crossing angle (degrees)',note.crossingAngle],['Asset status',note.assetStatus],['Recorded by',note.createdBy]];
+          ['Bearing',note.bearing],['Distance (m)',note.distance],['Station / chainage',note.station],['Crossing angle (degrees)',note.crossingAngle],['Asset status',note.assetStatus],['Recorded by',note.createdBy],['Level setup',note.leveling?levelSetupName(sheet,note.leveling.setupId):null],['Reading type',note.leveling&&note.leveling.type],['Staff reading (m)',note.leveling&&note.leveling.reading],['Instrument height (m)',note.leveling&&note.leveling.instrumentHeight],['Levelling check',note.levelingError]];
         entries=entries.filter(function(e){return e[1]!==null && e[1]!==undefined && e[1]!=="";});
         for(var ei=0;ei<entries.length;ei+=2){
           var pair=entries.slice(ei,ei+2),lineSets=pair.map(function(e){record.ctx.font="12px Inter,sans-serif";return reportWrap(record.ctx,String(e[1]),244);});
@@ -4696,6 +4805,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         addPdfPageLink(doc,plans[pi],[box.x/scale,ptH-(box.y+box.h)/scale,(box.x+box.w)/scale,ptH-box.y/scale],firstPage,"Point "+note.pointNumber+" - details and photos");
       }
     }
+    return detailPages;
   }
 
   // ---------- polished sketch controls (move existing controls, keep their handlers) ----------
@@ -4798,6 +4908,455 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
 
   initSketchUI();
 
+  // The register edits the same Field Notes used by the plan and PDF reports.
+  var gradingDraft=null,gradingPointRows=new Map(),gradingSetupOutputs=new Map(),gradingSlopeRows=new Map();
+  function gradeClone(value){return JSON.parse(JSON.stringify(value));}
+  function gradeNumber(value){return fieldNumber(value);}
+  function gradeFormat(value,places){var n=gradeNumber(value);return n===null?"—":n.toFixed(places==null?3:places);}
+  function levelSetupName(page,id){var s=(page.gradingSetups||[]).find(function(s){return s.id===id;});return s?s.name:"Missing setup";}
+  function gradingPoints(page){return fieldPoints(page).filter(function(a){return a.fieldNote.mode==="grading"||a.fieldNote.leveling;});}
+  function gradingSlopes(page){return page.actions.filter(function(a){return a.fieldNote&&a.fieldNote.kind==="slope";});}
+  function recomputeLevels(page){
+    var setups=page.gradingSetups||[],points=fieldPoints(page),setupResults=new Map(),pointResults=new Map(),visiting=new Set();
+    function pointResult(point){
+      if(!point)return {error:"Referenced point is missing."};
+      var n=point.fieldNote,id="point:"+n.id;
+      if(pointResults.has(n.id))return pointResults.get(n.id);
+      if(visiting.has(id))return {error:"Circular setup / turning-point link."};
+      visiting.add(id);var result;
+      if(!n.leveling){var z=gradeNumber(n.observedElevation);result=z===null?{error:"Point "+n.pointNumber+" needs an elevation."}:{elevation:z};}
+      else{
+        var sr=setupResult(n.leveling.setupId),reading=gradeNumber(n.leveling.reading);
+        if(sr.error)result={error:sr.error};
+        else if(reading===null||reading<0||!["FS","IFS"].includes(n.leveling.type))result={error:"Point "+n.pointNumber+" needs a valid FS or IFS reading."};
+        else result={elevation:sr.hi-reading,hi:sr.hi};
+      }
+      visiting.delete(id);pointResults.set(n.id,result);return result;
+    }
+    function setupResult(id){
+      if(setupResults.has(id))return setupResults.get(id);
+      var s=setups.find(function(s){return s.id===id;}),key="setup:"+id;
+      if(!s)return {error:"Instrument setup is missing."};
+      if(visiting.has(key))return {error:"Circular setup / turning-point link."};
+      visiting.add(key);var result,bs=gradeNumber(s.backsight);
+      if(s.source==="hi"){
+        var hi=gradeNumber(s.directHeight);result=hi===null?{error:(s.name||"Setup")+": enter the instrument height."}:{hi:hi,reference:null};
+      }else{
+        var ref=s.source==="point"?pointResult(points.find(function(p){return p.fieldNote.id===s.referencePointId;})):{elevation:gradeNumber(s.referenceElevation)};
+        if(ref.error)result={error:ref.error};
+        else if(ref.elevation===null||bs===null||bs<0)result={error:(s.name||"Setup")+": enter benchmark elevation and backsight."};
+        else result={hi:ref.elevation+bs,reference:ref.elevation};
+      }
+      visiting.delete(key);setupResults.set(id,result);return result;
+    }
+    setups.forEach(function(s){setupResult(s.id);});
+    points.forEach(function(a){var n=a.fieldNote;if(!n.leveling){delete n.levelingError;return;}var r=pointResult(a);n.observedElevation=r.error?null:r.elevation;n.leveling.instrumentHeight=r.error?null:r.hi;if(r.error)n.levelingError=r.error;else delete n.levelingError;});
+    return {setups:setupResults,points:pointResults};
+  }
+  function captureGradingState(page){return {setups:gradeClone(page.gradingSetups||[]),actions:page.actions.slice(),notes:fieldPoints(page).map(function(a){return {action:a,note:gradeClone(a.fieldNote)};})};}
+  function applyGradingState(page,state){page.gradingSetups=gradeClone(state.setups);page.actions=state.actions.slice();state.notes.forEach(function(p){p.action.fieldNote=gradeClone(p.note);});}
+  function registerInput(parent,label,type,value,change,options){
+    var wrap=document.createElement("label");if(label)wrap.appendChild(document.createTextNode(label));
+    var input=document.createElement(type==="select"?"select":"input");
+    if(type==="select")options.forEach(function(o){var el=document.createElement("option");el.value=o[0];el.textContent=o[1];input.appendChild(el);});
+    else{input.type=type;if(type==="number"){input.step="any";input.inputMode="decimal";}}
+    input.value=value==null?"":value;input.setAttribute("aria-label",label||"Reading");decorateRegisterInput(input,label);wrap.appendChild(input);parent.appendChild(wrap);
+    input.addEventListener(type==="select"?"change":"input",function(){change(type==="number"?gradeNumber(input.value):input.value);});return input;
+  }
+  function registerButton(parent,label,callback){var b=document.createElement("button");b.type="button";b.className="field-button";b.textContent=label;b.addEventListener("click",callback);parent.appendChild(b);return b;}
+  function registerCell(row){var td=document.createElement("td");row.appendChild(td);return td;}
+  function registerOutput(parent){var o=document.createElement("output");parent.appendChild(o);return o;}
+  function registerPointOptions(){return fieldPoints(gradingDraft.page).map(function(p){return [p.fieldNote.id,p.fieldNote.pointNumber+" · "+p.fieldNote.feature];});}
+  function setRegisterTab(name){["levels","slopes"].forEach(function(n){document.getElementById(n+"-panel").hidden=n!==name;document.getElementById(n+"-tab").setAttribute("aria-selected",String(n===name));});}
+  function openGradingRegister(){
+    var page=pages[currentIndex];if(!page){fieldMessage("Import a plan to start the grading register.");return;}
+    commitPendingText();cancelActiveStroke();refreshDerivedNotes();
+    var points=fieldPoints(page).map(function(a){return Object.assign({},a,{fieldNote:gradeClone(a.fieldNote)});});
+    var slopes=gradingSlopes(page).map(function(a){return Object.assign({},a,{fieldNote:gradeClone(a.fieldNote)});});
+    gradingDraft={target:page,page:{actions:points.concat(slopes),gradingSetups:gradeClone(page.gradingSetups||[]),rulerScale:page.rulerScale},points:points,slopes:slopes};
+    document.getElementById("grading-sheet").textContent=page.name+" · "+gradingPoints(page).length+" grading points · metres";
+    setRegisterTab("levels");renderRegisterSetups();renderRegisterPoints();renderRegisterSlopes();updateRegisterResults();showFieldModal("grading-dialog");
+  }
+  function closeGradingRegister(){gradingDraft=null;closeFieldModal("grading-dialog");}
+  document.getElementById("gradingRegister").addEventListener("click",openGradingRegister);
+  ["grading-close","grading-cancel"].forEach(function(id){document.getElementById(id).addEventListener("click",closeGradingRegister);});
+  ["levels","slopes"].forEach(function(n){document.getElementById(n+"-tab").addEventListener("click",function(){setRegisterTab(n);});});
+  document.getElementById("grading-add-setup").addEventListener("click",function(){
+    gradingDraft.page.gradingSetups.push({id:genId(),name:"Setup "+(gradingDraft.page.gradingSetups.length+1),source:"benchmark",referenceLabel:"",referenceElevation:null,backsight:null});renderRegisterSetups();renderRegisterPoints();updateRegisterResults();
+    document.querySelector("#grading-setups .grading-setup:last-child input").focus();
+  });
+  function renderRegisterSetups(){
+    var root=document.getElementById("grading-setups");root.replaceChildren();gradingSetupOutputs.clear();
+    if(!gradingDraft.page.gradingSetups.length){var help=document.createElement("p");help.className="field-help";help.textContent="No instrument setups yet. Manual elevations remain available.";root.appendChild(help);}
+    gradingDraft.page.gradingSetups.forEach(function(s){
+      var card=document.createElement("div");card.className="grading-setup";card.dataset.setupId=s.id;root.appendChild(card);
+      registerInput(card,"Setup name","text",s.name,function(v){s.name=v;updateRegisterResults();document.querySelectorAll('#grading-readings option').forEach(function(o){if(o.value===s.id)o.textContent=v||"Unnamed setup";});});
+      registerInput(card,"Height source","select",s.source,function(v){s.source=v;renderRegisterSetups();updateRegisterResults();},[["benchmark","Benchmark + BS"],["point","Turning point + BS"],["hi","Enter HI directly"]]);
+      if(s.source==="point")registerInput(card,"Reference point","select",s.referencePointId||"",function(v){s.referencePointId=v;updateRegisterResults();},[["","Choose point"]].concat(registerPointOptions()));
+      else registerInput(card,s.source==="hi"?"Reference / station":"Benchmark / station","text",s.referenceLabel,function(v){s.referenceLabel=v;});
+      if(s.source==="hi")registerInput(card,"Known HI (m)","number",s.directHeight,function(v){s.directHeight=v;updateRegisterResults();});
+      else if(s.source==="benchmark")registerInput(card,"Benchmark elevation (m)","number",s.referenceElevation,function(v){s.referenceElevation=v;updateRegisterResults();});
+      else{var ref=registerOutput(card);ref.dataset.reference=s.id;}
+      var bs=registerInput(card,"BS (m)","number",s.backsight,function(v){s.backsight=v;updateRegisterResults();});bs.min="0";
+      var wrap=document.createElement("label");wrap.textContent="HI (m)";card.appendChild(wrap);gradingSetupOutputs.set(s.id,registerOutput(wrap));
+      registerButton(card,"Remove",function(){
+        if(gradingDraft.points.some(function(p){return p.fieldNote.leveling&&p.fieldNote.leveling.setupId===s.id;})){document.getElementById("grading-error").textContent="This setup has linked readings. Change them to Manual or another setup before removing it.";return;}
+        gradingDraft.page.gradingSetups=gradingDraft.page.gradingSetups.filter(function(x){return x!==s;});renderRegisterSetups();renderRegisterPoints();updateRegisterResults();
+      });
+    });
+  }
+  function renderRegisterPoints(){
+    var body=document.getElementById("grading-readings");body.replaceChildren();gradingPointRows.clear();
+    var points=gradingPoints(gradingDraft.page);
+    if(!points.length){var row=document.createElement("tr"),td=registerCell(row);td.colSpan=8;td.textContent="Place grading Field Points on the plan to populate this register.";body.appendChild(row);}
+    points.forEach(function(a){
+      var n=a.fieldNote,l=n.leveling,row=document.createElement("tr");row.dataset.pointId=n.id;body.appendChild(row);
+      var station=registerCell(row);station.textContent=n.pointNumber;var small=document.createElement("small");small.textContent=n.feature;station.appendChild(small);
+      var opts=[["","Manual"]].concat(gradingDraft.page.gradingSetups.map(function(s){return [s.id,s.name||"Unnamed setup"];}));
+      if(l&&!opts.some(function(o){return o[0]===l.setupId;}))opts.push([l.setupId,"Missing setup"]);
+      var setup=registerInput(registerCell(row),"Setup for "+n.pointNumber,"select",l?l.setupId:"",function(v){if(v)n.leveling={setupId:v,type:l?l.type:"IFS",reading:l?l.reading:null};else{delete n.leveling;delete n.levelingError;}renderRegisterPoints();updateRegisterResults();},opts);
+      var type=registerInput(registerCell(row),"Reading type for "+n.pointNumber,"select",l?l.type:"IFS",function(v){n.leveling.type=v;updateRegisterResults();},[["IFS","IFS"],["FS","FS"]]);type.disabled=!l;
+      var reading=registerInput(registerCell(row),"Staff reading for "+n.pointNumber,"number",l?l.reading:null,function(v){n.leveling.reading=v;updateRegisterResults();});reading.disabled=!l;reading.min="0";
+      var hi=registerOutput(registerCell(row));
+      var elevation=registerInput(registerCell(row),"Elevation for "+n.pointNumber,"number",n.observedElevation,function(v){n.observedElevation=v;updateRegisterResults();});elevation.readOnly=!!l;
+      registerInput(registerCell(row),"Design elevation for "+n.pointNumber,"number",n.designElevation,function(v){n.designElevation=v;updateRegisterResults();});
+      var delta=registerOutput(registerCell(row));gradingPointRows.set(n.id,{hi:hi,elevation:elevation,delta:delta,row:row});
+      // The column headings already describe the fields; retain individual accessible labels.
+      row.querySelectorAll("label").forEach(function(label){if(label.firstChild&&label.firstChild.nodeType===3)label.firstChild.remove();});
+    });
+  }
+  document.getElementById("grading-add-slope").addEventListener("click",function(){
+    var p=gradingDraft.points;if(p.length<2){document.getElementById("grading-error").textContent="Place at least two Field Points on the plan first.";return;}
+    gradingDraft.slopes.push({type:"ruler",color:toolColors.ruler||"#000000",width:currentWidth,x1:0,y1:0,x2:0,y2:0,fieldNote:{schemaVersion:1,id:genId(),kind:"slope",mode:"grading",fromId:p[0].fieldNote.id,toId:p[1].fieldNote.id,distance:null,units:"m",createdAt:new Date().toISOString()}});renderRegisterSlopes();updateRegisterResults();
+  });
+  function renderRegisterSlopes(){
+    var body=document.getElementById("grading-slopes");body.replaceChildren();gradingSlopeRows.clear();
+    gradingDraft.slopes.forEach(function(a){
+      var n=a.fieldNote,row=document.createElement("tr");row.dataset.slopeId=n.id;body.appendChild(row);
+      ["fromId","toId"].forEach(function(k){var opts=registerPointOptions();if(!opts.some(function(o){return o[0]===n[k];}))opts.unshift([n[k],"Missing point"]);registerInput(registerCell(row),k==="fromId"?"From point":"To point","select",n[k],function(v){n[k]=v;updateRegisterResults();},opts);});
+      var distance=registerInput(registerCell(row),"Measured distance (m)","number",n.distance,function(v){n.distance=v;updateRegisterResults();});distance.min="0.000001";distance.placeholder="Auto";
+      var used=registerOutput(registerCell(row)),rise=registerOutput(registerCell(row)),slope=registerOutput(registerCell(row));
+      gradingSlopeRows.set(n.id,{used:used,rise:rise,slope:slope});registerButton(registerCell(row),"Remove",function(){gradingDraft.slopes=gradingDraft.slopes.filter(function(x){return x!==a;});renderRegisterSlopes();updateRegisterResults();});
+      row.querySelectorAll("label").forEach(function(label){if(label.firstChild&&label.firstChild.nodeType===3)label.firstChild.remove();});
+    });
+    if(!gradingDraft.slopes.length){var row=document.createElement("tr"),td=registerCell(row);td.colSpan=7;td.textContent="No slopes yet. Add a slope to link two plan points.";body.appendChild(row);}
+  }
+  function registerSlopeResult(page,a){var pts=fieldPoints(page),n=a.fieldNote;return slopeCalculation(page,pts.find(function(p){return p.fieldNote.id===n.fromId;}),pts.find(function(p){return p.fieldNote.id===n.toId;}),n.distance);}
+  function updateRegisterResults(){
+    if(!gradingDraft)return [];
+    var page=gradingDraft.page,results=recomputeLevels(page),errors=[];
+    page.gradingSetups.forEach(function(s){var r=results.setups.get(s.id),o=gradingSetupOutputs.get(s.id);if(o){o.textContent=r.error?"Check setup":gradeFormat(r.hi);o.title=r.error||"";o.classList.toggle("grading-invalid",!!r.error);}if(r.error)errors.push(r.error);
+      var ref=document.querySelector('[data-reference="'+s.id+'"]');if(ref)ref.textContent="Reference: "+gradeFormat(r.reference)+" m";
+    });
+    gradingPoints(page).forEach(function(a){var n=a.fieldNote,row=gradingPointRows.get(n.id);if(!row)return;
+      row.hi.textContent=n.leveling?gradeFormat(n.leveling.instrumentHeight):"—";if(n.leveling)row.elevation.value=n.observedElevation==null?"":gradeFormat(n.observedElevation);
+      var cf=fieldCutFill(n);row.delta.textContent=n.levelingError|| (cf?gradeFormat(cf.difference)+" m · "+cutFillText(n):"—");row.delta.classList.toggle("grading-invalid",!!n.levelingError);if(n.levelingError)errors.push(n.levelingError);
+    });
+    gradingDraft.slopes.forEach(function(a){var r=registerSlopeResult(page,a),row=gradingSlopeRows.get(a.fieldNote.id);row.used.textContent=r.error?"—":gradeFormat(r.distance);row.used.title=r.source||"";row.rise.textContent=r.error?"—":gradeFormat(r.rise);row.slope.textContent=r.error?r.error:r.slope.toFixed(2)+"% · "+(r.rise>0?"Rise":r.rise<0?"Fall":"Level");row.slope.classList.toggle("grading-invalid",!!r.error);if(r.error)errors.push(r.error);});
+    document.getElementById("grading-error").classList.toggle("grading-invalid",!!errors.length);
+    document.getElementById("grading-error").textContent=errors.length?Array.from(new Set(errors)).join(" "):"Changes update the plan and PDF when you save this register.";
+    return errors;
+  }
+  document.getElementById("grading-form").addEventListener("submit",function(e){
+    e.preventDefault();if(!gradingDraft)return;var errors=updateRegisterResults();if(errors.length)return;
+    var d=gradingDraft,page=d.target,before=captureGradingState(page),slopes=d.slopes.map(function(a){return Object.assign({},a,{fieldNote:gradeClone(a.fieldNote)});});
+    var after={setups:gradeClone(d.page.gradingSetups),actions:page.actions.filter(function(a){return !(a.fieldNote&&a.fieldNote.kind==="slope");}).concat(slopes),notes:fieldPoints(page).map(function(a){return {action:a,note:gradeClone(d.points.find(function(p){return p.fieldNote.id===a.fieldNote.id;}).fieldNote)};})};
+    // A single history item keeps a whole register edit reversible.
+    applyGradingState(page,after);page.history.push({type:"grading",before:before,after:after});page.redo=[];
+    closeGradingRegister();refreshDerivedNotes();scheduleSave();redraw();renderFieldPanel();
+  });
+
+  // Landscape register pages use the same point records and calculation functions as the editor.
+  async function appendGradingTable(doc,title,subtitle,columns,rows,planPage,sheet,detailPages){
+    var canvas,ctx,page,y,firstPage=null,number=0,left=32,top=116,bottom=556;
+    var widths=columns.map(function(c){return c[1];});
+    function newTablePage(){
+      page=doc.addPage([792,612]);if(!firstPage)firstPage=page;number++;
+      canvas=document.createElement("canvas");canvas.width=1584;canvas.height=1224;ctx=canvas.getContext("2d");ctx.scale(2,2);ctx.fillStyle="#fff";ctx.fillRect(0,0,792,612);
+      ctx.fillStyle="#0b1e2e";ctx.fillRect(0,0,792,83);ctx.fillStyle="#ff7a1a";ctx.fillRect(0,83,792,3);
+      ctx.font="700 10px Inter,sans-serif";ctx.fillStyle="#92b6cb";ctx.fillText("VISTA GEOMATICS / FIELD MARK",32,22);
+      ctx.font="700 23px Inter,sans-serif";ctx.fillStyle="#fff";ctx.fillText(title,32,51);
+      ctx.font="10px Inter,sans-serif";ctx.fillStyle="#bfd6e5";
+      ctx.fillText(reportWrap(ctx,(currentDoc&&currentDoc.name||"Untitled job")+" · "+sheet.name,690)[0],32,71);
+      ctx.fillStyle="#284b62";ctx.font="10px Inter,sans-serif";ctx.fillText(subtitle,32,103);
+      var x=left;ctx.fillStyle="#e1edf3";ctx.fillRect(left,top,728,30);ctx.fillStyle="#16354a";ctx.font="700 9px Inter,sans-serif";
+      columns.forEach(function(c){ctx.fillText(c[0],x+6,top+19);x+=c[1];});y=top+30;
+      ctx.fillStyle="#e8f2f8";ctx.fillRect(32,574,112,24);ctx.fillStyle="#164664";ctx.font="700 9px Inter,sans-serif";ctx.fillText("‹ BACK TO PLAN",42,590);
+      ctx.font="9px Inter,sans-serif";ctx.fillStyle="#516978";ctx.fillText("Metres · Difference = design − observed · Select a point row for details / photos",157,589);ctx.fillText(String(number),741,589);
+    }
+    async function finish(){
+      var im=await doc.embedPng(dataURLToUint8(canvas.toDataURL("image/png")));page.drawImage(im,{x:0,y:0,width:792,height:612});
+      addPdfPageLink(doc,page,[32,14,144,38],planPage,"Back to plan");canvas.width=canvas.height=1;
+    }
+    newTablePage();
+    for(var i=0;i<rows.length;i++){
+      var row=rows[i];ctx.font="10px Inter,sans-serif";
+      var lines=row.cells.map(function(cell,col){return reportWrap(ctx,String(cell==null?"—":cell),widths[col]-12);}),offset=0,total=Math.max.apply(null,lines.map(function(l){return l.length;}));
+      while(offset<total){
+        if(y+30>bottom){await finish();newTablePage();}
+        var count=Math.min(total-offset,Math.max(1,Math.floor((bottom-y-12)/13))),height=Math.max(30,count*13+12),x=left;
+        ctx.fillStyle=row.setup?"#dce9f0":i%2?"#f2f6f9":"#fff";ctx.fillRect(left,y,728,height);
+        ctx.strokeStyle="#cadbe5";ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(left,y+height);ctx.lineTo(760,y+height);ctx.stroke();
+        ctx.fillStyle=row.error?"#8e342d":"#142e40";ctx.font=(row.setup?"700 ":"")+"10px Inter,sans-serif";
+        lines.forEach(function(cell,col){cell.slice(offset,offset+count).forEach(function(line,j){ctx.fillText(line,x+6,y+17+j*13);});x+=widths[col];});
+        var target=row.point&&detailPages.get(row.point);if(target)addPdfPageLink(doc,page,[left,612-y-height,760,612-y],target,"Point "+row.point.fieldNote.pointNumber+" details");
+        y+=height;offset+=count;if(offset<total){await finish();newTablePage();}
+      }
+    }
+    await finish();return firstPage;
+  }
+  async function appendGradingReports(doc,pageList,detailPages){
+    detailPages=detailPages||new Map();var plans=doc.getPages().slice(0,pageList.length),navFont=null;
+    for(var pi=0;pi<pageList.length;pi++){
+      var sheet=pageList[pi],points=gradingPoints(sheet),setups=sheet.gradingSetups||[],slopes=gradingSlopes(sheet);
+      if(!points.length&&!setups.length&&!slopes.length)continue;
+      var calculations=recomputeLevels(sheet),rows=[];
+      function addPoint(a){
+        var n=a.fieldNote,l=n.leveling,cf=fieldCutFill(n);
+        rows.push({point:a,error:!!n.levelingError,cells:[n.pointNumber+" · "+n.feature,"",l?gradeFormat(l.instrumentHeight):"—",l&&l.type==="FS"?gradeFormat(l.reading):"—",l&&l.type==="IFS"?gradeFormat(l.reading):"—",gradeFormat(n.observedElevation),gradeFormat(n.designElevation),n.levelingError|| (cf?gradeFormat(cf.difference)+" / "+cutFillText(n):"—")]});
+      }
+      setups.forEach(function(s){var r=calculations.setups.get(s.id),reference=s.source==="point"?fieldPoints(sheet).find(function(a){return a.fieldNote.id===s.referencePointId;}):null;
+        var label=s.name+" · "+(reference?"TP "+reference.fieldNote.pointNumber:s.referenceLabel|| (s.source==="hi"?"Known HI":"Benchmark"));
+        rows.push({setup:true,error:!!r.error,cells:[label,gradeFormat(s.backsight),gradeFormat(r.hi),"—","—",gradeFormat(r.reference),"—",r.error|| (s.source==="hi"?"Direct instrument height":"HI = reference + BS")]});
+        points.filter(function(a){return a.fieldNote.leveling&&a.fieldNote.leveling.setupId===s.id;}).forEach(addPoint);
+      });
+      var manual=points.filter(function(a){return !a.fieldNote.leveling||!setups.some(function(s){return s.id===a.fieldNote.leveling.setupId;});});
+      if(manual.length){rows.push({setup:true,cells:["Manual / unlinked points","","","","","","",""]});manual.forEach(addPoint);}
+      var first=null;
+      if(rows.length)first=await appendGradingTable(doc,"Levelling register","BS: backsight · HI: instrument height · FS: foresight · IFS: intermediate foresight",[["STA / Feature",152],["BS",50],["HI",65],["FS",50],["IFS",50],["ELEV",70],["Design",70],["Difference / Cut-fill",221]],rows,plans[pi],sheet,detailPages);
+      if(slopes.length){
+        var slopeRows=slopes.map(function(a){var n=a.fieldNote,pts=fieldPoints(sheet),from=pts.find(function(p){return p.fieldNote.id===n.fromId;}),to=pts.find(function(p){return p.fieldNote.id===n.toId;}),r=registerSlopeResult(sheet,a);
+          return {point:from,error:!!r.error,cells:[from?from.fieldNote.pointNumber:"Missing",to?to.fieldNote.pointNumber:"Missing",r.error?"—":gradeFormat(r.distance),r.error?"—":gradeFormat(r.rise),r.error?"—":r.slope.toFixed(2)+"%",r.error|| (r.rise>0?"Rise":r.rise<0?"Fall":"Level"),r.source||"Check endpoints / distance"]};
+        });
+        var slopePage=await appendGradingTable(doc,"Slope register","Grade (%) = (To elevation − From elevation) ÷ horizontal distance × 100. Negative = fall from From to To.",[["From",80],["To",80],["Distance (m)",88],["ΔZ (m)",85],["Grade (%)",80],["Direction / check",155],["Distance source",160]],slopeRows,plans[pi],sheet,detailPages);
+        if(first){navFont=navFont||await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);first.drawText("Slope register >",{x:645,y:563,size:9,font:navFont,color:PDFLib.rgb(.75,.87,.94)});addPdfPageLink(doc,first,[638,558,760,573],slopePage,"Slope register");}else first=slopePage;
+      }
+      if(first){
+        navFont=navFont||await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+        points.forEach(function(a){var detail=detailPages.get(a);if(detail){detail.drawText("Grading register >",{x:220,y:39,size:10,font:navFont,color:PDFLib.rgb(.1,.3,.4)});addPdfPageLink(doc,detail,[214,33,352,53],first,"Grading register");}});
+      }
+    }
+  }
+
+  // Descriptions are shared by pointer/keyboard hints and the touch-friendly field guide.
+  var crewReady=false,crewHints=true,crewHintTimer=null,crewHideTimer=null,crewHintTarget=null,crewNextShots=new Map(),crewPointerFocus=false,crewMoreOpen=false;
+  var TOOL_HELP={
+    pen:["Pen","Draw freehand notes. Pencil pressure changes the stroke when pressure is enabled. Hold still at the end to straighten a stroke. Shortcut: P."],
+    highlighter:["Highlighter","Draw a translucent highlight over the plan. Starts red; change its colour with Ink."],
+    calligraphy:["Ink pen","Draw a slanted pen stroke for signatures or handwriting. Adjust the nib slant and pressure in Settings."],
+    line:["Line","Drag between two points for a straight line. Hold Shift on PC, or turn on angle snapping, to constrain its direction."],
+    arrow:["Arrow","Drag from the tail towards the arrowhead to show a direction or point out a feature."],
+    rect:["Rectangle","Drag between opposite corners to outline an area on the plan."],
+    ellipse:["Ellipse","Drag to surround a feature with a circle or oval."],
+    polygon:["Area","Tap the boundary corners, then finish the polygon. Calibrate the ruler to calculate an area in real-world units."],
+    cloud:["Cloud","Drag around the part of the plan you want to flag for review."],
+    ruler:["Ruler","Draw between two locations. On the first measurement, enter a known length to calibrate the plan. Later measurements use that scale."],
+    angle:["Angle","Tap three points to record an angle. Follow the on-screen prompts to place its arms and vertex."],
+    guides:["Guides","Add alignment guides for positioning markup. Guides are screen aids and do not appear in the exported PDF."],
+    stamp:["Survey stamps","Place survey evidence symbols, a north arrow, or other stamps. Select a placed stamp to move, rotate or recolour it."],
+    photo:["Photo pin","Tap the plan and choose a photo to pin there. To include a photo in a structured point record, attach it through Field Point."],
+    text:["Text","Tap the plan and type a note. Choose its size before placing it, then select it to move or recolour it. Shortcut: T."],
+    eraser:["Erase","Drag over markup to remove whole marks. Undo restores the last erase operation. Shortcut: E."],
+    select:["Select","Tap a mark or drag around several marks to select them. Move, recolour, rotate supported objects, or delete the selection. Shortcut: V."],
+    pan:["Pan","Drag to move around the plan. Fingers pan by default; two fingers pinch to zoom. On PC, hold Space or use right-drag for temporary pan. Shortcut: H."],
+    fieldpoint:["Field Point","Tap to place a numbered point with elevations, notes and photos. Tap an existing point to edit it. The same point appears in registers and PDF details. Shortcut: F."],
+    drainage:["Drainage arrow","Draw in the direction water should flow: start uphill and drag towards the outlet. Use a slope between measured points to check the grade."]
+  };
+  var FEATURE_HELP={
+    "Spot grade":["Numbered spot grade","A general elevation shot, such as points 1–23 in your level book. Record its design grade and measured elevation or staff reading."],
+    "EG":["Existing ground","The existing ground surface at this point. Record the observed elevation and, when useful, the intended design elevation."],
+    "FG":["Finished grade","The final ground surface being checked. Compare the observed elevation with the design grade to calculate cut or fill."],
+    "TF":["Top of footing","The upper surface of a footing. TF can mean top of foundation on some drawings; check the plan legend and use the separate Top of foundation feature when appropriate."],
+    "BF":["Bottom of footing","The underside of a footing. Confirm the drawing legend before using an abbreviated feature code."],
+    "Main floor":["Main floor","An elevation shot for the main floor reference, like MF in your field notes. Enter the design elevation shown on the plan."],
+    "Benchmark":["Benchmark","A point used as a known elevation reference. Enter its verified elevation, then reference it from an instrument setup if needed."],
+    "Turning point":["Turning point","A stable point used to carry elevations when moving the level. Record its FS from the first setup, then link the next setup to this point and enter the new BS."],
+    "Back of walk":["Back of walk","An elevation along the back edge of the walk. Use your crew's station names, such as LBOW or RBOW, when they match the plan."],
+    "Top of foundation":["Top of foundation","The top of the foundation wall. This is a separate feature from Top of footing so the reference is explicit."],
+    "House corner":["House corner","Record a grade at a house corner and compare it with the plan elevation."],
+    "Garage corner":["Garage corner","Record a garage or pad corner elevation for grade and drainage checks."],
+    "Swale":["Swale","Record an elevation along a drainage swale. Use successive points to check the slope towards the outlet."],
+    "High point":["High point","Mark the high point where the direction of drainage changes."],
+    "Low point":["Low point","Mark a low point or collection point and record its elevation."],
+    "Curb":["Curb","Record a curb elevation. State the measured surface, such as top of curb, in the description."],
+    "Gutter":["Gutter","Record the flow-line elevation along a gutter."],
+    "Invert":["Invert","Record the elevation at the inside bottom of a pipe or channel."],
+    "Sidewalk":["Sidewalk","Record a walk surface elevation. Use two points and a horizontal distance to check its slope."],
+    "Manhole":["Manhole","Record the feature elevation and specify rim, cover or another measured surface in the description."],
+    "Retaining wall":["Retaining wall","Record a wall elevation and identify whether the shot is at its top or bottom."]
+  };
+  var CONTROL_HELP={
+    shapeGroup:["Shapes","Open line, arrow, rectangle, ellipse, area and cloud tools."],measureGroup:["Survey & media","Open measurement tools, stamps, photos, plan calibration and the display grid."],
+    btnRecalibrate:["Calibrate","Clear this sheet's ruler scale. Draw a ruler over a known distance and enter its real length to set a new scale. This is separate from a level's instrument height."],
+    btnGridToggle:["Grid","Show or hide the screen grid. It is a visual aid, not survey coordinates, and is not exported."],
+    btnUndo:["Undo","Reverse the latest markup or register change on this sheet. Shortcut: Ctrl/Cmd+Z."],btnRedo:["Redo","Restore the change you most recently undid."],
+    btnUpload:["Add plan","Import a PDF or image into this job. Existing sheets and markup stay in the job."],btnUploadEmpty:["Add plan","Import a PDF or image to start marking up a sheet."],pageAddBtn:["Add sheet","Import additional PDF pages or images into this job."],
+    btnClear:["Clear sheet markup","Remove markup from the current sheet. The underlying plan remains."],
+    btnExport:["Export this sheet","Export the current plan sheet with markup, clickable field-point details and photos, and its grading registers."],
+    btnExportAll:["Export all sheets","Create one PDF containing all sheets, their markup, clickable point details/photos, and grading registers."],gradingExport:["Export plan + registers","Export the whole job as one PDF. Review point readings and slopes first; the PDF includes the plan, point details, photos and registers."],
+    btnLibrary:["Library","Return to saved jobs. Changes are saved on this device when local storage is available."],btnBackup:["Back up library","Download a backup containing saved jobs, markup, field readings, setups and photos. Keep a copy outside this device."],btnRestore:["Restore backup","Import jobs from a Field Mark library backup file."],
+    modeBadge:["Field-note mode","Choose Municipal, Construction, Oil & Gas or Grading. Changing mode keeps the existing markup and records."],fieldToggle:["Field tools","Open the presets, point list and tools for the current field-note mode."],
+    fingerMode:["Finger navigation","Switch between finger pan and finger drawing. Pencil drawing and two-finger pinch/pan remain available."],
+    inkButton:["Ink colour","Choose the active tool's colour. With a selection, choosing a colour recolours the selected marks."],penSettingsButton:["Drawing settings","Adjust smoothing, line snapping, pressure, nib slant and hover descriptions."],
+    strokeWidthRange:["Stroke width","Set the width of new strokes. Existing markup is unchanged."],btnPressure:["Pencil pressure","Turn pressure sensitivity on or off for compatible pen strokes."],btnNibAngle:["Nib slant","Change the calligraphy pen's slant for left- or right-handed writing."],
+    smoothingLevel:["Stroke smoothing","Choose how much new freehand strokes are smoothed. Raw follows your input most closely."],snapAngles:["Angle snapping","Constrain new lines, arrows and ruler lines to 45-degree directions. On PC, Shift enables it temporarily."],
+    focusButton:["Focus view","Hide tool panels and sheet thumbnails to give the plan more room. Use Exit focus to restore them."],toolGuideButton:["Field guide","Read all tool descriptions and a guide to the grading workflow. Works with touch on iPad."],
+    btnFit:["Fit plan","Fit the entire sheet into the available canvas."],btnZoomIn:["Zoom in","Enlarge the view around its centre. On PC, the mouse wheel zooms around the pointer."],btnZoomOut:["Zoom out","Reduce the view to see more of the sheet."],
+    gradingRegister:["Levelling register","Set up the instrument using a benchmark + BS or a known HI. Review the same numbered points shown on the plan. ELEV = HI − FS or IFS."],
+    gradingSlopeRegister:["Slope register","Review From/To point pairs, horizontal distances, elevation changes and grades. A negative grade falls from From to To."],
+    gradingNext:["Numbered shot","Tap each shot location, enter a reading and design elevation, then use Save & next point to continue numbering."],
+    slopeTool:["Slope between points","Choose two existing field points and enter their horizontal distance. The slope updates when their elevations change."],
+    "levels-tab":["Levelling","Review instrument setups and the BS, HI, FS/IFS, observed and design elevations for this sheet."],"slopes-tab":["Slopes","Compare point pairs. Grade (%) = elevation change ÷ horizontal distance × 100; 0.073 as a ratio is about 7.3%."],
+    "grading-add-setup":["Add instrument setup","Create a level setup using a known benchmark and backsight, a turning point and backsight, or a directly entered HI."],
+    "grading-add-slope":["Add slope","Link two points and enter a measured horizontal distance. Leave distance blank only when using coordinates or a calibrated plan."],
+    "point-next":["Save & next point","Save this point and return to the plan to place the next numbered shot. Keep the feature, setup and reading type; start fresh readings, design values and photos."],
+    "point-save":["Save point","Save the point's readings, notes and photos. Linked registers and plan labels update together."],
+    "fp-pointNumber":["STA / Point number","Use the same number or station name as your field book. Numbers advance automatically; named references such as MF are also allowed."],
+    "fp-observedElevation":["Observed elevation","The measured elevation in metres. Enter it directly for a manual shot, or calculate it from HI minus the staff reading."],
+    "fp-designElevation":["Design elevation","The intended elevation from the plan. Design minus observed gives positive FILL or negative CUT."],
+    "fp-crewSetup":["Instrument setup","Choose the setup used for this shot, or Manual to enter an observed elevation directly."],
+    "fp-crewType":["IFS / FS","IFS is an intermediate foresight for a detail shot. FS is a foresight, commonly to a turning point before moving the instrument."],
+    "fp-crewReading":["Staff reading","Enter the staff reading in metres. The observed elevation is the selected instrument height minus this reading."]
+  };
+  function crewFeatureLabel(feature){return FEATURE_HELP[feature]&&["EG","FG","TF","BF"].includes(feature)?feature+" · "+FEATURE_HELP[feature][0]:feature;}
+  function decorateRegisterInput(input,label){
+    var pair=null;
+    if(label==="BS (m)")pair=["BS · Backsight","Staff reading on the known reference after setting up the level. HI = reference elevation + BS. With a directly entered HI, BS is recorded for reference only."];
+    else if(label==="Known HI (m)")pair=["HI · Instrument height","Enter the elevation of the level's line of sight in metres. Each shot's elevation is this HI minus its FS or IFS reading."];
+    else if(label==="Benchmark elevation (m)")pair=["Benchmark elevation","Enter the verified elevation of the reference used for this setup. The backsight is added to calculate HI."];
+    else if(label==="Reference point")pair=["Turning point reference","Use the point observed from the previous setup. Its elevation plus the new backsight gives the new HI."];
+    else if(label&&label.startsWith("Staff reading"))pair=CONTROL_HELP["fp-crewReading"];
+    else if(label&&label.startsWith("Reading type"))pair=CONTROL_HELP["fp-crewType"];
+    else if(label&&label.startsWith("Design elevation"))pair=CONTROL_HELP["fp-designElevation"];
+    else if(label&&label.startsWith("Elevation for"))pair=CONTROL_HELP["fp-observedElevation"];
+    else if(label==="Measured distance (m)")pair=["Horizontal distance","Enter the measured horizontal distance between From and To, in metres. Leave blank to use point coordinates or the calibrated plan."];
+    if(pair){input.dataset.helpTitle=pair[0];input.dataset.helpBody=pair[1];}
+  }
+  function crewHelpInfo(el){
+    if(!el)return null;
+    if(el.dataset.helpFeature){var f=el.dataset.helpFeature;return FEATURE_HELP[f]||[f,"Place a "+f.toLowerCase()+" field point, then record its measurements, notes and photos."];}
+    if(el.dataset.helpTool)return TOOL_HELP[el.dataset.helpTool];
+    if(el.dataset.tool&&TOOL_HELP[el.dataset.tool])return TOOL_HELP[el.dataset.tool];
+    if(CONTROL_HELP[el.id])return CONTROL_HELP[el.id];
+    if(el.dataset.helpBody)return [el.dataset.helpTitle||el.getAttribute("aria-label")||"Field tool",el.dataset.helpBody];
+    if(el.classList.contains("stamp-chip"))return [el.textContent.trim(),"Tap the plan to place this survey stamp. Select a placed stamp to move, rotate or recolour it."];
+    if(el.classList.contains("linestyle-chip"))return [el.textContent.trim(),"Choose this line pattern, then drag a line on the plan. Use Ink to choose its colour."];
+    if(el.dataset.tip)return [el.dataset.tip,el.dataset.tip];
+    return null;
+  }
+  function crewHelpElement(target){return target&&target.closest?target.closest('[data-tool],[data-help-feature],[data-help-tool],[data-help-body],[data-crew-help],[data-tip],.stamp-chip,.linestyle-chip'):null;}
+  function hideCrewHint(){
+    clearTimeout(crewHintTimer);clearTimeout(crewHideTimer);document.getElementById("tool-description").hidden=true;
+    if(crewHintTarget){var ids=(crewHintTarget.getAttribute("aria-describedby")||"").split(/\s+/).filter(function(id){return id&&id!=="tool-description";});if(ids.length)crewHintTarget.setAttribute("aria-describedby",ids.join(" "));else crewHintTarget.removeAttribute("aria-describedby");}crewHintTarget=null;
+  }
+  function showCrewHint(el){
+    if(!crewHints||!el.isConnected||!el.getClientRects().length)return;var info=crewHelpInfo(el);if(!info)return;hideCrewHint();crewHintTarget=el;
+    var tip=document.getElementById("tool-description");document.getElementById("tool-description-title").textContent=info[0];document.getElementById("tool-description-body").textContent=info[1];
+    el.removeAttribute("title");var described=(el.getAttribute("aria-describedby")||"").split(/\s+/).filter(Boolean);described.push("tool-description");el.setAttribute("aria-describedby",described.join(" "));
+    tip.hidden=false;var r=el.getBoundingClientRect(),x=r.right+10,y=r.top;if(x+tip.offsetWidth>innerWidth-12){x=Math.max(12,Math.min(r.left,innerWidth-tip.offsetWidth-12));y=r.bottom+10;if(y+tip.offsetHeight>innerHeight-12)y=r.top-tip.offsetHeight-10;}
+    tip.style.left=Math.max(12,Math.min(x,innerWidth-tip.offsetWidth-12))+"px";tip.style.top=Math.max(12,Math.min(y,innerHeight-tip.offsetHeight-12))+"px";
+  }
+  function setCrewHints(on){crewHints=on;try{localStorage.setItem("fieldmark-tool-descriptions",String(on));}catch(e){}document.getElementById("toolHintsToggle").checked=on;document.getElementById("guideHintsToggle").checked=on;if(!on)hideCrewHint();}
+  function initCrewHelp(){
+    try{crewHints=localStorage.getItem("fieldmark-tool-descriptions")!=="false";}catch(e){}setCrewHints(crewHints);document.documentElement.classList.add("crew-help-ready");
+    Object.keys(CONTROL_HELP).forEach(function(id){var el=document.getElementById(id);if(el){el.dataset.crewHelp="true";el.removeAttribute("title");}});
+    document.querySelectorAll('[data-tool]').forEach(function(el){el.removeAttribute("title");});
+    document.getElementById("grading-next-shot").dataset.helpBody=CONTROL_HELP.gradingNext[1];document.getElementById("grading-next-shot").dataset.helpTitle="Numbered shot";
+    document.getElementById("drainageTool").dataset.helpTool="drainage";
+    ["toolHintsToggle","guideHintsToggle"].forEach(function(id){document.getElementById(id).addEventListener("change",function(){setCrewHints(this.checked);});});
+    document.addEventListener("pointerover",function(e){if(e.pointerType==="touch"||e.buttons)return;var el=crewHelpElement(e.target);if(!el||el.contains(e.relatedTarget))return;clearTimeout(crewHideTimer);clearTimeout(crewHintTimer);crewHintTimer=setTimeout(function(){showCrewHint(el);},400);});
+    document.addEventListener("pointerout",function(e){var el=crewHelpElement(e.target);if(!el||el.contains(e.relatedTarget))return;clearTimeout(crewHintTimer);crewHideTimer=setTimeout(hideCrewHint,180);});
+    document.addEventListener("focusin",function(e){var el=crewHelpElement(e.target);if(el&&!crewPointerFocus)showCrewHint(el);});
+    document.addEventListener("focusout",function(){hideCrewHint();});
+    document.addEventListener("pointerdown",function(){crewPointerFocus=true;hideCrewHint();},true);document.addEventListener("scroll",hideCrewHint,true);window.addEventListener("resize",hideCrewHint);
+    document.addEventListener("keydown",function(e){if(e.key==="Tab")crewPointerFocus=false;},true);
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!document.getElementById("tool-description").hidden){hideCrewHint();e.preventDefault();e.stopImmediatePropagation();}},true);
+    document.getElementById("tool-description").addEventListener("pointerenter",function(){clearTimeout(crewHideTimer);});document.getElementById("tool-description").addEventListener("pointerleave",hideCrewHint);
+    document.getElementById("toolGuideButton").addEventListener("click",function(){renderCrewGuide();showFieldModal("tool-guide-dialog");});document.getElementById("tool-guide-close").addEventListener("click",function(){closeFieldModal("tool-guide-dialog");});
+    document.getElementById("crew-setup-slot").appendChild(document.getElementById("gradingRegister"));
+    document.getElementById("grading-next-shot").addEventListener("click",function(){fieldPreset={feature:"Spot grade",label:"Numbered spot grade"};selectTool("fieldpoint");if(innerWidth<=1100)showFieldPanel(false);fieldMessage("Tap the plan for point "+nextPointNumber()+". Use Save & next point to keep recording shots.");});
+    document.getElementById("gradingSlopeRegister").addEventListener("click",function(){openGradingRegister();if(gradingDraft)setRegisterTab("slopes");});
+    document.getElementById("gradingExport").addEventListener("click",function(){document.getElementById("btnExportAll").click();});
+    crewReady=true;
+  }
+  function renderCrewGuide(){
+    var root=document.getElementById("tool-guide-content");root.replaceChildren();
+    function section(title,entries,open){var details=document.createElement("details"),summary=document.createElement("summary");summary.textContent=title;details.open=!!open;details.appendChild(summary);entries.forEach(function(pair){var box=document.createElement("div"),strong=document.createElement("strong"),p=document.createElement("p");box.className="tool-guide-entry";strong.textContent=pair[0];p.textContent=pair[1];box.append(strong,p);details.appendChild(box);});root.appendChild(details);}
+    section("Grading · match the field book",[
+      ["1 · Set up the level","Open the levelling register. Give the setup a useful name, such as LBOW, and enter a verified benchmark + backsight or a known instrument height. BS entered with a direct HI is a record only; it does not change that HI."],
+      ["2 · Number the shots","Choose Place numbered shot and tap the plan. Use the same STA / point number as your field book. Choose the setup, enter IFS or FS and the design elevation, then Save & next point. Readings, design values and photos start fresh for each point."],
+      ["Moving the instrument","Record the turning point's FS under the old setup. Add a new setup linked to that point and enter the new BS. The app carries the elevation forward and updates dependent shots."],
+      ["3 · Check slopes and drainage","Open the slope register and choose From / To point numbers. Enter the measured horizontal distance. Grade is shown as a percentage; negative means falling from From to To. Draw drainage arrows towards the outlet."],
+      ["4 · Review and export","Review readings, design differences and slope direction. Export the plan and registers together. In the PDF, select a point for details and photos, or select a register row to open its point record."],
+      ["Field-book abbreviations","STA = station / point; BS = backsight; HI = instrument height; FS = foresight; IFS = intermediate foresight; ELEV = observed elevation. Difference = design − observed: positive FILL, negative CUT. No project tolerance or pass/fail acceptance is assumed."]
+    ],docMode()==="grading");
+    section("Grading feature descriptions",Object.keys(FEATURE_HELP).map(function(f){return [crewFeatureLabel(f),FEATURE_HELP[f][1]];}),false);
+    section("Drawing and plan tools",Object.keys(TOOL_HELP).map(function(k){return TOOL_HELP[k];}),docMode()!=="grading");
+    section("Controls, measurements and export",Object.keys(CONTROL_HELP).filter(function(k){return !k.startsWith("fp-")&&!k.startsWith("point-");}).map(function(k){return CONTROL_HELP[k];}),false);
+  }
+  function decorateFieldWorkflow(){
+    var grading=docMode()==="grading";document.getElementById("grading-workflow").hidden=!grading;document.getElementById("grading-export-step").hidden=!grading;
+    var presets=document.getElementById("field-presets"),buttons=Array.from(presets.children);
+    buttons.forEach(function(b){var feature=b.textContent;b.dataset.helpFeature=feature;if(grading&&FEATURE_HELP[feature]){b.textContent=crewFeatureLabel(feature);b.dataset.helpFeature=feature;}});
+    if(!grading)return;
+    document.getElementById("field-panel-help").textContent="Follow your plan + level book + slope sheet workflow. All three use the same point numbers.";
+    var page=pages[currentIndex],setups=page&&page.gradingSetups||[];
+    document.getElementById("crew-setup-status").textContent=setups.length?setups.length+" saved setup"+(setups.length===1?"":"s")+". Choose the setup for each shot or enter elevations manually.":"Start with a known HI, or a verified benchmark and backsight. Manual elevations are also available.";
+    var common=["Spot grade","Main floor","Back of walk","Benchmark","Turning point","Swale"],details=document.createElement("details"),summary=document.createElement("summary"),more=document.createElement("div");details.className="crew-more-features";details.open=crewMoreOpen;details.addEventListener("toggle",function(){if(details.isConnected)crewMoreOpen=details.open;});summary.textContent="More grading features · full names";more.className="field-presets";details.append(summary,more);
+    common.forEach(function(name){var b=buttons.find(function(b){return b.dataset.helpFeature===name;});if(b)presets.appendChild(b);});
+    buttons.filter(function(b){return !common.includes(b.dataset.helpFeature);}).forEach(function(b){more.appendChild(b);});presets.appendChild(details);
+  }
+
+  function crewShotKey(page){return (currentDoc?currentDoc.id:"")+":"+page.id;}
+  function crewPointCalculation(d){
+    var setup=document.getElementById("fp-crewSetup");if(!setup||!setup.value)return null;
+    var note=gradeClone(d.note);note.pointNumber=fieldValue("pointNumber")||note.pointNumber;
+    note.leveling={setupId:setup.value,type:fieldValue("crewType"),reading:gradeNumber(fieldValue("crewReading"))};
+    var actions=fieldPoints(d.page).filter(function(a){return a!==d.action;}).map(function(a){return Object.assign({},a,{fieldNote:gradeClone(a.fieldNote)});});
+    var point={type:"fieldpoint",fieldNote:note};actions.push(point);recomputeLevels({actions:actions,gradingSetups:d.page.gradingSetups||[]});return note;
+  }
+  function updateCrewReading(){
+    if(!fieldDraft)return;var setup=document.getElementById("fp-crewSetup");if(!setup)return;
+    var linked=!!setup.value,obs=document.getElementById("fp-observedElevation"),reading=document.getElementById("fp-crewReading"),type=document.getElementById("fp-crewType"),result=document.getElementById("crew-reading-result");
+    reading.disabled=!linked;type.disabled=!linked;obs.readOnly=linked;
+    var note=crewPointCalculation(fieldDraft);if(note){obs.value=note.observedElevation==null?"":gradeFormat(note.observedElevation);result.textContent=note.levelingError||"HI "+gradeFormat(note.leveling.instrumentHeight)+" − reading "+gradeFormat(note.leveling.reading)+" = elevation "+gradeFormat(note.observedElevation)+" m";result.classList.toggle("grading-invalid",!!note.levelingError);}
+    else{result.textContent="Manual shot: enter the measured elevation above.";result.classList.remove("grading-invalid");}
+    updateCutFill();
+  }
+  function configureCrewPointForm(mode,note,action,root,grid){
+    document.getElementById("point-next").hidden=mode!=="grading"||!!action;
+    var feature=document.getElementById("fp-feature");if(mode==="grading")Array.from(feature.options).forEach(function(o){o.textContent=crewFeatureLabel(o.value);});
+    ["pointNumber","observedElevation","designElevation"].forEach(function(k){var el=document.getElementById("fp-"+k);if(el)el.dataset.crewHelp="true";});
+    if(mode!=="grading"){
+      if(note.leveling){document.getElementById("fp-observedElevation").readOnly=true;var info=document.createElement("p");info.className="field-help";info.textContent=note.levelingError||"This elevation is linked to the Grading register.";root.appendChild(info);}return;
+    }
+    var extra=document.createElement("details"),summary=document.createElement("summary"),extraGrid=document.createElement("div");extra.className="crew-point-extra";summary.textContent="Coordinates, offsets & other details";extraGrid.className="field-grid";extra.append(summary,extraGrid);
+    ["northing","easting","code","description","offset","offsetDirection","createdBy"].forEach(function(k){var el=document.getElementById("fp-"+k);if(el){extraGrid.appendChild(el.parentElement);if(el.value)extra.open=true;}});root.appendChild(extra);
+    var memory=crewNextShots.get(crewShotKey(fieldDraft.page));
+    if(!action&&!note.leveling&&memory&&memory.setupId&&(fieldDraft.page.gradingSetups||[]).some(function(s){return s.id===memory.setupId;}))note.leveling={setupId:memory.setupId,type:memory.type,reading:null};
+    var block=document.createElement("section");block.className="crew-point-reading";var title=document.createElement("h3");title.textContent="Level-book reading";block.appendChild(title);
+    var fields=document.createElement("div");fields.className="field-grid";block.appendChild(fields);
+    var options=[""].concat((fieldDraft.page.gradingSetups||[]).map(function(s){return s.id;}));if(note.leveling&&!options.includes(note.leveling.setupId))options.push(note.leveling.setupId);
+    var select=addField(fields,"crewSetup","Instrument setup","select",note.leveling?note.leveling.setupId:"",options);
+    Array.from(select.options).forEach(function(o){o.textContent=o.value?levelSetupName(fieldDraft.page,o.value):"Manual elevation";});
+    addField(fields,"crewType","Reading type","select",note.leveling?note.leveling.type:"IFS",["IFS","FS"]);
+    var input=addField(fields,"crewReading","Staff reading (m)","number",note.leveling?note.leveling.reading:null);input.min="0";input.inputMode="decimal";
+    var info=document.createElement("p");info.id="crew-reading-result";info.setAttribute("aria-live","polite");block.appendChild(info);grid.after(block);
+    if(!fieldDraft.page.gradingSetups||!fieldDraft.page.gradingSetups.length){var help=document.createElement("p");help.className="field-help";help.textContent="To calculate from a reading, first save an instrument setup in the levelling register. You can record a manual elevation now.";block.appendChild(help);}
+    ["crewSetup","crewType","crewReading"].forEach(function(k){var el=document.getElementById("fp-"+k);el.dataset.crewHelp="true";el.addEventListener("input",updateCrewReading);el.addEventListener("change",updateCrewReading);});updateCrewReading();
+  }
+  function commitCrewReading(d){
+    var setup=document.getElementById("fp-crewSetup");if(!setup)return true;
+    var note=crewPointCalculation(d);if(note&&note.levelingError){document.getElementById("point-error").textContent=note.levelingError;return false;}
+    if(note){d.note.leveling=note.leveling;d.note.observedElevation=note.observedElevation;delete d.note.levelingError;}else{delete d.note.leveling;delete d.note.levelingError;}return true;
+  }
+  function rememberCrewShot(d,next){
+    if(d.note.mode!=="grading")return;
+    if(!d.action){var l=d.note.leveling;crewNextShots.set(crewShotKey(d.page),{setupId:l?l.setupId:"",type:l?l.type:"IFS"});}
+    if(next)fieldPreset={feature:d.note.feature,label:crewFeatureLabel(d.note.feature)};
+  }
+
+  initCrewHelp();
   // ---------- boot ----------
   var splashStartTime = Date.now();
   var splashEl = document.getElementById("splash-screen");
