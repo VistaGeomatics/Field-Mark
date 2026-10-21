@@ -232,6 +232,7 @@ SOFTWARE.
 
 -->
 <meta charset="UTF-8">
+<meta name="fieldmark-release" content="2026-10-19-automatic-precision-alignment">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Vista Geomatics Field Mark — Plan Markup</title>
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEYklEQVR42u3VWWxUVRgH8O9sd+beuTMFWmZpU7owbaHFomI1IFTAhWjUxJgYBBWjJiQuMRE1GAnIiyY1IT6gxheCa9SIxhhAKgop+1qkLBEtA9PpOuu9s9xl7j3HhybEYCPEyINJv9dzvvzOSc75f8g3ox1uZGG4wTUJTAKTwL8AMEKE4BsFEEJMy9ZzOiHkvwcYo3oq09LU8NSKR/Vk+joNIlWEJlxACBGCMUZCCABglObGkp13Ldi29f32tlmYsQP7D3sUGSMMABjj8W3XC1BKLMsqFUqWYTJJooRoI2NPrlr+2Uebtv3wYyyeaG1pqqyq7O09Y5fL5bJjmpYksQmZqwGEECFET6ZCkdDmrrdubm/bf/h4Uc9vendj14bXV65+pXvPPgToWO9pRZYdzlVJ+nrr5mhjXffPPQJAkqSrDPTXeUAIKZUMxzSfe/rxN9e8cKE/dvJUXzqrdS64PeBX127sOn7qDCbYNkzikVxNf2PdmmefeOxiLE4IjieG17+9aWBg0D91Cud8YqBYKLREG9e9+qIiez/+8rvf+2PRutqVyx/Z0b33ky++Acb8qg8hZBpGdSi4Ye3LXkl6570Pa2uq22Y3z6yfEQpWbfn0q527e6jECCHjV0Fq3VwEAAhRhDoXdCyc37Gn59COXb8gRpctWRQOh77fviubylRUTRMCOOfcddtaog8/cO/BIyd27tzNfD7HcTBG4VBw2pSKjlvbNU3fd/Bo0bQwQlwIJFW3AoBdMhoa61RV7es7B4WiJ1iFEQIAI1+gXq8se23bppS6nAvOI+Hg5YEhYRj+qkrLtiXGyo4jhLAtG+xyZSQYUNXB4VEBQmKMRutnyLJ34R23xeKJ+tqaxtqahfM7jp3qS6bSAVXt2Xfo7qWLLvRf8ngkVVH6Lw/Mbmo0TDOgqhjjWDwxb+6cgcGhmnC4ZBqtzdFYPJFMZZpn1kfCQUX2anqern/tpf7YZZ9PqY4Ew9Orzp8971eVoeHR559ZUREIYIJPnj5bKhr337f44qWB1uaZsXjCtssPLltimlZLtIESMm1KINpQv/2nvdmc5rruQ8uWfru9O5vJ3bP4Tsdx0AdbPj/x65mhkTG/qnbcctPR3tOO43DOmxrrOec5TT/32x+KIvsUOTE0UjLM2pqIZdklwwAAIYQiy5QSw7QQQFbTHccJBaf7fUoqkxVCzJs7B7HwrNqa6uD0So8kyV7PWCrt8XgYpZqeF0L4FFlVfaZpxRNDq1ct33vgyODwaCQUzGo6Idi2bb/qKxmm67o+RXE5RwB2uazni5lsjjFq2TZllFm2nc7kOOecc8ZYvlAUQhBCEIBhmqPJNCE4p2nnLvSPJlMjYynLtjHG47+yUDQwRgihYskAQAACIzyWSpumhTBC48+07Djc5YAAAODviYIABDBGS/kC9Xoopa7jXjMWr8QGFUIwSoDSf+4RQgSmVnAuhBDUQ665+UpgUAAQYsKTX12uy6/0T87k/xPwJ+/XHMEAGLb1AAAAAElFTkSuQmCC">
@@ -1527,6 +1528,123 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   </form>
 </div>
 
+<style id="fm-page-tools-style">
+#page-dock{flex:none;min-width:0;background:#10273b;border-top:1px solid var(--border)}
+#page-controls{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:7px 12px 3px;color:var(--ink);font:12px/1.35 var(--font-ui)}
+#page-controls button{min-height:36px;padding:7px 10px;border:1px solid #44637a;border-radius:7px;background:#183348;color:var(--ink);font:600 12px var(--font-ui);cursor:pointer;touch-action:manipulation;white-space:nowrap}
+#page-controls button:disabled{opacity:.4;cursor:default}
+#page-controls button:focus-visible,#page-strip button:focus-visible,#page-strip input:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+#page-controls button[aria-pressed=true]{background:#275c78;border-color:#7dd3ed}
+#page-controls #pm-delete{color:#ffc1b6;border-color:#85554d}
+#page-controls #pm-compare:not(:disabled){background:#c66012;border-color:#ff9f57;color:#fff}
+#pm-summary{font-family:var(--font-tech);white-space:nowrap;color:#b9d4e5}
+#pm-status{flex:1;min-width:170px;color:#adc9dc;font-size:11px}
+#pm-status[data-error=true]{color:#ffc1b6}
+#page-dock #page-strip{border-top:0;min-height:95px;padding:7px 12px;align-items:center}
+#page-strip .page-thumb{width:90px;height:79px;border-color:#4c6c82;border-radius:7px;background:#091a27;display:block;overflow:hidden}
+#page-strip .page-thumb.active{border-color:var(--accent)}
+#page-strip .page-thumb.pm-selected{border-color:#73d6f1;box-shadow:0 0 0 2px #73d6f159}
+#page-strip .page-open{position:absolute;inset:0;padding:0;border:0;background:none;width:100%;height:100%;cursor:pointer;color:white;touch-action:manipulation}
+#page-strip .page-open img{position:absolute;inset:0 0 18px;width:100%;height:calc(100% - 18px);object-fit:contain;background:#fff;pointer-events:none}
+#page-strip .pm-page-name{position:absolute;bottom:0;left:0;right:0;padding:2px 4px;background:#0c2233;text-align:left;font:10px/1.3 var(--font-ui);white-space:nowrap;text-overflow:ellipsis;overflow:hidden;pointer-events:none}
+#page-strip .page-thumb .num{bottom:21px;right:3px;pointer-events:none;font-size:10px}
+#page-strip .pm-check{position:absolute;top:0;left:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#10273bcc;border-radius:0 0 6px 0;cursor:pointer}
+#page-strip .pm-check input{width:18px;height:18px;margin:0;accent-color:#26b8df;cursor:pointer}
+#page-strip .pm-remove{position:absolute;right:0;top:0;width:28px;height:28px;padding:0;border:0;border-radius:0 0 0 6px;background:#422521e6;color:#ffe6df;font:23px/1 sans-serif;cursor:pointer;touch-action:manipulation}
+#page-strip .pm-pick-order{position:absolute;top:32px;left:4px;min-width:16px;padding:1px 4px;border-radius:3px;background:#0b6782;color:white;font:700 10px/1.3 var(--font-ui);pointer-events:none}
+#page-strip .page-add{width:90px;height:79px;flex-direction:column;gap:5px;font:600 11px var(--font-ui);color:#b9d4e5}
+#page-strip .page-add svg{width:23px;height:23px}
+.focus-view #page-dock{display:none!important}
+#pm-drop-target{position:fixed;inset:12px;z-index:750;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:3px dashed #82d9ef;border-radius:16px;background:#0a2639ed;color:white;text-align:center;font:700 24px/1.3 var(--font-ui);padding:24px;box-shadow:0 0 0 16px #05131b80}
+#pm-drop-target[hidden]{display:none}
+#pm-drop-target span{font-size:15px;font-weight:400;max-width:620px;color:#d0e8f5}
+@media(pointer:coarse){#page-controls button{min-height:40px}#page-strip .pm-check{width:36px;height:36px}#page-strip .pm-remove{width:34px;height:34px}#page-strip .pm-pick-order{top:38px}}
+@media(max-width:700px){#page-controls{gap:5px;padding:5px 8px 2px}#page-controls button{font-size:11px;padding:7px 8px}#pm-status{flex-basis:100%;min-width:0}#page-dock #page-strip{padding:6px 8px;min-height:91px}#pm-drop-target{font-size:19px}#pm-drop-target span{font-size:13px}}
+</style>
+<div id="pm-drop-target" hidden aria-hidden="true">Drop PDFs or images to add pages<span id="pm-drop-caption">The pages will be appended to the open job.</span></div>
+
+<style id="fm-fine-detail-style">
+#rc-detail{flex:none;margin:0;padding:8px 12px;border-top:1px solid #31516a;background:#122b40;max-height:220px;overflow:auto}
+#rc-detail[hidden]{display:none}
+#rc-detail summary{cursor:pointer;font-weight:700;font-size:12px;min-height:22px;color:#ffd3ac}
+.rc-detail-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:5px}
+.rc-detail-pair figure{margin:0;min-width:0}
+.rc-detail-pair figcaption{font-size:11px;color:#c9dce9;margin-bottom:3px}
+.rc-detail-pair canvas{display:block;width:100%;height:125px;object-fit:contain;background:#fff;border:1px solid #7296ad}
+#rc-detail-help{margin:5px 0 0;font-size:11px;color:#b9cfde}
+#rc-preview{cursor:crosshair}
+@media(max-width:600px){#rc-detail{max-height:175px;padding:5px 8px}.rc-detail-pair{gap:6px}.rc-detail-pair canvas{height:90px}#rc-detail-help{font-size:10px}}
+</style>
+
+<style id="fm-compare-style">
+#fm-compare{width:min(1480px,calc(100vw - 24px));height:calc(100dvh - 24px);max-width:none;max-height:none;margin:auto;padding:0;border:1px solid #49718c;border-radius:14px;background:#0b1e2e;color:#eaf3f9;font:13px/1.45 var(--font-ui,Inter,sans-serif);box-shadow:0 20px 90px #0009}
+#fm-compare[open]{display:flex;flex-direction:column}
+#fm-compare::backdrop{background:#020b13d9}
+#fm-compare *{box-sizing:border-box}
+#fm-compare [hidden]{display:none!important}
+#fm-compare button,#fm-compare select,#fm-compare input{font:inherit;color:inherit}
+#fm-compare button,#fm-compare select,#fm-compare input[type=number]{min-height:38px;padding:7px 10px;border:1px solid #44637a;border-radius:7px;background:#183348}
+#fm-compare button{cursor:pointer;touch-action:manipulation}
+#fm-compare button:disabled{opacity:.42;cursor:default}
+#fm-compare button:focus-visible,#fm-compare select:focus-visible,#fm-compare input:focus-visible{outline:2px solid #ff9d55;outline-offset:2px}
+#fm-compare .rc-primary{background:#d76c16;border-color:#f29347;color:white;font-weight:700}
+.rc-head,.rc-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;flex:none;background:#122b40}
+.rc-head{border-bottom:1px solid #31516a}
+.rc-head h2{margin:0;font-size:19px;letter-spacing:.01em}
+.rc-head p{margin:2px 0 0;color:#b6cddd;font-size:12px}
+.rc-body{display:grid;grid-template-columns:310px minmax(0,1fr);flex:1;min-height:0}
+.rc-controls{padding:14px;overflow:auto;border-right:1px solid #31516a;overscroll-behavior:contain}
+.rc-card{padding:12px;background:#122b3c;border:1px solid #31516a;border-radius:9px;margin-bottom:12px}
+.rc-card h3{margin:0 0 9px;font-size:14px}
+.rc-card label{display:flex;flex-direction:column;gap:5px;margin:8px 0;color:#d7e6f0}
+.rc-card select,.rc-card input[type=file]{width:100%;min-width:0}
+.rc-card input[type=file]{font-size:11px}
+.rc-card input[type=file]::file-selector-button{background:#254b65;color:white;border:1px solid #6387a1;border-radius:5px;padding:7px;margin:0 6px 5px 0}
+.rc-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rc-pair input{width:100%}
+.rc-note{margin:7px 0;font-size:12px;color:#adc5d5;overflow-wrap:anywhere}
+.rc-actions{display:flex;gap:7px;flex-wrap:wrap}
+.rc-workspace{display:flex;flex-direction:column;min-height:0;min-width:0}
+.rc-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:10px 14px;border-bottom:1px solid #31516a;flex:none}
+.rc-toolbar label{display:flex;align-items:center;gap:6px}
+.rc-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:#c8dae6}
+.rc-legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;background:#2185d5}
+.rc-legend span:nth-child(2)::before{background:#ed4b6c}
+.rc-legend span:nth-child(3)::before{background:#9a58d5}
+#rc-scroll{flex:1;min-height:120px;overflow:auto;background:#07131e;padding:18px;overscroll-behavior:contain;touch-action:pan-x pan-y}
+#rc-stage{position:relative;margin:0 auto;width:100%;max-width:100%}
+#rc-preview{display:block;width:100%;height:auto;background:white;border:1px solid #648097}
+#rc-empty{padding:70px 20px;text-align:center;color:#a9c5d8}
+.rc-results{padding:10px 14px;flex:none;border-top:1px solid #31516a;background:#102739}
+.rc-results-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+#rc-findings{display:flex;gap:6px;overflow:auto;max-height:80px;margin-top:8px;padding-bottom:3px}
+#rc-findings button{flex:none;font-size:12px;white-space:nowrap}
+#rc-findings button[aria-current=true]{border-color:#ffa44f;background:#603d27}
+#rc-status{margin:0;flex:1;font-size:12px;overflow-wrap:anywhere}
+#rc-status[data-error=true]{color:#ffc1b2}
+.rc-footer{border-top:1px solid #31516a;flex-wrap:wrap}
+@media(max-width:850px){#fm-compare{width:100vw;height:100dvh;border-radius:0;border:0}.rc-body{grid-template-columns:240px minmax(0,1fr)}.rc-head,.rc-footer{padding:9px 12px}.rc-head h2{font-size:16px}.rc-controls{padding:9px}.rc-card{padding:9px}.rc-toolbar{padding:8px}.rc-head p{max-width:65vw}}
+@media(max-width:600px){.rc-body{display:flex;flex-direction:column;overflow:auto}.rc-controls{max-height:42dvh;flex:none;border-right:0;border-bottom:1px solid #31516a}.rc-workspace{min-height:52dvh;flex:1}.rc-controls .rc-card{margin-bottom:8px}.rc-head p{font-size:11px}.rc-footer .rc-actions{width:100%}#rc-scroll{padding:8px}.rc-legend{font-size:11px}.rc-footer button{flex:1}}
+</style>
+<dialog id="fm-compare" aria-labelledby="rc-title">
+  <header class="rc-head"><div><h2 id="rc-title">Compare Revisions</h2><p>Find visible changes · click a highlighted area for close-ups</p></div><button type="button" id="rc-close" autofocus>Close</button></header>
+  <div class="rc-body">
+    <aside class="rc-controls" aria-label="Comparison setup">
+      <section class="rc-card"><h3>1 · Original drawing</h3><label>Job sheet<select id="rc-original-sheet" aria-label="Original job sheet"></select></label><label>Or open a PDF / image<input id="rc-original-file" type="file" accept="application/pdf,image/*"></label><label id="rc-original-page-row" hidden>PDF page<select id="rc-original-page" aria-label="Original PDF page"></select></label><p class="rc-note" id="rc-original-name">Choose an original drawing.</p></section>
+      <section class="rc-card"><h3>2 · Revised drawing</h3><label>Job sheet<select id="rc-revised-sheet" aria-label="Revised job sheet"></select></label><label>Or open a PDF / image<input id="rc-revised-file" type="file" accept="application/pdf,image/*"></label><label id="rc-revised-page-row" hidden>PDF page<select id="rc-revised-page" aria-label="Revised PDF page"></select></label><p class="rc-note" id="rc-revised-name">Choose a revised drawing.</p></section>
+      <section class="rc-card"><h3>3 · Align drawings</h3><label style="flex-direction:row;align-items:center;gap:8px"><input id="rc-auto-on-load" type="checkbox" checked> Align automatically when loaded</label><p class="rc-note">Overlay the matching lines before comparing. Auto-align matches position, scale and slight rotation. Review the overlay before comparing.</p><div class="rc-pair"><label>Move right (px)<input id="rc-offset-x" type="number" value="0" step="1"></label><label>Move down (px)<input id="rc-offset-y" type="number" value="0" step="1"></label><label>Scale (%)<input id="rc-scale" type="number" value="100" min="10" max="400" step="0.1"></label><label>Rotation (°)<input id="rc-rotation" type="number" value="0" min="-180" max="180" step="0.1"></label></div><div class="rc-actions"><button id="rc-auto" type="button" disabled>Auto-align drawings</button><button id="rc-reset" type="button">Reset</button></div></section>
+      <section class="rc-card"><h3>4 · Find changes</h3><label>Sensitivity <output id="rc-sensitivity-value">65</output><input id="rc-sensitivity" type="range" min="1" max="100" value="65"></label><label>Ignore isolated changes<select id="rc-noise"><option value="4">Small marks (4 pixels)</option><option value="12" selected>Scan specks (12 pixels)</option><option value="40">Larger specks (40 pixels)</option></select></label><label>Line-edge tolerance<select id="rc-tolerance"><option value="0">Exact pixels</option><option value="1" selected>1 pixel</option><option value="2">2 pixels</option></select></label><button type="button" id="rc-run" class="rc-primary" disabled>Compare drawings</button><p class="rc-note">Compares the plan images without Field Mark markup. Highlights are review aids; check the drawings before accepting a change.</p></section>
+    </aside>
+    <section class="rc-workspace" aria-label="Comparison preview">
+      <div class="rc-toolbar"><label>View<select id="rc-mode"><option value="overlay">Colour overlay</option><option value="changes">Highlighted changes</option><option value="side">Side by side</option><option value="original">Original only</option><option value="revised">Revised only</option></select></label><label>Zoom<select id="rc-zoom"><option value="fit">Fit width</option><option value="100">100%</option><option value="150">150%</option><option value="200">200%</option></select></label><span class="rc-legend"><span>Original / removed</span><span>Revised / added</span><span>Colour changed</span></span></div>
+      <div id="rc-scroll"><div id="rc-empty">Choose an original and revised drawing to begin.</div><div id="rc-stage" hidden><canvas id="rc-preview" aria-label="Drawing comparison preview"></canvas></div></div>
+      <details id="rc-detail" hidden><summary id="rc-detail-title">Original and revised close-ups</summary><div class="rc-detail-pair"><figure><figcaption>Original</figcaption><canvas id="rc-detail-original" aria-label="Original drawing close-up"></canvas></figure><figure><figcaption>Revised</figcaption><canvas id="rc-detail-revised" aria-label="Revised drawing close-up"></canvas></figure></div><p id="rc-detail-help">Orange boxes locate the changed area. These are visual close-ups of the plan images.</p></details>
+      <div class="rc-results"><div class="rc-results-top"><strong id="rc-count">No comparison yet</strong><button id="rc-prev" type="button" disabled aria-label="Previous difference">Previous</button><button id="rc-next" type="button" disabled aria-label="Next difference">Next</button><span id="rc-current"></span></div><div id="rc-findings" aria-label="Differences"></div></div>
+    </section>
+  </div>
+  <footer class="rc-footer"><p id="rc-status" role="status" aria-live="polite">Choose two sheets. Your job sheets stay available while you compare.</p><div class="rc-actions"><button id="rc-save" type="button" disabled>Save comparison to job</button><button id="rc-png" type="button" disabled>Download PNG</button><button id="rc-pdf" type="button" class="rc-primary" disabled>Download PDF report</button></div></footer>
+</dialog>
+
 <script>
 (function(){
   "use strict";
@@ -2228,7 +2346,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     });
   }
 
-  async function addPdfFile(file){
+  async function addPdfFile(file,expectedJobId){
     var baseName = file.name.replace(/\.pdf$/i, "");
     var buf = await fileToArrayBuffer(file);
     var sourceId = "src" + genId();
@@ -2267,6 +2385,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       p._imgMime = "image/png";
       p._imgBlob = rasterBlob;
       oc.width=oc.height=1;pdfPage.cleanup();
+      if(expectedJobId&&(!currentDoc||currentDoc.id!==expectedJobId))throw new Error("The target job is no longer open.");
       pages.push(p);
       renderPageStrip();
       if (currentIndex === -1) selectPage(pages.length - 1);
@@ -2275,41 +2394,15 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     } finally { await pdfDoc.destroy(); hideToast(); }
   }
 
-  function addImageFile(file){
-    return new Promise(function(resolve){
-      loadImageFile(file, function(img){
-        var p = newPage("Sheet " + (pages.length + 1), img);
-        p._imgMime = "image/jpeg";
-        imageToBlob(img, "image/jpeg", 0.9).then(function(blob){
-          p._imgBlob = blob;
-          pages.push(p);
-          renderPageStrip();
-          if (currentIndex === -1) selectPage(pages.length - 1);
-          scheduleSave();
-          resolve();
-        });
-      });
-    });
+  async function addImageFile(file,expectedJobId){
+    var image=await blobToImage(file),width=image.naturalWidth,height=image.naturalHeight;
+    if(width>MAX_DIM||height>MAX_DIM){var ratio=Math.min(MAX_DIM/width,MAX_DIM/height),surface=document.createElement("canvas");surface.width=Math.max(1,Math.round(width*ratio));surface.height=Math.max(1,Math.round(height*ratio));surface.getContext("2d").drawImage(image,0,0,surface.width,surface.height);image=await canvasToImage(surface);}
+    var blob=await imageToBlob(image,"image/jpeg",.9);if(!blob)throw new Error("This image could not be imported.");
+    if(expectedJobId&&(!currentDoc||currentDoc.id!==expectedJobId))return;
+    var page=newPage("Sheet "+(pages.length+1),image);page._imgMime="image/jpeg";page._imgBlob=blob;pages.push(page);renderPageStrip();if(currentIndex===-1)selectPage(pages.length-1);scheduleSave();
   }
 
-  async function addFiles(fileList){
-    if (!currentDoc) return;
-    var files = Array.prototype.slice.call(fileList);
-    for (var i = 0; i < files.length; i++){
-      var file = files[i];
-      try {
-        if (file.type === "application/pdf" || /\.pdf$/i.test(file.name)){
-          await addPdfFile(file);
-        } else if (file.type.match(/^image\//)){
-          await addImageFile(file);
-        }
-      } catch (err){
-        hideToast();
-        console.error(err);
-        alert("Couldn't load " + file.name + ". " + (err && err.message ? err.message : "It may be corrupted or password-protected."));
-      }
-    }
-  }
+  function addFiles(fileList){ return pmQueueImports(fileList); }
 
   function selectPage(idx){
     commitPendingText();
@@ -2343,22 +2436,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     renderFieldPanel();
   }
 
-  function renderPageStrip(){
-    if(sketchReady)syncSketchUI();
-    Array.prototype.slice.call(pageStrip.querySelectorAll(".page-thumb")).forEach(function(t){ t.remove(); });
-    pages.forEach(function(p, i){
-      var t = document.createElement("div");
-      t.className = "page-thumb" + (i === currentIndex ? " active" : "");
-      var im = document.createElement("img");
-      im.src = p._stripThumbnail || (p._stripThumbnail = makeThumbnail(p,150));
-      var num = document.createElement("div");
-      num.className = "num"; num.textContent = (i+1);
-      t.appendChild(im); t.appendChild(num);
-      t.addEventListener("click", function(){ selectPage(i); });
-      t.tabIndex=0;t.setAttribute("role","button");t.setAttribute("aria-label","Sheet "+(i+1)+": "+p.name);t.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();selectPage(i);}});
-      pageStrip.insertBefore(t, pageAddBtn);
-    });
-  }
+  function renderPageStrip(){ pmRenderPageStrip(); }
 
   sheetTitle.addEventListener("input", function(){
     if (currentDoc){
@@ -4772,6 +4850,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   // ---------- library <-> editor navigation ----------
   var activeObjectUrls = [];
   function releaseActiveDoc(){
+    pmResetPageTools();
     activeObjectUrls.forEach(function(u){ try { URL.revokeObjectURL(u); } catch(e){} });
     activeObjectUrls = [];
   }
@@ -5790,7 +5869,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     }catch(err){pages.splice(oldLength);surveyData().planVersions=surveyData().planVersions.filter(function(v){return v.id!==version.id;});Object.keys(sourceFiles).forEach(function(k){if(!oldSources.includes(k))delete sourceFiles[k];});renderPageStrip();throw err;}
   }
   async function sdRestorePlan(v){if(!confirm("Restore this previous plan image and markup? The current sheet will be saved as another version. Current shared survey coordinates will be retained."))return;var index=pages.findIndex(function(p){return p.id===v.pageId;});if(index<0)throw new Error("The original sheet no longer exists.");var old=pages[index];sdRememberPlan(old);var h=await hydrateDoc({id:currentDoc.id,name:currentDoc.name,mode:docMode()},{pages:[cloneSaveSnapshot(v.page)],sourceFiles:{}});pages[index]=h.pages[0];surveyData().points.forEach(sdUpdatePlacements);surveyData().sheetRevisions[old.id]={label:v.label,time:new Date().toISOString(),needsReview:true};sdChanged("plan","Restored plan version "+v.label,null,{version:v.id},old.id);renderPageStrip();selectPage(index);sdRender();sdStatus("Previous sheet restored. Review the markup and scale before use.");}
-  function sdRenderHistory(root){var d=surveyData();root.append(sdEl("h3",{text:"Drawing revisions"}));if(currentIndex>=0){var page=pages[currentIndex],rev=d.sheetRevisions[page.id];root.append(sdEl("p",{text:page.name+" · "+sdSheetRevision(page)+(rev&&rev.needsReview?" · review required":"")}));var row=sdEl("div",{class:"sd-grid two"}),label=sdInput(row,"New revision / issue date","","text","sd-revision-label"),file=sdInput(row,"Replacement PDF or image",null,"file","sd-revision-file");file.accept="application/pdf,image/*";root.append(row,sdEl("p",{class:"sd-note",text:"The selected sheet's image is replaced. Its previous image and markup are kept in history. Existing annotations retain their positions and original measurement revision; check them against the new drawing. Ruler calibration is cleared."}),sdEl("div",{class:"sd-row"},[sdButton("Install drawing revision",async function(){if(!file.files[0])throw new Error("Choose a replacement plan.");await sdReplacePlan(file.files[0],label.value);}),sdButton("Mark current revision reviewed",function(){if(!rev)throw new Error("No replacement revision to review.");var before=cloneSaveSnapshot(rev);rev.needsReview=false;rev.reviewedAt=new Date().toISOString();rev.reviewedBy=d.config.crew;sdChanged("plan review","Reviewed plan revision "+rev.label,before,rev,page.id);sdRender();})]));var versions=d.planVersions.filter(function(v){return v.pageId===page.id;});versions.slice().reverse().forEach(function(v){var card=sdEl("div",{class:"sd-card"},[sdEl("strong",{text:v.label+" · "+new Date(v.time).toLocaleString()}),sdButton("Compare images",async function(){var prior=await blobToImage(v.page.imgBlob),grid=sdEl("div",{class:"sd-grid two"});[prior,page.img].forEach(function(img,i){var canvas=sdEl("canvas",{width:640,height:420,style:"width:100%;background:white"}),ctx=canvas.getContext("2d"),scale=Math.min(640/img.width,420/img.height);ctx.drawImage(img,0,0,img.width*scale,img.height*scale);grid.append(sdEl("div",{},[sdEl("p",{text:i?"Current image":"Previous image"}),canvas]));});card.append(grid);}),sdButton("Restore this sheet version",function(){return sdRestorePlan(v);})]);root.append(card);});}else root.append(sdEl("p",{text:"Add or select a plan sheet to manage drawing revisions."}));
+  function sdRenderHistory(root){var d=surveyData();root.append(sdEl("h3",{text:"Drawing revisions"}));if(currentIndex>=0){var page=pages[currentIndex],rev=d.sheetRevisions[page.id];root.append(sdEl("p",{text:page.name+" · "+sdSheetRevision(page)+(rev&&rev.needsReview?" · review required":"")}));var row=sdEl("div",{class:"sd-grid two"}),label=sdInput(row,"New revision / issue date","","text","sd-revision-label"),file=sdInput(row,"Replacement PDF or image",null,"file","sd-revision-file");file.accept="application/pdf,image/*";root.append(row,sdEl("p",{class:"sd-note",text:"The selected sheet's image is replaced. Its previous image and markup are kept in history. Existing annotations retain their positions and original measurement revision; check them against the new drawing. Ruler calibration is cleared."}),sdEl("div",{class:"sd-row"},[sdButton("Install drawing revision",async function(){if(!file.files[0])throw new Error("Choose a replacement plan.");await sdReplacePlan(file.files[0],label.value);}),sdButton("Mark current revision reviewed",function(){if(!rev)throw new Error("No replacement revision to review.");var before=cloneSaveSnapshot(rev);rev.needsReview=false;rev.reviewedAt=new Date().toISOString();rev.reviewedBy=d.config.crew;sdChanged("plan review","Reviewed plan revision "+rev.label,before,rev,page.id);sdRender();})]));var versions=d.planVersions.filter(function(v){return v.pageId===page.id;});versions.slice().reverse().forEach(function(v){var card=sdEl("div",{class:"sd-card"},[sdEl("strong",{text:v.label+" · "+new Date(v.time).toLocaleString()}),sdButton("Compare revisions",async function(){var prior=await blobToImage(v.page.imgBlob);rcOpen({img:prior,name:v.label+" (previous)",pdfPtWidth:v.page.pdfPtWidth,pdfPtHeight:v.page.pdfPtHeight},{img:page.img,name:page.name+" (current)",pdfPtWidth:page.pdfPtWidth,pdfPtHeight:page.pdfPtHeight});}),sdButton("Restore this sheet version",function(){return sdRestorePlan(v);})]);root.append(card);});}else root.append(sdEl("p",{text:"Add or select a plan sheet to manage drawing revisions."}));
     root.append(sdEl("h3",{text:"Job change history"}),sdEl("p",{class:"sd-note",text:"Survey point edits, imports, job settings, calculations and drawing revisions are recorded here with the entered crew name. This local history is editable with the file and is not a tamper-proof certification log."}));root.append(sdEl("div",{class:"sd-row"},[sdButton("Export full history",function(){sdDownload(JSON.stringify(d.audit,null,2),"change-history.json","application/json");}),sdButton("Export calculation log",function(){sdDownload(JSON.stringify(d.calculations,null,2),"calculations.json","application/json");})]));d.audit.slice(-150).reverse().forEach(function(a){var card=sdEl("details",{class:"sd-card"},[sdEl("summary",{text:new Date(a.time).toLocaleString()+" · "+a.by+" · "+a.summary}),sdEl("pre",{style:"white-space:pre-wrap;overflow-wrap:anywhere",text:JSON.stringify({before:a.before,after:a.after},null,2)})]);if(a.kind==="point"&&a.before&&a.target)card.append(sdButton("Restore previous point values",function(){var p=d.points.find(function(p){return p.id===a.target;});if(!p)throw new Error("This point no longer exists.");if(d.points.some(function(p){return p.id!==a.target&&p.pointNumber===a.before.pointNumber;}))throw new Error("That previous point number is now used by another point.");sdApplyPoint(p,sdPointFields(a.before),"Restored previous values for point "+p.pointNumber);sdRender();}));root.append(card);});if(d.audit.length>150)root.append(sdEl("p",{text:"Showing the latest 150 entries. The full export includes all "+d.audit.length+" entries."}));
   }
 
@@ -5837,6 +5916,517 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
 
   initCrewHelp();
   // ---------- boot ----------
+  var revisionCompare = { slots:{original:null,revised:null}, buffers:null, result:null, epoch:0, busy:false, active:-1, opener:null, previewTimer:null };
+  var rcDialog = document.getElementById("fm-compare");
+  function rcElement(name){ return document.getElementById("rc-"+name); }
+  function rcStatus(message,error){ rcElement("status").textContent=message;rcElement("status").dataset.error=error?"true":"false"; }
+  function rcCanvas(width,height){ var surface=document.createElement("canvas");surface.width=width;surface.height=height;var context=surface.getContext("2d",{willReadFrequently:true});context.fillStyle="#fff";context.fillRect(0,0,width,height);return surface; }
+  function rcYield(){ return new Promise(function(resolve){setTimeout(resolve,0);}); }
+  function rcReady(){return !!(revisionCompare.slots.original&&revisionCompare.slots.original.img&&!revisionCompare.slots.original.loading&&revisionCompare.slots.revised&&revisionCompare.slots.revised.img&&!revisionCompare.slots.revised.loading);}
+  function rcRefreshButtons(){
+    var ready=rcReady(),hasResult=!!revisionCompare.result,busy=revisionCompare.busy;
+    rcElement("run").disabled=busy||!ready;rcElement("auto").disabled=busy||!ready;
+    ["save","png","pdf"].forEach(function(name){rcElement(name).disabled=busy||!hasResult;});
+    ["prev","next"].forEach(function(name){rcElement(name).disabled=busy||!hasResult||!revisionCompare.result.regions.length;});
+    rcDialog.querySelectorAll(".rc-controls input,.rc-controls select,#rc-reset").forEach(function(control){control.disabled=busy;});
+    rcDialog.setAttribute("aria-busy",String(busy));
+  }
+  function rcInvalidate(message){
+    revisionCompare.epoch++;revisionCompare.result=null;revisionCompare.active=-1;revisionCompare.busy=false;
+    rcClearDetail();rcElement("findings").replaceChildren();rcElement("count").textContent="No comparison yet";rcElement("current").textContent="";
+    rcRefreshButtons();if(message)rcStatus(message);
+  }
+  function rcReleaseSlot(slot){
+    if(!slot)return;slot.token++;slot.img=null;
+    if(slot.task){var destruction=slot.task.destroy();if(destruction&&destruction.catch)destruction.catch(function(){});}
+    slot.task=null;slot.pdf=null;
+  }
+  function rcResetAlignment(){["offset-x","offset-y","rotation"].forEach(function(name){rcElement(name).value="0";});rcElement("scale").value="100";}
+  function rcNewSlot(){return {img:null,token:0,loading:false,pdf:null,task:null,name:"",pageWidth:null,pageHeight:null};}
+  function rcUseSheet(side,index){
+    var slot=revisionCompare.slots[side];rcReleaseSlot(slot);slot.loading=false;
+    rcElement(side+"-file").value="";rcElement(side+"-page-row").hidden=true;rcElement(side+"-page").replaceChildren();
+    var sheet=pages[index];if(sheet){slot.img=sheet.img;slot.name=sheet.name;slot.pageWidth=sheet.pdfPtWidth;slot.pageHeight=sheet.pdfPtHeight;}
+    else slot.name="Choose a "+(side==="original"?"original":"revised")+" drawing.";
+    rcElement(side+"-name").textContent=slot.name;rcResetAlignment();rcInvalidate("Drawings changed. Check alignment, then compare.");rcPreview();rcAlignLoadedPair();
+  }
+  function rcUseImage(side,source){
+    var slot=revisionCompare.slots[side];rcReleaseSlot(slot);slot.loading=false;slot.img=source.img;slot.name=source.name;slot.pageWidth=source.pdfPtWidth;slot.pageHeight=source.pdfPtHeight;
+    rcElement(side+"-sheet").value="";rcElement(side+"-page-row").hidden=true;rcElement(side+"-name").textContent=slot.name;
+  }
+  async function rcRenderPdfPage(side){
+    var slot=revisionCompare.slots[side],token=++slot.token;slot.loading=true;slot.img=null;rcInvalidate("Rendering "+side+" PDF page…");
+    try{
+      var pageNumber=Number(rcElement(side+"-page").value),pdfPage=await slot.pdf.getPage(pageNumber),baseViewport=pdfPage.getViewport({scale:1});
+      var edge=(navigator.maxTouchPoints>1)?1800:2400,renderScale=Math.min(4,edge/Math.max(baseViewport.width,baseViewport.height));
+      var viewport=pdfPage.getViewport({scale:renderScale}),surface=rcCanvas(Math.ceil(viewport.width),Math.ceil(viewport.height));
+      await pdfPage.render({canvasContext:surface.getContext("2d"),viewport:viewport}).promise;pdfPage.cleanup();
+      if(token!==slot.token||!rcDialog.open)return;
+      slot.img=surface;slot.pageWidth=baseViewport.width;slot.pageHeight=baseViewport.height;slot.name=slot.fileName+" · page "+pageNumber;slot.loading=false;
+      rcElement(side+"-name").textContent=slot.name;rcRefreshButtons();rcPreview();rcStatus("PDF page ready. Check alignment, then compare.");rcAlignLoadedPair();
+    }catch(error){if(token===slot.token){slot.loading=false;rcRefreshButtons();rcStatus("Could not render the PDF page. "+error.message,true);}}
+  }
+  async function rcOpenFile(side,file){
+    if(!file)return;var slot=revisionCompare.slots[side];rcReleaseSlot(slot);slot.loading=true;var token=++slot.token;
+    rcElement(side+"-sheet").value="";rcElement(side+"-page-row").hidden=true;rcElement(side+"-name").textContent="Opening "+file.name+"…";rcResetAlignment();rcInvalidate("Opening "+file.name+"…");rcPreview();
+    try{
+      if(file.size>100*1024*1024)throw new Error("Choose a file smaller than 100 MB or split the PDF into smaller files.");
+      if(file.type==="application/pdf"||/\.pdf$/i.test(file.name)){
+        if(typeof pdfjsLib==="undefined")throw new Error("The PDF reader is unavailable. Reload Field Mark and retry.");
+        var bytes=await file.arrayBuffer();if(token!==slot.token)return;
+        slot.task=pdfjsLib.getDocument({data:bytes});slot.task.onPassword=function(){if(token===slot.token){slot.task.destroy().catch(function(){});slot.loading=false;rcElement(side+"-name").textContent="Password-protected PDF";rcRefreshButtons();rcStatus("Open an unlocked copy of this PDF before comparing.",true);}};
+        var pdf=await slot.task.promise;if(token!==slot.token||!rcDialog.open){await pdf.destroy();return;}
+        slot.pdf=pdf;slot.fileName=file.name;var selector=rcElement(side+"-page");selector.replaceChildren();
+        for(var pageIndex=1;pageIndex<=pdf.numPages;pageIndex++)selector.add(new Option("Page "+pageIndex+" of "+pdf.numPages,String(pageIndex)));
+        rcElement(side+"-page-row").hidden=false;await rcRenderPdfPage(side);
+      }else{
+        if(!/^image\//.test(file.type)&&!/\.(png|jpe?g|webp|gif|bmp)$/i.test(file.name))throw new Error("Choose a PDF or a browser-supported image.");
+        var objectUrl=URL.createObjectURL(file),image=new Image();
+        try{await new Promise(function(resolve,reject){image.onload=resolve;image.onerror=function(){reject(new Error("This image could not be decoded."));};image.src=objectUrl;});}
+        finally{URL.revokeObjectURL(objectUrl);}
+        if(token!==slot.token||!rcDialog.open)return;
+        var ratio=Math.min(1,2600/Math.max(image.naturalWidth,image.naturalHeight)),surface=rcCanvas(Math.max(1,Math.round(image.naturalWidth*ratio)),Math.max(1,Math.round(image.naturalHeight*ratio)));
+        surface.getContext("2d").drawImage(image,0,0,surface.width,surface.height);slot.img=surface;slot.name=file.name;slot.pageWidth=null;slot.pageHeight=null;slot.loading=false;
+        rcElement(side+"-name").textContent=slot.name;rcRefreshButtons();rcPreview();rcStatus("Drawing ready. Check alignment, then compare.");rcAlignLoadedPair();
+      }
+    }catch(error){if(token===slot.token){slot.loading=false;slot.img=null;rcElement(side+"-name").textContent="Could not open "+file.name;rcRefreshButtons();rcStatus("Could not open "+file.name+". "+error.message,true);}}
+  }
+  function rcSettings(){
+    var result={x:Number(rcElement("offset-x").value),y:Number(rcElement("offset-y").value),scale:Number(rcElement("scale").value),rotation:Number(rcElement("rotation").value)};
+    if(!Number.isFinite(result.x)||!Number.isFinite(result.y)||!Number.isFinite(result.scale)||!Number.isFinite(result.rotation)||result.scale<10||result.scale>400||Math.abs(result.rotation)>180)throw new Error("Enter finite alignment values, a scale from 10–400%, and a rotation from -180–180°.");
+    return result;
+  }
+  function rcBuildBuffers(alignmentOverride){
+    if(!rcReady())return null;
+    var original=revisionCompare.slots.original.img,revised=revisionCompare.slots.revised.img,originalWidth=original.naturalWidth||original.width,originalHeight=original.naturalHeight||original.height;
+    var ratio=Math.min(1,((navigator.maxTouchPoints>1)?1600:2200)/Math.max(originalWidth,originalHeight));
+    var width=Math.max(1,Math.round(originalWidth*ratio)),height=Math.max(1,Math.round(originalHeight*ratio)),settings=alignmentOverride||rcSettings();
+    if(Math.abs(settings.x)>width||Math.abs(settings.y)>height)throw new Error("Alignment moves must stay within one page width or height.");
+    var first=rcCanvas(width,height),second=rcCanvas(width,height),context=second.getContext("2d"),revisedWidth=revised.naturalWidth||revised.width,revisedHeight=revised.naturalHeight||revised.height;
+    rcDrawRegisteredImage(first.getContext("2d"),original,width,height,{x:0,y:0,scale:100,rotation:0});
+    rcDrawRegisteredImage(context,revised,width,height,settings);
+    return {original:first,revised:second,width:width,height:height,settings:settings};
+  }
+  function rcGray(surface){
+    var pixels=surface.getContext("2d").getImageData(0,0,surface.width,surface.height).data,gray=new Uint8Array(surface.width*surface.height);
+    for(var pixelIndex=0;pixelIndex<gray.length;pixelIndex++){var byteIndex=pixelIndex*4;gray[pixelIndex]=Math.round(pixels[byteIndex]*.299+pixels[byteIndex+1]*.587+pixels[byteIndex+2]*.114);}
+    return gray;
+  }
+  function rcMinimum(gray,width,height,radius){
+    if(!radius)return gray;var minimum=new Uint8Array(gray.length);
+    for(var row=0;row<height;row++)for(var column=0;column<width;column++){
+      var darkest=255;
+      for(var nearRow=Math.max(0,row-radius);nearRow<=Math.min(height-1,row+radius);nearRow++)for(var nearColumn=Math.max(0,column-radius);nearColumn<=Math.min(width-1,column+radius);nearColumn++)darkest=Math.min(darkest,gray[nearRow*width+nearColumn]);
+      minimum[row*width+column]=darkest;
+    }
+    return minimum;
+  }
+  function rcPaint(surface,mode,includeSelection){
+    var buffers=revisionCompare.buffers;if(!buffers)return;
+    var width=buffers.width,height=buffers.height,side=mode==="side",context;
+    surface.width=side?width*2+20:width;surface.height=height;context=surface.getContext("2d");context.fillStyle="#fff";context.fillRect(0,0,surface.width,height);
+    if(mode==="original")context.drawImage(buffers.original,0,0);
+    else if(mode==="revised")context.drawImage(buffers.revised,0,0);
+    else if(side){context.drawImage(buffers.original,0,0);context.drawImage(buffers.revised,width+20,0);context.fillStyle="#122b40";context.fillRect(width,0,20,height);}
+    else{
+      var original=rcGray(buffers.original),revised=rcGray(buffers.revised),output=context.createImageData(width,height),mask=revisionCompare.result&&revisionCompare.result.mask;
+      for(var pixelIndex=0;pixelIndex<original.length;pixelIndex++){
+        var byteIndex=pixelIndex*4,firstInk=1-original[pixelIndex]/255,secondInk=1-revised[pixelIndex]/255;
+        if(mode==="changes"){
+          var gray=235+Math.min(original[pixelIndex],revised[pixelIndex])*20/255;
+          output.data[byteIndex]=gray;output.data[byteIndex+1]=gray;output.data[byteIndex+2]=gray;
+          if(mask&&mask[pixelIndex]){var colour=mask[pixelIndex]===3,added=mask[pixelIndex]===1;output.data[byteIndex]=colour?143:added?220:28;output.data[byteIndex+1]=colour?65:added?40:101;output.data[byteIndex+2]=colour?195:added?83:211;}
+        }else{
+          var overlap=Math.min(firstInk,secondInk),removed=firstInk-overlap,addedInk=secondInk-overlap;
+          output.data[byteIndex]=255*(1-overlap-.87*removed-.07*addedInk);output.data[byteIndex+1]=255*(1-overlap-.52*removed-.78*addedInk);output.data[byteIndex+2]=255*(1-overlap-.12*removed-.61*addedInk);
+        }
+        output.data[byteIndex+3]=255;
+      }
+      context.putImageData(output,0,0);
+      if(revisionCompare.result){
+        context.lineWidth=Math.max(1.5,width/850);context.font="bold "+Math.max(13,width/95)+"px sans-serif";context.textBaseline="top";
+        revisionCompare.result.regions.forEach(function(region,index){context.strokeStyle="#ce6511";context.fillStyle="#a44705";context.strokeRect(region.x,region.y,region.width,region.height);context.fillText(String(index+1),region.x+3,Math.max(0,region.y-18));});
+      }
+    }
+    if(includeSelection&&revisionCompare.active>=0&&revisionCompare.result){
+      var selected=revisionCompare.result.regions[revisionCompare.active];context.strokeStyle="#14ae88";context.lineWidth=Math.max(3,width/450);context.strokeRect(selected.x-3,selected.y-3,selected.width+6,selected.height+6);
+      if(side)context.strokeRect(selected.x+width+17,selected.y-3,selected.width+6,selected.height+6);
+    }
+  }
+  function rcApplyZoom(){
+    var preview=rcElement("preview"),stage=rcElement("stage"),zoomChoice=rcElement("zoom").value;
+    stage.style.width=zoomChoice==="fit"?"100%":Math.round(preview.width*Number(zoomChoice)/100)+"px";
+    stage.style.maxWidth=zoomChoice==="fit"?"100%":"none";
+  }
+  function rcPreview(){
+    try{
+      revisionCompare.buffers=rcBuildBuffers();var ready=!!revisionCompare.buffers;rcElement("stage").hidden=!ready;rcElement("empty").hidden=ready;
+      if(ready){rcPaint(rcElement("preview"),rcElement("mode").value,true);rcApplyZoom();}
+    }catch(error){revisionCompare.buffers=null;rcElement("stage").hidden=true;rcElement("empty").hidden=false;rcStatus(error.message,true);}
+  }
+  async function rcDetect(){
+    if(!rcReady())return;var buffers;
+    try{buffers=rcBuildBuffers();}catch(error){rcStatus(error.message,true);return;}
+    var epoch=++revisionCompare.epoch;revisionCompare.busy=true;rcRefreshButtons();rcStatus("Comparing drawings…");
+    try{
+      await rcYield();var width=buffers.width,height=buffers.height,first=rcGray(buffers.original),second=rcGray(buffers.revised),tolerance=Number(rcElement("tolerance").value);
+      var firstMin=rcMinimum(first,width,height,tolerance),secondMin=rcMinimum(second,width,height,tolerance),mask=new Uint8Array(width*height),threshold=8+(100-Number(rcElement("sensitivity").value))*1.35;
+      var firstColours=buffers.original.getContext("2d").getImageData(0,0,width,height).data,secondColours=buffers.revised.getContext("2d").getImageData(0,0,width,height).data;
+      for(var row=0;row<height;row++){
+        for(var column=0;column<width;column++){
+          var pixel=row*width+column,byte=pixel*4;
+          if(firstMin[pixel]-second[pixel]>threshold)mask[pixel]=1;
+          else if(secondMin[pixel]-first[pixel]>threshold)mask[pixel]=2;
+          else if(first[pixel]<220&&second[pixel]<220&&Math.max(Math.abs(firstColours[byte]-secondColours[byte]),Math.abs(firstColours[byte+1]-secondColours[byte+1]),Math.abs(firstColours[byte+2]-secondColours[byte+2]))>threshold*1.5)mask[pixel]=3;
+        }
+        if(row%96===0){await rcYield();if(epoch!==revisionCompare.epoch||!rcDialog.open)return;}
+      }
+      var queue=new Int32Array(mask.length),visited=new Uint8Array(mask.length),components=[],minimum=Number(rcElement("noise").value),addedPixels=0,removedPixels=0,colourPixels=0;
+      for(var start=0;start<mask.length;start++){
+        if(!mask[start]||visited[start])continue;var head=0,tail=1,minX=start%width,maxX=minX,minY=Math.floor(start/width),maxY=minY,added=0,removed=0,colour=0;queue[0]=start;visited[start]=1;
+        while(head<tail){
+          var current=queue[head++],currentX=current%width,currentY=Math.floor(current/width);if(mask[current]===1)added++;else if(mask[current]===2)removed++;else colour++;
+          minX=Math.min(minX,currentX);maxX=Math.max(maxX,currentX);minY=Math.min(minY,currentY);maxY=Math.max(maxY,currentY);
+          for(var nearY=Math.max(0,currentY-2);nearY<=Math.min(height-1,currentY+2);nearY++)for(var nearX=Math.max(0,currentX-2);nearX<=Math.min(width-1,currentX+2);nearX++){
+            var adjacent=nearY*width+nearX;if(mask[adjacent]&&!visited[adjacent]){visited[adjacent]=1;queue[tail++]=adjacent;}
+          }
+        }
+        if(tail<minimum){for(var erased=0;erased<tail;erased++)mask[queue[erased]]=0;}
+        else{addedPixels+=added;removedPixels+=removed;colourPixels+=colour;components.push({x:Math.max(0,minX-7),y:Math.max(0,minY-7),width:Math.min(width-1,maxX+7)-Math.max(0,minX-7)+1,height:Math.min(height-1,maxY+7)-Math.max(0,minY-7)+1,added:added,removed:removed,colour:colour});}
+        if(components.length>10000)throw new Error("Too many separate differences. Align the drawings, reduce sensitivity, or increase the speck filter and compare again.");
+        if(start%1024<25){await rcYield();if(epoch!==revisionCompare.epoch||!rcDialog.open)return;}
+      }
+      var regions=rcGroupRegions(components,width,height);
+      regions.sort(function(firstRegion,secondRegion){return firstRegion.y-secondRegion.y||firstRegion.x-secondRegion.x;});
+      if(epoch!==revisionCompare.epoch||!rcDialog.open)return;
+      revisionCompare.buffers=buffers;revisionCompare.result={mask:mask,regions:regions,addedPixels:addedPixels,removedPixels:removedPixels,colourPixels:colourPixels,settings:buffers.settings,sensitivity:Number(rcElement("sensitivity").value),tolerance:tolerance,minimum:minimum};revisionCompare.active=-1;
+      rcElement("count").textContent=regions.length+" changed area"+(regions.length===1?"":"s");rcElement("findings").replaceChildren();
+      regions.forEach(function(region,index){var button=document.createElement("button");button.type="button";button.textContent=(index+1)+" · "+(region.colour||region.added&&region.removed?"Changed":region.added?"Added":"Removed");button.addEventListener("click",function(){rcSelectDifference(index);});rcElement("findings").appendChild(button);});
+      rcElement("mode").value="changes";rcPaint(rcElement("preview"),"changes",false);rcApplyZoom();
+      var fraction=(addedPixels+removedPixels+colourPixels)/(width*height);
+      rcStatus(regions.length?(regions.length+" changed area(s) found. Blue = removed, pink = added, purple = colour changed. Review each area."+(fraction>.3?" Many pixels differ: check alignment and scale before interpreting these results.":"")):"No visible differences found at these settings. Finer changes may require higher sensitivity or a smaller speck filter.");
+    }catch(error){if(epoch===revisionCompare.epoch){revisionCompare.result=null;rcStatus("Comparison stopped. "+error.message,true);}}
+    finally{if(epoch===revisionCompare.epoch){revisionCompare.busy=false;rcRefreshButtons();}}
+  }
+  function rcDrawRegisteredImage(context,image,width,height,settings){
+    var imageWidth=image.naturalWidth||image.width,imageHeight=image.naturalHeight||image.height,fit=Math.min(width/imageWidth,height/imageHeight)*settings.scale/100;
+    context.save();context.translate(width/2+settings.x,height/2+settings.y);context.rotate(settings.rotation*Math.PI/180);context.scale(fit,fit);context.drawImage(image,-imageWidth/2,-imageHeight/2);context.restore();
+  }
+  function rcRegistrationBlur(gray,width,height,radius){
+    if(!radius)return gray;var horizontal=new Float32Array(gray.length),blurred=new Float32Array(gray.length),size=radius*2+1;
+    for(var row=0;row<height;row++)for(var column=0;column<width;column++){var total=0;for(var offset=-radius;offset<=radius;offset++)total+=gray[row*width+Math.max(0,Math.min(width-1,column+offset))];horizontal[row*width+column]=total/size;}
+    for(var row=0;row<height;row++)for(var column=0;column<width;column++){var total=0;for(var offset=-radius;offset<=radius;offset++)total+=horizontal[Math.max(0,Math.min(height-1,row+offset))*width+column];blurred[row*width+column]=total/size;}
+    return blurred;
+  }
+  function rcRegistrationSamples(gray,width,height,limit,minimumContrast){
+    var samples=[],stride=Math.max(1,Math.floor(Math.max(width,height)/320));
+    for(var row=1;row<height-1;row+=stride)for(var column=1;column<width-1;column+=stride){
+      var pixel=row*width+column,value=gray[pixel],contrast=Math.max(Math.abs(value-gray[pixel-1]),Math.abs(value-gray[pixel+1]),Math.abs(value-gray[pixel-width]),Math.abs(value-gray[pixel+width]));
+      if(contrast>=minimumContrast)samples.push({x:column,y:row,value:value});
+    }
+    if(samples.length>limit){var reduced=[],step=samples.length/limit;for(var sampleIndex=0;sampleIndex<limit;sampleIndex++)reduced.push(samples[Math.floor(sampleIndex*step)]);return reduced;}
+    return samples;
+  }
+  function rcRegistrationData(buffers,edge,limit){
+    var ratio=Math.min(1,edge/Math.max(buffers.width,buffers.height)),width=Math.max(1,Math.round(buffers.width*ratio)),height=Math.max(1,Math.round(buffers.height*ratio));
+    var original=rcCanvas(width,height),revised=rcCanvas(width,height);original.getContext("2d").drawImage(buffers.original,0,0,width,height);revised.getContext("2d").drawImage(buffers.revised,0,0,width,height);
+    var radius=edge<=300?2:edge<=600?1:0,first=rcRegistrationBlur(rcGray(original),width,height,radius),second=rcRegistrationBlur(rcGray(revised),width,height,radius),minimumContrast=radius?2:16;
+    return {width:width,height:height,ratio:ratio,original:first,revised:second,originalSamples:rcRegistrationSamples(first,width,height,limit,minimumContrast),revisedSamples:rcRegistrationSamples(second,width,height,limit,minimumContrast)};
+  }
+  function rcRegistrationScore(data,settings){
+    var width=data.width,height=data.height,centerX=(width-1)/2,centerY=(height-1)/2,scale=settings.scale/100,radians=settings.rotation*Math.PI/180,cosine=Math.cos(radians),sine=Math.sin(radians),offsetX=settings.x*data.ratio,offsetY=settings.y*data.ratio;
+    var total=0,count=0;
+    for(var direction=0;direction<2;direction++){
+      var samples=direction?data.revisedSamples:data.originalSamples,target=direction?data.original:data.revised;
+      for(var sampleIndex=0;sampleIndex<samples.length;sampleIndex++){
+        var sample=samples[sampleIndex],relativeX=sample.x-centerX,relativeY=sample.y-centerY,targetX,targetY;
+        if(direction){targetX=(cosine*relativeX-sine*relativeY)*scale+centerX+offsetX;targetY=(sine*relativeX+cosine*relativeY)*scale+centerY+offsetY;}
+        else{relativeX-=offsetX;relativeY-=offsetY;targetX=(cosine*relativeX+sine*relativeY)/scale+centerX;targetY=(-sine*relativeX+cosine*relativeY)/scale+centerY;}
+        var value=255;
+        if(targetX>=0&&targetY>=0&&targetX<width-1&&targetY<height-1){var left=Math.floor(targetX),top=Math.floor(targetY),fractionX=targetX-left,fractionY=targetY-top,pixel=top*width+left;value=(target[pixel]*(1-fractionX)+target[pixel+1]*fractionX)*(1-fractionY)+(target[pixel+width]*(1-fractionX)+target[pixel+width+1]*fractionX)*fractionY;}
+        total+=Math.min(90,Math.abs(sample.value-value));count++;
+      }
+    }
+    return count?total/count:Infinity;
+  }
+  async function rcEstimateAlignment(buffers,initial,epoch){
+    var settings=Object.assign({},initial),coarse=rcRegistrationData(buffers,200,1400);
+    if(coarse.originalSamples.length<16||coarse.revisedSamples.length<16)throw new Error("Not enough drawing features to align automatically. Use the manual alignment controls.");
+    var bestScore=rcRegistrationScore(coarse,settings);
+    if(bestScore<.0001)return {settings:settings,before:bestScore,after:bestScore,improvement:0,matched:true};
+    var coarseStep=2/coarse.ratio,limit=Math.round(Math.max(coarse.width,coarse.height)*.13);
+    for(var offsetY=-limit;offsetY<=limit;offsetY+=2){
+      for(var offsetX=-limit;offsetX<=limit;offsetX+=2){var candidate={x:initial.x+offsetX/coarse.ratio,y:initial.y+offsetY/coarse.ratio,scale:initial.scale,rotation:initial.rotation},score=rcRegistrationScore(coarse,candidate);if(score<bestScore){bestScore=score;settings=candidate;}}
+      if(offsetY%4===0){await rcYield();if(epoch!==revisionCompare.epoch||!rcDialog.open)return null;}
+    }
+    var stages=[{edge:256,move:coarseStep/2,scale:.8,rotation:.25,cycles:6},{edge:512,move:Math.max(.5,buffers.width/512/2),scale:.2,rotation:.06,cycles:7},{edge:768,move:Math.max(.2,buffers.width/768/4),scale:.05,rotation:.02,cycles:7},{edge:Math.min(1100,Math.max(buffers.width,buffers.height)),move:.15,scale:.015,rotation:.006,cycles:7}];
+    var finalData=null;
+    for(var stageIndex=0;stageIndex<stages.length;stageIndex++){
+      var stage=stages[stageIndex],data=rcRegistrationData(buffers,stage.edge,6000),steps={x:stage.move,y:stage.move,scale:stage.scale,rotation:stage.rotation};bestScore=rcRegistrationScore(data,settings);finalData=data;
+      for(var cycle=0;cycle<stage.cycles;cycle++){
+        var changed=false;
+        ["x","y","scale","rotation"].forEach(function(parameter){
+          var currentBest=settings,currentScore=bestScore;
+          [-1,1].forEach(function(direction){
+            var candidate=Object.assign({},settings);candidate[parameter]+=steps[parameter]*direction;
+            if(Math.abs(candidate.x-initial.x)>buffers.width*.2||Math.abs(candidate.y-initial.y)>buffers.height*.2||candidate.scale<Math.max(10,initial.scale*.9)||candidate.scale>Math.min(400,initial.scale*1.1)||Math.abs(candidate.rotation-initial.rotation)>2)return;
+            var score=rcRegistrationScore(data,candidate);if(score<currentScore-.00001){currentBest=candidate;currentScore=score;}
+          });
+          if(currentBest!==settings){settings=currentBest;bestScore=currentScore;changed=true;}
+        });
+        await rcYield();if(epoch!==revisionCompare.epoch||!rcDialog.open)return null;if(!changed)break;
+      }
+    }
+    var before=rcRegistrationScore(finalData,initial),after=rcRegistrationScore(finalData,settings),improvement=before?Math.max(0,(before-after)/before):0;
+    if(after>40&&improvement<.1)return {settings:initial,before:before,after:before,improvement:0,matched:false};
+    if(improvement<.002)settings=Object.assign({},initial);
+    settings.x=Math.round(settings.x*1000)/1000;settings.y=Math.round(settings.y*1000)/1000;settings.scale=Math.round(settings.scale*10000)/10000;settings.rotation=Math.round(settings.rotation*10000)/10000;
+    return {settings:settings,before:before,after:after,improvement:improvement,matched:true};
+  }
+  function rcAlignLoadedPair(){if(rcReady()&&rcDialog.open&&rcElement("auto-on-load").checked)rcAutoAlign({automatic:true});}
+  async function rcAutoAlign(options){
+    if(!rcReady())return;var epoch=++revisionCompare.epoch;revisionCompare.busy=true;rcRefreshButtons();rcStatus("Aligning drawing position, scale and rotation…");
+    try{
+      await rcYield();if(epoch!==revisionCompare.epoch||!rcDialog.open)return;
+      var initial=rcSettings(),buffers=rcBuildBuffers({x:0,y:0,scale:100,rotation:0}),estimate=await rcEstimateAlignment(buffers,initial,epoch);
+      if(!estimate||epoch!==revisionCompare.epoch||!rcDialog.open)return;
+      var settings=estimate.settings;rcElement("offset-x").value=String(settings.x);rcElement("offset-y").value=String(settings.y);rcElement("scale").value=String(settings.scale);rcElement("rotation").value=String(settings.rotation);
+      revisionCompare.lastAlignment=estimate;
+      rcInvalidate(estimate.matched?"Drawings aligned. Review the overlay, then compare; manual adjustments remain available.":"A reliable automatic match was not found. Adjust alignment manually before comparing.");rcPreview();
+    }catch(error){if(epoch===revisionCompare.epoch)rcStatus("Automatic alignment: "+error.message,true);}
+    finally{if(epoch===revisionCompare.epoch){revisionCompare.busy=false;rcRefreshButtons();}}
+  }
+
+  function rcSelectDifference(index){
+    var result=revisionCompare.result;if(!result||!result.regions.length)return;
+    revisionCompare.active=(index+result.regions.length)%result.regions.length;rcShowDetail(result.regions[revisionCompare.active]);
+    rcElement("current").textContent="Area "+(revisionCompare.active+1)+" of "+result.regions.length;
+    Array.from(rcElement("findings").children).forEach(function(button,buttonIndex){button.setAttribute("aria-current",String(buttonIndex===revisionCompare.active));});
+    rcPaint(rcElement("preview"),rcElement("mode").value,true);var region=result.regions[revisionCompare.active],preview=rcElement("preview"),scroll=rcElement("scroll"),scale=preview.clientWidth/preview.width;
+    scroll.scrollTo({left:Math.max(0,(region.x+region.width/2)*scale-scroll.clientWidth/2),top:Math.max(0,(region.y+region.height/2)*scale-scroll.clientHeight/2),behavior:"smooth"});
+  }
+  function rcSafeName(){return ("Comparison - "+revisionCompare.slots.revised.name).replace(/[<>:"/\\|?*\x00-\x1f]/g,"-").slice(0,140);}
+  function rcReportCanvas(){
+    var buffers=revisionCompare.buffers,painted=rcCanvas(buffers.width,buffers.height);rcPaint(painted,rcElement("mode").value,false);
+    var header=Math.max(112,Math.round(painted.width*.08)),surface=rcCanvas(painted.width,painted.height+header),context=surface.getContext("2d"),fontSize=Math.max(12,Math.round(painted.width/100));
+    context.fillStyle="#122b40";context.fillRect(0,0,surface.width,header);context.fillStyle="#fff";context.textBaseline="top";context.font="bold "+fontSize*1.3+"px sans-serif";context.fillText("FIELD MARK · REVISION COMPARISON",12,9,surface.width-24);
+    context.font=fontSize+"px sans-serif";var textRows=["Original: "+revisionCompare.slots.original.name,"Revised: "+revisionCompare.slots.revised.name,revisionCompare.result.regions.length+" changed area(s) · Blue: removed · Pink: added · Purple: colour changed","Visual review only · sensitivity "+revisionCompare.result.sensitivity+" · "+new Date().toLocaleDateString()];
+    textRows.forEach(function(text,index){context.fillText(text,12,12+fontSize*1.7+index*fontSize*1.35,surface.width-24);});context.drawImage(painted,0,header);return surface;
+  }
+  async function rcPngBlob(surface){return new Promise(function(resolve,reject){surface.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Could not create the comparison image."));},"image/png");});}
+  async function rcDownloadPng(){if(!revisionCompare.result)return;try{downloadBytes(await (await rcPngBlob(rcReportCanvas())).arrayBuffer(),rcSafeName()+".png","image/png");rcStatus("Comparison PNG downloaded.");}catch(error){rcStatus(error.message,true);}}
+  async function rcDownloadPdf(){
+    if(!revisionCompare.result)return;revisionCompare.busy=true;rcRefreshButtons();rcStatus("Preparing PDF comparison report…");
+    try{
+      if(typeof PDFLib==="undefined")throw new Error("The PDF exporter is unavailable. Use Download PNG instead.");
+      var surface=rcReportCanvas(),pdf=await PDFLib.PDFDocument.create(),image=await pdf.embedPng(await (await rcPngBlob(surface)).arrayBuffer());
+      var factor=Math.min(1,1800/Math.max(surface.width,surface.height)),pdfPage=pdf.addPage([surface.width*factor,surface.height*factor]);pdfPage.drawImage(image,{x:0,y:0,width:pdfPage.getWidth(),height:pdfPage.getHeight()});
+      var font=await pdf.embedFont(PDFLib.StandardFonts.Helvetica),reportPage=pdf.addPage([612,792]),lineY=750;
+      function reportLine(text){if(lineY<45){reportPage=pdf.addPage([612,792]);lineY=750;}reportPage.drawText(String(text).replace(/[^\x20-\x7e]/g,"?"),{x:32,y:lineY,size:10,font:font,maxWidth:548});lineY-=17;}
+      reportLine("FIELD MARK - REVISION COMPARISON DETAILS");reportLine("Original: "+revisionCompare.slots.original.name.slice(0,85));reportLine("Revised: "+revisionCompare.slots.revised.name.slice(0,85));reportLine("Generated: "+new Date().toISOString());reportLine("Changed areas: "+revisionCompare.result.regions.length);reportLine("Alignment (revised to original): "+JSON.stringify(revisionCompare.result.settings));reportLine("Sensitivity: "+revisionCompare.result.sensitivity+"; edge tolerance: "+revisionCompare.result.tolerance+" px; minimum: "+revisionCompare.result.minimum+" px");reportLine("Positions use the comparison image grid: "+revisionCompare.buffers.width+" x "+revisionCompare.buffers.height+" pixels.");reportLine("Review highlights against the drawings; this is a visual comparison, not an engineering approval.");
+      revisionCompare.result.regions.forEach(function(region,index){reportLine("Area "+(index+1)+": x="+region.x+", y="+region.y+", width="+region.width+", height="+region.height+", added="+region.added+", removed="+region.removed+", colour="+region.colour+" px");});
+      await pdf.attach(new TextEncoder().encode(JSON.stringify({app:"fieldmark-revision-comparison",original:revisionCompare.slots.original.name,revised:revisionCompare.slots.revised.name,generatedAt:new Date().toISOString(),width:revisionCompare.buffers.width,height:revisionCompare.buffers.height,alignment:revisionCompare.result.settings,sensitivity:revisionCompare.result.sensitivity,tolerance:revisionCompare.result.tolerance,minimum:revisionCompare.result.minimum,regions:revisionCompare.result.regions},null,2)),"comparison-details.json",{mimeType:"application/json",description:"Alignment settings and highlighted change regions"});
+      downloadBytes(await pdf.save(),rcSafeName()+".pdf","application/pdf");rcStatus("PDF comparison report downloaded.");
+    }catch(error){rcStatus("Could not export PDF. "+error.message,true);}
+    finally{revisionCompare.busy=false;rcRefreshButtons();}
+  }
+  async function rcSaveToJob(){
+    if(!revisionCompare.result||!currentDoc)return;revisionCompare.busy=true;rcRefreshButtons();rcStatus("Saving comparison as a new sheet…");
+    try{
+      var surface=rcReportCanvas(),blob=await rcPngBlob(surface),image=await blobToImage(blob),sheet=newPage(rcSafeName(),image);sheet._imgBlob=blob;sheet._imgMime="image/png";pages.push(sheet);renderPageStrip();scheduleSave();
+      var saved=await doSave();rcStatus(saved?"Comparison saved as a new job sheet. It is included in job backups and sheet exports.":"Comparison added to the open job, but device saving failed. Download the report or use the job recovery backup before closing.",!saved);
+    }catch(error){rcStatus("Could not save comparison. "+error.message,true);}
+    finally{revisionCompare.busy=false;rcRefreshButtons();}
+  }
+  function rcOpen(original,revised){
+    commitPendingText();revisionCompare.opener=document.activeElement;
+    if(rcDialog.open)rcDialog.close();revisionCompare.slots={original:rcNewSlot(),revised:rcNewSlot()};revisionCompare.buffers=null;rcResetAlignment();rcInvalidate();
+    ["original","revised"].forEach(function(side){var select=rcElement(side+"-sheet");select.replaceChildren(new Option("Choose a job sheet…",""));pages.forEach(function(sheet,index){select.add(new Option((index+1)+" · "+sheet.name,String(index)));});rcElement(side+"-file").value="";rcElement(side+"-page-row").hidden=true;rcElement(side+"-name").textContent="Choose a "+side+" drawing.";});
+    rcElement("mode").value="overlay";rcElement("zoom").value="fit";
+    rcDialog.showModal();
+    if(original)rcUseImage("original",original);else if(pages[currentIndex]){rcElement("original-sheet").value=String(currentIndex);rcUseSheet("original",currentIndex);}
+    if(revised)rcUseImage("revised",revised);rcRefreshButtons();rcPreview();rcStatus("Choose an original and revised sheet. Adjust alignment before comparing.");rcAlignLoadedPair();
+  }
+  var rcLauncher=document.createElement("button");rcLauncher.type="button";rcLauncher.id="compareRevisionsButton";rcLauncher.className="field-button";rcLauncher.textContent="Compare Revisions";rcLauncher.title="Compare two plan revisions with overlays and change highlights";rcLauncher.setAttribute("aria-haspopup","dialog");rcLauncher.setAttribute("aria-controls","fm-compare");rcLauncher.addEventListener("click",function(){rcOpen();});document.getElementById("toolGuideButton").before(rcLauncher);
+  ["original","revised"].forEach(function(side){
+    rcElement(side+"-sheet").addEventListener("change",function(event){rcUseSheet(side,event.target.value===""?-1:Number(event.target.value));});
+    rcElement(side+"-file").addEventListener("change",function(event){rcOpenFile(side,event.target.files[0]);});
+    rcElement(side+"-page").addEventListener("change",function(){rcResetAlignment();rcRenderPdfPage(side);});
+  });
+  ["offset-x","offset-y","scale","rotation","sensitivity","noise","tolerance"].forEach(function(name){rcElement(name).addEventListener("input",function(){rcElement("sensitivity-value").textContent=rcElement("sensitivity").value;rcInvalidate("Settings changed. Compare again to refresh the highlights.");clearTimeout(revisionCompare.previewTimer);revisionCompare.previewTimer=setTimeout(rcPreview,120);});});
+  rcElement("reset").addEventListener("click",function(){rcResetAlignment();rcInvalidate("Alignment reset. Compare again to refresh the highlights.");rcPreview();});
+  rcElement("auto-on-load").addEventListener("change",function(){if(rcElement("auto-on-load").checked)rcAlignLoadedPair();});
+  rcElement("auto").addEventListener("click",rcAutoAlign);rcElement("run").addEventListener("click",rcDetect);
+  rcElement("mode").addEventListener("change",function(){if(revisionCompare.buffers){rcPaint(rcElement("preview"),rcElement("mode").value,true);rcApplyZoom();}});rcElement("zoom").addEventListener("change",rcApplyZoom);
+  rcElement("prev").addEventListener("click",function(){rcSelectDifference(revisionCompare.active<0?revisionCompare.result.regions.length-1:revisionCompare.active-1);});rcElement("next").addEventListener("click",function(){rcSelectDifference(revisionCompare.active+1);});
+  rcElement("png").addEventListener("click",rcDownloadPng);rcElement("pdf").addEventListener("click",rcDownloadPdf);rcElement("save").addEventListener("click",rcSaveToJob);rcElement("close").addEventListener("click",function(){rcDialog.close();});
+  rcDialog.addEventListener("keydown",function(event){event.stopPropagation();});
+  rcDialog.addEventListener("close",function(){revisionCompare.epoch++;clearTimeout(revisionCompare.previewTimer);rcReleaseSlot(revisionCompare.slots.original);rcReleaseSlot(revisionCompare.slots.revised);revisionCompare.buffers=null;revisionCompare.result=null;revisionCompare.busy=false;rcElement("preview").width=1;rcElement("preview").height=1;rcElement("findings").replaceChildren();if(revisionCompare.opener&&revisionCompare.opener.isConnected)revisionCompare.opener.focus();});
+
+  var pageManagement={selected:new Set(),selectionMode:false,anchor:null,undo:[],queue:Promise.resolve(),pendingImports:0,dragDepth:0};
+  var pageDock=document.createElement("section");pageDock.id="page-dock";pageDock.setAttribute("aria-label","Job pages");pageStrip.before(pageDock);
+  var pageControls=document.createElement("div");pageControls.id="page-controls";
+  pageControls.innerHTML='<button type="button" id="pm-add">+ Add pages</button><button type="button" id="pm-select" aria-pressed="false">Select pages</button><button type="button" id="pm-delete" disabled>Delete page</button><button type="button" id="pm-undo" hidden>Undo delete</button><button type="button" id="pm-compare" disabled>Compare selected (2)</button><button type="button" id="pm-clear" hidden>Clear selection</button><span id="pm-summary"></span><span id="pm-status" role="status" aria-live="polite">Drop PDFs/images here · Tick two pages to compare</span>';
+  pageDock.append(pageControls,pageStrip);pageStrip.setAttribute("role","list");pageStrip.setAttribute("aria-label","Pages in this job");
+  var addPageLabel=document.createElement("span");addPageLabel.textContent="Add pages";pageAddBtn.appendChild(addPageLabel);pageAddBtn.setAttribute("aria-label","Add PDF or image pages to this job");
+  function pmElement(name){return document.getElementById("pm-"+name);}
+  function pmStatus(message,error){pmElement("status").textContent=message;pmElement("status").dataset.error=error?"true":"false";}
+  function pmSelectedPages(){return Array.from(pageManagement.selected).map(function(id){return pages.find(function(page){return page.id===id;});}).filter(Boolean);}
+  function pmSync(){
+    if(!pageManagement)return;var selected=pmSelectedPages(),busy=pageManagement.pendingImports>0;
+    Array.from(pageManagement.selected).forEach(function(id){if(!pages.some(function(page){return page.id===id;}))pageManagement.selected.delete(id);});
+    pmElement("summary").textContent=pages.length+" page"+(pages.length===1?"":"s")+(selected.length?" · "+selected.length+" selected":"");
+    pmElement("select").disabled=!pages.length;pmElement("select").setAttribute("aria-pressed",String(pageManagement.selectionMode));
+    pmElement("delete").disabled=busy||(!selected.length&&currentIndex<0);pmElement("delete").textContent=selected.length?"Delete selected ("+selected.length+")":"Delete page";
+    pmElement("compare").disabled=busy||selected.length!==2;pmElement("clear").hidden=!selected.length&&!pageManagement.selectionMode;
+    pmElement("undo").hidden=!pageManagement.undo.length;pmElement("undo").disabled=busy;
+    var libraryButton=document.getElementById("btnLibrary");libraryButton.setAttribute("aria-disabled",String(busy));
+  }
+  function pmResetPageTools(){if(!pageManagement)return;pageManagement.selected.clear();pageManagement.selectionMode=false;pageManagement.anchor=null;pageManagement.undo=[];pageManagement.dragDepth=0;pmElement("drop-target").hidden=true;pmStatus("Drop PDFs/images here · Tick two pages to compare");}
+  function pmTogglePage(id,range){
+    var target=pages.findIndex(function(page){return page.id===id;}),anchor=pages.findIndex(function(page){return page.id===pageManagement.anchor;});
+    if(range&&anchor>=0){for(var pageIndex=Math.min(anchor,target);pageIndex<=Math.max(anchor,target);pageIndex++)pageManagement.selected.add(pages[pageIndex].id);}
+    else if(pageManagement.selected.has(id))pageManagement.selected.delete(id);else pageManagement.selected.add(id);
+    pageManagement.anchor=id;renderPageStrip();var selected=pmSelectedPages();
+    pmStatus(selected.length===2?"Ready to compare · first selected = original, second = revised":selected.length?selected.length+" page(s) selected · select exactly two to compare":"Drop PDFs/images here · Tick two pages to compare");
+  }
+  function pmRenderPageStrip(){
+    if(!pageManagement)return;if(sketchReady)syncSketchUI();var scrollLeft=pageStrip.scrollLeft,focused=document.activeElement,focusPage=focused&&focused.closest(".page-thumb"),focusId=focusPage&&focusPage.dataset.pageId;
+    var focusKind=focused&&focused.matches("input")?"input":focused&&focused.classList.contains("pm-remove")?".pm-remove":".page-open";
+    Array.from(pageStrip.querySelectorAll(".page-thumb")).forEach(function(thumb){thumb.remove();});
+    pages.forEach(function(page,index){
+      var thumb=document.createElement("div");thumb.className="page-thumb"+(index===currentIndex?" active":"")+(pageManagement.selected.has(page.id)?" pm-selected":"");thumb.dataset.pageId=page.id;thumb.setAttribute("role","listitem");
+      var open=document.createElement("button");open.type="button";open.className="page-open";open.setAttribute("aria-label","Open page "+(index+1)+": "+page.name);if(index===currentIndex)open.setAttribute("aria-current","page");open.title=page.name;
+      var image=document.createElement("img");image.src=page._stripThumbnail||(page._stripThumbnail=makeThumbnail(page,150));image.alt="";image.draggable=false;
+      var number=document.createElement("span");number.className="num";number.textContent=String(index+1);var name=document.createElement("span");name.className="pm-page-name";name.textContent=(index+1)+" · "+page.name;open.append(image,number,name);
+      open.addEventListener("click",function(event){if(pageManagement.selectionMode||event.ctrlKey||event.metaKey||event.shiftKey){pmTogglePage(page.id,event.shiftKey);return;}pageManagement.anchor=page.id;selectPage(pages.findIndex(function(candidate){return candidate.id===page.id;}));});
+      open.addEventListener("keydown",function(event){if(event.key===" "||event.key==="Enter")event.stopPropagation();});
+      var label=document.createElement("label");label.className="pm-check";var checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.checked=pageManagement.selected.has(page.id);checkbox.setAttribute("aria-label","Select page "+(index+1)+": "+page.name);
+      checkbox.addEventListener("click",function(event){event.stopPropagation();pmTogglePage(page.id,event.shiftKey);});checkbox.addEventListener("keydown",function(event){if(event.key===" ")event.stopPropagation();});label.appendChild(checkbox);
+      var remove=document.createElement("button");remove.type="button";remove.className="pm-remove";remove.textContent="×";remove.disabled=pageManagement.pendingImports>0;remove.title="Delete this page";remove.setAttribute("aria-label","Delete page "+(index+1)+": "+page.name);remove.addEventListener("click",function(event){event.stopPropagation();pmDeletePages([page.id]);});
+      thumb.append(open,label,remove);
+      if(pageManagement.selected.has(page.id)){var order=document.createElement("span");order.className="pm-pick-order";order.textContent=String(Array.from(pageManagement.selected).indexOf(page.id)+1);thumb.appendChild(order);}
+      pageStrip.insertBefore(thumb,pageAddBtn);
+    });
+    pmSync();pageStrip.scrollLeft=scrollLeft;
+    if(focusId){var replacement=Array.from(pageStrip.querySelectorAll(".page-thumb")).find(function(thumb){return thumb.dataset.pageId===focusId;});if(replacement){var control=replacement.querySelector(focusKind);if(control)control.focus({preventScroll:true});}}
+  }
+  function pmCancelDrafts(){commitPendingText();cancelActiveStroke();cancelPolygonDraft();cancelAngleDraft();activePointers.clear();panState=null;endPinch();inputPointerId=null;penPointerId=null;clearSelection();}
+  function pmDisplayPage(id,fallback){
+    var nextIndex=pages.findIndex(function(page){return page.id===id;});currentIndex=-1;viewportMemory=null;
+    if(pages.length){selectPage(nextIndex>=0?nextIndex:Math.min(fallback,pages.length-1));return;}
+    stage.innerHTML="";canvas=null;ctx=null;selectDeleteBtn=null;selectRecolorBtn=null;recolorPopover=null;rotateHandle=null;rotatingAction=null;emptyState.style.display="flex";renderPageStrip();renderFieldPanel();
+  }
+  function pmDeletePages(ids){
+    if(!currentDoc||pageManagement.pendingImports)return;var unique=new Set(ids),removed=[];
+    pages.forEach(function(page,index){if(unique.has(page.id))removed.push({page:page,index:index});});if(!removed.length)return;
+    var message=removed.length===1?'Delete page "'+removed[0].page.name+'" and its markup?':"Delete these "+removed.length+" pages and their markup?";
+    if(!confirm(message+"\n\nUndo delete is available until you leave this job. Shared survey points stay in the job."))return;
+    var previous=pages[currentIndex]&&pages[currentIndex].id;pmCancelDrafts();syncSurveyPoints();
+    pageManagement.undo.push({jobId:currentDoc.id,entries:removed,activeId:previous});if(pageManagement.undo.length>10)pageManagement.undo.shift();
+    for(var removeIndex=removed.length-1;removeIndex>=0;removeIndex--)pages.splice(removed[removeIndex].index,1);
+    pageManagement.selected.clear();pageManagement.selectionMode=false;pageManagement.anchor=null;
+    sdAudit("plan","Deleted "+removed.length+" page(s)",removed.map(function(entry){return {id:entry.page.id,name:entry.page.name};}),null);
+    pmDisplayPage(previous,removed[0].index);scheduleSave();pmStatus("Deleted "+removed.length+" page(s) · Undo delete restores them while this job stays open.");
+  }
+  function pmUndoDelete(){
+    if(!currentDoc||pageManagement.pendingImports)return;var batch=pageManagement.undo.pop();if(!batch||batch.jobId!==currentDoc.id){pmSync();return;}
+    pmCancelDrafts();batch.entries.forEach(function(entry){pages.splice(Math.min(entry.index,pages.length),0,entry.page);});
+    pageManagement.selected.clear();sdAudit("plan","Restored deleted pages",null,batch.entries.map(function(entry){return {id:entry.page.id,name:entry.page.name};}));pmDisplayPage(batch.activeId,batch.entries[0].index);scheduleSave();pmStatus("Restored "+batch.entries.length+" page(s), including their markup.");
+  }
+  function pmCompareSelected(){
+    var selected=pmSelectedPages();if(selected.length!==2||pageManagement.pendingImports)return;
+    rcOpen({img:selected[0].img,name:selected[0].name,pdfPtWidth:selected[0].pdfPtWidth,pdfPtHeight:selected[0].pdfPtHeight},{img:selected[1].img,name:selected[1].name,pdfPtWidth:selected[1].pdfPtWidth,pdfPtHeight:selected[1].pdfPtHeight});
+  }
+  function pmSupportedFile(file){return file.type==="application/pdf"||/^image\//i.test(file.type)||/\.(pdf|png|jpe?g|webp|gif|bmp)$/i.test(file.name);}
+  function pmQueueImports(fileList){
+    if(!currentDoc)return Promise.resolve();var incoming=Array.from(fileList),files=incoming.filter(pmSupportedFile),jobId=currentDoc.id;
+    if(!files.length){pmStatus("Choose PDF or image files to add pages.",true);return Promise.resolve();}
+    var skipped=incoming.length-files.length;pageManagement.pendingImports++;renderPageStrip();pmStatus("Adding "+files.length+" file(s) to this job…");
+    var work=async function(){
+      var beforeIds=new Set(pages.map(function(page){return page.id;})),failed=0,added=0;
+      try{
+        if(!currentDoc||currentDoc.id!==jobId)return;
+        for(var fileIndex=0;fileIndex<files.length;fileIndex++){
+          if(!currentDoc||currentDoc.id!==jobId)break;var file=files[fileIndex];
+          try{if(file.type==="application/pdf"||/\.pdf$/i.test(file.name))await addPdfFile(file,jobId);else await addImageFile(file,jobId);}
+          catch(error){failed++;hideToast();pmStatus("Could not add "+file.name+". "+(error.message||error),true);}
+        }
+        if(currentDoc&&currentDoc.id===jobId){added=pages.filter(function(page){return !beforeIds.has(page.id);}).length;if(added){sdAudit("plan","Added "+added+" page(s)",null,{files:files.map(function(file){return file.name;}),pageCount:added});scheduleSave();}}
+      }finally{
+        pageManagement.pendingImports--;hideToast();renderPageStrip();
+        if(currentDoc&&currentDoc.id===jobId)pmStatus("Added "+added+" page(s) to this job"+(failed?" · "+failed+" file(s) could not be read":"")+(skipped?" · "+skipped+" unsupported file(s) skipped":"")+(pageManagement.pendingImports?" · more files queued":""),failed>0||skipped>0);
+      }
+    };
+    var task=pageManagement.queue.then(work,work);pageManagement.queue=task.catch(function(error){pmStatus("Page import stopped. "+error.message,true);});return pageManagement.queue;
+  }
+  pmElement("add").addEventListener("click",triggerUpload);
+  pmElement("select").addEventListener("click",function(){pageManagement.selectionMode=!pageManagement.selectionMode;pmSync();pmStatus(pageManagement.selectionMode?"Tap pages to select them · first selected = original, second = revised":"Click a page to open it · use checkboxes or Ctrl/Cmd-click to select pages");});
+  pmElement("clear").addEventListener("click",function(){pageManagement.selected.clear();pageManagement.selectionMode=false;renderPageStrip();pmStatus("Selection cleared · tick two pages to compare");});
+  pmElement("delete").addEventListener("click",function(){var selected=pmSelectedPages();pmDeletePages(selected.length?selected.map(function(page){return page.id;}):pages[currentIndex]?[pages[currentIndex].id]:[]);});
+  pmElement("undo").addEventListener("click",pmUndoDelete);pmElement("compare").addEventListener("click",pmCompareSelected);
+  pageDock.addEventListener("keydown",function(event){
+    if(["Escape","Delete","Backspace"," ","Enter"].includes(event.key)||(event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="a")event.stopPropagation();if(event.key==="Escape"){pageManagement.selected.clear();pageManagement.selectionMode=false;renderPageStrip();}
+    if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="a"){event.preventDefault();pages.forEach(function(page){pageManagement.selected.add(page.id);});renderPageStrip();pmStatus("All "+pages.length+" pages selected.");}
+    if((event.key==="Delete"||event.key==="Backspace")&&event.target.closest(".page-thumb")){event.preventDefault();var selected=pmSelectedPages(),thumb=event.target.closest(".page-thumb");pmDeletePages(selected.length?selected.map(function(page){return page.id;}):[thumb.dataset.pageId]);}
+  });
+  document.getElementById("btnLibrary").addEventListener("click",function(event){if(pageManagement.pendingImports){event.preventDefault();event.stopImmediatePropagation();pmStatus("Pages are still being added. Wait for the import to finish before leaving this job.",true);}},true);
+  window.addEventListener("beforeunload",function(event){if(pageManagement.pendingImports){event.preventDefault();event.returnValue="";}});
+  function pmHasFileDrag(event){return !!(event.dataTransfer&&(Array.from(event.dataTransfer.types||[]).includes("Files")||event.dataTransfer.files.length));}
+  function pmCanDrop(){return !!currentDoc&&!editorView.classList.contains("hidden")&&!document.querySelector("dialog[open],.field-overlay:not([hidden])");}
+  function pmHideDrop(){pageManagement.dragDepth=0;pmElement("drop-target").hidden=true;}
+  window.addEventListener("dragenter",function(event){if(!pmHasFileDrag(event))return;event.preventDefault();if(!pmCanDrop())return;pageManagement.dragDepth++;pmElement("drop-caption").textContent='Append pages to "'+(currentDoc.name||"Untitled job")+'" · existing pages stay in this job';pmElement("drop-target").hidden=false;},true);
+  window.addEventListener("dragover",function(event){if(!pmHasFileDrag(event))return;event.preventDefault();event.dataTransfer.dropEffect=pmCanDrop()?"copy":"none";},true);
+  window.addEventListener("dragleave",function(event){if(!pmHasFileDrag(event)&&!pageManagement.dragDepth)return;pageManagement.dragDepth=Math.max(0,pageManagement.dragDepth-1);if(!pageManagement.dragDepth||!event.relatedTarget)pmHideDrop();},true);
+  window.addEventListener("drop",function(event){if(!pmHasFileDrag(event))return;event.preventDefault();event.stopImmediatePropagation();pmHideDrop();if(pmCanDrop())addFiles(event.dataTransfer.files);},true);
+  window.addEventListener("dragend",pmHideDrop);window.addEventListener("blur",pmHideDrop);
+  pmSync();
+
+  function rcGroupRegions(components,width,height){
+    var regions=[],maximumWidth=Math.max(72,width*.045),maximumHeight=Math.max(30,height*.025);
+    components.forEach(function(component){
+      var combined=Object.assign({},component);
+      if(combined.width<=maximumWidth&&combined.height<=maximumHeight){
+        for(var regionIndex=regions.length-1;regionIndex>=0;regionIndex--){
+          var other=regions[regionIndex];
+          if(other.width>maximumWidth||other.height>maximumHeight)continue;
+          var left=Math.min(combined.x,other.x),top=Math.min(combined.y,other.y),right=Math.max(combined.x+combined.width,other.x+other.width),bottom=Math.max(combined.y+combined.height,other.y+other.height);
+          var overlaps=combined.x<=other.x+other.width&&combined.x+combined.width>=other.x&&combined.y<=other.y+other.height&&combined.y+combined.height>=other.y;
+          if(overlaps&&right-left<=maximumWidth&&bottom-top<=maximumHeight){combined={x:left,y:top,width:right-left,height:bottom-top,added:combined.added+other.added,removed:combined.removed+other.removed,colour:combined.colour+other.colour};regions.splice(regionIndex,1);regionIndex=regions.length;}
+        }
+      }
+      regions.push(combined);
+    });
+    return regions;
+  }
+  function rcClearDetail(){
+    rcElement("detail").hidden=true;
+    ["detail-original","detail-revised"].forEach(function(name){var surface=rcElement(name);surface.width=1;surface.height=1;});
+  }
+  function rcShowDetail(region){
+    var buffers=revisionCompare.buffers;if(!buffers||!region)return;
+    var cropWidth=Math.min(buffers.width,Math.max(100,Math.min(320,region.width+32))),cropHeight=Math.min(buffers.height,Math.max(60,Math.min(180,region.height+24)));
+    var cropX=Math.max(0,Math.min(buffers.width-cropWidth,region.x+region.width/2-cropWidth/2)),cropY=Math.max(0,Math.min(buffers.height-cropHeight,region.y+region.height/2-cropHeight/2));
+    ["original","revised"].forEach(function(side){
+      var surface=rcElement("detail-"+side);surface.width=640;surface.height=240;var context=surface.getContext("2d"),scale=Math.min(surface.width/cropWidth,surface.height/cropHeight),left=(surface.width-cropWidth*scale)/2,top=(surface.height-cropHeight*scale)/2;
+      context.fillStyle="#fff";context.fillRect(0,0,surface.width,surface.height);context.save();context.beginPath();context.rect(left,top,cropWidth*scale,cropHeight*scale);context.clip();
+      var image=revisionCompare.slots[side].img,imageWidth=image.naturalWidth||image.width,imageHeight=image.naturalHeight||image.height;
+      {
+        var settings=side==="original"?{x:0,y:0,scale:100,rotation:0}:buffers.settings,fit=Math.min(buffers.width/imageWidth,buffers.height/imageHeight)*settings.scale/100;
+        context.translate(left+(buffers.width/2+settings.x-cropX)*scale,top+(buffers.height/2+settings.y-cropY)*scale);context.rotate(settings.rotation*Math.PI/180);context.scale(fit*scale,fit*scale);context.drawImage(image,-imageWidth/2,-imageHeight/2);
+      }
+      context.restore();context.strokeStyle="#d56e17";context.lineWidth=2;context.strokeRect(left+(region.x-cropX)*scale,top+(region.y-cropY)*scale,region.width*scale,region.height*scale);
+    });
+    rcElement("detail-title").textContent="Area "+(revisionCompare.active+1)+" · Original and revised close-ups";rcElement("detail").hidden=false;rcElement("detail").open=true;
+  }
+  rcElement("preview").addEventListener("click",function(event){
+    if(!revisionCompare.result||!revisionCompare.buffers)return;var surface=rcElement("preview"),rect=surface.getBoundingClientRect(),pointX=(event.clientX-rect.left)*surface.width/rect.width,pointY=(event.clientY-rect.top)*surface.height/rect.height;
+    if(rcElement("mode").value==="side"&&pointX>=revisionCompare.buffers.width+20)pointX-=revisionCompare.buffers.width+20;
+    var matches=revisionCompare.result.regions.map(function(region,index){return {region:region,index:index};}).filter(function(item){return pointX>=item.region.x-3&&pointX<=item.region.x+item.region.width+3&&pointY>=item.region.y-3&&pointY<=item.region.y+item.region.height+3;});
+    matches.sort(function(first,second){return first.region.width*first.region.height-second.region.width*second.region.height;});if(matches.length)rcSelectDifference(matches[0].index);
+  });
+  rcDialog.addEventListener("close",rcClearDetail);
+
   var splashStartTime = Date.now();
   var splashEl = document.getElementById("splash-screen");
   function hideSplash(){
