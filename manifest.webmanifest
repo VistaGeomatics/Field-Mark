@@ -1,0 +1,14 @@
+{
+  "id": "./",
+  "name": "Field Mark",
+  "short_name": "Field Mark",
+  "description": "Offline plan markup and field jobs stored on this device.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1e2e",
+  "theme_color": "#132d40",
+  "icons": [
+    { "src": "fieldmark-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

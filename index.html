@@ -232,7 +232,9 @@ SOFTWARE.
 
 -->
 <meta charset="UTF-8">
-<meta name="fieldmark-release" content="2026-10-21-cleanup-zoom-pan">
+<meta name="fieldmark-release" content="2026-10-22-inline-point-text">
+<meta name="theme-color" content="#132d40">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Vista Geomatics Field Mark — Plan Markup</title>
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEYklEQVR42u3VWWxUVRgH8O9sd+beuTMFWmZpU7owbaHFomI1IFTAhWjUxJgYBBWjJiQuMRE1GAnIiyY1IT6gxheCa9SIxhhAKgop+1qkLBEtA9PpOuu9s9xl7j3HhybEYCPEyINJv9dzvvzOSc75f8g3ox1uZGG4wTUJTAKTwL8AMEKE4BsFEEJMy9ZzOiHkvwcYo3oq09LU8NSKR/Vk+joNIlWEJlxACBGCMUZCCABglObGkp13Ldi29f32tlmYsQP7D3sUGSMMABjj8W3XC1BKLMsqFUqWYTJJooRoI2NPrlr+2Uebtv3wYyyeaG1pqqyq7O09Y5fL5bJjmpYksQmZqwGEECFET6ZCkdDmrrdubm/bf/h4Uc9vendj14bXV65+pXvPPgToWO9pRZYdzlVJ+nrr5mhjXffPPQJAkqSrDPTXeUAIKZUMxzSfe/rxN9e8cKE/dvJUXzqrdS64PeBX127sOn7qDCbYNkzikVxNf2PdmmefeOxiLE4IjieG17+9aWBg0D91Cud8YqBYKLREG9e9+qIiez/+8rvf+2PRutqVyx/Z0b33ky++Acb8qg8hZBpGdSi4Ye3LXkl6570Pa2uq22Y3z6yfEQpWbfn0q527e6jECCHjV0Fq3VwEAAhRhDoXdCyc37Gn59COXb8gRpctWRQOh77fviubylRUTRMCOOfcddtaog8/cO/BIyd27tzNfD7HcTBG4VBw2pSKjlvbNU3fd/Bo0bQwQlwIJFW3AoBdMhoa61RV7es7B4WiJ1iFEQIAI1+gXq8se23bppS6nAvOI+Hg5YEhYRj+qkrLtiXGyo4jhLAtG+xyZSQYUNXB4VEBQmKMRutnyLJ34R23xeKJ+tqaxtqahfM7jp3qS6bSAVXt2Xfo7qWLLvRf8ngkVVH6Lw/Mbmo0TDOgqhjjWDwxb+6cgcGhmnC4ZBqtzdFYPJFMZZpn1kfCQUX2anqern/tpf7YZZ9PqY4Ew9Orzp8971eVoeHR559ZUREIYIJPnj5bKhr337f44qWB1uaZsXjCtssPLltimlZLtIESMm1KINpQv/2nvdmc5rruQ8uWfru9O5vJ3bP4Tsdx0AdbPj/x65mhkTG/qnbcctPR3tOO43DOmxrrOec5TT/32x+KIvsUOTE0UjLM2pqIZdklwwAAIYQiy5QSw7QQQFbTHccJBaf7fUoqkxVCzJs7B7HwrNqa6uD0So8kyV7PWCrt8XgYpZqeF0L4FFlVfaZpxRNDq1ct33vgyODwaCQUzGo6Idi2bb/qKxmm67o+RXE5RwB2uazni5lsjjFq2TZllFm2nc7kOOecc8ZYvlAUQhBCEIBhmqPJNCE4p2nnLvSPJlMjYynLtjHG47+yUDQwRgihYskAQAACIzyWSpumhTBC48+07Djc5YAAAODviYIABDBGS/kC9Xoopa7jXjMWr8QGFUIwSoDSf+4RQgSmVnAuhBDUQ665+UpgUAAQYsKTX12uy6/0T87k/xPwJ+/XHMEAGLb1AAAAAElFTkSuQmCC">
@@ -1407,6 +1409,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     <aside id="field-panel" hidden aria-label="Field note tools">
       <div class="field-heading"><h2 id="field-panel-title">Municipal</h2><button class="field-button" id="fieldClose" aria-label="Close field tools">✕</button></div>
       <p id="field-panel-help" class="field-help"></p>
+      <section class="field-section" id="field-text-tools"><h3>Legible field notes</h3><div class="ft-entry-buttons"><button type="button" class="field-button" id="field-text-write">Write to text</button><button type="button" class="field-button" id="field-text-speak">Speak to text</button></div><p class="ft-entry-guide">Choose an option, then tap the plan. Notes use 10-point text. Existing handwriting stays unchanged.</p></section>
       <section id="grading-cleanup-section" class="crew-step" hidden><h3>Prepare the plot plan</h3><button type="button" class="field-button" id="plotPlanCleanup" data-help-title="Plot plan cleanup" data-help-body="Draw boxes around information to hide, or keep only the areas the crew needs. Preview before applying. The original stays recoverable; export the cleaned PDF for the field.">Plot plan cleanup</button><p>Hide unnecessary information before issuing the plan to the field. The original stays recoverable.</p></section><div id="grading-workflow" hidden><section class="crew-step"><h3>1 · Set up the level</h3><div id="crew-setup-slot"></div><p id="crew-setup-status"></p></section><section class="crew-step"><h3>2 · Record numbered shots</h3><p>Tap each shot location on the plan. Match the point number to your level book, then enter the staff reading and design grade.</p><button type="button" class="field-button" id="grading-next-shot">Place numbered shot</button></section></div><div id="field-presets" class="field-presets"></div>
       <div id="field-status" role="status"></div>
       <div id="grading-tools" class="field-section" hidden><h3>3 · Check slopes &amp; drainage</h3><div class="field-presets"><button class="field-button" id="gradingRegister">Levelling & slope register</button><button class="field-button" id="gradingSlopeRegister">Slope register</button><button class="field-button" id="slopeTool">Slope between points</button><button class="field-button" id="drainageTool">Drainage arrow</button></div></div>
@@ -1509,6 +1512,8 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   <form id="point-form" class="field-dialog" role="dialog" aria-modal="true" aria-labelledby="point-title" tabindex="-1">
     <div class="field-heading"><h2 id="point-title">Field Point</h2><span id="point-mode" class="mode-badge"></span></div>
     <p class="field-help">Coordinates and measurements are field entries. Plan positions do not imply survey coordinates.</p>
+    <p id="fp-entry-guide" class="ft-point-entry">Write, type or dictate directly in the text fields. Check the wording and numbers before Save point.</p>
+    <details class="ft-point-help"><summary>Writing &amp; dictation help</summary><p>Apple Pencil: write inside a white text field using iPad Scribble. Or tap the field and use the microphone on the iPad onscreen keyboard. No separate note window is needed.</p><p>Enable Scribble in Settings → Apple Pencil, and Dictation in Settings → General → Keyboard. Field Mark cannot turn on the keyboard microphone. Offline dictation depends on your iPad and language settings; test it in Airplane Mode before field use.</p><p>Save point keeps the text with this point; Cancel discards edits. Existing handwriting on the plan is not converted. Numeric measurement fields and calculations are unchanged.</p></details>
     <div id="point-fields"></div>
     <fieldset><legend>Photos attached to this point</legend>
       <label>Add photos<input id="field-photo-input" type="file" accept="image/*" multiple></label>
@@ -1626,6 +1631,30 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
 @media(max-width:850px){#fm-compare{width:100vw;height:100dvh;border-radius:0;border:0}.rc-body{grid-template-columns:240px minmax(0,1fr)}.rc-head,.rc-footer{padding:9px 12px}.rc-head h2{font-size:16px}.rc-controls{padding:9px}.rc-card{padding:9px}.rc-toolbar{padding:8px}.rc-head p{max-width:65vw}}
 @media(max-width:600px){.rc-body{display:flex;flex-direction:column;overflow:auto}.rc-controls{max-height:42dvh;flex:none;border-right:0;border-bottom:1px solid #31516a}.rc-workspace{min-height:52dvh;flex:1}.rc-controls .rc-card{margin-bottom:8px}.rc-head p{font-size:11px}.rc-footer .rc-actions{width:100%}#rc-scroll{padding:8px}.rc-legend{font-size:11px}.rc-footer button{flex:1}}
 </style>
+<style id="field-text-style">
+#field-text-dialog{box-sizing:border-box;width:min(760px,calc(100vw - 20px));max-height:calc(100dvh - 20px);padding:0;border:1px solid #496b82;border-radius:14px;background:#112b3c;color:#e5f0f7;font:14px/1.5 var(--font-ui,sans-serif);overflow:auto}#field-text-dialog::backdrop{background:#03101bd9}.ft-head,.ft-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;background:#17364b}.ft-head h2{font-size:21px;margin:0}.ft-body{padding:16px 18px}.ft-modes,.ft-actions{display:flex;gap:8px;flex-wrap:wrap}.ft-modes [aria-pressed=true]{border-color:#ffb340;background:#28495d}#field-text-dialog button{min-height:44px}.ft-body p{color:#bed2df}.ft-body textarea{box-sizing:border-box;display:block;width:100%;min-height:220px;margin:10px 0;padding:16px;background:#fff;color:#102b3d;border:2px solid #7897a9;border-radius:10px;resize:vertical;font:22px/1.5 var(--font-ui,sans-serif);touch-action:auto;user-select:text;-webkit-user-select:text}.ft-review{display:flex;align-items:center;gap:10px;padding:10px 0}.ft-review input{width:22px;height:22px;flex:none}#ft-status{min-height:1.5em;color:#94d9ef}#ft-stop[hidden],#ft-speech[hidden]{display:none}.ft-foot p{margin:0;font-size:12px;color:#bed2df}.ft-foot .ft-actions{flex:none}.ft-entry-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.ft-entry-buttons button{min-height:44px;flex:1}.ft-entry-guide{font-size:12px;color:#bed2df}#ft-interim{min-height:1.5em;color:#d2e5ef;font-style:italic}#ft-language{min-height:44px;background:#183b52;color:#e5f0f7;border:1px solid #496b82;border-radius:7px;padding:8px}.ft-mic{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}#ft-mic-state{font-weight:700;color:#ffcd87}@media(max-width:550px){.ft-head,.ft-foot{padding:10px 12px}.ft-body{padding:12px}.ft-foot{flex-direction:column;align-items:stretch}.ft-foot .ft-actions{justify-content:flex-end}.ft-body textarea{min-height:185px}.ft-head h2{font-size:18px}}
+</style>
+<style>#ft-language{appearance:none;-webkit-appearance:none;background:#183b52 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6' fill='%23bed2df'/%3E%3C/svg%3E") no-repeat right 10px center;padding:8px 30px 8px 10px;color:#e5f0f7}</style>
+<style>#ft-browser-voice{border:1px solid #496b82;border-radius:8px;padding:8px 10px;margin:10px 0}#ft-browser-voice summary{min-height:36px;cursor:pointer;color:#bed2df}</style>
+<style id="field-point-text-style">
+#point-form .ft-point-text{box-sizing:border-box;min-height:52px;background:#fff;color:#102b3d;border:2px solid #7897a9;font:18px/1.5 var(--font-ui,sans-serif);padding:11px 12px;touch-action:auto;user-select:text;-webkit-user-select:text}#point-form .ft-point-text::placeholder{color:#536b79;opacity:1}#point-form .ft-point-text:focus{border-color:#ffb340;outline:2px solid #ffb340;outline-offset:2px}#point-form textarea.ft-point-text{min-height:136px;resize:vertical}#point-form .ft-point-entry{color:#c5dbe8;font-size:13px;line-height:1.5;margin:10px 0 4px}#point-form .ft-point-help{color:#bed2df;font-size:13px;line-height:1.5;margin:0 0 10px}#point-form .ft-point-help summary{cursor:pointer;min-height:44px;display:list-item;align-content:center;color:#94d9ef}#point-form .ft-point-help p{margin:8px 0}
+</style>
+<dialog id="field-text-dialog" aria-labelledby="ft-title">
+  <header class="ft-head"><h2 id="ft-title">Field text note</h2><button type="button" class="field-button" id="ft-close">Close</button></header>
+  <section class="ft-body">
+    <div class="ft-modes" role="group" aria-label="Text entry"><button type="button" class="field-button" id="ft-write" aria-pressed="true">Write / type</button><button type="button" class="field-button" id="ft-speak" aria-pressed="false">Speak to text</button></div>
+    <p id="ft-instruction">Write with Apple Pencil in the white box using iPad Scribble, or type. This does not convert existing pen strokes.</p>
+    <label for="ft-text">Note text · review before using</label><textarea id="ft-text" maxlength="10000" autocapitalize="sentences" spellcheck="true" inputmode="text" aria-describedby="ft-instruction" placeholder="Write, type or dictate your field note here…"></textarea>
+    <div id="ft-speech" hidden><p>On iPad: tap the white box, then the microphone on the onscreen keyboard. Dictation language and offline support depend on the iPad settings. Field Mark cannot switch on the keyboard microphone for you.</p><details id="ft-browser-voice"><summary>Optional: on-device browser microphone</summary><div class="ft-mic"><label for="ft-language">Browser microphone language</label><select id="ft-language"><option value="en-CA">English (Canada)</option><option value="en-US">English (US)</option></select><button type="button" class="field-button" id="ft-start">Start on-device microphone</button><button type="button" class="field-button" id="ft-stop" hidden>Stop microphone</button><span id="ft-mic-state" role="status"></span></div><p>Browser microphone works only when on-device recognition and its language pack are available. No automatic cloud fallback, audio upload or language download. Otherwise use the iPad keyboard microphone or type.</p><p id="ft-interim" aria-live="polite"></p></details></div>
+    <label class="ft-review"><input type="checkbox" id="ft-reviewed"> I checked the wording, numbers and units.</label>
+    <p id="ft-status" role="status" aria-live="polite"></p>
+  </section>
+  <footer class="ft-foot"><p>Plain text stays with this job. Recognition never changes elevations or other measurements automatically.</p><div class="ft-actions"><button type="button" class="field-button" id="ft-cancel">Cancel</button><button type="button" class="field-button primary" id="ft-use" disabled>Place reviewed text</button></div></footer>
+</dialog>
+
+<style id="fieldmark-offline-style">
+#lib-topbar{flex-wrap:wrap;gap:8px}#fm-offline-button{min-height:42px;font-size:12px}#fm-offline-button[data-ready=true]{border-color:#6dbf8e;color:#abebc4}#fm-offline-dialog{box-sizing:border-box;width:min(620px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:22px;border:1px solid #496b82;border-radius:12px;background:#112b3c;color:#e5f0f7;font:14px/1.5 var(--font-ui,sans-serif);overflow:auto}#fm-offline-dialog::backdrop{background:#03101bd9}#fm-offline-dialog h2{font-size:21px;margin-top:0}#fm-offline-dialog h3{font-size:16px}#fm-offline-dialog .field-actions{display:flex;flex-wrap:wrap;gap:8px}#fm-offline-dialog button{min-height:44px}#fm-offline-update[hidden]{display:none}#fm-offline-status{color:#94d9ef}#fm-device-storage{overflow-wrap:anywhere}
+</style>
 <style id="plot-cleanup-style">
 #fm-plot-cleanup{padding:0;width:min(1320px,calc(100vw - 24px));height:min(940px,calc(100vh - 24px));height:min(940px,calc(100dvh - 24px));max-width:none;max-height:none;border:1px solid #40637b;border-radius:14px;background:#0b1e2e;color:#e5f0f7;overflow:hidden;font:14px var(--font-ui,sans-serif)}
 #fm-plot-cleanup[open]{display:flex;flex-direction:column}
@@ -1661,7 +1690,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       <p class="pc-note">Tap text follows detected PDF or scanned labels, including their angle. Angled outline works on any plan. All selections hide or keep an area; nearby lines inside it are affected too. Your grading points stay visible.</p>
       <div class="pc-actions"><button type="button" class="field-button" id="pc-undo">Undo last area</button><button type="button" class="field-button" id="pc-clear">Clear areas</button></div>
       <h3>2 · Review the cleanup</h3>
-      <label><input type="checkbox" id="pc-preview"> Preview cleaned plan</label>
+      <label><input type="checkbox" id="pc-preview" checked> Preview cleaned plan</label>
       <ul id="pc-area-list" aria-label="Marked cleanup areas"></ul>
       <button type="button" class="field-button" id="pc-restore">Restore original drawing</button>
       <p class="pc-safety">The original stays in this job and editable backups. For a simplified field copy, apply the cleanup, then export the PDF. This is visual cleanup, not secure redaction.</p>
@@ -1704,43 +1733,88 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   function genId(){ return "id" + Date.now().toString(36) + Math.random().toString(36).slice(2,9); }
 
   // ---------- local storage (IndexedDB) ----------
-  var DB_NAME = "fieldmark-db", DB_VERSION = 1;
-  var dbPromise = null;
-  var storageAvailable = (typeof indexedDB !== "undefined");
-
+  var DB_NAME="fieldmark-db",DB_VERSION=1,dbPromise=null,storageCompatibilityWrites=false;
+  var storageAvailable=typeof indexedDB!=="undefined";
+  function storageError(name,message){var error=new Error(message);error.name=name;return error;}
+  function transientStorageError(error){return !!error&&["AbortError","UnknownError","InvalidStateError","TransactionInactiveError","StorageTimeoutError"].includes(error.name);}
+  function resetStorageConnection(){var previous=dbPromise;dbPromise=null;if(previous)previous.then(function(db){db.close();},function(){});}
   function openDB(){
     if(dbPromise)return dbPromise;
     var attempt=new Promise(function(resolve,reject){
-      var req,finished=false,timer=setTimeout(function(){if(!finished){finished=true;var err=new Error("Device storage did not respond. Close other Field Mark tabs and retry.");err.name="StorageTimeoutError";reject(err);}},20000);
-      function fail(err){if(finished)return;finished=true;clearTimeout(timer);reject(err||new Error("Device storage failed"));}
+      var request,finished=false,timer=setTimeout(function(){fail(storageError("StorageTimeoutError","Device storage did not respond. Keep this tab open, protect your work with a recovery backup, then retry saving."));},20000);
+      function fail(error){if(finished)return;finished=true;clearTimeout(timer);reject(error||storageError("UnknownError","Device storage failed."));}
       try{
-        // Open the existing version. Earlier published Field Mark releases used
-        // version 2; requesting version 1 prevents access to their intact jobs.
-        req=indexedDB.open(DB_NAME);
-        req.onupgradeneeded=function(event){var db=event.target.result;["folders","notesMeta","notesData"].forEach(function(name){if(!db.objectStoreNames.contains(name))db.createObjectStore(name,{keyPath:"id"});});};
-        req.onsuccess=function(){if(finished){req.result.close();return;}var db=req.result,missing=["folders","notesMeta","notesData"].filter(function(name){return !db.objectStoreNames.contains(name);});if(missing.length){db.close();var err=new Error("Existing Field Mark storage has a different layout (missing "+missing.join(", ")+"). Its data has been preserved. Contact support with these details.");err.name="StorageSchemaError";fail(err);return;}finished=true;clearTimeout(timer);function clearConnection(){if(dbPromise===attempt)dbPromise=null;}db.onversionchange=function(){db.close();clearConnection();};db.onclose=clearConnection;resolve(db);};
-        req.onerror=function(){fail(req.error);};req.onblocked=function(){var err=new Error("Another Field Mark tab is blocking storage. Close it and retry saving.");err.name="StorageBlockedError";fail(err);};
-      }catch(err){fail(err);}
+        request=indexedDB.open(DB_NAME);
+        request.onupgradeneeded=function(){var db=request.result;["folders","notesMeta","notesData"].forEach(function(name){if(!db.objectStoreNames.contains(name))db.createObjectStore(name,{keyPath:"id"});});};
+        request.onsuccess=function(){
+          if(finished){request.result.close();return;}var db=request.result,missing=["folders","notesMeta","notesData"].filter(function(name){return !db.objectStoreNames.contains(name);});
+          if(missing.length){db.close();fail(storageError("StorageSchemaError","Existing Field Mark storage has a different layout (missing "+missing.join(", ")+"). Its data has been preserved. Contact support with these details."));return;}
+          finished=true;clearTimeout(timer);function clearConnection(){if(dbPromise===attempt)dbPromise=null;}
+          db.onversionchange=function(){db.close();clearConnection();};db.onclose=clearConnection;resolve(db);
+        };
+        request.onerror=function(){fail(request.error);};request.onblocked=function(){fail(storageError("StorageBlockedError","Another Field Mark tab is blocking storage. Protect any open work, close the other tab, then retry saving."));};
+      }catch(error){fail(error);}
     });
     dbPromise=attempt;attempt.catch(function(){if(dbPromise===attempt)dbPromise=null;});return attempt;
   }
-  function writeTransaction(db,stores){try{return db.transaction(stores,"readwrite",{durability:"strict"});}catch(err){if(err.name!=="TypeError")throw err;return db.transaction(stores,"readwrite");}}
-  function dbPut(store,value){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=writeTransaction(db,store);tx.oncomplete=function(){resolve();};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Write aborted"));};tx.objectStore(store).put(value);});});}
-  function dbDelete(store,key){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=writeTransaction(db,store);tx.oncomplete=function(){resolve();};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Delete aborted"));};tx.objectStore(store).delete(key);});});}
-  function dbGet(store,key){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=db.transaction(store,"readonly"),req=tx.objectStore(store).get(key);tx.oncomplete=function(){resolve(req.result);};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Read aborted"));};});});}
-  function dbGetAll(store){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=db.transaction(store,"readonly"),req=tx.objectStore(store).getAll();tx.oncomplete=function(){resolve(req.result||[]);};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Read aborted"));};});});}
-  function writeNotePair(meta,data,expectedVersion){return openDB().then(function(db){return new Promise(function(resolve,reject){
-    var tx=writeTransaction(db,["notesMeta","notesData"]),reason=null,version=0;
-    tx.oncomplete=function(){resolve(version);};tx.onerror=tx.onabort=function(){reject(reason||tx.error||new Error("Save aborted"));};
-    var req=tx.objectStore("notesData").get(data.id);req.onsuccess=function(){
-      var found=req.result,actual=found&&found._saveVersion||0;
-      if(expectedVersion!==undefined&&actual!==expectedVersion){reason=new Error("This job changed in another tab");reason.name="SaveConflictError";tx.abort();return;}
-      try{version=actual+1;meta._saveVersion=data._saveVersion=version;tx.objectStore("notesMeta").put(meta);tx.objectStore("notesData").put(data);}catch(err){reason=err;tx.abort();}
-    };
-  });});}
-  function deleteNotePair(id){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=writeTransaction(db,["notesMeta","notesData"]);tx.oncomplete=function(){resolve();};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Delete aborted"));};tx.objectStore("notesMeta").delete(id);tx.objectStore("notesData").delete(id);});});}
-  function readLibrarySnapshot(){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=db.transaction(["folders","notesMeta","notesData"],"readonly"),folders=tx.objectStore("folders").getAll(),meta=tx.objectStore("notesMeta").getAll(),data=tx.objectStore("notesData").getAll();tx.oncomplete=function(){resolve({folders:folders.result||[],meta:meta.result||[],data:data.result||[]});};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Backup read aborted"));};});});}
-  function writeRestoreBundle(records){return openDB().then(function(db){return new Promise(function(resolve,reject){var tx=writeTransaction(db,["folders","notesMeta","notesData"]),reason=null;tx.oncomplete=function(){resolve();};tx.onerror=tx.onabort=function(){reject(reason||tx.error||new Error("Restore aborted. No notes were imported."));};try{records.forEach(function(row){tx.objectStore(row[0]).put(row[1]);});}catch(err){reason=err;tx.abort();}});});}
+  function writeTransaction(db,stores){
+    if(!storageCompatibilityWrites){try{return db.transaction(stores,"readwrite",{durability:"strict"});}catch(error){if(error.name!=="TypeError")throw error;}}
+    return db.transaction(stores,"readwrite");
+  }
+  function storageTransaction(db,stores,mode,message,enqueue){
+    return new Promise(function(resolve,reject){
+      var tx=mode==="readwrite"?writeTransaction(db,stores):db.transaction(stores,mode),reason=null,result;
+      function recordError(error){if(error&&(!reason||reason.name==="AbortError"))reason=error;}
+      function abort(error){recordError(error);try{tx.abort();}catch(abortError){reject(reason||abortError);}}
+      tx.onerror=function(event){var target=event.target;recordError(target&&target.error||tx.error);};
+      tx.onabort=function(){reject(reason||tx.error||storageError("AbortError",message+" The browser cancelled the transaction before it completed."));};
+      tx.oncomplete=function(){try{resolve(typeof result==="function"?result():result);}catch(error){reject(error);}};
+      try{result=enqueue(tx,abort);}catch(error){abort(error);}
+    });
+  }
+  function storageBlobBytes(blob){
+    if(typeof blob.arrayBuffer==="function")return blob.arrayBuffer();
+    return new Promise(function(resolve,reject){var reader=new FileReader();reader.onload=function(){resolve(reader.result);};reader.onerror=function(){reject(reader.error);};reader.readAsArrayBuffer(blob);});
+  }
+  async function freshStorageBlobs(value,seen){
+    if(!value||typeof value!=="object")return value;
+    seen=seen||new WeakMap();if(seen.has(value))return seen.get(value);
+    if(value instanceof Blob){var bytes=await storageBlobBytes(value),replacement=typeof File!=="undefined"&&value instanceof File?new File([bytes],value.name,{type:value.type,lastModified:value.lastModified}):new Blob([bytes],{type:value.type});seen.set(value,replacement);return replacement;}
+    if(value instanceof ArrayBuffer||ArrayBuffer.isView(value)||value instanceof Date||value instanceof RegExp)return value;
+    if(value instanceof Map){var mapped=new Map();seen.set(value,mapped);for(var entry of value)mapped.set(await freshStorageBlobs(entry[0],seen),await freshStorageBlobs(entry[1],seen));return mapped;}
+    if(value instanceof Set){var members=new Set();seen.set(value,members);for(var member of value)members.add(await freshStorageBlobs(member,seen));return members;}
+    var output=Array.isArray(value)?[]:Object.create(Object.getPrototypeOf(value));seen.set(value,output);
+    for(var key of Object.keys(value))Object.defineProperty(output,key,{value:await freshStorageBlobs(value[key],seen),enumerable:true,configurable:true,writable:true});
+    return output;
+  }
+  function dbPut(store,value){return openDB().then(function(db){return storageTransaction(db,store,"readwrite","Write aborted.",function(tx){tx.objectStore(store).put(value);});});}
+  function dbDelete(store,key){return openDB().then(function(db){return storageTransaction(db,store,"readwrite","Delete aborted.",function(tx){tx.objectStore(store).delete(key);});});}
+  function dbGet(store,key){return openDB().then(function(db){return storageTransaction(db,store,"readonly","Read aborted.",function(tx){var request=tx.objectStore(store).get(key);return function(){return request.result;};});}).then(function(value){return freshStorageBlobs(value);});}
+  function dbGetAll(store){return openDB().then(function(db){return storageTransaction(db,store,"readonly","Read aborted.",function(tx){var request=tx.objectStore(store).getAll();return function(){return request.result||[];};});}).then(function(value){return freshStorageBlobs(value);});}
+  async function writeNotePair(meta,data,expectedVersion){
+    function write(db,record){return storageTransaction(db,["notesMeta","notesData"],"readwrite","Save aborted.",function(tx,abort){
+      var version=0,request=tx.objectStore("notesData").get(record.id);
+      request.onsuccess=function(){
+        try{
+          var found=request.result,actual=found&&found._saveVersion||0;
+          if(expectedVersion!==undefined&&actual!==expectedVersion){abort(storageError("SaveConflictError","This job changed in another tab"));return;}
+          version=actual+1;meta._saveVersion=record._saveVersion=version;tx.objectStore("notesMeta").put(meta);tx.objectStore("notesData").put(record);
+        }catch(error){abort(error);}
+      };
+      return function(){return version;};
+    });}
+    try{return await write(await openDB(),data);}catch(error){
+      if(!transientStorageError(error))throw error;
+      storageCompatibilityWrites=true;resetStorageConnection();
+      var fresh;
+      try{fresh=await freshStorageBlobs(data);}catch(assetError){throw storageError("StorageAssetReadError","A drawing or photo could not be read for retry saving. Keep this tab open and download a recovery backup. "+(assetError.message||""));}
+      return write(await openDB(),fresh);
+    }
+  }
+  function deleteNotePair(id){return openDB().then(function(db){return storageTransaction(db,["notesMeta","notesData"],"readwrite","Delete aborted.",function(tx){tx.objectStore("notesMeta").delete(id);tx.objectStore("notesData").delete(id);});});}
+  function readLibrarySnapshot(){return openDB().then(function(db){return storageTransaction(db,["folders","notesMeta","notesData"],"readonly","Backup read aborted.",function(tx){var folders=tx.objectStore("folders").getAll(),meta=tx.objectStore("notesMeta").getAll(),data=tx.objectStore("notesData").getAll();return function(){return {folders:folders.result||[],meta:meta.result||[],data:data.result||[]};};});}).then(function(value){return freshStorageBlobs(value);});}
+  function writeRestoreBundle(records){return openDB().then(function(db){return storageTransaction(db,["folders","notesMeta","notesData"],"readwrite","Restore aborted. No notes were imported.",function(tx){records.forEach(function(row){tx.objectStore(row[0]).put(row[1]);});});});}
+
 
   var currentDoc = null;       // { id, name, folderId, createdAt, updatedAt }
   var foldersCache = [];
@@ -1911,6 +1985,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     stampPanel.classList.toggle("visible", currentTool === "stamp");
     if (name === "stamp") showFieldPanel(false);
     if (name === "fieldpoint") showFieldPanel(true);
+    if(name!=="text")fieldTextMode=null;
     if(sketchReady){closeSketchPopovers();syncSketchUI();}
   }
 
@@ -2028,26 +2103,34 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     if(n.photos && n.photos.length) lines.push(n.photos.length+" photo"+(n.photos.length===1?"":"s"));
     return lines;
   }
-  function fieldPointBox(a){
-    var fs=a.labelSize||18, lines=fieldLabel(a), w=Math.max.apply(null,lines.map(function(s){return Array.from(s).length*fs*0.72;}));
-    return {x:a.x-a.size/2-4,y:a.y-a.size/2-4,w:a.size+12+w,h:Math.max(a.size+8,lines.length*fs*1.3+a.size/2+4)};
+  var fieldPointPages=new WeakMap();
+  function fieldPlanScale(page){return page&&page.sourceFileId&&sourceFiles[page.sourceFileId]?(page.pdfScale||1):150/72;}
+  function fieldPointLayout(action,page){
+    if(!page)page=fieldPointPages.get(action)||pages.find(function(sheet){return sheet.actions.includes(action);});
+    if(page)fieldPointPages.set(action,page);
+    var scale=fieldPlanScale(page),fontSize=10*scale,number=String(action.fieldNote&&action.fieldNote.pointNumber||"");
+    return Object.assign({},action,{labelSize:fontSize,labelFontPt:10,size:Math.max(18*scale,number.length*fontSize*.7+6*scale),_pointScale:scale});
   }
-  function drawFieldPoint(c,a){
-    var n=a.fieldNote, r=a.size/2, fs=a.labelSize||18;
-    c.save();c.strokeStyle=a.color;c.fillStyle="#fff";c.lineWidth=Math.max(2,a.size*0.08);
-    c.beginPath();c.arc(a.x,a.y,r,0,Math.PI*2);c.fill();c.stroke();
-    c.beginPath();
-    if(n.status==="Not found" || n.status==="Disturbed"){
-      c.moveTo(a.x-r*.6,a.y-r*.6);c.lineTo(a.x+r*.6,a.y+r*.6);c.moveTo(a.x+r*.6,a.y-r*.6);c.lineTo(a.x-r*.6,a.y+r*.6);
-    }else{c.moveTo(a.x-r*.6,a.y);c.lineTo(a.x+r*.6,a.y);c.moveTo(a.x,a.y-r*.6);c.lineTo(a.x,a.y+r*.6);}
-    c.stroke();
-    if(n.mode==="grading"){c.fillStyle="#fff";c.beginPath();c.arc(a.x,a.y,r*.76,0,Math.PI*2);c.fill();c.fillStyle=a.color;c.textAlign="center";c.textBaseline="middle";var number=String(n.pointNumber);c.font="700 "+Math.min(r*1.25,r*2/Math.max(1,number.length)*1.4)+"px Inter,sans-serif";c.fillText(number,a.x,a.y,r*1.55);c.textAlign="start";}
-    c.font="700 "+fs+"px Inter, sans-serif";c.textBaseline="top";c.lineJoin="round";
-    fieldLabel(a).forEach(function(line,i){
-      var x=a.x+r+8,y=a.y-r+i*fs*1.3;
-      c.strokeStyle="#fff";c.lineWidth=4;c.strokeText(line,x,y);c.fillStyle=a.color;c.fillText(line,x,y);
-    });c.restore();
+  function fieldPointBox(action,page){
+    var point=fieldPointLayout(action,page),fontSize=point.labelSize,scale=point._pointScale,lines=fieldLabel(point),width=Math.max.apply(null,lines.map(function(line){return Array.from(line).length*fontSize*.72;})),padding=2*scale;
+    return {x:point.x-point.size/2-padding,y:point.y-point.size/2-padding,w:point.size+4*scale+width+padding*2,h:Math.max(point.size+padding*2,lines.length*fontSize*1.3+padding*2)};
   }
+  function drawFieldPoint(context,action,page){
+    var point=fieldPointLayout(action,page),note=point.fieldNote,radius=point.size/2,fontSize=point.labelSize,scale=point._pointScale;
+    context.save();context.strokeStyle=point.color;context.fillStyle="#fff";context.lineWidth=scale;context.beginPath();context.arc(point.x,point.y,radius,0,Math.PI*2);context.fill();context.stroke();context.beginPath();
+    if(note.status==="Not found"||note.status==="Disturbed"){context.moveTo(point.x-radius*.6,point.y-radius*.6);context.lineTo(point.x+radius*.6,point.y+radius*.6);context.moveTo(point.x+radius*.6,point.y-radius*.6);context.lineTo(point.x-radius*.6,point.y+radius*.6);}
+    else{context.moveTo(point.x-radius*.6,point.y);context.lineTo(point.x+radius*.6,point.y);context.moveTo(point.x,point.y-radius*.6);context.lineTo(point.x,point.y+radius*.6);}
+    context.stroke();
+    if(note.mode==="grading"){context.fillStyle="#fff";context.beginPath();context.arc(point.x,point.y,radius*.85,0,Math.PI*2);context.fill();context.fillStyle=point.color;context.textAlign="center";context.textBaseline="middle";context.font="700 "+fontSize+"px Inter,sans-serif";context.fillText(String(note.pointNumber),point.x,point.y);context.textAlign="start";}
+    context.font="700 "+fontSize+"px Inter,sans-serif";context.textBaseline="top";context.lineJoin="round";
+    fieldLabel(point).forEach(function(line,index){var horizontal=point.x+radius+4*scale,vertical=point.y-radius+index*fontSize*1.3;context.strokeStyle="#fff";context.lineWidth=1.3*scale;context.strokeText(line,horizontal,vertical);context.fillStyle=point.color;context.fillText(line,horizontal,vertical);});context.restore();
+  }
+  function fieldTextLines(action){return String(action.text||"").split(/\r\n|\r|\n/);}
+  function fieldTextBox(action){
+    var lines=fieldTextLines(action),fontSize=action.fontSize,width=Math.max.apply(null,lines.map(function(line){return Array.from(line).length*fontSize*.72;}));
+    return {x:action.x-4,y:action.y-fontSize*1.15-4,w:width+8,h:fontSize*1.3*lines.length+8};
+  }
+
   function showFieldPanel(show){
     fieldPanel.hidden=!show;
     document.getElementById("fieldToggle").setAttribute("aria-expanded",String(show));
@@ -2112,7 +2195,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     var input=document.createElement(type==="select"?"select":type==="textarea"?"textarea":"input");input.id="fp-"+key;input.name=key;
     if(type==="select"){(options||[]).forEach(function(opt){var o=document.createElement("option");o.value=opt;o.textContent=opt||"—";input.appendChild(o);});}
     else if(type!=="textarea"){input.type=type||"text";if(type==="number")input.step="any";}
-    input.value=value==null?"":value;wrap.appendChild(input);container.appendChild(wrap);return input;
+    input.value=value==null?"":value;ftPreparePointInput(input,key);wrap.appendChild(input);container.appendChild(wrap);return input;
   }
   function nextPointNumber(){var max=0;if(currentDoc&&currentDoc.survey)currentDoc.survey.points.forEach(function(p){var n=Number(p.pointNumber);if(Number.isInteger(n)&&n>max)max=n;});pages.forEach(function(p){fieldPoints(p).forEach(function(a){var n=Number(a.fieldNote.pointNumber);if(Number.isInteger(n)&&n>max)max=n;});});return String(max+1);}
   function fieldValue(key){var e=document.getElementById("fp-"+key);return e?e.value.trim():null;}
@@ -2196,7 +2279,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     n.updatedAt=new Date().toISOString();
     sdAudit("field note",(d.action?"Edited":"Recorded")+" field note "+n.pointNumber,d.action?d.action.fieldNote:null,n,n.surveyPointId||n.id);
     if(d.action){var before=d.action.fieldNote;d.action.fieldNote=n;d.page.history.push({type:"fieldnote",action:d.action,before:before,after:n});d.page.redo=[];scheduleSave();}
-    else pushAdd(d.page,{type:"fieldpoint",x:d.pos.x,y:d.pos.y,size:Math.max(22,28/zoom),labelSize:Math.max(14,13/zoom),color:currentColor,fieldNote:n});
+    else pushAdd(d.page,{type:"fieldpoint",x:d.pos.x,y:d.pos.y,size:18*fieldPlanScale(d.page),labelSize:10*fieldPlanScale(d.page),labelFontPt:10,color:currentColor,fieldNote:n});
     var nextShot=e.submitter&&e.submitter.id==="point-next";rememberCrewShot(d,nextShot);
     fieldDraft=null;closeFieldModal("point-dialog");refreshDerivedNotes();redraw();renderFieldPanel();
     if(nextShot){selectTool("fieldpoint");if(window.innerWidth<=1100)showFieldPanel(false);fieldMessage("Saved point "+n.pointNumber+". Tap the plan for point "+nextPointNumber()+".");}
@@ -2260,23 +2343,24 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     });});
   }
   document.getElementById("exportFieldNotes").addEventListener("click",function(){
-    if(!currentDoc)return;var data={app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc.name,mode:docMode(),units:"m",pages:pages.map(function(p){return {id:p.id,name:p.name,gradingSetups:p.gradingSetups||[],notes:p.actions.filter(function(a){return a.fieldNote;})};})};
+    if(!currentDoc)return;var data={app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc.name,mode:docMode(),units:"m",pages:pages.map(function(p){return {id:p.id,name:p.name,gradingSetups:p.gradingSetups||[],notes:p.actions.filter(function(a){return a.fieldNote;}),textNotes:p.actions.filter(function(a){return a.type==="text"&&a.fieldText;})};})};
     downloadBytes(JSON.stringify(data,null,2),(currentDoc.name||"field-notes")+" - field notes.json","application/json");
   });
 
   // Export the new labels as bounded transparent tiles, keeping original PDF vectors.
-  async function drawFieldPointPdf(pdfPage,a,toPt,scale,outDoc){
-    var b=fieldPointBox(a),c=document.createElement("canvas"),factor=Math.min(2,3000/Math.max(b.w,b.h));
+  async function drawFieldPointPdf(pdfPage,a,toPt,scale,outDoc,page){
+    var b=fieldPointBox(a,page),c=document.createElement("canvas"),factor=Math.min(2,3000/Math.max(b.w,b.h));
     c.width=Math.max(1,Math.ceil(b.w*factor));c.height=Math.max(1,Math.ceil(b.h*factor));
-    var cx=c.getContext("2d");cx.scale(factor,factor);cx.translate(-b.x,-b.y);drawFieldPoint(cx,a);
+    var cx=c.getContext("2d");cx.scale(factor,factor);cx.translate(-b.x,-b.y);drawFieldPoint(cx,a,page);
     var image=await outDoc.embedPng(dataURLToUint8(c.toDataURL("image/png"))),pt=toPt(b.x,b.y+b.h);
     pdfPage.drawImage(image,{x:pt.x,y:pt.y,width:b.w/scale,height:b.h/scale});c.width=c.height=1;
   }
   async function attachFieldNotesToPdf(outDoc,pageList){
     var notes=pageList.map(function(p){return {sheet:p.name,gradingSetups:p.gradingSetups||[],notes:p.actions.filter(function(a){return a.fieldNote;})};}).filter(function(p){return p.notes.length||p.gradingSetups.length;});
-    if(!notes.length)return;
+    var textNotes=pageList.map(function(page){return {sheet:page.name,notes:page.actions.filter(function(action){return action.type==="text"&&action.fieldText;})};}).filter(function(page){return page.notes.length;});
+    if(!notes.length&&!textNotes.length)return;
     // Embedded JSON retains every structured field and photo in the marked-up PDF.
-    await outDoc.attach(new TextEncoder().encode(JSON.stringify({app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc&&currentDoc.name,units:"m",pages:notes},null,2)),"field-notes.json",{mimeType:"application/json",description:"Vista Field Mark structured field notes and photos"});
+    await outDoc.attach(new TextEncoder().encode(JSON.stringify({app:"vista-geomatics-fieldmark",schemaVersion:1,job:currentDoc&&currentDoc.name,units:"m",pages:notes,textNotes:textNotes},null,2)),"field-notes.json",{mimeType:"application/json",description:"Vista Field Mark structured field notes and photos"});
   }
 
   // Modal keyboard scope: typing never invokes drawing shortcuts underneath.
@@ -2350,7 +2434,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     cx.save();
     cx.scale(scale, scale);
     pcDrawBase(cx,page,w,h);
-    page.actions.forEach(function(a){ drawAction(cx, a); });
+    page.actions.forEach(function(a){ drawAction(cx, a, page); });
     cx.restore();
     return c.toDataURL("image/jpeg", 0.7);
   }
@@ -2505,7 +2589,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   }
 
   function hitTestAction(a, px, py, radius){
-    if (a.type === "fieldpoint") return pointInBBox(fieldPointBox(a),px,py) || Math.hypot(px-a.x,py-a.y) < a.size/2+radius;
+    if (a.type === "fieldpoint") return pointInBBox(fieldPointBox(a),px,py) || Math.hypot(px-a.x,py-a.y) < fieldPointLayout(a).size/2+radius;
     if (a.type === "pen" || a.type === "highlighter" || a.type === "calligraphy"){
       var pts = a.points;
       for (var i=0;i<pts.length-1;i++){
@@ -2532,8 +2616,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       return Math.abs(Math.sqrt(norm) - 1) < (radius+a.width)/((rx+ry)/2);
     }
     if (a.type === "text"){
-      var fw = (a.text.length * a.fontSize * 0.6), fh = a.fontSize*1.3;
-      return px >= a.x-4 && px <= a.x+fw+4 && py >= a.y-fh-4 && py <= a.y+4;
+      return pointInBBox(fieldTextBox(a),px,py);
     }
     if (a.type === "stamp" || a.type === "photopin"){
       return Math.hypot(px-a.x, py-a.y) <= radius + a.size/2;
@@ -2617,8 +2700,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       return { x:minX-pad, y:minY-pad, w:(maxX-minX)+pad*2, h:(maxY-minY)+pad*2 };
     }
     if (a.type === "text"){
-      var fw = a.text.length * a.fontSize * 0.6, fh = a.fontSize*1.3;
-      return { x:a.x-4, y:a.y-fh-4, w:fw+8, h:fh+8 };
+      return fieldTextBox(a);
     }
     if (a.type === "stamp" || a.type === "photopin"){
       var sp = (a.size/2) + 3;
@@ -2924,11 +3006,11 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     c.restore();
   }
 
-  function drawAction(c, a){
+  function drawAction(c, a, page){
     c.save();
     c.lineCap = "round"; c.lineJoin = "round";
     if (a.type === "fieldpoint"){
-      drawFieldPoint(c,a);
+      drawFieldPoint(c,a,page);
     } else if (a.type === "pen"){
       c.fillStyle = a.color; c.globalAlpha = 1;
       var pts = densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 4);
@@ -3095,7 +3177,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     } else if (a.type === "text"){
       c.fillStyle = a.color; c.font = "700 " + a.fontSize + "px Inter, sans-serif";
       c.textBaseline = "alphabetic";
-      c.fillText(a.text, a.x, a.y);
+      fieldTextLines(a).forEach(function(line,index){c.fillText(line,a.x,a.y+index*a.fontSize*1.3);});
     }
     c.restore();
   }
@@ -3122,7 +3204,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       ctx.restore();
     }
 
-    page.actions.forEach(function(a){ drawAction(ctx, a); });
+    page.actions.forEach(function(a){ drawAction(ctx, a, page); });
     if (currentAction) drawAction(ctx, currentAction);
 
     if (polygonDraft && polygonDraft.points.length){
@@ -3415,7 +3497,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
 
     inputPointerId=e.pointerId;
     if (currentTool === "pan" || (e.pointerType==="mouse" && (e.button===1 || e.button===2 || spacePan)) || (e.pointerType==="touch" && touchPan) || e.target!==canvas){
-      if(currentTool==="fieldpoint" && e.pointerType==="touch" && e.target===canvas)pendingFieldTap={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,pos:getCanvasPos(e)};
+      if((currentTool==="fieldpoint"||currentTool==="text"&&fieldTextMode) && e.pointerType==="touch" && e.target===canvas)pendingFieldTap={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,pos:getCanvasPos(e),textMode:currentTool==="text"?fieldTextMode:null};
       commitPendingText();
       if (currentIndex < 0) return;
       panState = { startX:e.clientX, startY:e.clientY, startLeft:scrollWrap.scrollLeft, startTop:scrollWrap.scrollTop };
@@ -3625,6 +3707,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     if(pendingFieldTap && pendingFieldTap.pointerId===e.pointerId){
       var tap=pendingFieldTap;pendingFieldTap=null;
       panState=null;if(canvas)canvas.style.cursor="crosshair";rememberViewport();
+      if(tap.textMode){if(Math.hypot(e.clientX-tap.startX,e.clientY-tap.startY)<10)ftOpen({page:pages[currentIndex],position:tap.pos,mode:tap.textMode});return;}
       if(Math.hypot(e.clientX-tap.startX,e.clientY-tap.startY)<10){var pts=fieldPoints(pages[currentIndex]),hit=null;for(var fi=pts.length-1;fi>=0;fi--){if(hitTestAction(pts[fi],tap.pos.x,tap.pos.y,8/zoom)){hit=pts[fi];break;}}openFieldPoint(hit,tap.pos);}
       return;
     }
@@ -4018,6 +4101,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   // ---------- text tool ----------
   var activeInput = null, pendingTextCtx = null;
   function openTextInput(e, canvasPos, page){
+    if(fieldTextMode){ftOpen({page:page,position:canvasPos,mode:fieldTextMode});return;}
     commitPendingText();
     var stagePos = getStagePos(e);
     var input = document.createElement("input");
@@ -4179,7 +4263,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     oc.width = w; oc.height = h;
     var octx = oc.getContext("2d");
     pcDrawBase(octx,page,w,h);
-    page.actions.forEach(function(a){ drawAction(octx, a); });
+    page.actions.forEach(function(a){ drawAction(octx, a, page); });
     return oc;
   }
 
@@ -4342,7 +4426,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       var color = hexToRgb01(a.color);
 
       if (a.type === "fieldpoint"){
-        await drawFieldPointPdf(pdfPage,a,toPt,scale,outDoc);
+        await drawFieldPointPdf(pdfPage,a,toPt,scale,outDoc,page);
       } else if (a.type === "pen" || a.type === "calligraphy"){
         var pts = a.points.length >= 3 ? densifyStroke(smoothPoints(a.points, a.smoothing==null?2:a.smoothing), 3) : a.points;
         if (pts.length < 2){
@@ -4443,7 +4527,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         pdfPage.drawEllipse({ x:cpt.x, y:cpt.y, xScale:Math.max(rx/scale,0.05), yScale:Math.max(ry/scale,0.05), borderColor: color, borderWidth: a.width/scale });
       } else if (a.type === "text"){
         var tp = toPt(a.x, a.y);
-        pdfPage.drawText(a.text, { x: tp.x, y: tp.y, size: a.fontSize/scale, font: font, color: color });
+        pdfPage.drawText(a.text, { x: tp.x, y: tp.y, size: a.fontSize/scale, lineHeight:a.fontSize/scale*1.3, font: font, color: color });
       } else if (a.type === "polygon"){
         var polyPts = a.points.map(function(p){ var pt=toPt(p.x,p.y);return {x:pt.x,y:-pt.y}; });
         var dPoly = "M " + polyPts[0].x + " " + polyPts[0].y + " " +
@@ -4642,12 +4726,14 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
       return "Field Mark could not open the jobs saved in this browser. This does not mean they were deleted. Tap Retry saving. Keep this tab open and do not clear website data.";
     }
     if(err&&err.name==="QuotaExceededError")return "Device storage is full. Your current work is still open. Download a backup, free some device space, then retry saving. Do not clear Field Mark website data.";
-    return "Saving is unavailable. Keep this tab open, download a backup of your current work, then retry saving.";
+    if(err&&["AbortError","UnknownError","InvalidStateError","TransactionInactiveError","StorageTimeoutError"].includes(err.name))return "The browser interrupted device saving. Keep this tab open and download a recovery backup, then tap Retry saving. Do not refresh or clear website data until your backup is safe.";
+    return "Saving is unavailable. Keep this tab open, download a backup of your current work, then retry saving. Do not clear website data.";
   }
   function showStorageFailure(err){
     var notice=document.getElementById("fm-save-notice");if(!notice)return;
     notice.hidden=false;notice.querySelector("p").textContent=storageMessage(err);
-    var detail=document.getElementById("fm-storage-detail");if(detail)detail.textContent=(err&&err.name||"StorageError")+": "+(err&&err.message||"Browser storage is unavailable")+" · Field Mark storage compatibility update 2026-10-16";
+    var detail=document.getElementById("fm-storage-detail"),release=document.querySelector('meta[name="fieldmark-release"]');
+    if(detail)detail.textContent=(err&&err.name||"StorageError")+": "+(err&&err.message||"Browser storage is unavailable")+" · Field Mark "+(release?release.content:"2026-10-22-ipad-save-recovery")+" · "+location.protocol+" · "+navigator.userAgent;
     var indicator=document.getElementById("lib-save-indicator");if(indicator){indicator.className="save-indicator error";indicator.textContent="Device saving needs attention";}
   }
   function clearStorageFailure(){var notice=document.getElementById("fm-save-notice");if(notice)notice.hidden=true;if(libSaveIndicator){libSaveIndicator.className="save-indicator";libSaveIndicator.textContent="Jobs save on this device · Back up for safekeeping";}}
@@ -4686,7 +4772,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
         saveAttempts=0;lastSaveError=null;clearStorageFailure();setSaveIndicator("saved");return true;
       }catch(err){
         console.error("save failed",err);lastSaveError=err;setSaveIndicator("error");showStorageFailure(err);
-        if((!err||err.name!=="SaveConflictError")&&saveAttempts<3){saveAttempts++;retryTimer=setTimeout(doSave,1000*Math.pow(2,saveAttempts-1));}
+        if(transientStorageError(err)&&saveAttempts<3){saveAttempts++;retryTimer=setTimeout(doSave,1000*Math.pow(2,saveAttempts-1));}
         return false;
       }
     })();
@@ -4695,6 +4781,8 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   }
   async function retryDeviceSaving(){
     clearTimeout(retryTimer);saveAttempts=0;
+    if(saveTask)await saveTask;
+    if(lastSaveError&&transientStorageError(lastSaveError)){storageCompatibilityWrites=true;resetStorageConnection();}
     if(currentDoc){commitPendingText();if(lastSaveError&&lastSaveError.name==="SaveConflictError"){showStorageFailure(lastSaveError);return false;}return doSave();}
     try{await openDB();await refreshFolders();await refreshGrid();clearStorageFailure();libSaveIndicator.textContent="Jobs save on this device · Back up for safekeeping";libSaveIndicator.className="save-indicator";return true;}catch(err){showStorageFailure(err);return false;}
   }
@@ -5857,7 +5945,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   function sdDownload(data,name,type){downloadBytes(data,sdSafeName(currentDoc&&currentDoc.name)+" - "+name,type||"application/octet-stream");}
   function sdSettings(){if(surveySettingDB)return surveySettingDB;surveySettingDB=new Promise(function(resolve,reject){var req=indexedDB.open("fieldmark-preferences",1);req.onupgradeneeded=function(){req.result.createObjectStore("settings");};req.onsuccess=function(){resolve(req.result);};req.onerror=function(){reject(req.error);};});surveySettingDB.catch(function(){surveySettingDB=null;});return surveySettingDB;}
   async function sdSettingGet(key){var db=await sdSettings();return new Promise(function(resolve,reject){var tx=db.transaction("settings","readonly"),r=tx.objectStore("settings").get(key);tx.oncomplete=function(){resolve(r.result);};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Settings could not be read"));};});}
-  async function sdSettingPut(key,value){var db=await sdSettings();return new Promise(function(resolve,reject){var tx=writeTransaction(db,"settings");tx.oncomplete=function(){resolve();};tx.onerror=tx.onabort=function(){reject(tx.error||new Error("Settings could not be saved"));};tx.objectStore("settings").put(value,key);});}
+  async function sdSettingPut(key,value){var db=await sdSettings();return storageTransaction(db,"settings","readwrite","Settings could not be saved.",function(tx){tx.objectStore("settings").put(value,key);});}
   async function sdEncode(value){if(value instanceof Blob)return {__fmBlob:true,type:value.type,data:await blobToBase64(value)};if(value instanceof ArrayBuffer)return {__fmBytes:true,data:await blobToBase64(new Blob([value]))};if(Array.isArray(value))return Promise.all(value.map(sdEncode));if(value&&typeof value==="object"){var out={};for(var key of Object.keys(value))out[key]=await sdEncode(value[key]);return out;}return value;}
   async function sdDecode(value){if(value&&value.__fmBlob===true&&typeof value.data==="string"){if(!value.data.startsWith("data:"))throw new Error("Invalid backup image");return dataUrlToBlob(value.data);}if(value&&value.__fmBytes===true&&typeof value.data==="string"){if(!value.data.startsWith("data:"))throw new Error("Invalid backup data");return (await dataUrlToBlob(value.data)).arrayBuffer();}if(Array.isArray(value))return Promise.all(value.map(sdDecode));if(value&&typeof value==="object"){var out={};for(var key of Object.keys(value)){if(["__proto__","constructor","prototype"].includes(key))continue;out[key]=await sdDecode(value[key]);}return out;}return value;}
   async function sdBackupBundle(snapshot,includeCalculator){var out=[];for(var d of snapshot.data){var converted=[];for(var page of d.pages){var p=Object.assign({},page);p.imgBlobB64=p.imgBlob?await blobToBase64(p.imgBlob):null;delete p.imgBlob;p.actions=[];for(var action of page.actions||[]){var a=Object.assign({},action);if(a.imgBlob){a.imgBlobB64=await blobToBase64(a.imgBlob);delete a.imgBlob;}p.actions.push(a);}converted.push(p);}var sources={};for(var key of Object.keys(d.sourceFiles||{})){var source=d.sourceFiles[key];sources[key]={name:source.name,bytesB64:await blobToBase64(new Blob([source.bytes]))};}out.push({id:d.id,pages:converted,sourceFiles:sources,survey:await sdEncode(d.survey||null)});}return {app:"vista-geomatics-fieldmark",version:1,exportedAt:Date.now(),folders:snapshot.folders,notesMeta:snapshot.meta,notesData:out,calculatorSession:includeCalculator?sdCalculatorSession():undefined};}
@@ -6517,7 +6605,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   }
   function pcPreview(){
     var draft=plotCleanup.draft;if(!draft||!pcDialog.open)return;var surface=pcElement("canvas"),context=surface.getContext("2d"),preview=pcElement("preview").checked;
-    context.clearRect(0,0,surface.width,surface.height);pcDrawBase(context,draft.page,surface.width,surface.height,preview?pcDraftValue():null);draft.page.actions.forEach(function(action){drawAction(context,action);});
+    context.clearRect(0,0,surface.width,surface.height);pcDrawBase(context,draft.page,surface.width,surface.height,preview?pcDraftValue():null);draft.page.actions.forEach(function(action){drawAction(context,action,draft.page);});
     var regions=draft.regions.slice();if(plotCleanup.drag&&plotCleanup.drag.kind==="area")regions.push(pcDragRegion());
     pcDrawSelectionOverlay(context,regions,preview,surface);
   }
@@ -6530,7 +6618,7 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
     if(docMode()!=="grading")return;var page=pages[currentIndex];if(!page){fieldMessage("Import a plot plan before using cleanup.");return;}
     commitPendingText();cancelActiveStroke();cancelPolygonDraft();cancelAngleDraft();clearSelection();hideCrewHint();
     pcResetNavigation();var before=pcCopyCleanup(page.plotCleanup);plotCleanup.draft={page:page,jobId:currentDoc.id,before:before,regions:before?before.regions.slice():[]};plotCleanup.opener=document.activeElement;plotCleanup.drag=null;plotCleanup.mode="hide";plotCleanup.pan=false;plotCleanup.selection="box";plotCleanup.outline=[];plotCleanup.textItems=[];plotCleanup.textHover=null;pcElement("ocr-angle").value="0";
-    pcElement("sheet").textContent=page.name+" · edit this sheet only · original drawing is preserved";pcElement("preview").checked=false;pcElement("zoom").value="fit";
+    pcElement("sheet").textContent=page.name+" · edit this sheet only · original drawing is preserved";pcElement("preview").checked=true;pcElement("zoom").value="fit";
     var surface=pcElement("canvas");surface.width=page.img.naturalWidth||page.img.width;surface.height=page.img.naturalHeight||page.img.height;
     pcStatus("Choose Box, Angled outline or Tap text. Preview before applying.");pcDialog.showModal();pcRefreshControls();pcFit();pcElement("hide").focus();pcLoadPdfText();
   }
@@ -6785,6 +6873,184 @@ button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:2p
   pcDialog.addEventListener("keydown",pcNavigationKey);
   window.addEventListener("keyup",function(event){if(event.code==="Space"&&pcSpacePan){pcSpacePan=false;if(pcDialog.open)pcNavigationControls();}},true);
   window.addEventListener("blur",function(){if(pcDialog.open){pcResetNavigation();pcRefreshControls();}});
+
+  var fmOfflineRegistration=null,fmOfflineReady=false,fmOfflineMessage="Checking offline setup…";
+  function fmOfflineStatus(message,ready){
+    fmOfflineMessage=message;fmOfflineReady=!!ready;
+    var button=document.getElementById("fm-offline-button"),status=document.getElementById("fm-offline-status");
+    if(button){button.textContent=ready?"Offline ready":"Offline setup";button.title=message;button.dataset.ready=String(!!ready);}
+    if(status)status.textContent=message;
+  }
+  async function fmCheckOfflineCache(registration){
+    var update=document.getElementById("fm-offline-update");if(update)update.hidden=!registration.waiting;
+    if(registration.waiting){fmOfflineStatus("An update is downloaded. Save and back up your work, then choose Use downloaded update. The program will reload only after you confirm.",false);return;}
+    if(!registration.active)return;
+    try{
+      var result=await new Promise(function(resolve,reject){
+        var channel=new MessageChannel(),timer=setTimeout(function(){channel.port1.close();reject(new Error("Offline cache did not respond."));},4000);
+        channel.port1.onmessage=function(event){clearTimeout(timer);channel.port1.close();resolve(event.data);};registration.active.postMessage({type:"FM_OFFLINE_STATUS"},[channel.port2]);
+      });
+      var release=document.querySelector('meta[name="fieldmark-release"]').content;
+      fmOfflineStatus(result.ready&&result.release===release?"Ready for offline use on this browser. Plans, notes and changes save on this device; no job upload is needed. Test once in Airplane Mode before field use.":"This version is not fully prepared for offline reopening. Connect to the internet and choose Prepare offline use.",result.ready&&result.release===release);
+    }catch(error){fmOfflineStatus("Offline setup could not be verified. Keep the current tab open and retry while connected.",false);}
+  }
+  async function fmPrepareOffline(){
+    if(!/^https?:$/.test(location.protocol)){fmOfflineStatus("This standalone HTML works without the internet while open. For reliable reopening on an iPad, use the Field Mark website in Safari, then prepare offline use and add it to the Home Screen.",false);return;}
+    if(!window.isSecureContext||!("serviceWorker" in navigator)){fmOfflineStatus("This browser cannot prepare offline reopening here. Use Safari at the secure Field Mark website. Keep a recovery backup of open work.",false);return;}
+    fmOfflineStatus("Preparing the program for offline use. Keep this tab open while it downloads…",false);
+    try{
+      var registration=await navigator.serviceWorker.register("./fieldmark-sw.js",{scope:"./",updateViaCache:"none"});fmOfflineRegistration=registration;
+      function watch(){var worker=registration.installing;if(worker)worker.addEventListener("statechange",function(){if(worker.state==="activated"||worker.state==="installed")fmCheckOfflineCache(registration);else if(worker.state==="redundant")fmOfflineStatus("Offline setup did not finish. Check the connection and that index.html, fieldmark-sw.js, manifest.webmanifest and fieldmark-icon.png were uploaded together, then retry.",false);});}
+      watch();registration.addEventListener("updatefound",watch);await fmCheckOfflineCache(registration);
+    }catch(error){fmOfflineStatus("Offline setup is unavailable. The matching program and offline files must be published together. Nothing in your saved jobs was changed.",false);}
+  }
+  async function fmStorageDetails(){
+    var status=document.getElementById("fm-device-storage"),message="";
+    try{await openDB();message="Job storage opened successfully on this device. ";}catch(error){message="Job storage needs attention: "+error.name+". Keep open work backed up. ";}
+    try{if(navigator.storage&&navigator.storage.estimate){var estimate=await navigator.storage.estimate();if(Number.isFinite(estimate.usage)&&Number.isFinite(estimate.quota))message+="Website storage: "+(estimate.usage/1048576).toFixed(1)+" MB used of approximately "+(estimate.quota/1048576).toFixed(0)+" MB allowed. ";}if(navigator.storage&&navigator.storage.persisted)message+=await navigator.storage.persisted()?"Persistent storage is enabled. ":"Storage is browser-managed. ";}catch(error){}
+    status.textContent=message+"Keep regular recovery backups in Files. Website data can still be lost if it is cleared, the device is lost, or the browser has a fault.";
+  }
+  async function fmActivateOfflineUpdate(){
+    var button=document.getElementById("fm-offline-update"),registration=fmOfflineRegistration;if(!registration||!registration.waiting)return;
+    if(!confirm("Use the downloaded Field Mark update now? Keep a recovery backup first. This reloads the program, not your job database."))return;
+    button.disabled=true;
+    try{
+      if(currentDoc){commitPendingText();if(!await doSave()){fmOfflineStatus("Your current changes could not be saved. Download a recovery backup before updating. The program has not been reloaded.",false);return;}}
+      var worker=registration.waiting,previous=navigator.serviceWorker.controller;if(!worker){await fmCheckOfflineCache(registration);return;}
+      await new Promise(function(resolve,reject){
+        var timer=setTimeout(function(){navigator.serviceWorker.removeEventListener("controllerchange",changed);reject(new Error("Update activation did not finish."));},20000);
+        function changed(){if(navigator.serviceWorker.controller&&navigator.serviceWorker.controller!==previous){clearTimeout(timer);navigator.serviceWorker.removeEventListener("controllerchange",changed);resolve();}}
+        navigator.serviceWorker.addEventListener("controllerchange",changed);worker.postMessage({type:"FM_ACTIVATE_UPDATE"});
+      });
+      location.reload();
+    }catch(error){fmOfflineStatus("The update could not finish. Keep a backup of your work, then close all Field Mark tabs and reopen. No job data was cleared.",false);}
+    finally{button.disabled=false;}
+  }
+  function fmInitializeOffline(){
+    if(/^https?:$/.test(location.protocol)){var manifest=document.createElement("link");manifest.rel="manifest";manifest.href="./manifest.webmanifest";document.head.append(manifest);}
+    var button=document.createElement("button");button.id="fm-offline-button";button.type="button";button.className="field-button";button.textContent="Offline setup";
+    document.getElementById("btnBackup").before(button);
+    var dialog=document.createElement("dialog");dialog.id="fm-offline-dialog";dialog.setAttribute("aria-labelledby","fm-offline-title");
+    dialog.innerHTML='<h2 id="fm-offline-title">Offline use and iPad storage</h2><p id="fm-offline-status" role="status"></p><h3>Keep jobs on this device</h3><p id="fm-device-storage" role="status"></p><p>Safari: connect once, wait for <strong>Offline ready</strong>, then use Share → Add to Home Screen. Test opening Field Mark in Airplane Mode before going to the field. Always use the same browser or Home Screen app for its jobs: their storage may be separate. The website provides the program; your job library stays on the device.</p><p>Program updates do not reload automatically or clear your jobs. Back up open work before choosing Use downloaded update.</p><div class="field-actions"><button type="button" class="field-button" id="fm-offline-update" hidden>Use downloaded update</button><button type="button" class="field-button" id="fm-offline-prepare">Prepare offline use</button><button type="button" class="field-button" id="fm-storage-persist">Ask to keep storage</button><button type="button" class="field-button" id="fm-offline-close">Close</button></div>';
+    document.body.append(dialog);button.addEventListener("click",function(){dialog.showModal();document.getElementById("fm-offline-status").textContent=fmOfflineMessage;if(fmOfflineRegistration)fmCheckOfflineCache(fmOfflineRegistration);fmStorageDetails();});
+    document.getElementById("fm-offline-close").addEventListener("click",function(){dialog.close();});
+    document.getElementById("fm-offline-prepare").addEventListener("click",fmPrepareOffline);
+    document.getElementById("fm-offline-update").addEventListener("click",fmActivateOfflineUpdate);
+    document.getElementById("fm-storage-persist").addEventListener("click",async function(){
+      var output=document.getElementById("fm-device-storage");if(!navigator.storage||!navigator.storage.persist){output.textContent="This browser manages storage automatically and cannot grant this request here. Keep recovery backups in Files.";return;}
+      try{var granted=await navigator.storage.persist();await fmStorageDetails();if(!granted)output.textContent="The browser has not granted persistent storage. Local saving can still work, but keep recovery backups. "+output.textContent;}catch(error){output.textContent="Storage protection could not be requested. Keep regular recovery backups in Files.";}
+    });
+    dialog.addEventListener("keydown",function(event){event.stopPropagation();});
+    if("serviceWorker" in navigator)navigator.serviceWorker.addEventListener("controllerchange",function(){if(fmOfflineRegistration)fmCheckOfflineCache(fmOfflineRegistration);});
+    fmPrepareOffline();
+  }
+  fmInitializeOffline();
+
+  var fieldTextMode=null,ftDraft=null,ftSpeech=null,ftVoiceEpoch=0,ftVoicePending=false,ftStopTimer=null,ftMicStarted=false;
+  var ftDialog=document.getElementById("field-text-dialog");
+  function ftElement(name){return document.getElementById("ft-"+name);}
+  function ftStatus(message){ftElement("status").textContent=message;}
+  function ftRefresh(){
+    ftElement("use").disabled=!ftDraft||!ftElement("text").value.trim()||!ftElement("reviewed").checked||!!ftSpeech||ftVoicePending;
+    ftElement("start").disabled=!!ftSpeech||ftVoicePending;ftElement("language").disabled=!!ftSpeech||ftVoicePending;ftElement("stop").hidden=!ftSpeech;
+    ftElement("reviewed").disabled=!!ftSpeech||ftVoicePending;
+    ftElement("text").readOnly=!!ftSpeech;ftElement("mic-state").textContent=ftSpeech?(ftMicStarted?"Browser microphone listening":"Starting browser microphone…"):ftVoicePending?"Checking on-device support…":"Browser microphone off";
+  }
+  function ftSetMode(mode){
+    if(!ftDraft)return;if(ftSpeech||ftVoicePending)ftAbortSpeech();ftDraft.mode=mode;
+    ftElement("write").setAttribute("aria-pressed",String(mode==="write"));ftElement("speak").setAttribute("aria-pressed",String(mode==="speak"));ftElement("speech").hidden=mode!=="speak";
+    ftElement("instruction").textContent=mode==="speak"?"Tap this text box, then use the microphone on the iPad keyboard. Or try Start on-device microphone if your browser supports local speech. Check every number and unit.":"Write with Apple Pencil in the white box using iPad Scribble, or type. Enable Scribble in iPad Settings → Apple Pencil. This does not convert existing pen strokes.";
+    ftElement("text").focus({preventScroll:true});ftRefresh();
+  }
+  function ftOpen(options){
+    if(!currentDoc||!options.page||!pages.includes(options.page))return;commitPendingText();cancelActiveStroke();closeSketchPopovers();
+    ftAbortSpeech();var original=options.target?options.target.value:"";
+    ftDraft={jobId:currentDoc.id,page:options.page,position:options.position,target:options.target||null,pointDraft:options.target?fieldDraft:null,initial:original,mode:options.mode||"write",color:currentColor,opener:document.activeElement,usedLocalSpeech:false};
+    ftElement("text").value=original;ftElement("reviewed").checked=false;ftElement("browser-voice").open=false;ftElement("interim").textContent="";ftElement("use").textContent=options.target?"Use reviewed text":"Place reviewed text";
+    ftElement("title").textContent=options.target?"Field point note":"Field text note · 10 point";ftStatus("Review the wording, numbers and units, then tick the check box. Nothing is placed or saved to the point until you confirm.");
+    ftDialog.showModal();ftDialog.scrollTop=0;ftSetMode(ftDraft.mode);
+  }
+  function ftClose(){if(!ftDraft)return;ftAbortSpeech();if(ftElement("text").value!==ftDraft.initial&&!confirm("Discard this text draft? Existing plan marks and saved notes will stay unchanged."))return;ftDialog.close();}
+  function ftArm(mode){
+    if(currentIndex<0){fieldMessage("Import a plan before adding a text note.");return;}
+    selectTool("text");fieldTextMode=mode;showFieldPanel(false);fieldMessage("Tap the plan to place a 10-point text note. "+(mode==="speak"?"Then use iPad keyboard dictation or an available on-device microphone.":"Write in the note box with Apple Pencil Scribble, or type."));
+  }
+  function ftPreparePointInput(input,key){
+    if(input.tagName!=="TEXTAREA"&&input.type!=="text")return;
+    var exact=/^(pointNumber|code|bearing|station|tie-)/.test(key);
+    input.classList.add("ft-point-text");input.inputMode="text";input.autocomplete="off";input.spellcheck=!exact;
+    input.setAttribute("autocapitalize",exact?"off":key==="createdBy"?"words":"sentences");input.setAttribute("autocorrect",exact?"off":"on");input.setAttribute("aria-describedby","fp-entry-guide");
+    if(input.tagName==="TEXTAREA"){input.rows=4;input.placeholder="Write, type or dictate field notes here…";}
+  }
+  function ftWrapText(text,width,fontSize){
+    var measure=document.createElement("canvas").getContext("2d"),lines=[];measure.font="700 "+fontSize+"px Inter,sans-serif";
+    text.split(/\r\n|\r|\n/).forEach(function(paragraph){
+      var line="",words=paragraph.match(/\S+/g)||[];if(!words.length){lines.push("");return;}
+      words.forEach(function(word){
+        var candidate=line?line+" "+word:word;if(measure.measureText(candidate).width<=width){line=candidate;return;}
+        if(line){lines.push(line);line="";}
+        Array.from(word).forEach(function(character){if(line&&measure.measureText(line+character).width>width){lines.push(line);line="";}line+=character;});
+      });if(line)lines.push(line);
+    });return lines.join("\n");
+  }
+  function ftUse(){
+    var draft=ftDraft,text=ftElement("text").value.trim();if(!draft||!text||!ftElement("reviewed").checked||ftSpeech||ftVoicePending)return;
+    if(text.length>10000){ftStatus("Keep this note to 10,000 characters or fewer. Nothing was truncated or placed.");return;}
+    if(!currentDoc||currentDoc.id!==draft.jobId||!pages.includes(draft.page)){ftStatus("This job or page is no longer open. Copy your text before closing this draft; nothing was placed.");return;}
+    if(draft.target){
+      if(!draft.target.isConnected||fieldDraft!==draft.pointDraft){ftStatus("The point form changed. Copy your text before closing this draft; the other point was not changed.");return;}
+      draft.target.value=text;draft.target.dispatchEvent(new Event("input",{bubbles:true}));
+    }else{
+      var scale=fieldPlanScale(draft.page),fontSize=10*scale,width=Math.min(220*scale,Math.max(fontSize,(draft.page.img.naturalWidth||draft.page.img.width)-draft.position.x-5*scale)),entry={schemaVersion:1,entryMode:draft.mode,inputSource:draft.usedLocalSpeech?"on-device-speech":"system-keyboard-or-pencil",reviewedAt:new Date().toISOString(),reviewedBy:surveyData().config.crew||"",text:text,layoutWidthPt:width/scale};
+      var action={id:genId(),type:"text",x:draft.position.x,y:draft.position.y+fontSize*.8,color:draft.color,text:ftWrapText(text,width,fontSize),fontSize:fontSize,fontSizePt:10,fieldText:entry};
+      sdAudit("text note","Placed reviewed field text",null,{text:text,entry:entry},action.id);pushAdd(draft.page,action);redraw();
+    }
+    ftDialog.close();if(draft.target){draft.target.focus({preventScroll:true});fieldMessage("Text copied to the point form. Save the point to keep it.");}
+    else fieldMessage("Reviewed 10-point text placed. Use Select to move or remove it; Undo also works.");
+  }
+  function ftAbortSpeech(){
+    ftVoiceEpoch++;ftVoicePending=false;ftMicStarted=false;clearTimeout(ftStopTimer);ftStopTimer=null;var speech=ftSpeech;ftSpeech=null;
+    if(speech){speech.onstart=speech.onresult=speech.onerror=speech.onend=null;try{speech.abort();}catch(error){}}
+    ftElement("interim").textContent="";ftRefresh();
+  }
+  async function ftStartSpeech(){
+    if(!ftDraft||ftSpeech||ftVoicePending)return;var draft=ftDraft,epoch=++ftVoiceEpoch,Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!Speech){ftStatus("This browser has no on-device microphone control. On iPad, tap the text box and use the keyboard microphone; otherwise type.");ftElement("text").focus({preventScroll:true});return;}
+    var speech;
+    try{speech=new Speech();}catch(error){ftStatus("The browser microphone could not start. Use the keyboard microphone or type.");return;}
+    if(!("processLocally" in speech)||typeof Speech.available!=="function"){ftStatus("Verified on-device browser speech is not available here. Field Mark will not switch to cloud recognition. Use the iPad keyboard microphone and test its language offline.");ftElement("text").focus({preventScroll:true});return;}
+    ftVoicePending=true;ftRefresh();var timer;
+    try{
+      speech.processLocally=true;speech.lang=ftElement("language").value;speech.continuous=true;speech.interimResults=true;
+      var availability=await Promise.race([Speech.available({langs:[speech.lang],processLocally:true}),new Promise(function(resolve,reject){timer=setTimeout(function(){reject(new Error("Local speech support did not respond."));},10000);})]);clearTimeout(timer);
+      if(ftDraft!==draft||epoch!==ftVoiceEpoch)return;
+      if(availability!=="available"){ftVoicePending=false;ftStatus("The on-device speech language is not ready ("+String(availability)+"). Nothing was recorded or downloaded. Use keyboard dictation or type; configure the language while online before field use.");ftRefresh();return;}
+      var base=ftElement("text").value,finals=new Map();ftSpeech=speech;ftVoicePending=false;ftElement("reviewed").checked=false;
+      function current(){return ftDraft===draft&&epoch===ftVoiceEpoch&&ftSpeech===speech;}
+      function finish(){if(!current())return;clearTimeout(ftStopTimer);ftStopTimer=null;ftSpeech=null;ftMicStarted=false;ftElement("interim").textContent="";ftRefresh();}
+      speech.onstart=function(){if(current()){ftMicStarted=true;ftRefresh();ftStatus("Listening on this device. Stop the microphone, then review every number and unit.");}};
+      speech.onresult=function(event){
+        if(!current())return;var interim=[];
+        for(var index=event.resultIndex;index<event.results.length;index++){var result=event.results[index];if(result.isFinal)finals.set(index,result[0].transcript);else interim.push(result[0].transcript);}
+        var transcript=Array.from(finals.keys()).sort(function(first,second){return first-second;}).map(function(key){return finals.get(key);}).join(" ").trim();
+        ftElement("text").value=(base+(base&&transcript?" ":"")+transcript).slice(0,10000);ftElement("interim").textContent=interim.join(" ");ftElement("reviewed").checked=false;draft.usedLocalSpeech=draft.usedLocalSpeech||!!transcript;ftRefresh();
+      };
+      speech.onerror=function(event){if(!current())return;ftStatus("Microphone stopped ("+(event.error||"recognition error")+"). Existing draft text stays. Use keyboard dictation or type, then review it.");finish();try{speech.abort();}catch(error){}};
+      speech.onend=function(){if(!current())return;finish();ftStatus("Microphone off. Review the recognized wording, numbers and units before using the text.");};
+      ftRefresh();speech.start();
+    }catch(error){clearTimeout(timer);if(ftDraft!==draft||epoch!==ftVoiceEpoch)return;ftAbortSpeech();ftStatus("On-device speech could not start. Draft text is unchanged. Use the iPad keyboard microphone or type. "+(error.message||""));}
+  }
+  ftElement("text").addEventListener("input",function(){ftElement("reviewed").checked=false;ftRefresh();});ftElement("reviewed").addEventListener("change",ftRefresh);
+  ftElement("browser-voice").addEventListener("toggle",function(){if(!this.open&&(ftSpeech||ftVoicePending)){ftAbortSpeech();ftStatus("Browser microphone off. Your text draft stays for review.");}});
+  ftElement("write").addEventListener("click",function(){ftSetMode("write");});ftElement("speak").addEventListener("click",function(){ftSetMode("speak");});
+  ["close","cancel"].forEach(function(name){ftElement(name).addEventListener("click",ftClose);});ftElement("use").addEventListener("click",ftUse);ftElement("start").addEventListener("click",ftStartSpeech);
+  ftElement("stop").addEventListener("click",function(){if(!ftSpeech)return;var speech=ftSpeech;ftStatus("Stopping microphone…");try{speech.stop();ftStopTimer=setTimeout(function(){if(ftSpeech===speech){ftAbortSpeech();ftStatus("Microphone off. Review the final text before using it.");}},5000);}catch(error){ftAbortSpeech();}});
+  ftDialog.addEventListener("cancel",function(event){event.preventDefault();ftClose();});ftDialog.addEventListener("keydown",function(event){event.stopPropagation();});
+  ftDialog.addEventListener("close",function(){if(ftDialog.open)return;var draft=ftDraft;ftAbortSpeech();ftDraft=null;ftElement("text").value="";ftRefresh();if(draft&&draft.opener&&draft.opener.isConnected)draft.opener.focus({preventScroll:true});});
+  document.getElementById("field-text-write").addEventListener("click",function(){ftArm("write");});document.getElementById("field-text-speak").addEventListener("click",function(){ftArm("speak");});
+  document.querySelector('[data-tool="text"]').addEventListener("click",function(){fieldTextMode=null;});
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"&&(ftSpeech||ftVoicePending)){ftAbortSpeech();ftStatus("Microphone off because Field Mark went into the background. Draft text stays here for review.");}});
+  window.addEventListener("beforeunload",function(event){if(ftDraft&&ftElement("text").value!==ftDraft.initial){event.preventDefault();event.returnValue="";}});
 
   var splashStartTime = Date.now();
   var splashEl = document.getElementById("splash-screen");
