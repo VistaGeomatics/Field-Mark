@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Update Field Mark</title>
+<style>html{color-scheme:dark}body{margin:0;background:#0b1e2e;color:#e6f0f6;font:17px/1.5 system-ui,sans-serif}main{max-width:630px;margin:8vh auto;padding:24px}h1{font-size:28px;color:#ff7a1a}p{margin:18px 0}button,a{font:inherit}button{min-height:48px;padding:12px 20px;border:1px solid #78d69b;border-radius:9px;background:#214c40;color:#d6ffe4;cursor:pointer}button:disabled{opacity:.6;cursor:wait}#status{white-space:pre-wrap;overflow-wrap:anywhere}small{color:#9eb7c8}a{color:#75d8ef}</style></head>
+<body><main><small>VISTA GEOMATICS · FIELD MARK</small><h1>Load the latest Field Mark</h1>
+<p>This replaces the old offline program that can hide an uploaded update. Saved jobs and calculator memory stay on this device.</p>
+<p>First save any open point forms and work in your other Field Mark tabs. This page will open the updated program when it is ready.</p>
+<button id="update" type="button">Load latest Field Mark</button><p id="status" role="status" aria-live="polite">Connect to the internet, then tap the button.</p><small>Target version: 2026-11-02-tablet-portal-1</small>
+<p><a href="./">Back to Field Mark</a></p></main>
+<script>
+(()=>{"use strict";const RELEASE="2026-11-02-tablet-portal-1",button=document.getElementById("update"),status=document.getElementById("status"),root=new URL("./",location.href);let timer;
+function workerInstalled(worker){return new Promise((resolve,reject)=>{function check(){if(worker.state==="installed"||worker.state==="activated"){clearTimeout(timer);worker.removeEventListener("statechange",check);resolve();}else if(worker.state==="redundant"){clearTimeout(timer);worker.removeEventListener("statechange",check);reject(new Error("The offline files do not match. Upload index.html and fieldmark-sw.js from the same update package, then retry."));}}timer=setTimeout(()=>{worker.removeEventListener("statechange",check);reject(new Error("The update download did not finish. Check the connection and retry."));},30000);worker.addEventListener("statechange",check);check();});}
+function activate(worker){return new Promise((resolve,reject)=>{function changed(){if(worker.state==="activated"){clearTimeout(timer);worker.removeEventListener("statechange",changed);resolve();}else if(worker.state==="redundant"){clearTimeout(timer);worker.removeEventListener("statechange",changed);reject(new Error("The update could not activate."));}}timer=setTimeout(()=>{worker.removeEventListener("statechange",changed);reject(new Error("The program update has not activated yet. Retry while connected."));},20000);worker.addEventListener("statechange",changed);worker.postMessage({type:"FM_ACTIVATE_UPDATE"});changed();});}
+button.addEventListener("click",async()=>{button.disabled=true;status.textContent="Downloading and checking the latest program…";
+try{
+ if(!(location.protocol==="https:"||location.hostname==="localhost"||location.hostname==="127.0.0.1")||!("serviceWorker" in navigator))throw new Error("Open this update page in Safari on the secure company Field Mark website.");
+ const registration=await navigator.serviceWorker.register(new URL("fieldmark-sw.js",root),{scope:root.href,updateViaCache:"none"});
+ await registration.update();if(registration.installing)await workerInstalled(registration.installing);if(registration.waiting)await activate(registration.waiting);else if(registration.active&&registration.active.state!=="activated")await workerInstalled(registration.active);
+ const response=await fetch(new URL("index.html?fieldmark-verify="+Date.now(),root),{cache:"no-store"});if(!response.ok)throw new Error("The website has not published the updated index.html yet.");const source=await response.text();
+ if(!source.includes('<meta name="fieldmark-release" content="'+RELEASE+'">')||!source.includes('grading-table-entry'))throw new Error("The website is still returning another program version. Upload all files from the portal update package and wait for GitHub Pages to finish publishing, then retry. Your saved jobs have not been changed.");
+ status.textContent="Update verified. Opening Field Mark…";location.replace(new URL("./?fieldmark-version="+encodeURIComponent(RELEASE),root));
+}catch(error){clearTimeout(timer);status.textContent=error.message+"\n\nNo saved jobs or calculator memory were cleared.";button.disabled=false;}});
+})();
+</script></body></html>
